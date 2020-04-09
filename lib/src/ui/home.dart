@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/models/gameCategory.dart';
-import 'package:mathgame/src/resources/gameCategoryProvider.dart';
+import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/ui/calculator.dart';
 
 class MyHomePage extends StatefulWidget {
