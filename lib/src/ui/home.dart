@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/models/gameCategory.dart';
 import 'package:mathgame/src/resources/gameCategoryProvider.dart';
+import 'package:mathgame/src/ui/calculator.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -48,7 +49,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                switch (index) {
+                  case 0:
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Calculator()));
+                    break;
+                }
+              },
             ),
           );
         },
