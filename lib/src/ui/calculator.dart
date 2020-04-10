@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/provider/calculatorProvider.dart';
 import 'package:mathgame/src/ui/calculatorButton.dart';
+import 'package:mathgame/src/ui/timer.dart';
 import 'package:provider/provider.dart';
 
 class Calculator extends StatelessWidget {
@@ -14,7 +15,14 @@ class Calculator extends StatelessWidget {
           constraints: BoxConstraints.expand(),
           child: Column(
             children: <Widget>[
-              Expanded(flex: 1, child: SizedBox()),
+              Expanded(
+                  flex: 1,
+                  child: SizedBox(
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Timer(),
+                    ),
+                  )),
               Consumer<CalculatorProvider>(
                   builder: (context, calculatorProvider, child) {
                 return Expanded(
@@ -37,10 +45,22 @@ class Calculator extends StatelessWidget {
                     margin: EdgeInsets.fromLTRB(5, 10, 5, 20),
                     constraints: BoxConstraints.expand(),
                     child: Center(
-                      child: Text(
-                        "",
-                        style: TextStyle(
-                            fontSize: 45, fontWeight: FontWeight.w700),
+                      child: Consumer<CalculatorProvider>(
+                        builder: (context, calculatorProvider, child) {
+                          return calculatorProvider.timeOut
+                              ? RaisedButton(
+                                  child: Text("Over"),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                )
+                              : Text(
+                                  calculatorProvider.result,
+                                  style: TextStyle(
+                                      fontSize: 45,
+                                      fontWeight: FontWeight.w700),
+                                );
+                        },
                       ),
                     ),
                   )),

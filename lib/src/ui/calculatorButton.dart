@@ -14,8 +14,12 @@ class CalculatorButton extends StatelessWidget {
     return Expanded(
       flex: flex,
       child: InkWell(
-        onTap: (){
-          calculatorProvider.checkResult(text);
+        onTap: () {
+          if (text == "Clear") {
+            calculatorProvider.clear();
+          } else {
+            calculatorProvider.checkResult(text);
+          }
         },
         child: Container(
           decoration: BoxDecoration(
