@@ -4,4 +4,9 @@ class CalculatorQandS {
   int answer;
 
   CalculatorQandS(this.id, this.question, this.answer);
+
+  @override
+  String toString() {
+    return 'CalculatorQandS{id: $id, question: $question, answer: $answer}';
+  }
 }
