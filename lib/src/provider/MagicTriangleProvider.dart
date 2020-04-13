@@ -33,19 +33,27 @@ class MagicTriangleProvider with ChangeNotifier {
   }
 
   void inputTriangleSelection(int index, MagicTriangleInput input) {
-    for (int i = 0; i < _currentState.listInput.length; i++) {
-      _currentState.listInput[i].isActive = false;
+    if (input.value.isEmpty) {
+      for (int i = 0; i < _currentState.listTriangle.length; i++) {
+        _currentState.listTriangle[i].isActive = false;
+      }
+      selectedTriangleIndex = index;
+      _currentState.listTriangle[index].isActive = true;
+      notifyListeners();
+    } else {
+      int listGridIndex = _currentState.listGrid.indexWhere(
+          (val) => val.value == input.value && val.isVisible == false);
+      _currentState.listTriangle[index] = MagicTriangleInput(false, "");
+      _currentState.listGrid[listGridIndex].isVisible = true;
+      notifyListeners();
     }
-    selectedTriangleIndex = index;
-    _currentState.listInput[index].isActive = true;
-    notifyListeners();
   }
 
-  Future<void> checkResult(int index, MagicTriangleDigits digit) async {
+  Future<void> checkResult(int index, MagicTriangleGrid digit) async {
     print(digit.value);
 
-    _currentState.listInput[selectedTriangleIndex].value = digit.value;
-    _currentState.listDigits[index].isVisible = false;
+    _currentState.listTriangle[selectedTriangleIndex].value = digit.value;
+    _currentState.listGrid[index].isVisible = false;
     notifyListeners();
 
     /*if (!timeOut) {

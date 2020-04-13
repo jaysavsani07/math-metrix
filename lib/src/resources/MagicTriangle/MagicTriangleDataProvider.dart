@@ -7,12 +7,12 @@ class MagicTriangleDataProvider {
     list.add(MagicTriangleModel(
         1,
         [
-          MagicTriangleDigits("1", true),
-          MagicTriangleDigits("2", true),
-          MagicTriangleDigits("3", true),
-          MagicTriangleDigits("4", true),
-          MagicTriangleDigits("5", true),
-          MagicTriangleDigits("6", true),
+          MagicTriangleGrid("1", true),
+          MagicTriangleGrid("2", true),
+          MagicTriangleGrid("3", true),
+          MagicTriangleGrid("4", true),
+          MagicTriangleGrid("5", true),
+          MagicTriangleGrid("6", true),
         ],
         [
           MagicTriangleInput(true, ""),

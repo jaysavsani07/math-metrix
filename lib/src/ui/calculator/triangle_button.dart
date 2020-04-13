@@ -5,7 +5,7 @@ import 'package:mathgame/src/provider/MagicTriangleProvider.dart';
 import 'package:provider/provider.dart';
 
 class TriangleButton extends StatelessWidget {
-  final MagicTriangleDigits digit;
+  final MagicTriangleGrid digit;
   final int index;
 
   TriangleButton(this.digit, this.index);

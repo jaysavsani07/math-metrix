@@ -11,7 +11,7 @@ class SquareRootQandSDataProvider {
     list.add(SquareRootQandS(5, "81", "7", "9", "11", "14", 9));
     list.add(SquareRootQandS(6, "400", "10", "15", "20", "25", 20));
     list.add(SquareRootQandS(7, "169", "14", "16", "13", "11", 13));
-    list.add(SquareRootQandS(8, "64", "7", "9", "11", "8", 84));
+    list.add(SquareRootQandS(8, "64", "7", "9", "11", "8", 8));
     list.add(SquareRootQandS(5, "25", "4", "8", "5", "6", 5));
     list.add(SquareRootQandS(10, "324", "17", "19", "18", "16", 18));
     return list;

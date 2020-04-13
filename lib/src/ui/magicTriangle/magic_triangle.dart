@@ -52,7 +52,7 @@ class MagicTriangle extends StatelessWidget {
                         top: padding,
                         left: MediaQuery.of(context).size.width / 2 - radius,
                         child: TriangleInputButton(
-                            magicTriangleProvider.currentState.listInput[0], 0),
+                            magicTriangleProvider.currentState.listTriangle[0], 0),
                         height: (radius * 2),
                         width: (radius * 2),
                       ), // first
@@ -61,7 +61,7 @@ class MagicTriangle extends StatelessWidget {
                         left: (MediaQuery.of(context).size.width / 4) -
                             padding / 2,
                         child: TriangleInputButton(
-                            magicTriangleProvider.currentState.listInput[1], 1),
+                            magicTriangleProvider.currentState.listTriangle[1], 1),
                         height: (radius * 2),
                         width: (radius * 2),
                       ), // second one
@@ -72,7 +72,7 @@ class MagicTriangle extends StatelessWidget {
                                 3 -
                             padding / 2,
                         child: TriangleInputButton(
-                            magicTriangleProvider.currentState.listInput[2], 2),
+                            magicTriangleProvider.currentState.listTriangle[2], 2),
                         height: (radius * 2),
                         width: (radius * 2),
                       ), // third
@@ -80,7 +80,7 @@ class MagicTriangle extends StatelessWidget {
                         top: triangleHeight - padding - radius * 2,
                         left: padding,
                         child: TriangleInputButton(
-                            magicTriangleProvider.currentState.listInput[3], 3),
+                            magicTriangleProvider.currentState.listTriangle[3], 3),
                         height: (radius * 2),
                         width: (radius * 2),
                       ), // fourth
@@ -88,7 +88,7 @@ class MagicTriangle extends StatelessWidget {
                         top: triangleHeight - (radius * 3) + padding,
                         left: MediaQuery.of(context).size.width / 2 - radius,
                         child: TriangleInputButton(
-                            magicTriangleProvider.currentState.listInput[4], 4),
+                            magicTriangleProvider.currentState.listTriangle[4], 4),
                         height: (radius * 2),
                         width: (radius * 2),
                       ), // fifth
@@ -96,7 +96,7 @@ class MagicTriangle extends StatelessWidget {
                         top: triangleHeight - ((radius * 2 + padding)),
                         right: padding,
                         child: TriangleInputButton(
-                            magicTriangleProvider.currentState.listInput[5], 5),
+                            magicTriangleProvider.currentState.listTriangle[5], 5),
                         height: (radius * 2),
                         width: (radius * 2),
                       ), // last one
@@ -114,11 +114,11 @@ class MagicTriangle extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 TriangleButton(magicTriangleProvider
-                                    .currentState.listDigits[0], 0),
+                                    .currentState.listGrid[0], 0),
                                 TriangleButton(magicTriangleProvider
-                                    .currentState.listDigits[1], 1),
+                                    .currentState.listGrid[1], 1),
                                 TriangleButton(magicTriangleProvider
-                                    .currentState.listDigits[2], 2),
+                                    .currentState.listGrid[2], 2),
                               ],
                             ),
                           ),
@@ -128,11 +128,11 @@ class MagicTriangle extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 TriangleButton(magicTriangleProvider
-                                    .currentState.listDigits[3], 3),
+                                    .currentState.listGrid[3], 3),
                                 TriangleButton(magicTriangleProvider
-                                    .currentState.listDigits[4], 4),
+                                    .currentState.listGrid[4], 4),
                                 TriangleButton(magicTriangleProvider
-                                    .currentState.listDigits[5], 5),
+                                    .currentState.listGrid[5], 5),
                               ],
                             ),
                           )

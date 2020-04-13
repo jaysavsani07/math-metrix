@@ -1,18 +1,18 @@
 class MagicTriangleModel {
   int id;
-  List<MagicTriangleDigits> listDigits;
-  List<MagicTriangleInput> listInput;
+  List<MagicTriangleGrid> listGrid;
+  List<MagicTriangleInput> listTriangle;
   int availableDigit;
 
   MagicTriangleModel(
-      this.id, this.listDigits, this.listInput, this.availableDigit);
+      this.id, this.listGrid, this.listTriangle, this.availableDigit);
 }
 
-class MagicTriangleDigits {
+class MagicTriangleGrid {
   String value;
   bool isVisible;
 
-  MagicTriangleDigits(this.value, this.isVisible);
+  MagicTriangleGrid(this.value, this.isVisible);
 }
 
 class MagicTriangleInput {
