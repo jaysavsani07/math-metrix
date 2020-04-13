@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/models/gameCategory.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
-import 'package:mathgame/src/ui/calculator.dart';
-import 'package:mathgame/src/ui/magic_triangle.dart';
+import 'package:mathgame/src/ui/calculator/calculator.dart';
+import 'package:mathgame/src/ui/magicTriangle/magic_triangle.dart';
+import 'package:mathgame/src/ui/whatsTheSign/whats_the_sign.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -56,9 +57,17 @@ class _MyHomePageState extends State<MyHomePage> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Calculator()));
                     break;
+                  case 1:
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => WhatsTheSign()));
+                    break;
                   case 5:
-                    Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => MagicTriangle()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MagicTriangle()));
                 }
               },
             ),

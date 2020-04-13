@@ -13,8 +13,8 @@ class CalculatorQandSDataProvider {
     list.add(CalculatorQandS(5, "11+4", 15));
     list.add(CalculatorQandS(5, "27+5", 32));
     list.add(CalculatorQandS(5, "19-17", 2));
-    list.add(CalculatorQandS(5, "7*9", 72));
-    list.add(CalculatorQandS(5, "55*5", 11));
+    list.add(CalculatorQandS(5, "7*9", 63));
+    list.add(CalculatorQandS(5, "55/5", 11));
     list.add(CalculatorQandS(5, "42-7", 35));
     list.add(CalculatorQandS(5, "26+6", 32));
     list.add(CalculatorQandS(5, "72-8", 64));

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/ui/TrianglePainter.dart';
+import 'package:mathgame/src/ui/magicTriangle/TrianglePainter.dart';
 
 class MagicTriangle extends StatelessWidget {
   double padding = 20;

@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 class Timer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final timerProvider = Provider.of<CalculatorProvider>(context);
-    return Text(timerProvider.time.toString(), style: TextStyle(fontSize: 20));
+//    final timerProvider = Provider.of<CalculatorProvider>(context);
+    return Text("5", style: TextStyle(fontSize: 20));
   }
 }
