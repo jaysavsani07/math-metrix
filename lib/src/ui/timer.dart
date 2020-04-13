@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/provider/calculatorProvider.dart';
+import 'package:mathgame/src/provider/mathPairsProvider.dart';
 import 'package:mathgame/src/provider/signProvider.dart';
 import 'package:mathgame/src/provider/squareRootProvider.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
@@ -12,14 +13,16 @@ class Timer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var timerProvider;
+    var provider;
     if (type == GameCategoryType.CALCULATOR) {
-      timerProvider = Provider.of<CalculatorProvider>(context);
+      provider = Provider.of<CalculatorProvider>(context);
     } else if (type == GameCategoryType.SIGN) {
-      timerProvider = Provider.of<SignProvider>(context);
+      provider = Provider.of<SignProvider>(context);
     } else if (type == GameCategoryType.SQUARE_ROOT) {
-      timerProvider = Provider.of<SquareRootProvider>(context);
+      provider = Provider.of<SquareRootProvider>(context);
+    } else if (type == GameCategoryType.MATH_PAIRS) {
+      provider = Provider.of<MathPairsProvider>(context);
     }
-    return Text(timerProvider.time.toString(), style: TextStyle(fontSize: 20));
+    return Text(provider.time.toString(), style: TextStyle(fontSize: 20));
   }
 }
