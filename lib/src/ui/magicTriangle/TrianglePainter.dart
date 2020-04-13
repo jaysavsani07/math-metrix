@@ -17,6 +17,7 @@ class TrianglePainter extends CustomPainter {
     path.close();
     canvas.drawPath(path, paint);
 
+    /*
     paint.style = PaintingStyle.stroke;
     paint.color = Colors.blue;
     canvas.drawCircle(Offset(size.width / 2, radius + padding), radius,
@@ -39,7 +40,7 @@ class TrianglePainter extends CustomPainter {
     canvas.drawCircle(
         Offset(size.width - radius - padding, size.height - radius - padding),
         radius,
-        paint);
+        paint);*/
   }
 
   @override
