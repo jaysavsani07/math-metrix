@@ -3,6 +3,7 @@ import 'package:mathgame/src/models/gameCategory.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/ui/calculator/calculator.dart';
 import 'package:mathgame/src/ui/magicTriangle/magic_triangle.dart';
+import 'package:mathgame/src/ui/squareRoot/square_root.dart';
 import 'package:mathgame/src/ui/whatsTheSign/whats_the_sign.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -62,6 +63,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => WhatsTheSign()));
+                    break;
+                  case 2:
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => SquareRoot()));
                     break;
                   case 5:
                     Navigator.push(
