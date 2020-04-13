@@ -13,3 +13,5 @@ class GameCategoryProvider {
     return list;
   }
 }
+
+enum GameCategoryType { CALCULATOR, SIGN }

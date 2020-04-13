@@ -10,14 +10,6 @@ class TimerProvider with ChangeNotifier {
 
   int get time => _time;
 
-  StreamController<bool> timeOutController = StreamController();
-
-  Stream<bool> get timeOutStream => timeOutController.stream;
-
-  Stream<int> get timerStream => timerController.stream;
-
-  StreamController<int> timerController = StreamController();
-
   StreamSubscription timerSubscription;
 
   TimerProvider() {
@@ -42,8 +34,6 @@ class TimerProvider with ChangeNotifier {
   }
 
   void dispose() {
-    this.timeOutController.close();
-    this.timerController.close();
     this.timerSubscription.cancel();
   }
 }

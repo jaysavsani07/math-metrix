@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/provider/calculatorProvider.dart';
 import 'package:mathgame/src/provider/signProvider.dart';
+import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/ui/calculator/calculator_button.dart';
 import 'package:mathgame/src/ui/timer.dart';
 import 'package:mathgame/src/ui/whatsTheSign/sign_button.dart';
@@ -22,7 +23,7 @@ class WhatsTheSign extends StatelessWidget {
                   child: SizedBox(
                     child: Align(
                       alignment: Alignment.bottomLeft,
-                      child: Timer(),
+                      child: Timer(GameCategoryType.SIGN),
                     ),
                   )),
               Consumer<SignProvider>(builder: (context, signProvider, child) {
