@@ -43,17 +43,43 @@ class MagicTriangleProvider with ChangeNotifier {
     } else {
       int listGridIndex = _currentState.listGrid.indexWhere(
           (val) => val.value == input.value && val.isVisible == false);
-      _currentState.listTriangle[index] = MagicTriangleInput(false, "");
+      _currentState.listTriangle[index].isActive = false;
+      _currentState.listTriangle[index].value = "";
+      _currentState.availableDigit = _currentState.availableDigit + 1;
       _currentState.listGrid[listGridIndex].isVisible = true;
       notifyListeners();
     }
   }
 
   Future<void> checkResult(int index, MagicTriangleGrid digit) async {
-    print(digit.value);
-
+    int activeTriangelIndex =
+        _currentState.listTriangle.indexWhere((val) => val.isActive == true);
+    if (_currentState.listTriangle[activeTriangelIndex].value.isNotEmpty) {
+      return;
+    }
     _currentState.listTriangle[selectedTriangleIndex].value = digit.value;
     _currentState.listGrid[index].isVisible = false;
+    _currentState.availableDigit = _currentState.availableDigit - 1;
+    if (_currentState.availableDigit == 0) {
+      // check if total of triangle is as per given answer
+      int sumOfLeftSide = (int.parse(_currentState.listTriangle[0].value) +
+          int.parse(_currentState.listTriangle[1].value) +
+          int.parse(_currentState.listTriangle[3].value));
+      int sumOfRightSide = (int.parse(_currentState.listTriangle[0].value) +
+          int.parse(_currentState.listTriangle[2].value) +
+          int.parse(_currentState.listTriangle[5].value));
+      int sumOfBottomSide = (int.parse(_currentState.listTriangle[3].value) +
+          int.parse(_currentState.listTriangle[4].value) +
+          int.parse(_currentState.listTriangle[5].value));
+      if (_currentState.answer == sumOfLeftSide &&
+          _currentState.answer == sumOfRightSide &&
+          _currentState.answer == sumOfBottomSide) {
+        print("voila it's correct");
+        _index = _index + 1;
+        _currentState = _list[_index];
+        notifyListeners();
+      }
+    }
     notifyListeners();
 
     /*if (!timeOut) {

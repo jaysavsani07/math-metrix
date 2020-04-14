@@ -3,9 +3,10 @@ class MagicTriangleModel {
   List<MagicTriangleGrid> listGrid;
   List<MagicTriangleInput> listTriangle;
   int availableDigit;
+  int answer;
 
   MagicTriangleModel(
-      this.id, this.listGrid, this.listTriangle, this.availableDigit);
+      this.id, this.listGrid, this.listTriangle, this.availableDigit, this.answer);
 }
 
 class MagicTriangleGrid {
