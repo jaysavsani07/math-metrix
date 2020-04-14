@@ -5,6 +5,7 @@ import 'package:mathgame/src/ui/calculator/calculator.dart';
 import 'package:mathgame/src/ui/correctAnswer/correct_answer.dart';
 import 'package:mathgame/src/ui/magicTriangle/magic_triangle.dart';
 import 'package:mathgame/src/ui/mathPairs/mathPairs.dart';
+import 'package:mathgame/src/ui/mentalArithmetic/mental_arithmetic.dart';
 import 'package:mathgame/src/ui/squareRoot/square_root.dart';
 import 'package:mathgame/src/ui/whatsTheSign/whats_the_sign.dart';
 
@@ -86,6 +87,13 @@ class _MyHomePageState extends State<MyHomePage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => MagicTriangle()));
+                    break;
+                  case 6:
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MentalArithmetic()));
+                    break;
                 }
               },
             ),
