@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mathgame/src/models/gameCategory.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/ui/calculator/calculator.dart';
+import 'package:mathgame/src/ui/correctAnswer/correct_answer.dart';
 import 'package:mathgame/src/ui/magicTriangle/magic_triangle.dart';
 import 'package:mathgame/src/ui/mathPairs/mathPairs.dart';
 import 'package:mathgame/src/ui/squareRoot/square_root.dart';
@@ -73,6 +74,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   case 3:
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => MathPairs()));
+                    break;
+                  case 4:
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CorrectAnswer()));
                     break;
                   case 5:
                     Navigator.push(

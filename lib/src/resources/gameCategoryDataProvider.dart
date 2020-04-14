@@ -14,4 +14,5 @@ class GameCategoryProvider {
   }
 }
 
-enum GameCategoryType { CALCULATOR, SIGN , SQUARE_ROOT,MATH_PAIRS}
+enum GameCategoryType { CALCULATOR, SIGN , SQUARE_ROOT,MATH_PAIRS,
+  CORRECT_ANSWER}
