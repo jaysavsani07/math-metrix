@@ -10,6 +10,8 @@ class GameCategoryProvider {
     list.add(GameCategory(5, "Correct answer"));
     list.add(GameCategory(6, "Magic triangle"));
     list.add(GameCategory(7, "Mental arithmetic"));
+    list.add(GameCategory(8, "Math Machine Square"));
+
     return list;
   }
 }
