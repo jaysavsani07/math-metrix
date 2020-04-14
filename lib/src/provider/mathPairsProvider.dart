@@ -42,11 +42,20 @@ class MathPairsProvider with ChangeNotifier {
           _currentState.list[first].isVisible = false;
           _currentState.list[index].isVisible = false;
 
+          _currentState.availableItem = _currentState.availableItem - 2;
           first = -1;
           notifyListeners();
+          if (_currentState.availableItem == 0) {
+            await Future.delayed(Duration(milliseconds: 300));
+            _index = _index + 1;
+            _currentState = _list[_index];
+            restartTimer();
+            notifyListeners();
+          }
         } else {
           _currentState.list[first].isActive = false;
           _currentState.list[index].isActive = false;
+          first = -1;
           notifyListeners();
         }
       } else {
