@@ -1,25 +1,38 @@
 import 'package:mathgame/src/models/calculator/calculatorQandS.dart';
+import 'package:mathgame/src/utility/mathUtil.dart';
 
 class CalculatorQandSDataProvider {
-  static getCalculatorDataList() {
+  static getCalculatorDataList(int level) {
     List<CalculatorQandS> list = List();
+    int i = 0;
 
-    list.add(CalculatorQandS(1, "5+4", 9));
-    list.add(CalculatorQandS(2, "5-4", 1));
-    list.add(CalculatorQandS(3, "5*4", 20));
-    list.add(CalculatorQandS(4, "4/4", 1));
-    list.add(CalculatorQandS(5, "8+4", 12));
-    list.add(CalculatorQandS(5, "7-6", 1));
-    list.add(CalculatorQandS(5, "11+4", 15));
-    list.add(CalculatorQandS(5, "27+5", 32));
-    list.add(CalculatorQandS(5, "19-17", 2));
-    list.add(CalculatorQandS(5, "7*9", 63));
-    list.add(CalculatorQandS(5, "55/5", 11));
-    list.add(CalculatorQandS(5, "42-7", 35));
-    list.add(CalculatorQandS(5, "26+6", 32));
-    list.add(CalculatorQandS(5, "72-8", 64));
-    list.add(CalculatorQandS(5, "54-23", 31));
+    int min = 10;
+    min = min < 1 ? 1 : min;
+    int max = 20;
+
+    while (i < 5) {
+      int x1 = MathUtil.generateRandomAnswer(min, max);
+      String x2 = MathUtil.generateRandomSign();
+      int x3 = MathUtil.generateRandomAnswer(min, max);
+
+      if (x1 % x3 == 0 && MathUtil.evaluate(x1, x2, x3)>0 &&
+          !list.contains(CalculatorQandS(
+              1, "$x1 $x2 $x3", MathUtil.evaluate(x1, x2, x3)))) {
+
+        print("$x1 $x2 $x3 = ${MathUtil.evaluate(x1, x2, x3)}");
+
+        list.add(
+            CalculatorQandS(1, "$x1 $x2 $x3", MathUtil.evaluate(x1, x2, x3)));
+        i++;
+      }
+    }
 
     return list;
+  }
+}
+
+void main() {
+  for (int i = 1; i < 6; i++) {
+    CalculatorQandSDataProvider.getCalculatorDataList(i);
   }
 }

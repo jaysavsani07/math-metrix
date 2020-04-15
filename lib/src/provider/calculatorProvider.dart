@@ -30,7 +30,7 @@ class CalculatorProvider with ChangeNotifier {
   CalculatorQandS get currentState => _currentState;
 
   CalculatorProvider() {
-    _list = CalculatorQandSDataProvider.getCalculatorDataList();
+    _list = CalculatorQandSDataProvider.getCalculatorDataList(1);
     _currentState = _list[_index];
     _time = 5;
     _timeOut = false;
@@ -44,8 +44,13 @@ class CalculatorProvider with ChangeNotifier {
       notifyListeners();
       if (int.parse(_result) == _currentState.answer) {
         await Future.delayed(Duration(milliseconds: 300));
-        _index = _index + 1;
+        if (_list.length == _index) {
+          _list.addAll(CalculatorQandSDataProvider.getCalculatorDataList(
+              _index ~/ 5 + 1));
+        }
+
         _currentState = _list[_index];
+        _index = _index + 1;
         _result = "";
         restartTimer();
         notifyListeners();
@@ -65,8 +70,7 @@ class CalculatorProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
-      homeViewModel.updateScoreboard(
-          GameCategoryType.CALCULATOR, _index);
+      homeViewModel.updateScoreboard(GameCategoryType.CALCULATOR, _index);
       this._timeOut = true;
       notifyListeners();
     });
