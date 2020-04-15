@@ -67,48 +67,76 @@ class Calculator extends StatelessWidget {
                   )),
               Expanded(
                 flex: 5,
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    height: 600,
+                    width: 400,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                      ),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          CalculatorButton("1", 1),
-                          CalculatorButton("4", 1),
-                          CalculatorButton("7", 1),
+                          Expanded(
+                            child: Row(
+                              children: <Widget>[
+                                CalculatorButton(
+                                    "7",
+                                    BorderRadius.only(
+                                        topLeft: Radius.circular(40))),
+                                CalculatorButton(
+                                    "8", BorderRadius.all(Radius.zero)),
+                                CalculatorButton(
+                                    "9",
+                                    BorderRadius.only(
+                                        topRight: Radius.circular(40)))
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Row(
+                              children: <Widget>[
+                                CalculatorButton(
+                                    "4", BorderRadius.all(Radius.zero)),
+                                CalculatorButton(
+                                    "5", BorderRadius.all(Radius.zero)),
+                                CalculatorButton(
+                                    "6", BorderRadius.all(Radius.zero))
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Row(
+                              children: <Widget>[
+                                CalculatorButton(
+                                    "1", BorderRadius.all(Radius.zero)),
+                                CalculatorButton(
+                                    "2", BorderRadius.all(Radius.zero)),
+                                CalculatorButton(
+                                    "3", BorderRadius.all(Radius.zero))
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Row(
+                              children: <Widget>[
+                                CalculatorButton(
+                                    "0",
+                                    BorderRadius.only(
+                                        bottomLeft: Radius.circular(40))),
+                                CalculatorButton(
+                                    "CLEAR",
+                                    BorderRadius.only(
+                                        bottomRight: Radius.circular(40)))
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        children: <Widget>[
-                          CalculatorButton("2", 1),
-                          CalculatorButton("5", 1),
-                          CalculatorButton("8", 1),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        children: <Widget>[
-                          CalculatorButton("3", 1),
-                          CalculatorButton("6", 1),
-                          CalculatorButton("9", 1),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        children: <Widget>[
-                          CalculatorButton("Clear", 1),
-                          CalculatorButton("0", 1),
-                        ],
-                      ),
-                    )
-                  ],
+                  ),
                 ),
               ),
               Expanded(flex: 1, child: SizedBox()),
