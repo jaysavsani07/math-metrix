@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:mathgame/src/homeViewModel.dart';
 import 'package:mathgame/src/ui/home.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  setupServiceLocator();
+  runApp(MyApp());
+}
+
+setupServiceLocator() {
+  GetIt.I.registerLazySingleton<HomeViewModel>(() => HomeViewModel());
+}
 
 class MyApp extends StatelessWidget {
   @override

@@ -1,10 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/calculator/calculatorQandS.dart';
 import 'package:mathgame/src/resources/calculator/calculatorQandSDataProvider.dart';
+import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
+
+import '../homeViewModel.dart';
 
 class CalculatorProvider with ChangeNotifier {
+  var homeViewModel = GetIt.I<HomeViewModel>();
+
   List<CalculatorQandS> _list;
   CalculatorQandS _currentState;
   String _result;
@@ -59,6 +65,8 @@ class CalculatorProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
+      homeViewModel.updateScoreboard(
+          GameCategoryType.CALCULATOR, _index);
       this._timeOut = true;
       notifyListeners();
     });
