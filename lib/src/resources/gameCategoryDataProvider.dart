@@ -10,10 +10,17 @@ class GameCategoryProvider {
     list.add(GameCategory(5, "Correct answer"));
     list.add(GameCategory(6, "Magic triangle"));
     list.add(GameCategory(7, "Mental arithmetic"));
+    list.add(GameCategory(8, "Quick calculation"));
     return list;
   }
 }
 
-enum GameCategoryType { CALCULATOR, SIGN , SQUARE_ROOT,MATH_PAIRS,
+enum GameCategoryType {
+  CALCULATOR,
+  SIGN,
+  SQUARE_ROOT,
+  MATH_PAIRS,
   CORRECT_ANSWER,
-  MENTAL_ARITHMETIC}
+  MENTAL_ARITHMETIC,
+  QUICK_CALCULATION
+}
