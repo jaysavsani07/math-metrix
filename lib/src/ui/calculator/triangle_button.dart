@@ -17,19 +17,21 @@ class TriangleButton extends StatelessWidget {
       flex: 1,
       child: Visibility(
         visible: digit.isVisible,
-        child: Container(
-          height: 80,
-          width: 80,
-          margin: EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(color: Colors.grey),
+        child: Card(
+          shape: CircleBorder(
+            side: BorderSide(color: Colors.white70, width: 3),
           ),
-          child: FlatButton(
-            onPressed: () {
-              magicTriangleProvider.checkResult(index, digit);
-            },
-            child: Text(digit.value, style: TextStyle(fontSize: 28)),
+          child: Container(
+            height: 80,
+            width: 80,
+            child: FlatButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onPressed: () {
+                magicTriangleProvider.checkResult(index, digit);
+              },
+              child: Text(digit.value, style: TextStyle(fontSize: 28)),
+            ),
           ),
         ),
       ),

@@ -28,7 +28,6 @@ class _MyHomePageState extends State<MyHomePage> {
         padding: EdgeInsets.only(bottom: 80.0),
         itemBuilder: (BuildContext context, int index) {
           return Card(
-            color: Theme.of(context).primaryColorLight,
             margin: EdgeInsets.all(7.0),
             elevation: 0.0,
             shape: RoundedRectangleBorder(
@@ -50,8 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       list[index].name,
                       style: TextStyle(
                           fontSize: 16.0,
-                          fontWeight: FontWeight.w800,
-                          color: Colors.black87),
+                          fontWeight: FontWeight.w800),
                     )
                   ],
                 ),

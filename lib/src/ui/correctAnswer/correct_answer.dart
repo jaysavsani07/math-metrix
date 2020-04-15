@@ -32,42 +32,64 @@ class CorrectAnswer extends StatelessWidget {
                         child: Center(
                           child: Text(
                             correctAnswerProvider.currentState.question,
-                            style: TextStyle(fontSize: 35),
+                            style: Theme.of(context).textTheme.headline,
                           ),
                         )),
                     Expanded(
                       flex: 5,
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            flex: 1,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: SizedBox(
+                          height: 300,
+                          width: 500,
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30)),
+                                ),
                             child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+//                                  mainAxisSize: MainAxisSize.max,
                               children: <Widget>[
-                                CorrectAnswerButton(
-                                    correctAnswerProvider.currentState.firstAns,
-                                    1),
-                                CorrectAnswerButton(
-                                    correctAnswerProvider
-                                        .currentState.secondAns,
-                                    1),
+                                Expanded(
+                                  child: Row(
+//                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: <Widget>[
+                                      CorrectAnswerButton(
+                                          correctAnswerProvider
+                                              .currentState.firstAns,
+                                          BorderRadius.only(
+                                              topLeft: Radius.circular(40)
+                                          )),
+                                      CorrectAnswerButton(
+                                          correctAnswerProvider.currentState.secondAns,
+                                          BorderRadius.only(
+                                              topRight: Radius.circular(40)
+                                          ))
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Row(
+                                    children: <Widget>[
+                                      CorrectAnswerButton(
+                                          correctAnswerProvider
+                                              .currentState.thirdAns,
+                                          BorderRadius.only(
+                                              bottomLeft: Radius.circular(40)
+                                          )),
+                                      CorrectAnswerButton(
+                                          correctAnswerProvider.currentState.fourthAns,
+                                          BorderRadius.only(
+                                              bottomRight: Radius.circular(40)
+                                          ))
+                                    ],
+                                  ),
+                                )
                               ],
                             ),
                           ),
-                          Expanded(
-                            flex: 1,
-                            child: Column(
-                              children: <Widget>[
-                                CorrectAnswerButton(
-                                    correctAnswerProvider.currentState.thirdAns,
-                                    1),
-                                CorrectAnswerButton(
-                                    correctAnswerProvider
-                                        .currentState.fourthAns,
-                                    1),
-                              ],
-                            ),
-                          )
-                        ],
+                        ),
                       ),
                     ),
                     Expanded(flex: 1, child: SizedBox()),

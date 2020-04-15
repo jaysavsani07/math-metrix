@@ -3,32 +3,35 @@ import 'package:mathgame/src/provider/correctAnswerProvider.dart';
 import 'package:provider/provider.dart';
 
 class CorrectAnswerButton extends StatelessWidget {
-  final int flex;
-  final String text;
 
-  CorrectAnswerButton(this.text, this.flex);
+  final String text;
+  final BorderRadius borderRadius;
+
+  CorrectAnswerButton(this.text, this.borderRadius);
 
   @override
   Widget build(BuildContext context) {
     final correctAnswerProvider = Provider.of<CorrectAnswerProvider>(context);
     return Expanded(
-      flex: flex,
+      flex: 1,
       child: InkWell(
+        highlightColor: Colors.white60,
+        splashColor: Colors.grey,
         onTap: () {
           correctAnswerProvider.checkResult(text);
         },
         child: Container(
           decoration: BoxDecoration(
+            color: Theme.of(context).dialogBackgroundColor,
             shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            border: Border.all(color: Colors.grey),
+            borderRadius: borderRadius,
+            border: Border.all(color: Colors.grey[900], width: 1),
           ),
-          margin: EdgeInsets.all(5),
-          constraints: BoxConstraints.expand(),
+          margin: EdgeInsets.all(1),
           child: Center(
             child: Text(
               text,
-              style: TextStyle(fontSize: 25),
+              style: Theme.of(context).textTheme.title,
             ),
           ),
         ),

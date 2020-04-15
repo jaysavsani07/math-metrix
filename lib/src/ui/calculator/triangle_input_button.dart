@@ -13,23 +13,24 @@ class TriangleInputButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final magicTriangleProvider = Provider.of<MagicTriangleProvider>(context);
     return InkWell(
+      customBorder: CircleBorder(),
       onTap: () {
         magicTriangleProvider.inputTriangleSelection(index, input);
       },
-      child: Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.rectangle,
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(40)),
-            border:
-                Border.all(color: input.isActive ? Colors.blue : Colors.grey),
+      child: Card(
+        elevation: 4.0,
+        shape: CircleBorder(
+          side: BorderSide(
+              color: input.value.isNotEmpty ? Theme.of(context).primaryColor : (input.isActive ? Colors.yellow : Colors.grey), width: 3),
+        ),
+        child: Container(
+            child: Center(
+          child: Text(
+            input.value,
+            style: TextStyle(fontSize: 20),
           ),
-          child: Center(
-            child: Text(
-              input.value,
-              style: TextStyle(fontSize: 20),
-            ),
-          )),
+        )),
+      ),
     );
   }
 }
