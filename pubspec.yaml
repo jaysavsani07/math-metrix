@@ -25,6 +25,8 @@ dependencies:
   cupertino_icons: ^0.1.2
   provider: ^4.0.4
   percent_indicator: "^2.1.1"
+  provider_architecture: ^1.0.6
+  get_it: ^4.0.1
 
 dev_dependencies:
   flutter_test:
