@@ -33,40 +33,60 @@ class SquareRoot extends StatelessWidget {
                         child: Center(
                           child: Text(
                             squareRootProvider.currentState.question,
-                            style: TextStyle(fontSize: 35),
+                            style: Theme.of(context).textTheme.headline,
                           ),
                         )),
                     Expanded(
                       flex: 5,
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            flex: 1,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: SizedBox(
+                          height: 300,
+                          width: 500,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(30)),
+                            ),
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                SquareRootButton(
-                                    squareRootProvider.currentState.firstAns,
-                                    1),
-                                SquareRootButton(
-                                    squareRootProvider.currentState.secondAns,
-                                    1),
+                                Expanded(
+                                  child: Row(
+                                    children: <Widget>[
+                                      SquareRootButton(
+                                          squareRootProvider.currentState.firstAns,
+                                          BorderRadius.only(
+                                              topLeft: Radius.circular(40)
+                                          )),
+                                      SquareRootButton(
+                                          squareRootProvider.currentState.secondAns,
+                                          BorderRadius.only(
+                                              topRight: Radius.circular(40)
+                                          ))
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Row(
+                                    children: <Widget>[
+                                      SquareRootButton(
+                                          squareRootProvider.currentState.thirdAns,
+                                          BorderRadius.only(
+                                              bottomLeft: Radius.circular(40)
+                                          )),
+                                      SquareRootButton(
+                                          squareRootProvider.currentState.fourthAns,
+                                          BorderRadius.only(
+                                              bottomRight: Radius.circular(40)
+                                          ))
+                                    ],
+                                  ),
+                                )
                               ],
                             ),
                           ),
-                          Expanded(
-                            flex: 1,
-                            child: Column(
-                              children: <Widget>[
-                                SquareRootButton(
-                                    squareRootProvider.currentState.thirdAns,
-                                    1),
-                                SquareRootButton(
-                                    squareRootProvider.currentState.fourthAns,
-                                    1),
-                              ],
-                            ),
-                          )
-                        ],
+                        ),
                       ),
                     ),
                     Expanded(flex: 1, child: SizedBox()),
