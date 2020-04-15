@@ -27,14 +27,20 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.yellow,
           scaffoldBackgroundColor: Color(0xFF121212),
           dialogBackgroundColor: Colors.blueGrey[900],
+          splashColor: Colors.grey,
+          highlightColor: Colors.white60,
+          dividerColor: Colors.grey[900],
           applyElevationOverlayColor: true,
           cardTheme: CardTheme(
             color: Colors.grey[900]
           ),
           textTheme: TextTheme(
-            headline: TextStyle(fontSize: 70.0, fontWeight: FontWeight.bold),
+            headline: TextStyle(fontSize: 60.0, fontWeight: FontWeight.bold),
             title: TextStyle(fontSize: 50.0, fontWeight: FontWeight.w400),
             subhead: TextStyle(fontSize: 40.0, fontWeight: FontWeight.w400),
+            body1: TextStyle(fontSize: 38.0, fontWeight: FontWeight.w400),
+            body2: TextStyle(fontSize: 32.0, fontWeight: FontWeight.w400),
+            display1: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w400),
             button: TextStyle(fontSize: 32.0, fontWeight: FontWeight.normal),
           )),
       home: MyHomePage(),

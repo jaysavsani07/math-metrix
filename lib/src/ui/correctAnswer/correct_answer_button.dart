@@ -15,8 +15,8 @@ class CorrectAnswerButton extends StatelessWidget {
     return Expanded(
       flex: 1,
       child: InkWell(
-        highlightColor: Colors.white60,
-        splashColor: Colors.grey,
+        highlightColor: Theme.of(context).highlightColor,
+        splashColor: Theme.of(context).splashColor,
         onTap: () {
           correctAnswerProvider.checkResult(text);
         },
@@ -25,7 +25,7 @@ class CorrectAnswerButton extends StatelessWidget {
             color: Theme.of(context).dialogBackgroundColor,
             shape: BoxShape.rectangle,
             borderRadius: borderRadius,
-            border: Border.all(color: Colors.grey[900], width: 1),
+            border: Border.all(color: Theme.of(context).dividerColor, width: 1),
           ),
           margin: EdgeInsets.all(1),
           child: Center(

@@ -49,11 +49,9 @@ class CorrectAnswer extends StatelessWidget {
                                 ),
                             child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
-//                                  mainAxisSize: MainAxisSize.max,
                               children: <Widget>[
                                 Expanded(
                                   child: Row(
-//                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     children: <Widget>[
                                       CorrectAnswerButton(
                                           correctAnswerProvider

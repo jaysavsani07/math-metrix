@@ -61,6 +61,7 @@ class QuickCalculationProvider with ChangeNotifier {
     timerSubscription = Stream.periodic(Duration(milliseconds: 250), (x) => x)
         .takeWhile((time) => time <= _timeLength)
         .listen((time) {
+      _time = time / _timeLength;
       notifyListeners();
     }, onDone: () {
       this._timeOut = true;

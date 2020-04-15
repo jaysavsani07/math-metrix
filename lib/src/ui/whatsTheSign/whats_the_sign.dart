@@ -35,7 +35,7 @@ class WhatsTheSign extends StatelessWidget {
                           child: Center(
                             child: Text(
                               signProvider.currentState.firstDigit,
-                              style: TextStyle(fontSize: 35),
+                              style: Theme.of(context).textTheme.headline,
                             ),
                           ),
                         ),
@@ -46,8 +46,8 @@ class WhatsTheSign extends StatelessWidget {
                             decoration: BoxDecoration(
                               shape: BoxShape.rectangle,
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              border: Border.all(color: Colors.grey),
+                                  BorderRadius.all(Radius.circular(3)),
+                              border: Border.all(color: Theme.of(context).primaryColor, width: 2),
                             ),
                             child: Center(
                               heightFactor: 1,
@@ -63,7 +63,7 @@ class WhatsTheSign extends StatelessWidget {
                           child: Center(
                             child: Text(
                               signProvider.currentState.secondDigit,
-                              style: TextStyle(fontSize: 35),
+                              style: Theme.of(context).textTheme.headline,
                             ),
                           ),
                         ),
@@ -72,7 +72,7 @@ class WhatsTheSign extends StatelessWidget {
                           child: Center(
                             child: Text(
                               "=",
-                              style: TextStyle(fontSize: 35),
+                              style: Theme.of(context).textTheme.headline,
                             ),
                           ),
                         ),
@@ -81,7 +81,7 @@ class WhatsTheSign extends StatelessWidget {
                           child: Center(
                             child: Text(
                               signProvider.currentState.answer,
-                              style: TextStyle(fontSize: 35),
+                              style: Theme.of(context).textTheme.headline,
                             ),
                           ),
                         ),
@@ -90,27 +90,47 @@ class WhatsTheSign extends StatelessWidget {
               }),
               Expanded(
                 flex: 5,
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    height: 300,
+                    width: 500,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius:
+                        BorderRadius.all(Radius.circular(30)),
+                      ),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          SignButton("+", 1),
-                          SignButton("*", 1),
+                          Expanded(
+                            child: Row(
+                              children: <Widget>[
+                                SignButton("+", BorderRadius.only(
+                                    topLeft: Radius.circular(40)
+                                )),
+                                SignButton("-", BorderRadius.only(
+                                    topRight: Radius.circular(40)
+                                ))
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Row(
+                              children: <Widget>[
+                                SignButton("*", BorderRadius.only(
+                                    bottomLeft: Radius.circular(40)
+                                )),
+                                SignButton("/", BorderRadius.only(
+                                    bottomRight: Radius.circular(40)
+                                ))
+                              ],
+                            ),
+                          )
                         ],
                       ),
                     ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        children: <Widget>[
-                          SignButton("-", 1),
-                          SignButton("/", 1),
-                        ],
-                      ),
-                    )
-                  ],
+                  ),
                 ),
               ),
               Expanded(flex: 1, child: SizedBox()),

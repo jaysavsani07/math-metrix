@@ -48,14 +48,14 @@ class MyHomePage extends StatelessWidget {
                               model.list[index].name,
                               style: TextStyle(
                                   fontSize: 16.0,
-                                  fontWeight: FontWeight.w800,
-                                  color: Colors.black87),
+                                  fontWeight: FontWeight.w800
+                                  ),
                             ),
                             Text(
                               model.list[index].scoreboard.highestScore
                                   .toString(),
                               style: TextStyle(
-                                  fontSize: 14.0, color: Colors.black87),
+                                  fontSize: 14.0),
                             )
                           ],
                         ),

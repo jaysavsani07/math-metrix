@@ -3,19 +3,19 @@ import 'package:mathgame/src/provider/quickCalculationProvider.dart';
 import 'package:provider/provider.dart';
 
 class QuickCalculationButton extends StatelessWidget {
-  final int flex;
   final String text;
+  final BorderRadius borderRadius;
 
-  QuickCalculationButton(this.text, this.flex);
+  QuickCalculationButton(this.text, this.borderRadius);
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<QuickCalculationProvider>(context);
     return Expanded(
-      flex: flex,
+      flex: 1,
       child: InkWell(
         onTap: () {
-          if (text == "Clear") {
+          if (text == "CLEAR") {
             provider.clear();
           } else {
             provider.checkResult(text);
@@ -23,16 +23,17 @@ class QuickCalculationButton extends StatelessWidget {
         },
         child: Container(
           decoration: BoxDecoration(
+            color: Theme.of(context).dialogBackgroundColor,
             shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            border: Border.all(color: Colors.grey),
+            borderRadius: borderRadius,
+            border: Border.all(color: Theme.of(context).dividerColor, width: 1),
           ),
-          margin: EdgeInsets.all(5),
+          margin: EdgeInsets.all(1),
           constraints: BoxConstraints.expand(),
           child: Center(
             child: Text(
               text,
-              style: TextStyle(fontSize: 25),
+              style: text == "CLEAR" ? Theme.of(context).textTheme.body2 : Theme.of(context).textTheme.body1,
             ),
           ),
         ),
