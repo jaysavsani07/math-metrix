@@ -4,6 +4,7 @@ import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/ui/calculator/calculator.dart';
 import 'package:mathgame/src/ui/correctAnswer/correct_answer.dart';
 import 'package:mathgame/src/ui/magicTriangle/magic_triangle.dart';
+import 'package:mathgame/src/ui/mathGrid/math_grid.dart';
 import 'package:mathgame/src/ui/mathPairs/mathPairs.dart';
 import 'package:mathgame/src/ui/mentalArithmetic/mental_arithmetic.dart';
 import 'package:mathgame/src/ui/quickCalculation/quickCalculation.dart';
@@ -100,6 +101,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => QuickCalculation()));
+                    break;
+                  case 8:
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MathGrid()));
                     break;
                 }
               },

@@ -29,6 +29,12 @@ class MagicTriangle extends StatelessWidget {
                     color: Colors.blue,
                     width: 0.0,
                     height: 0.0,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(magicTriangleProvider.currentState.answer.toString(), style: TextStyle(fontSize: 36))
+                      ],
+                    ),
                   ),
                 ),
                 Expanded(
