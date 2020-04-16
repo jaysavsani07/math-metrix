@@ -17,7 +17,7 @@ class SignButton extends StatelessWidget {
         onTap: () {
           signProvider.checkResult(text);
         },
-        borderRadius: getRadius(text),
+        borderRadius: borderRadius,
         child: Container(
           decoration: BoxDecoration(
             color: Theme.of(context).dialogBackgroundColor,
@@ -36,18 +36,5 @@ class SignButton extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  BorderRadius getRadius(String text) {
-    if (text == "+")
-      return BorderRadius.only(topLeft: Radius.circular(40));
-    else if (text == "-")
-      return BorderRadius.only(topRight: Radius.circular(40));
-    else if (text == "*")
-      return BorderRadius.only(bottomLeft: Radius.circular(40));
-    else if (text == "/")
-      return BorderRadius.only(bottomRight: Radius.circular(40));
-    else
-      return BorderRadius.all(Radius.zero);
   }
 }

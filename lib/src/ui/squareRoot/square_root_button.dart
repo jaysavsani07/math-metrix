@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/provider/signProvider.dart';
 import 'package:mathgame/src/provider/squareRootProvider.dart';
 import 'package:provider/provider.dart';
 
 class SquareRootButton extends StatelessWidget {
-
   final String text;
   final BorderRadius borderRadius;
 
@@ -19,6 +17,7 @@ class SquareRootButton extends StatelessWidget {
         onTap: () {
           signProvider.checkResult(text);
         },
+        borderRadius: borderRadius,
         child: Container(
           decoration: BoxDecoration(
             color: Theme.of(context).dialogBackgroundColor,

@@ -3,7 +3,6 @@ import 'package:mathgame/src/provider/correctAnswerProvider.dart';
 import 'package:provider/provider.dart';
 
 class CorrectAnswerButton extends StatelessWidget {
-
   final String text;
   final BorderRadius borderRadius;
 
@@ -20,6 +19,7 @@ class CorrectAnswerButton extends StatelessWidget {
         onTap: () {
           correctAnswerProvider.checkResult(text);
         },
+        borderRadius: borderRadius,
         child: Container(
           decoration: BoxDecoration(
             color: Theme.of(context).dialogBackgroundColor,

@@ -21,7 +21,7 @@ class CalculatorButton extends StatelessWidget {
             provider.checkResult(text);
           }
         },
-        borderRadius: getRadius(text),
+        borderRadius: borderRadius,
         child: Container(
           decoration: BoxDecoration(
             color: Theme.of(context).dialogBackgroundColor,
@@ -40,18 +40,5 @@ class CalculatorButton extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  BorderRadius getRadius(String text) {
-    if (text == "7")
-      return BorderRadius.only(topLeft: Radius.circular(40));
-    else if (text == "9")
-      return BorderRadius.only(topRight: Radius.circular(40));
-    else if (text == "0")
-      return BorderRadius.only(bottomLeft: Radius.circular(40));
-    else if (text == "CLEAR")
-      return BorderRadius.only(bottomRight: Radius.circular(40));
-    else
-      return BorderRadius.all(Radius.zero);
   }
 }
