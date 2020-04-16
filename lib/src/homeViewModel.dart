@@ -53,8 +53,6 @@ class HomeViewModel extends ChangeNotifier {
   }
 
   void updateScoreboard(GameCategoryType gameCategoryType, int newScore) {
-    print("okokokok");
-
     list.forEach((gameCategory) {
       if (gameCategory.gameCategoryType == gameCategoryType) {
         if (gameCategory.scoreboard.highestScore < newScore) {

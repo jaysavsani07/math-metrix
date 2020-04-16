@@ -39,7 +39,7 @@ class CalculatorProvider with ChangeNotifier {
   }
 
   Future<void> checkResult(String answer) async {
-    if (!timeOut) {
+    if (_result.length < 2 && !timeOut) {
       _result = _result + answer;
       notifyListeners();
       if (int.parse(_result) == _currentState.answer) {
@@ -48,10 +48,9 @@ class CalculatorProvider with ChangeNotifier {
           _list.addAll(CalculatorQandSDataProvider.getCalculatorDataList(
               _index ~/ 5 + 1));
         }
-
-        _currentState = _list[_index];
         _index = _index + 1;
         _result = "";
+        _currentState = _list[_index];
         restartTimer();
         notifyListeners();
       }
