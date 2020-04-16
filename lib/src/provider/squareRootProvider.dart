@@ -24,7 +24,7 @@ class SquareRootProvider with ChangeNotifier {
   SquareRootQandS get currentState => _currentState;
 
   SquareRootProvider() {
-    _list = SquareRootQandSDataProvider.getSquareDataList();
+    _list = SquareRootQandSDataProvider.getSquareDataList(1);
     _currentState = _list[_index];
     _time = 5;
     _timeOut = false;
@@ -38,6 +38,10 @@ class SquareRootProvider with ChangeNotifier {
       notifyListeners();
       if (int.parse(_result) == _currentState.answer) {
         await Future.delayed(Duration(milliseconds: 300));
+        if (_list.length - 1 == _index) {
+          _list.addAll(
+              SquareRootQandSDataProvider.getSquareDataList(_index ~/ 5 + 1));
+        }
         _index = _index + 1;
         _currentState = _list[_index];
         _result = "";
