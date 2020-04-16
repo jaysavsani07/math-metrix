@@ -3,7 +3,6 @@ import 'package:mathgame/src/provider/signProvider.dart';
 import 'package:provider/provider.dart';
 
 class SignButton extends StatelessWidget {
-
   final String text;
   final BorderRadius borderRadius;
 
@@ -18,6 +17,7 @@ class SignButton extends StatelessWidget {
         onTap: () {
           signProvider.checkResult(text);
         },
+        borderRadius: getRadius(text),
         child: Container(
           decoration: BoxDecoration(
             color: Theme.of(context).dialogBackgroundColor,
@@ -36,6 +36,18 @@ class SignButton extends StatelessWidget {
         ),
       ),
     );
-    ;
+  }
+
+  BorderRadius getRadius(String text) {
+    if (text == "+")
+      return BorderRadius.only(topLeft: Radius.circular(40));
+    else if (text == "-")
+      return BorderRadius.only(topRight: Radius.circular(40));
+    else if (text == "*")
+      return BorderRadius.only(bottomLeft: Radius.circular(40));
+    else if (text == "/")
+      return BorderRadius.only(bottomRight: Radius.circular(40));
+    else
+      return BorderRadius.all(Radius.zero);
   }
 }

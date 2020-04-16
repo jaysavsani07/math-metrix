@@ -24,7 +24,7 @@ class SignProvider with ChangeNotifier {
   SignQandS get currentState => _currentState;
 
   SignProvider() {
-    _list = SignQandSDataProvider.getSignDataList();
+    _list = SignQandSDataProvider.getSignDataList(1);
     _currentState = _list[_index];
     _time = 5;
     _timeOut = false;
@@ -38,9 +38,12 @@ class SignProvider with ChangeNotifier {
       notifyListeners();
       if (_result == _currentState.sign) {
         await Future.delayed(Duration(milliseconds: 300));
+        if (_list.length - 1 == _index) {
+          _list.addAll(SignQandSDataProvider.getSignDataList(_index ~/ 5 + 1));
+        }
         _index = _index + 1;
-        _currentState = _list[_index];
         _result = "";
+        _currentState = _list[_index];
         restartTimer();
         notifyListeners();
       }

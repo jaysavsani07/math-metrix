@@ -1,25 +1,30 @@
 import 'package:mathgame/src/models/whatsTheSign/SignQandS.dart';
+import 'package:mathgame/src/utility/mathUtil.dart';
 
 class SignQandSDataProvider {
-  static getSignDataList() {
+  static getSignDataList(int level) {
     List<SignQandS> list = List();
 
-    list.add(SignQandS(1, "5", "+", "4", "9"));
-    list.add(SignQandS(2, "5", "-", "4", "1"));
-    list.add(SignQandS(3, "5", "*", "4", "20"));
-    list.add(SignQandS(4, "4", "/", "4", "1"));
-    list.add(SignQandS(5, "8", "+", "4", "12"));
-    list.add(SignQandS(5, "7", "-", "6", "1"));
-    list.add(SignQandS(5, "11", "+", "4", "15"));
-    list.add(SignQandS(5, "27", "+", "5", "32"));
-    list.add(SignQandS(5, "19", "-", "17", "2"));
-    list.add(SignQandS(5, "7", "*", "9", "63"));
-    list.add(SignQandS(5, "55", "/", "5", "11"));
-    list.add(SignQandS(5, "42", "-", "7", "35"));
-    list.add(SignQandS(5, "26", "+", "6", "32"));
-    list.add(SignQandS(5, "72", "-", "8", "64"));
-    list.add(SignQandS(5, "54", "-", "23", "31"));
+    int i = 0;
+    int min = 3;
+    min = min < 1 ? 1 : min;
+    int max = 10;
 
+    while (i < 5) {
+      int x1 = MathUtil.generateRandomAnswer(min, max);
+      String x2 = MathUtil.generateRandomSign();
+      int x3 = MathUtil.generateRandomAnswer(min, max);
+      if (MathUtil.evaluate(x1, x2, x3) > 0 &&
+          !list.contains(SignQandS(1, x1.toString(), x2, x3.toString(),
+              MathUtil.evaluate(x1, x2, x3).toString()))) {
+        if ((x2 == "/" && x1 > x3 && x1 % x3 == 0) || x2 != "/") {
+          list.add(SignQandS(1, x1.toString(), x2, x3.toString(),
+              MathUtil.evaluate(x1, x2, x3).toString()));
+          print("$x1 $x2 $x3 = ${MathUtil.evaluate(x1, x2, x3)}");
+        }
+        i++;
+      }
+    }
     return list;
   }
 }
