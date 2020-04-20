@@ -9,7 +9,7 @@ import 'package:mathgame/src/utility/coinUtil.dart';
 import 'package:mathgame/src/utility/scoreUtil.dart';
 import 'package:mathgame/src/utility/timeUtil.dart';
 
-import '../utility/dashboardViewModel.dart';
+import 'dashboardViewModel.dart';
 
 class CalculatorProvider with ChangeNotifier {
   var homeViewModel = GetIt.I<DashboardViewModel>();

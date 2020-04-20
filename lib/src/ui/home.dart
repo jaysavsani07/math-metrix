@@ -13,7 +13,7 @@ import 'package:mathgame/src/ui/squareRoot/square_root.dart';
 import 'package:mathgame/src/ui/whatsTheSign/whats_the_sign.dart';
 import 'package:provider_architecture/provider_architecture.dart';
 
-import '../utility/dashboardViewModel.dart';
+import '../provider/dashboardViewModel.dart';
 
 class MyHomePage extends StatelessWidget {
   final PuzzleType puzzleType;

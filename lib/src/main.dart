@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mathgame/src/utility/dashboardViewModel.dart';
+import 'package:mathgame/src/provider/dashboardViewModel.dart';
 import 'package:mathgame/src/ui/dashboard.dart';
 
 void main() {
