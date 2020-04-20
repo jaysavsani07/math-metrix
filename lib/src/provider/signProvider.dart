@@ -1,10 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/whatsTheSign/SignQandS.dart';
+import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/whatsTheSign/signQandSDataProvider.dart';
+import 'package:mathgame/src/utility/dashboardViewModel.dart';
 
 class SignProvider with ChangeNotifier {
+  var homeViewModel = GetIt.I<DashboardViewModel>();
+
   List<SignQandS> _list;
   SignQandS _currentState;
   String _result;
@@ -62,6 +67,7 @@ class SignProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
+      homeViewModel.updateScoreboard(GameCategoryType.SIGN, _index);
       this._timeOut = true;
       notifyListeners();
     });

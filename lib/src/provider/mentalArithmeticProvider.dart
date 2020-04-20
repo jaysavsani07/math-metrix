@@ -1,10 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/mentalArithmetic/mentalArithmeticQandS.dart';
+import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/mentalArithmetic/mentalArithmeticQandSDataProvider.dart';
+import 'package:mathgame/src/utility/dashboardViewModel.dart';
 
 class MentalArithmeticProvider with ChangeNotifier {
+  var homeViewModel = GetIt.I<DashboardViewModel>();
+
   List<MentalArithmeticQandS> _list;
   MentalArithmeticQandS _currentState;
   String _result;
@@ -68,7 +73,7 @@ class MentalArithmeticProvider with ChangeNotifier {
       _currentState.currentQuestion = _currentState.questionList[time];
       notifyListeners();
     }, onDone: () {
-      this._localTimeOut = true;
+          this._localTimeOut = true;
       notifyListeners();
     });
   }
@@ -81,7 +86,8 @@ class MentalArithmeticProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
-      this._timeOut = true;
+          homeViewModel.updateScoreboard(GameCategoryType.MENTAL_ARITHMETIC, _index);
+          this._timeOut = true;
       notifyListeners();
     });
   }

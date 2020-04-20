@@ -1,10 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/MagicTriangle/MagicTriangleModel.dart';
 import 'package:mathgame/src/resources/MagicTriangle/MagicTriangleDataProvider.dart';
+import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
+import 'package:mathgame/src/utility/dashboardViewModel.dart';
 
 class MagicTriangleProvider with ChangeNotifier {
+  var homeViewModel = GetIt.I<DashboardViewModel>();
+
   List<MagicTriangleModel> _list;
   MagicTriangleModel _currentState;
   String _result;
@@ -108,6 +113,7 @@ class MagicTriangleProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
+      homeViewModel.updateScoreboard(GameCategoryType.MAGIC_TRIANGLE, _index);
       this._timeOut = true;
       notifyListeners();
     });

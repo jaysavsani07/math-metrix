@@ -1,11 +1,14 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
-import 'package:mathgame/src/models/MagicTriangle/MagicTriangleModel.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/MathGrid/MathGridModel.dart';
-import 'package:mathgame/src/resources/MagicTriangle/MagicTriangleDataProvider.dart';
+import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/mathGrid/MathGridDataProvider.dart';
+import 'package:mathgame/src/utility/dashboardViewModel.dart';
 
 class MathGridProvider with ChangeNotifier {
+  var homeViewModel = GetIt.I<DashboardViewModel>();
+
   List<MathGridModel> _list;
   MathGridModel _currentState;
   String _result;
@@ -30,7 +33,7 @@ class MathGridProvider with ChangeNotifier {
     _time = 5;
     _timeOut = false;
     _result = "";
-//    startTimer();
+    startTimer();
   }
 
   void inputTriangleSelection(int index, MathGridModel input) {}
@@ -75,6 +78,7 @@ class MathGridProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
+      homeViewModel.updateScoreboard(GameCategoryType.MATH_MACHINE, _index);
       this._timeOut = true;
       notifyListeners();
     });

@@ -1,10 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/correctAnswer/correctAnswerQandS.dart';
 import 'package:mathgame/src/resources/correctAnswer/correctAnswerQandSDataProvider.dart';
+import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
+import 'package:mathgame/src/utility/dashboardViewModel.dart';
 
 class CorrectAnswerProvider with ChangeNotifier {
+  var homeViewModel = GetIt.I<DashboardViewModel>();
+
   List<CorrectAnswerQandS> _list;
   CorrectAnswerQandS _currentState;
   String _result;
@@ -63,6 +68,7 @@ class CorrectAnswerProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
+      homeViewModel.updateScoreboard(GameCategoryType.CORRECT_ANSWER, _index);
       this._timeOut = true;
       notifyListeners();
     });

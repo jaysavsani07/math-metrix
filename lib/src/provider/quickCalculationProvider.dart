@@ -1,10 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/quickCalculation/quickCalculationQandS.dart';
+import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/quickCalculation/quickCalculationQandSDataProvider.dart';
+import 'package:mathgame/src/utility/dashboardViewModel.dart';
 
 class QuickCalculationProvider with ChangeNotifier {
+  var homeViewModel = GetIt.I<DashboardViewModel>();
+
   List<QuickCalculationQandS> _list;
   QuickCalculationQandS _currentState;
   int _index = 0;
@@ -64,6 +69,7 @@ class QuickCalculationProvider with ChangeNotifier {
     timerSubscription = Stream.periodic(Duration(milliseconds: 250), (x) => x)
         .takeWhile((time) => time <= _timeLength)
         .listen((time) {
+      homeViewModel.updateScoreboard(GameCategoryType.QUICK_CALCULATION, _index);
       _time = time / _timeLength;
       notifyListeners();
     }, onDone: () {

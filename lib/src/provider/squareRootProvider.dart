@@ -1,10 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/squareRoot/SquareRootQandS.dart';
+import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/squareRoot/squareRootQandSDataProvider.dart';
+import 'package:mathgame/src/utility/dashboardViewModel.dart';
 
 class SquareRootProvider with ChangeNotifier {
+  var homeViewModel = GetIt.I<DashboardViewModel>();
+
   List<SquareRootQandS> _list;
   SquareRootQandS _currentState;
   String _result;
@@ -63,6 +68,7 @@ class SquareRootProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
+      homeViewModel.updateScoreboard(GameCategoryType.SQUARE_ROOT, _index);
       this._timeOut = true;
       notifyListeners();
     });

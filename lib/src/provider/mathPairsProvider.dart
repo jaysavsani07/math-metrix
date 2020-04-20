@@ -1,10 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/mathPairs/MathPairsRootQandS.dart';
+import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/mathPairs/mathPairsQandSDataProvider.dart';
+import 'package:mathgame/src/utility/dashboardViewModel.dart';
 
 class MathPairsProvider with ChangeNotifier {
+  var homeViewModel = GetIt.I<DashboardViewModel>();
+
   List<MathPairsQandS> _list;
   MathPairsQandS _currentState;
   int _index = 0;
@@ -76,7 +81,8 @@ class MathPairsProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
-      this._timeOut = true;
+          homeViewModel.updateScoreboard(GameCategoryType.MATH_PAIRS, _index);
+          this._timeOut = true;
       notifyListeners();
     });
   }
