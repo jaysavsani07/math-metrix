@@ -21,6 +21,7 @@ class QuickCalculationButton extends StatelessWidget {
             provider.checkResult(text);
           }
         },
+        borderRadius: borderRadius,
         child: Container(
           decoration: BoxDecoration(
             color: Theme.of(context).dialogBackgroundColor,
@@ -33,7 +34,9 @@ class QuickCalculationButton extends StatelessWidget {
           child: Center(
             child: Text(
               text,
-              style: text == "CLEAR" ? Theme.of(context).textTheme.body2 : Theme.of(context).textTheme.body1,
+              style: text == "CLEAR"
+                  ? Theme.of(context).textTheme.body2
+                  : Theme.of(context).textTheme.body1,
             ),
           ),
         ),

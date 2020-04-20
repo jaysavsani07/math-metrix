@@ -23,7 +23,7 @@ class MathPairsProvider with ChangeNotifier {
   MathPairsQandS get currentState => _currentState;
 
   MathPairsProvider() {
-    _list = MathPairsQandSDataProvider.getMathPairsDataList();
+    _list = MathPairsQandSDataProvider.getMathPairsDataList(1);
     _currentState = _list[_index];
     _time = 120;
     _timeOut = false;
@@ -47,6 +47,10 @@ class MathPairsProvider with ChangeNotifier {
           notifyListeners();
           if (_currentState.availableItem == 0) {
             await Future.delayed(Duration(milliseconds: 300));
+            if (_list.length - 1 == _index) {
+              _list.addAll(MathPairsQandSDataProvider.getMathPairsDataList(
+                  _index ~/ 5 + 1));
+            }
             _index = _index + 1;
             _currentState = _list[_index];
             restartTimer();

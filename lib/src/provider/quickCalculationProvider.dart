@@ -29,7 +29,7 @@ class QuickCalculationProvider with ChangeNotifier {
 
   QuickCalculationProvider() {
     _scrollController = FixedExtentScrollController();
-    _list = QuickCalculationQandSDataProvider.getQuickCalculationDataList();
+    _list = QuickCalculationQandSDataProvider.getQuickCalculationDataList(1, 5);
     _currentState = _list[_index];
     _time = 0;
     _timeOut = false;
@@ -42,6 +42,9 @@ class QuickCalculationProvider with ChangeNotifier {
       notifyListeners();
       if (int.parse(_currentState.userAnswer) == _currentState.answer) {
         await Future.delayed(Duration(milliseconds: 300));
+        _list.addAll(
+            QuickCalculationQandSDataProvider.getQuickCalculationDataList(
+                _index ~/ 5 + 1, 1));
         _index = _index + 1;
         _timeLength = _timeLength + 8;
         _currentState = _list[_index];
