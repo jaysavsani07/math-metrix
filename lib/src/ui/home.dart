@@ -1,3 +1,5 @@
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/homeViewModel.dart';
@@ -23,6 +25,7 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Math Game"),
+        backgroundColor: Colors.transparent,
       ),
       body: ViewModelProvider<HomeViewModel>.withConsumer(
           onModelReady: (model) => model.initialise(puzzleType),
@@ -31,7 +34,7 @@ class MyHomePage extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: 80.0),
                 itemBuilder: (BuildContext context, int index) {
                   return Card(
-                    color: Theme.of(context).primaryColorLight,
+//                    color: Theme.of(context).primaryColorLight,
                     margin: EdgeInsets.all(7.0),
                     elevation: 0.0,
                     shape: RoundedRectangleBorder(
@@ -128,6 +131,7 @@ class MyHomePage extends StatelessWidget {
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2),
               )),
+      backgroundColor: Colors.black,
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/homeViewModel.dart';
-import 'package:mathgame/src/ui/home.dart';
+import 'package:mathgame/src/ui/dashboard.dart';
 
 void main() {
   setupServiceLocator();
@@ -9,7 +9,7 @@ void main() {
 }
 
 setupServiceLocator() {
-  GetIt.I.registerLazySingleton<HomeViewModel>(() => HomeViewModel());
+  GetIt.I.registerFactory<HomeViewModel>(() => HomeViewModel());
 }
 
 class MyApp extends StatelessWidget {
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Math Game',
       theme: ThemeData(
-          backgroundColor: Color(0xFF121212),
+          backgroundColor: Color(0xFF000000),
           brightness: Brightness.dark,
 //        primaryColor: Color(0xfffdd835),
           primaryColor: Colors.deepPurple,
@@ -31,19 +31,22 @@ class MyApp extends StatelessWidget {
           highlightColor: Colors.white60,
           dividerColor: Colors.grey[900],
           applyElevationOverlayColor: true,
-          cardTheme: CardTheme(
+          /*cardTheme: CardTheme(
             color: Colors.grey[900]
-          ),
+          ),*/
           textTheme: TextTheme(
             headline: TextStyle(fontSize: 60.0, fontWeight: FontWeight.bold),
             title: TextStyle(fontSize: 50.0, fontWeight: FontWeight.w400),
             subhead: TextStyle(fontSize: 40.0, fontWeight: FontWeight.w400),
-            body1: TextStyle(fontSize: 38.0, fontWeight: FontWeight.w400),
+            body1: TextStyle(fontSize: 38.0, fontWeight: FontWeight.w400, color: Colors.yellow[300]),
             body2: TextStyle(fontSize: 32.0, fontWeight: FontWeight.w400),
             display1: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w400),
+            display2: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w400),
+            display3: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w800),
+            display4: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w200, color: Colors.white),
             button: TextStyle(fontSize: 32.0, fontWeight: FontWeight.normal),
           )),
-      home: MyHomePage(),
+      home: DashBoardPage(),
     );
   }
 }
