@@ -14,10 +14,10 @@ class SquareButton extends StatelessWidget {
     final mathGridProvider = Provider.of<MathGridProvider>(context);
     return Container(
       decoration: BoxDecoration(
-          border: Border.all(color: Colors.green),
+          border: Border.all(color: Colors.white24),
           color: gridModel.isRemoved
-              ? Colors.black
-              : (gridModel.isActive ? Colors.blue[100] : Colors.grey[100])),
+              ? Colors.grey[800]
+              : (gridModel.isActive ? Theme.of(context).accentColor : Colors.grey[900])),
       child: Visibility(
         visible: !(gridModel.isRemoved),
         child: InkWell(
@@ -25,7 +25,7 @@ class SquareButton extends StatelessWidget {
             mathGridProvider.checkResult(value, gridModel);
           },
           child: Center(
-            child: Text(value.toString(), style: TextStyle(fontSize: 18)),
+            child: Text(value.toString(), style: Theme.of(context).textTheme.subhead),
           ),
         ),
       ),
