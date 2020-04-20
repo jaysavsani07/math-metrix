@@ -85,9 +85,9 @@ class DashboardViewModel extends ChangeNotifier {
         if (gameCategory.scoreboard.highestScore < newScore.toInt()) {
           setOverallScore(
               gameCategory.scoreboard.highestScore, newScore.toInt());
-          gameCategory.scoreboard.highestScore = newScore.toInt();
-          setScoreboard(gameCategory.key, gameCategory.scoreboard);
         }
+        gameCategory.scoreboard.highestScore = newScore.toInt();
+        setScoreboard(gameCategory.key, gameCategory.scoreboard);
       }
     });
   }

@@ -21,7 +21,6 @@ class _DashBoardPageState extends State<DashBoardPage>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _controller = AnimationController(
       vsync: this,
@@ -84,7 +83,7 @@ class _DashBoardPageState extends State<DashBoardPage>
                                       Icon(Icons.credit_card,
                                           color: Colors.deepOrange[300]),
                                       SizedBox(width: 5),
-                                      Text("2350",
+                                      Text(model.overallScore.toString(),
                                           style: Theme.of(context)
                                               .textTheme
                                               .subhead),
@@ -92,7 +91,7 @@ class _DashBoardPageState extends State<DashBoardPage>
                                       Icon(Icons.monetization_on,
                                           color: Colors.yellow[300]),
                                       SizedBox(width: 5),
-                                      Text("40",
+                                      Text(model.totalCoin.toString(),
                                           style: Theme.of(context)
                                               .textTheme
                                               .subhead)

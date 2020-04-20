@@ -47,7 +47,8 @@ class MyHomePage extends StatelessWidget {
                   Expanded(
                     flex: 74,
                     child: ViewModelProvider<DashboardViewModel>.withConsumer(
-                        onModelReady: (model) => model.getGameByPuzzleType(puzzleType),
+                        onModelReady: (model) =>
+                            model.getGameByPuzzleType(puzzleType),
                         reuseExisting: true,
                         viewModel: GetIt.I<DashboardViewModel>(),
                         builder: (context, model, child) => GridView.builder(
@@ -189,7 +190,13 @@ class MyHomePage extends StatelessWidget {
                                                           Expanded(
                                                             flex: 1,
                                                             child: Center(
-                                                              child: Text("560",
+                                                              child: Text(
+                                                                  model
+                                                                      .list[
+                                                                          index]
+                                                                      .scoreboard
+                                                                      .highestScore
+                                                                      .toString(),
                                                                   style: Theme.of(
                                                                           context)
                                                                       .textTheme
@@ -207,7 +214,7 @@ class MyHomePage extends StatelessWidget {
                                                             flex: 1,
                                                             child: Center(
                                                               child: Text(
-                                                                  "Level",
+                                                                  "Coin",
                                                                   style: Theme.of(
                                                                           context)
                                                                       .textTheme
@@ -217,7 +224,13 @@ class MyHomePage extends StatelessWidget {
                                                           Expanded(
                                                             flex: 1,
                                                             child: Center(
-                                                              child: Text("24",
+                                                              child: Text(
+                                                                  model
+                                                                      .list[
+                                                                          index]
+                                                                      .scoreboard
+                                                                      .coin
+                                                                      .toString(),
                                                                   style: Theme.of(
                                                                           context)
                                                                       .textTheme
