@@ -6,6 +6,7 @@ import 'package:mathgame/src/models/MagicTriangle/MagicTriangleModel.dart';
 import 'package:mathgame/src/resources/MagicTriangle/MagicTriangleDataProvider.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/utility/dashboardViewModel.dart';
+import 'package:mathgame/src/utility/timeUtil.dart';
 
 class MagicTriangleProvider with ChangeNotifier {
   var homeViewModel = GetIt.I<DashboardViewModel>();
@@ -28,7 +29,7 @@ class MagicTriangleProvider with ChangeNotifier {
   MagicTriangleProvider() {
     _list = MagicTriangleDataProvider.getTriangleDataProviderList();
     _currentState = _list[_index];
-    _time = 120;
+    _time = TimeUtil.magicTriangleTimeOut;
     _timeOut = false;
     startTimer();
   }
@@ -95,10 +96,10 @@ class MagicTriangleProvider with ChangeNotifier {
   }
 
   void startTimer() {
-    timerSubscription =
-        Stream.periodic(Duration(seconds: 1), (x) => 120 - x - 1)
-            .take(120)
-            .listen((time) {
+    timerSubscription = Stream.periodic(
+            Duration(seconds: 1), (x) => TimeUtil.magicTriangleTimeOut - x - 1)
+        .take(TimeUtil.magicTriangleTimeOut)
+        .listen((time) {
       _time = time;
       notifyListeners();
     }, onDone: () {

@@ -32,7 +32,12 @@ class QuickCalculationQandSDataProvider {
 }
 
 void main() {
-  for (int i = 1; i < 2; i++) {
-    QuickCalculationQandSDataProvider.getQuickCalculationDataList(i, 1);
-  }
+  int _timeLength = 10;
+  Stream.periodic(Duration(milliseconds: 250), (x) => x)
+      .takeWhile((time) => time <= _timeLength * 4)
+      .listen((time) {
+    print("$time ${time /( _timeLength * 4)}");
+  }, onDone: () {
+    print("done");
+  });
 }

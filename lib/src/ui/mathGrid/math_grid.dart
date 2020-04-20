@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/provider/MathGridProvider.dart';
+import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/ui/calculator/square_button.dart';
+import 'package:mathgame/src/ui/timer.dart';
 import 'package:provider/provider.dart';
 
 class MathGrid extends StatelessWidget {
@@ -18,6 +20,7 @@ class MathGrid extends StatelessWidget {
             builder: (context, mathGridProvider, child) {
               return Column(
                 children: <Widget>[
+                  Timer(GameCategoryType.MATH_MACHINE),
                   Expanded(
                     flex: 2,
                     child: Container(
@@ -37,8 +40,8 @@ class MathGrid extends StatelessWidget {
                     child: GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 9),
-                        itemCount: mathGridProvider
-                            .currentState.listForSquare.length,
+                        itemCount:
+                            mathGridProvider.currentState.listForSquare.length,
                         itemBuilder: (BuildContext context, int index) {
                           return SquareButton(
                               mathGridProvider

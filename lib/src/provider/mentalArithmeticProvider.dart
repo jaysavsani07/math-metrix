@@ -6,6 +6,7 @@ import 'package:mathgame/src/models/mentalArithmetic/mentalArithmeticQandS.dart'
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/mentalArithmetic/mentalArithmeticQandSDataProvider.dart';
 import 'package:mathgame/src/utility/dashboardViewModel.dart';
+import 'package:mathgame/src/utility/timeUtil.dart';
 
 class MentalArithmeticProvider with ChangeNotifier {
   var homeViewModel = GetIt.I<DashboardViewModel>();
@@ -33,7 +34,7 @@ class MentalArithmeticProvider with ChangeNotifier {
   MentalArithmeticProvider() {
     _list = MentalArithmeticQandSDataProvider.getMentalArithmeticDataList();
     _currentState = _list[_index];
-    _time = 120;
+    _time = TimeUtil.mentalArithmeticTimeOut;
     _timeOut = false;
     _result = "";
     startTimer();
@@ -41,16 +42,18 @@ class MentalArithmeticProvider with ChangeNotifier {
   }
 
   Future<void> checkResult(String answer) async {
-    if (_localTimeOut) if (!timeOut) {
-      _result = _result + answer;
-      notifyListeners();
-      if (_result != "-" && int.parse(_result) == _currentState.answer) {
-        await Future.delayed(Duration(milliseconds: 300));
-        _index = _index + 1;
-        _currentState = _list[_index];
-        _result = "";
-        restartLocalTimer();
+    if (_localTimeOut) {
+      if (!timeOut) {
+        _result = _result + answer;
         notifyListeners();
+        if (_result != "-" && int.parse(_result) == _currentState.answer) {
+          await Future.delayed(Duration(milliseconds: 300));
+          _index = _index + 1;
+          _currentState = _list[_index];
+          _result = "";
+          restartLocalTimer();
+          notifyListeners();
+        }
       }
     }
   }
@@ -67,27 +70,28 @@ class MentalArithmeticProvider with ChangeNotifier {
   void startLocalTimer() {
     _localTimeOut = false;
     _result = "";
-    localTimerSubscription =
-        Stream.periodic(Duration(seconds: 1), (x) => x).take(4).listen((time) {
-      print(time);
+    localTimerSubscription = Stream.periodic(Duration(seconds: 1), (x) => x)
+        .take(TimeUtil.mentalArithmeticLocalTimeOut)
+        .listen((time) {
       _currentState.currentQuestion = _currentState.questionList[time];
       notifyListeners();
     }, onDone: () {
-          this._localTimeOut = true;
+      this._localTimeOut = true;
       notifyListeners();
     });
   }
 
   void startTimer() {
-    timerSubscription =
-        Stream.periodic(Duration(seconds: 1), (x) => 120 - x - 1)
-            .take(120)
-            .listen((time) {
+    timerSubscription = Stream.periodic(Duration(seconds: 1),
+            (x) => TimeUtil.mentalArithmeticTimeOut - x - 1)
+        .take(TimeUtil.mentalArithmeticTimeOut)
+        .listen((time) {
       _time = time;
       notifyListeners();
     }, onDone: () {
-          homeViewModel.updateScoreboard(GameCategoryType.MENTAL_ARITHMETIC, _index);
-          this._timeOut = true;
+      homeViewModel.updateScoreboard(
+          GameCategoryType.MENTAL_ARITHMETIC, _index);
+      this._timeOut = true;
       notifyListeners();
     });
   }

@@ -6,6 +6,7 @@ import 'package:mathgame/src/models/mathPairs/MathPairsRootQandS.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/mathPairs/mathPairsQandSDataProvider.dart';
 import 'package:mathgame/src/utility/dashboardViewModel.dart';
+import 'package:mathgame/src/utility/timeUtil.dart';
 
 class MathPairsProvider with ChangeNotifier {
   var homeViewModel = GetIt.I<DashboardViewModel>();
@@ -30,7 +31,7 @@ class MathPairsProvider with ChangeNotifier {
   MathPairsProvider() {
     _list = MathPairsQandSDataProvider.getMathPairsDataList(1);
     _currentState = _list[_index];
-    _time = 120;
+    _time = TimeUtil.mathematicalPairsTimeOut;
     _timeOut = false;
     startTimer();
   }
@@ -74,15 +75,15 @@ class MathPairsProvider with ChangeNotifier {
   }
 
   void startTimer() {
-    timerSubscription =
-        Stream.periodic(Duration(seconds: 1), (x) => 120 - x - 1)
-            .take(120)
-            .listen((time) {
+    timerSubscription = Stream.periodic(Duration(seconds: 1),
+            (x) => TimeUtil.mathematicalPairsTimeOut - x - 1)
+        .take(TimeUtil.mathematicalPairsTimeOut)
+        .listen((time) {
       _time = time;
       notifyListeners();
     }, onDone: () {
-          homeViewModel.updateScoreboard(GameCategoryType.MATH_PAIRS, _index);
-          this._timeOut = true;
+      homeViewModel.updateScoreboard(GameCategoryType.MATH_PAIRS, _index);
+      this._timeOut = true;
       notifyListeners();
     });
   }

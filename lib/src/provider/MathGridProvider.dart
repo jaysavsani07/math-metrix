@@ -5,21 +5,19 @@ import 'package:mathgame/src/models/MathGrid/MathGridModel.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/mathGrid/MathGridDataProvider.dart';
 import 'package:mathgame/src/utility/dashboardViewModel.dart';
+import 'package:mathgame/src/utility/timeUtil.dart';
 
 class MathGridProvider with ChangeNotifier {
   var homeViewModel = GetIt.I<DashboardViewModel>();
 
   List<MathGridModel> _list;
   MathGridModel _currentState;
-  String _result;
   int _index = 0;
   int answerIndex = 0;
   bool _timeOut;
   int _time;
 
   bool get timeOut => _timeOut;
-
-  String get result => _result;
 
   int get time => _time;
 
@@ -30,9 +28,8 @@ class MathGridProvider with ChangeNotifier {
   MathGridProvider() {
     _list = MathGridDataProvider.getMathGridData();
     _currentState = _list[_index];
-    _time = 5;
+    _time = TimeUtil.mathMachineTimeOut;
     _timeOut = false;
-    _result = "";
     startTimer();
   }
 
@@ -67,13 +64,13 @@ class MathGridProvider with ChangeNotifier {
   }
 
   clear() {
-    _result = "";
     notifyListeners();
   }
 
   void startTimer() {
-    timerSubscription = Stream.periodic(Duration(seconds: 1), (x) => 6 - x - 1)
-        .take(6)
+    timerSubscription = Stream.periodic(
+            Duration(seconds: 1), (x) => TimeUtil.mathMachineTimeOut - x - 1)
+        .take(TimeUtil.mathMachineTimeOut)
         .listen((time) {
       _time = time;
       notifyListeners();

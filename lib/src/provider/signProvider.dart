@@ -6,6 +6,7 @@ import 'package:mathgame/src/models/whatsTheSign/SignQandS.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/whatsTheSign/signQandSDataProvider.dart';
 import 'package:mathgame/src/utility/dashboardViewModel.dart';
+import 'package:mathgame/src/utility/timeUtil.dart';
 
 class SignProvider with ChangeNotifier {
   var homeViewModel = GetIt.I<DashboardViewModel>();
@@ -31,7 +32,7 @@ class SignProvider with ChangeNotifier {
   SignProvider() {
     _list = SignQandSDataProvider.getSignDataList(1);
     _currentState = _list[_index];
-    _time = 5;
+    _time = TimeUtil.signTimeOut;
     _timeOut = false;
     _result = "";
     startTimer();
@@ -61,8 +62,9 @@ class SignProvider with ChangeNotifier {
   }
 
   void startTimer() {
-    timerSubscription = Stream.periodic(Duration(seconds: 1), (x) => 6 - x - 1)
-        .take(6)
+    timerSubscription = Stream.periodic(
+            Duration(seconds: 1), (x) => TimeUtil.signTimeOut - x - 1)
+        .take(TimeUtil.signTimeOut)
         .listen((time) {
       _time = time;
       notifyListeners();

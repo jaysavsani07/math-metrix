@@ -6,6 +6,7 @@ import 'package:mathgame/src/models/squareRoot/SquareRootQandS.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/squareRoot/squareRootQandSDataProvider.dart';
 import 'package:mathgame/src/utility/dashboardViewModel.dart';
+import 'package:mathgame/src/utility/timeUtil.dart';
 
 class SquareRootProvider with ChangeNotifier {
   var homeViewModel = GetIt.I<DashboardViewModel>();
@@ -31,7 +32,7 @@ class SquareRootProvider with ChangeNotifier {
   SquareRootProvider() {
     _list = SquareRootQandSDataProvider.getSquareDataList(1);
     _currentState = _list[_index];
-    _time = 5;
+    _time = TimeUtil.squareRootTimeOut;
     _timeOut = false;
     _result = "";
     startTimer();
@@ -62,8 +63,9 @@ class SquareRootProvider with ChangeNotifier {
   }
 
   void startTimer() {
-    timerSubscription = Stream.periodic(Duration(seconds: 1), (x) => 6 - x - 1)
-        .take(6)
+    timerSubscription = Stream.periodic(
+            Duration(seconds: 1), (x) => TimeUtil.squareRootTimeOut - x - 1)
+        .take(TimeUtil.squareRootTimeOut)
         .listen((time) {
       _time = time;
       notifyListeners();

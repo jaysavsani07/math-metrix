@@ -6,6 +6,7 @@ import 'package:mathgame/src/models/correctAnswer/correctAnswerQandS.dart';
 import 'package:mathgame/src/resources/correctAnswer/correctAnswerQandSDataProvider.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/utility/dashboardViewModel.dart';
+import 'package:mathgame/src/utility/timeUtil.dart';
 
 class CorrectAnswerProvider with ChangeNotifier {
   var homeViewModel = GetIt.I<DashboardViewModel>();
@@ -31,7 +32,7 @@ class CorrectAnswerProvider with ChangeNotifier {
   CorrectAnswerProvider() {
     _list = CorrectAnswerQandSDataProvider.getCorrectAnswerDataList(1);
     _currentState = _list[_index];
-    _time = 5;
+    _time = TimeUtil.correctAnswerTimeOut;
     _timeOut = false;
     _result = "";
     startTimer();
@@ -62,8 +63,9 @@ class CorrectAnswerProvider with ChangeNotifier {
   }
 
   void startTimer() {
-    timerSubscription = Stream.periodic(Duration(seconds: 1), (x) => 6 - x - 1)
-        .take(6)
+    timerSubscription = Stream.periodic(
+            Duration(seconds: 1), (x) => TimeUtil.correctAnswerTimeOut - x - 1)
+        .take(TimeUtil.correctAnswerTimeOut)
         .listen((time) {
       _time = time;
       notifyListeners();
