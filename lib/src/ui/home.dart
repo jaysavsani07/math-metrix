@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -23,115 +22,251 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Math Game"),
-        backgroundColor: Colors.transparent,
-      ),
-      body: ViewModelProvider<HomeViewModel>.withConsumer(
-          onModelReady: (model) => model.initialise(puzzleType),
-          viewModel: GetIt.I<HomeViewModel>(),
-          builder: (context, model, child) => GridView.builder(
-                padding: EdgeInsets.only(bottom: 80.0),
-                itemBuilder: (BuildContext context, int index) {
-                  return Card(
-//                    color: Theme.of(context).primaryColorLight,
-                    margin: EdgeInsets.all(7.0),
-                    elevation: 0.0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      side: BorderSide(width: 1.5),
-                    ),
-                    child: GestureDetector(
-                      behavior: HitTestBehavior.opaque,
-                      child: Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Icon(
-                              Icons.add,
-                              size: 40,
-                            ),
-                            Text(
-                              model.list[index].name,
-                              style: TextStyle(
-                                  fontSize: 16.0, fontWeight: FontWeight.w800),
-                            ),
-                            Text(
-                              model.list[index].scoreboard.highestScore
-                                  .toString(),
-                              style: TextStyle(fontSize: 14.0),
-                            )
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        switch (model.list[index].id) {
-                          case 1:
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Calculator()));
-                            break;
-                          case 2:
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => WhatsTheSign()));
-                            break;
-                          case 3:
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SquareRoot()));
-                            break;
+      body: SafeArea(
+          top: true,
+          bottom: true,
+          child: Container(
+              constraints: BoxConstraints.expand(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    flex: 6,
+                    child: Container(),
+                  ),
+                  Expanded(
+                    flex: 10,
+                    child: Container(
+                        constraints: BoxConstraints.expand(),
+                        alignment: Alignment.center,
+                        child: Text("Math Puzzle",
+                            style: Theme.of(context).textTheme.display2)),
+                  ),
+                  Expanded(
+                    flex: 74,
+                    child: ViewModelProvider<HomeViewModel>.withConsumer(
+                        onModelReady: (model) => model.initialise(puzzleType),
+                        viewModel: GetIt.I<HomeViewModel>(),
+                        builder: (context, model, child) => GridView.builder(
+                              padding: EdgeInsets.only(bottom: 80.0),
+                              itemBuilder: (BuildContext context, int index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    switch (model.list[index].id) {
+                                      case 1:
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Calculator()));
+                                        break;
+                                      case 2:
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    WhatsTheSign()));
+                                        break;
+                                      case 3:
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SquareRoot()));
+                                        break;
 
-                          case 4:
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MathPairs()));
-                            break;
-                          case 5:
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => CorrectAnswer()));
-                            break;
-                          case 6:
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MagicTriangle()));
-                            break;
-                          case 7:
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MentalArithmetic()));
-                            break;
-                          case 8:
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => QuickCalculation()));
-                            break;
-                          case 9:
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MathGrid()));
-                            break;
-                        }
-                      },
+                                      case 4:
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    MathPairs()));
+                                        break;
+                                      case 5:
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    CorrectAnswer()));
+                                        break;
+                                      case 6:
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    MagicTriangle()));
+                                        break;
+                                      case 7:
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    MentalArithmetic()));
+                                        break;
+                                      case 8:
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    QuickCalculation()));
+                                        break;
+                                      case 9:
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    MathGrid()));
+                                        break;
+                                    }
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.fromLTRB(40, 12, 40, 12),
+                                    child: Card(
+                                      color: Color(0xFF242424),
+                                      elevation: 20,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        child: Column(
+                                          children: <Widget>[
+                                            Expanded(
+                                              flex: 4,
+                                              child: Container(
+                                                  decoration: BoxDecoration(
+//                                                    color: Colors.pink[300],
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topLeft: Radius
+                                                                  .circular(20),
+                                                              topRight: Radius
+                                                                  .circular(20),
+                                                              bottomLeft:
+                                                                  Radius.zero,
+                                                              bottomRight:
+                                                                  Radius.zero)),
+                                                  alignment: Alignment.center,
+                                                  constraints:
+                                                      BoxConstraints.expand(),
+                                                  child: Text(
+                                                    model.list[index].name,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .headline,
+                                                  )),
+                                            ),
+                                            Expanded(
+                                              flex: 6,
+                                              child: Container(
+                                                constraints:
+                                                    BoxConstraints.expand(),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: <Widget>[
+                                                    Expanded(
+                                                      flex: 1,
+                                                      child: Row(
+                                                        children: <Widget>[
+                                                          Expanded(
+                                                            flex: 1,
+                                                            child: Center(
+                                                              child: Text(
+                                                                  "Score",
+                                                                  style: Theme.of(
+                                                                          context)
+                                                                      .textTheme
+                                                                      .subhead),
+                                                            ),
+                                                          ),
+                                                          Expanded(
+                                                            flex: 1,
+                                                            child: Center(
+                                                              child: Text("560",
+                                                                  style: Theme.of(
+                                                                          context)
+                                                                      .textTheme
+                                                                      .subhead),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      flex: 1,
+                                                      child: Row(
+                                                        children: <Widget>[
+                                                          Expanded(
+                                                            flex: 1,
+                                                            child: Center(
+                                                              child: Text(
+                                                                  "Level",
+                                                                  style: Theme.of(
+                                                                          context)
+                                                                      .textTheme
+                                                                      .subhead),
+                                                            ),
+                                                          ),
+                                                          Expanded(
+                                                            flex: 1,
+                                                            child: Center(
+                                                              child: Text("24",
+                                                                  style: Theme.of(
+                                                                          context)
+                                                                      .textTheme
+                                                                      .subhead),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                              itemCount: model.list.length,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      childAspectRatio: 2.8, crossAxisCount: 1),
+                            )),
+                  ),
+                  Expanded(
+                    flex: 10,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        IconButton(
+                          icon: Icon(Icons.home),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          iconSize: 40,
+                          padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.info_outline),
+                          iconSize: 40,
+                          padding: EdgeInsets.fromLTRB(0, 0, 30, 0),
+                        )
+                      ],
                     ),
-                  );
-                },
-                itemCount: model.list.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
-              )),
-      backgroundColor: Colors.black,
+                  )
+                ],
+              ))),
     );
   }
 }
