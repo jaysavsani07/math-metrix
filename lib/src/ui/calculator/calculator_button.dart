@@ -21,7 +21,7 @@ class CalculatorButton extends StatelessWidget {
             provider.checkResult(text);
           }
         },
-        borderRadius: getRadius(text),
+        borderRadius: borderRadius,
         child: Container(
           decoration: BoxDecoration(
             color: Theme.of(context).dialogBackgroundColor,

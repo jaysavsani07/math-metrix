@@ -29,8 +29,4 @@ class CalculatorQandSDataProvider {
     return list;
   }
 }
-void main() {
-  for (int i = 1; i < 3; i++) {
-    CalculatorQandSDataProvider.getCalculatorDataList(i);
-  }
-}
+

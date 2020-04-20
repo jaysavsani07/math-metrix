@@ -1,6 +1,10 @@
+import 'dart:async';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/homeViewModel.dart';
+import 'package:mathgame/src/provider/timerProvider.dart';
 import 'package:mathgame/src/ui/calculator/calculator.dart';
 import 'package:mathgame/src/ui/correctAnswer/correct_answer.dart';
 import 'package:mathgame/src/ui/magicTriangle/magic_triangle.dart';
@@ -11,13 +15,16 @@ import 'package:mathgame/src/ui/quickCalculation/quickCalculation.dart';
 import 'package:mathgame/src/ui/squareRoot/square_root.dart';
 import 'package:mathgame/src/ui/whatsTheSign/whats_the_sign.dart';
 import 'package:provider_architecture/provider_architecture.dart';
+import 'package:mathgame/src/utility/ShowUpAnimation.dart';
 
 class MyHomePage extends StatelessWidget {
-  @override
+
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Math Game"),
+        backgroundColor: Colors.transparent,
       ),
       body: ViewModelProvider<HomeViewModel>.withConsumer(
           onModelReady: (model) => model.initialise(),
@@ -26,7 +33,7 @@ class MyHomePage extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: 80.0),
                 itemBuilder: (BuildContext context, int index) {
                   return Card(
-                    color: Theme.of(context).primaryColorLight,
+//                    color: Theme.of(context).primaryColorLight,
                     margin: EdgeInsets.all(7.0),
                     elevation: 0.0,
                     shape: RoundedRectangleBorder(
@@ -126,6 +133,10 @@ class MyHomePage extends StatelessWidget {
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2),
               )),
+      backgroundColor: Colors.black,
+      body: Container(),
     );
   }
+
+
 }
