@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/calculator/calculatorQandS.dart';
 import 'package:mathgame/src/resources/calculator/calculatorQandSDataProvider.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
+import 'package:mathgame/src/utility/scoreUtil.dart';
 import 'package:mathgame/src/utility/timeUtil.dart';
 
 import '../utility/dashboardViewModel.dart';
@@ -71,7 +72,8 @@ class CalculatorProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
-      homeViewModel.updateScoreboard(GameCategoryType.CALCULATOR, _index);
+      homeViewModel.updateScoreboard(
+          GameCategoryType.CALCULATOR, _index * ScoreUtil.calculatorScore);
       this._timeOut = true;
       notifyListeners();
     });

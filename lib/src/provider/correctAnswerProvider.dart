@@ -6,6 +6,7 @@ import 'package:mathgame/src/models/correctAnswer/correctAnswerQandS.dart';
 import 'package:mathgame/src/resources/correctAnswer/correctAnswerQandSDataProvider.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/utility/dashboardViewModel.dart';
+import 'package:mathgame/src/utility/scoreUtil.dart';
 import 'package:mathgame/src/utility/timeUtil.dart';
 
 class CorrectAnswerProvider with ChangeNotifier {
@@ -70,7 +71,8 @@ class CorrectAnswerProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
-      homeViewModel.updateScoreboard(GameCategoryType.CORRECT_ANSWER, _index);
+      homeViewModel.updateScoreboard(GameCategoryType.CORRECT_ANSWER,
+          _index * ScoreUtil.correctAnswerScore);
       this._timeOut = true;
       notifyListeners();
     });

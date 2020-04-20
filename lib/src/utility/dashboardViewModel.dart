@@ -71,12 +71,13 @@ class DashboardViewModel extends ChangeNotifier {
     _preferences.setString(gameCategoryType, json.encode(scoreboard.toJson()));
   }
 
-  void updateScoreboard(GameCategoryType gameCategoryType, int newScore) {
+  void updateScoreboard(GameCategoryType gameCategoryType, double newScore) {
     list.forEach((gameCategory) {
       if (gameCategory.gameCategoryType == gameCategoryType) {
-        if (gameCategory.scoreboard.highestScore < newScore) {
-          setOverallScore(gameCategory.scoreboard.highestScore, newScore);
-          gameCategory.scoreboard.highestScore = newScore;
+        if (gameCategory.scoreboard.highestScore < newScore.toInt()) {
+          setOverallScore(
+              gameCategory.scoreboard.highestScore, newScore.toInt());
+          gameCategory.scoreboard.highestScore = newScore.toInt();
           setScoreboard(gameCategory.key, gameCategory.scoreboard);
         }
       }

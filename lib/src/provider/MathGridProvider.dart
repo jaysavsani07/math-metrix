@@ -5,6 +5,7 @@ import 'package:mathgame/src/models/MathGrid/MathGridModel.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/mathGrid/MathGridDataProvider.dart';
 import 'package:mathgame/src/utility/dashboardViewModel.dart';
+import 'package:mathgame/src/utility/scoreUtil.dart';
 import 'package:mathgame/src/utility/timeUtil.dart';
 
 class MathGridProvider with ChangeNotifier {
@@ -75,7 +76,8 @@ class MathGridProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
-      homeViewModel.updateScoreboard(GameCategoryType.MATH_MACHINE, _index);
+      homeViewModel.updateScoreboard(
+          GameCategoryType.MATH_MACHINE, _index * ScoreUtil.mathMachineScore);
       this._timeOut = true;
       notifyListeners();
     });

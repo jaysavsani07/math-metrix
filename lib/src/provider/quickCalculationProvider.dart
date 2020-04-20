@@ -6,6 +6,7 @@ import 'package:mathgame/src/models/quickCalculation/quickCalculationQandS.dart'
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/quickCalculation/quickCalculationQandSDataProvider.dart';
 import 'package:mathgame/src/utility/dashboardViewModel.dart';
+import 'package:mathgame/src/utility/scoreUtil.dart';
 import 'package:mathgame/src/utility/timeUtil.dart';
 
 class QuickCalculationProvider with ChangeNotifier {
@@ -75,8 +76,8 @@ class QuickCalculationProvider with ChangeNotifier {
       _time = time / (_timeLength * 4);
       notifyListeners();
     }, onDone: () {
-      homeViewModel.updateScoreboard(
-          GameCategoryType.QUICK_CALCULATION, _index);
+      homeViewModel.updateScoreboard(GameCategoryType.QUICK_CALCULATION,
+          _index * ScoreUtil.quickCalculationScore);
       this._timeOut = true;
       notifyListeners();
     });

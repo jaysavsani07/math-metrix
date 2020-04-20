@@ -6,6 +6,7 @@ import 'package:mathgame/src/models/MagicTriangle/MagicTriangleModel.dart';
 import 'package:mathgame/src/resources/MagicTriangle/MagicTriangleDataProvider.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/utility/dashboardViewModel.dart';
+import 'package:mathgame/src/utility/scoreUtil.dart';
 import 'package:mathgame/src/utility/timeUtil.dart';
 
 class MagicTriangleProvider with ChangeNotifier {
@@ -103,7 +104,8 @@ class MagicTriangleProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
-      homeViewModel.updateScoreboard(GameCategoryType.MAGIC_TRIANGLE, _index);
+      homeViewModel.updateScoreboard(GameCategoryType.MAGIC_TRIANGLE,
+          _index * ScoreUtil.magicTriangleScore);
       this._timeOut = true;
       notifyListeners();
     });
