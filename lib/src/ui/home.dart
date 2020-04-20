@@ -1,8 +1,6 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mathgame/src/homeViewModel.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/ui/calculator/calculator.dart';
 import 'package:mathgame/src/ui/correctAnswer/correct_answer.dart';
@@ -14,6 +12,8 @@ import 'package:mathgame/src/ui/quickCalculation/quickCalculation.dart';
 import 'package:mathgame/src/ui/squareRoot/square_root.dart';
 import 'package:mathgame/src/ui/whatsTheSign/whats_the_sign.dart';
 import 'package:provider_architecture/provider_architecture.dart';
+
+import '../utility/dashboardViewModel.dart';
 
 class MyHomePage extends StatelessWidget {
   final PuzzleType puzzleType;
@@ -27,9 +27,10 @@ class MyHomePage extends StatelessWidget {
         title: Text("Math Game"),
         backgroundColor: Colors.transparent,
       ),
-      body: ViewModelProvider<HomeViewModel>.withConsumer(
-          onModelReady: (model) => model.initialise(puzzleType),
-          viewModel: GetIt.I<HomeViewModel>(),
+      body: ViewModelProvider<DashboardViewModel>.withConsumer(
+          onModelReady: (model) => model.getGameByPuzzleType(puzzleType),
+          viewModel: GetIt.I<DashboardViewModel>(),
+          reuseExisting: true,
           builder: (context, model, child) => GridView.builder(
                 padding: EdgeInsets.only(bottom: 80.0),
                 itemBuilder: (BuildContext context, int index) {

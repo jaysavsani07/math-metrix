@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mathgame/src/homeViewModel.dart';
+import 'package:mathgame/src/utility/dashboardViewModel.dart';
 import 'package:mathgame/src/ui/dashboard.dart';
 
 void main() {
@@ -9,7 +9,7 @@ void main() {
 }
 
 setupServiceLocator() {
-  GetIt.I.registerFactory<HomeViewModel>(() => HomeViewModel());
+  GetIt.I.registerSingleton<DashboardViewModel>(DashboardViewModel());
 }
 
 class MyApp extends StatelessWidget {
@@ -38,12 +38,18 @@ class MyApp extends StatelessWidget {
             headline: TextStyle(fontSize: 60.0, fontWeight: FontWeight.bold),
             title: TextStyle(fontSize: 50.0, fontWeight: FontWeight.w400),
             subhead: TextStyle(fontSize: 40.0, fontWeight: FontWeight.w400),
-            body1: TextStyle(fontSize: 38.0, fontWeight: FontWeight.w400, color: Colors.yellow[300]),
+            body1: TextStyle(
+                fontSize: 38.0,
+                fontWeight: FontWeight.w400,
+                color: Colors.yellow[300]),
             body2: TextStyle(fontSize: 32.0, fontWeight: FontWeight.w400),
             display1: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w400),
             display2: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w400),
             display3: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w800),
-            display4: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w200, color: Colors.white),
+            display4: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.w200,
+                color: Colors.white),
             button: TextStyle(fontSize: 32.0, fontWeight: FontWeight.normal),
           )),
       home: DashBoardPage(),

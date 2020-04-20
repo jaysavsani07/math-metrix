@@ -5,19 +5,26 @@ import 'package:mathgame/src/models/scoreboard/Scoreboard.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'models/gameCategory.dart';
+import '../models/gameCategory.dart';
 
-class HomeViewModel extends ChangeNotifier {
+class DashboardViewModel extends ChangeNotifier {
+  int _overallScore = 0;
   List<GameCategory> _list;
   SharedPreferences _preferences;
+
+  int get overallScore => _overallScore;
 
   List<GameCategory> get list => _list;
 
   SharedPreferences get preferences => _preferences;
 
-  Future<void> initialise(PuzzleType puzzleType) async {
-    _list = List();
+  Future<void> initialise() async {
     _preferences = await SharedPreferences.getInstance();
+    _overallScore = getOverallScore();
+  }
+
+  Future<void> getGameByPuzzleType(PuzzleType puzzleType) async {
+    _list = List();
 
     switch (puzzleType) {
       case PuzzleType.MATH_PUZZLE:
@@ -53,7 +60,6 @@ class HomeViewModel extends ChangeNotifier {
             GameCategoryType.MATH_MACHINE, getScoreboard("math_machine")));
         break;
     }
-    notifyListeners();
   }
 
   Scoreboard getScoreboard(String gameCategoryType) {
@@ -69,11 +75,20 @@ class HomeViewModel extends ChangeNotifier {
     list.forEach((gameCategory) {
       if (gameCategory.gameCategoryType == gameCategoryType) {
         if (gameCategory.scoreboard.highestScore < newScore) {
+          setOverallScore(gameCategory.scoreboard.highestScore, newScore);
           gameCategory.scoreboard.highestScore = newScore;
           setScoreboard(gameCategory.key, gameCategory.scoreboard);
         }
       }
     });
-    notifyListeners();
+  }
+
+  int getOverallScore() {
+    return _preferences.getInt("overall_score") ?? 0;
+  }
+
+  void setOverallScore(int highestScore, int newScore) {
+    _overallScore = getOverallScore() - highestScore + newScore;
+    _preferences.setInt("overall_score", _overallScore);
   }
 }

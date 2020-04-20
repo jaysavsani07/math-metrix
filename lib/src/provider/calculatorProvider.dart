@@ -6,10 +6,10 @@ import 'package:mathgame/src/models/calculator/calculatorQandS.dart';
 import 'package:mathgame/src/resources/calculator/calculatorQandSDataProvider.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 
-import '../homeViewModel.dart';
+import '../utility/dashboardViewModel.dart';
 
 class CalculatorProvider with ChangeNotifier {
-  var homeViewModel = GetIt.I<HomeViewModel>();
+  var homeViewModel = GetIt.I<DashboardViewModel>();
 
   List<CalculatorQandS> _list;
   CalculatorQandS _currentState;
