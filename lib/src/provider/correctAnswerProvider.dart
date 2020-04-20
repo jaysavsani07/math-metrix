@@ -1,10 +1,18 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/correctAnswer/correctAnswerQandS.dart';
 import 'package:mathgame/src/resources/correctAnswer/correctAnswerQandSDataProvider.dart';
+import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
+import 'package:mathgame/src/utility/coinUtil.dart';
+import 'package:mathgame/src/provider/dashboardViewModel.dart';
+import 'package:mathgame/src/utility/scoreUtil.dart';
+import 'package:mathgame/src/utility/timeUtil.dart';
 
 class CorrectAnswerProvider with ChangeNotifier {
+  var homeViewModel = GetIt.I<DashboardViewModel>();
+
   List<CorrectAnswerQandS> _list;
   CorrectAnswerQandS _currentState;
   String _result;
@@ -26,7 +34,7 @@ class CorrectAnswerProvider with ChangeNotifier {
   CorrectAnswerProvider() {
     _list = CorrectAnswerQandSDataProvider.getCorrectAnswerDataList(1);
     _currentState = _list[_index];
-    _time = 5;
+    _time = TimeUtil.correctAnswerTimeOut;
     _timeOut = false;
     _result = "";
     startTimer();
@@ -57,12 +65,15 @@ class CorrectAnswerProvider with ChangeNotifier {
   }
 
   void startTimer() {
-    timerSubscription = Stream.periodic(Duration(seconds: 1), (x) => 6 - x - 1)
-        .take(6)
+    timerSubscription = Stream.periodic(
+            Duration(seconds: 1), (x) => TimeUtil.correctAnswerTimeOut - x - 1)
+        .take(TimeUtil.correctAnswerTimeOut)
         .listen((time) {
       _time = time;
       notifyListeners();
     }, onDone: () {
+      homeViewModel.updateScoreboard(GameCategoryType.CORRECT_ANSWER,
+          _index * ScoreUtil.correctAnswerScore,_index * CoinUtil.correctAnswerCoin);
       this._timeOut = true;
       notifyListeners();
     });

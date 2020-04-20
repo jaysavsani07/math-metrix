@@ -5,11 +5,14 @@ import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/calculator/calculatorQandS.dart';
 import 'package:mathgame/src/resources/calculator/calculatorQandSDataProvider.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
+import 'package:mathgame/src/utility/coinUtil.dart';
+import 'package:mathgame/src/utility/scoreUtil.dart';
+import 'package:mathgame/src/utility/timeUtil.dart';
 
-import '../homeViewModel.dart';
+import 'dashboardViewModel.dart';
 
 class CalculatorProvider with ChangeNotifier {
-  var homeViewModel = GetIt.I<HomeViewModel>();
+  var homeViewModel = GetIt.I<DashboardViewModel>();
 
   List<CalculatorQandS> _list;
   CalculatorQandS _currentState;
@@ -32,7 +35,7 @@ class CalculatorProvider with ChangeNotifier {
   CalculatorProvider() {
     _list = CalculatorQandSDataProvider.getCalculatorDataList(1);
     _currentState = _list[_index];
-    _time = 5;
+    _time = TimeUtil.calculatorTimeOut;
     _timeOut = false;
     _result = "";
     startTimer();
@@ -63,13 +66,15 @@ class CalculatorProvider with ChangeNotifier {
   }
 
   void startTimer() {
-    timerSubscription = Stream.periodic(Duration(seconds: 1), (x) => 6 - x - 1)
-        .take(6)
+    timerSubscription = Stream.periodic(
+            Duration(seconds: 1), (x) => TimeUtil.calculatorTimeOut - x - 1)
+        .take(TimeUtil.calculatorTimeOut)
         .listen((time) {
       _time = time;
       notifyListeners();
     }, onDone: () {
-      homeViewModel.updateScoreboard(GameCategoryType.CALCULATOR, _index);
+      homeViewModel.updateScoreboard(GameCategoryType.CALCULATOR,
+          _index * ScoreUtil.calculatorScore, _index * CoinUtil.calculatorCoin);
       this._timeOut = true;
       notifyListeners();
     });

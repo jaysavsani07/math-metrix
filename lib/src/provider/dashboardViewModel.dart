@@ -5,19 +5,30 @@ import 'package:mathgame/src/models/scoreboard/Scoreboard.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'models/gameCategory.dart';
+import '../models/gameCategory.dart';
 
-class HomeViewModel extends ChangeNotifier {
+class DashboardViewModel extends ChangeNotifier {
+  int _overallScore = 0;
+  int _totalCoin = 0;
   List<GameCategory> _list;
   SharedPreferences _preferences;
+
+  int get overallScore => _overallScore;
+
+  int get totalCoin => _totalCoin;
 
   List<GameCategory> get list => _list;
 
   SharedPreferences get preferences => _preferences;
 
-  Future<void> initialise(PuzzleType puzzleType) async {
-    _list = List();
+  Future<void> initialise() async {
     _preferences = await SharedPreferences.getInstance();
+    _overallScore = getOverallScore();
+    _totalCoin = getTotalCoin();
+  }
+
+  Future<void> getGameByPuzzleType(PuzzleType puzzleType) async {
+    _list = List();
 
     switch (puzzleType) {
       case PuzzleType.MATH_PUZZLE:
@@ -53,7 +64,6 @@ class HomeViewModel extends ChangeNotifier {
             GameCategoryType.MATH_MACHINE, getScoreboard("math_machine")));
         break;
     }
-    notifyListeners();
   }
 
   Scoreboard getScoreboard(String gameCategoryType) {
@@ -65,15 +75,38 @@ class HomeViewModel extends ChangeNotifier {
     _preferences.setString(gameCategoryType, json.encode(scoreboard.toJson()));
   }
 
-  void updateScoreboard(GameCategoryType gameCategoryType, int newScore) {
+  void updateScoreboard(
+      GameCategoryType gameCategoryType, double newScore, double coin) {
     list.forEach((gameCategory) {
       if (gameCategory.gameCategoryType == gameCategoryType) {
-        if (gameCategory.scoreboard.highestScore < newScore) {
-          gameCategory.scoreboard.highestScore = newScore;
+        gameCategory.scoreboard.coin =
+            gameCategory.scoreboard.coin + coin.toInt();
+        setTotalCoin(coin.toInt());
+        if (gameCategory.scoreboard.highestScore < newScore.toInt()) {
+          setOverallScore(
+              gameCategory.scoreboard.highestScore, newScore.toInt());
+          gameCategory.scoreboard.highestScore = newScore.toInt();
           setScoreboard(gameCategory.key, gameCategory.scoreboard);
         }
       }
     });
-    notifyListeners();
+  }
+
+  int getOverallScore() {
+    return _preferences.getInt("overall_score") ?? 0;
+  }
+
+  void setOverallScore(int highestScore, int newScore) {
+    _overallScore = getOverallScore() - highestScore + newScore;
+    _preferences.setInt("overall_score", _overallScore);
+  }
+
+  int getTotalCoin() {
+    return _preferences.getInt("total_coin") ?? 0;
+  }
+
+  void setTotalCoin(int coin) {
+    _totalCoin = getTotalCoin() + coin;
+    _preferences.setInt("total_coin", _totalCoin);
   }
 }

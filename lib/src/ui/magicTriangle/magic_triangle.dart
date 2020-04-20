@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/provider/MagicTriangleProvider.dart';
+import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/ui/calculator/triangle_button.dart';
 import 'package:mathgame/src/ui/calculator/triangle_input_button.dart';
 import 'package:mathgame/src/ui/magicTriangle/TrianglePainter.dart';
+import 'package:mathgame/src/ui/timer.dart';
 import 'package:provider/provider.dart';
 
 class MagicTriangle extends StatelessWidget {
@@ -22,6 +24,7 @@ class MagicTriangle extends StatelessWidget {
           body: Consumer<MagicTriangleProvider>(
             builder: (context, magicTriangleProvider, child) {
               return Column(children: <Widget>[
+                Timer(GameCategoryType.MAGIC_TRIANGLE),
                 Expanded(
                   flex: 2,
                   child: Container(

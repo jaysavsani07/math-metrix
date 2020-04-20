@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mathgame/src/provider/MagicTriangleProvider.dart';
+import 'package:mathgame/src/provider/MathGridProvider.dart';
 import 'package:mathgame/src/provider/calculatorProvider.dart';
 import 'package:mathgame/src/provider/correctAnswerProvider.dart';
 import 'package:mathgame/src/provider/mathPairsProvider.dart';
@@ -31,6 +33,10 @@ class Timer extends StatelessWidget {
       provider = Provider.of<MentalArithmeticProvider>(context);
     } else if (type == GameCategoryType.QUICK_CALCULATION) {
       provider = Provider.of<QuickCalculationProvider>(context);
+    } else if (type == GameCategoryType.MAGIC_TRIANGLE) {
+      provider = Provider.of<MagicTriangleProvider>(context);
+    } else if (type == GameCategoryType.MATH_MACHINE) {
+      provider = Provider.of<MathGridProvider>(context);
     }
     return Text(provider.time.toString(), style: TextStyle(fontSize: 20));
   }

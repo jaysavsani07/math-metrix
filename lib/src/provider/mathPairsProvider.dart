@@ -1,10 +1,18 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/mathPairs/MathPairsRootQandS.dart';
+import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/mathPairs/mathPairsQandSDataProvider.dart';
+import 'package:mathgame/src/utility/coinUtil.dart';
+import 'package:mathgame/src/provider/dashboardViewModel.dart';
+import 'package:mathgame/src/utility/scoreUtil.dart';
+import 'package:mathgame/src/utility/timeUtil.dart';
 
 class MathPairsProvider with ChangeNotifier {
+  var homeViewModel = GetIt.I<DashboardViewModel>();
+
   List<MathPairsQandS> _list;
   MathPairsQandS _currentState;
   int _index = 0;
@@ -25,7 +33,7 @@ class MathPairsProvider with ChangeNotifier {
   MathPairsProvider() {
     _list = MathPairsQandSDataProvider.getMathPairsDataList(1);
     _currentState = _list[_index];
-    _time = 120;
+    _time = TimeUtil.mathematicalPairsTimeOut;
     _timeOut = false;
     startTimer();
   }
@@ -69,13 +77,17 @@ class MathPairsProvider with ChangeNotifier {
   }
 
   void startTimer() {
-    timerSubscription =
-        Stream.periodic(Duration(seconds: 1), (x) => 120 - x - 1)
-            .take(120)
-            .listen((time) {
+    timerSubscription = Stream.periodic(Duration(seconds: 1),
+            (x) => TimeUtil.mathematicalPairsTimeOut - x - 1)
+        .take(TimeUtil.mathematicalPairsTimeOut)
+        .listen((time) {
       _time = time;
       notifyListeners();
     }, onDone: () {
+      homeViewModel.updateScoreboard(
+          GameCategoryType.MATH_PAIRS,
+          _index * ScoreUtil.mathematicalPairsScore,
+          _index * CoinUtil.mathematicalPairsCoin);
       this._timeOut = true;
       notifyListeners();
     });

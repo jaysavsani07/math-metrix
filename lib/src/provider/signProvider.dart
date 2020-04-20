@@ -1,10 +1,18 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/whatsTheSign/SignQandS.dart';
+import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/whatsTheSign/signQandSDataProvider.dart';
+import 'package:mathgame/src/utility/coinUtil.dart';
+import 'package:mathgame/src/provider/dashboardViewModel.dart';
+import 'package:mathgame/src/utility/scoreUtil.dart';
+import 'package:mathgame/src/utility/timeUtil.dart';
 
 class SignProvider with ChangeNotifier {
+  var homeViewModel = GetIt.I<DashboardViewModel>();
+
   List<SignQandS> _list;
   SignQandS _currentState;
   String _result;
@@ -26,7 +34,7 @@ class SignProvider with ChangeNotifier {
   SignProvider() {
     _list = SignQandSDataProvider.getSignDataList(1);
     _currentState = _list[_index];
-    _time = 5;
+    _time = TimeUtil.signTimeOut;
     _timeOut = false;
     _result = "";
     startTimer();
@@ -56,12 +64,15 @@ class SignProvider with ChangeNotifier {
   }
 
   void startTimer() {
-    timerSubscription = Stream.periodic(Duration(seconds: 1), (x) => 6 - x - 1)
-        .take(6)
+    timerSubscription = Stream.periodic(
+            Duration(seconds: 1), (x) => TimeUtil.signTimeOut - x - 1)
+        .take(TimeUtil.signTimeOut)
         .listen((time) {
       _time = time;
       notifyListeners();
     }, onDone: () {
+      homeViewModel.updateScoreboard(GameCategoryType.SIGN,
+          _index * ScoreUtil.signScore, _index * CoinUtil.signCoin);
       this._timeOut = true;
       notifyListeners();
     });
