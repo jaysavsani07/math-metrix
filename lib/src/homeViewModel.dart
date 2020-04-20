@@ -15,9 +15,18 @@ class HomeViewModel extends ChangeNotifier {
 
   SharedPreferences get preferences => _preferences;
 
-  Future<void> initialise() async {
+  Future<void> initialise(PuzzleType puzzleType) async {
     _list = List();
     _preferences = await SharedPreferences.getInstance();
+
+    switch (puzzleType) {
+      case PuzzleType.MATH_PUZZLE:
+        break;
+      case PuzzleType.MEMORY_PUZZLE:
+        break;
+      case PuzzleType.BRAIN_PUZZLE:
+        break;
+    }
     list.add(GameCategory(1, "Calculator", "calculator",
         GameCategoryType.CALCULATOR, getScoreboard("calculator")));
     list.add(GameCategory(2, "What's the sign?", "sign", GameCategoryType.SIGN,

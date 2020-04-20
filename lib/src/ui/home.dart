@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/homeViewModel.dart';
+import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/ui/calculator/calculator.dart';
 import 'package:mathgame/src/ui/correctAnswer/correct_answer.dart';
 import 'package:mathgame/src/ui/magicTriangle/magic_triangle.dart';
@@ -13,6 +14,10 @@ import 'package:mathgame/src/ui/whatsTheSign/whats_the_sign.dart';
 import 'package:provider_architecture/provider_architecture.dart';
 
 class MyHomePage extends StatelessWidget {
+  final PuzzleType puzzleType;
+
+  MyHomePage({Key key, @required this.puzzleType}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +25,7 @@ class MyHomePage extends StatelessWidget {
         title: Text("Math Game"),
       ),
       body: ViewModelProvider<HomeViewModel>.withConsumer(
-          onModelReady: (model) => model.initialise(),
+          onModelReady: (model) => model.initialise(puzzleType),
           viewModel: GetIt.I<HomeViewModel>(),
           builder: (context, model, child) => GridView.builder(
                 padding: EdgeInsets.only(bottom: 80.0),
@@ -47,71 +52,68 @@ class MyHomePage extends StatelessWidget {
                             Text(
                               model.list[index].name,
                               style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w800
-                                  ),
+                                  fontSize: 16.0, fontWeight: FontWeight.w800),
                             ),
                             Text(
                               model.list[index].scoreboard.highestScore
                                   .toString(),
-                              style: TextStyle(
-                                  fontSize: 14.0),
+                              style: TextStyle(fontSize: 14.0),
                             )
                           ],
                         ),
                       ),
                       onTap: () {
-                        switch (index) {
-                          case 0:
+                        switch (model.list[index].id) {
+                          case 1:
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => Calculator()));
                             break;
-                          case 1:
+                          case 2:
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => WhatsTheSign()));
                             break;
-                          case 2:
+                          case 3:
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => SquareRoot()));
                             break;
 
-                          case 3:
+                          case 4:
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => MathPairs()));
                             break;
-                          case 4:
+                          case 5:
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => CorrectAnswer()));
                             break;
-                          case 5:
+                          case 6:
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => MagicTriangle()));
                             break;
-                          case 6:
+                          case 7:
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => MentalArithmetic()));
                             break;
-                          case 7:
+                          case 8:
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => QuickCalculation()));
                             break;
-                          case 8:
+                          case 9:
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

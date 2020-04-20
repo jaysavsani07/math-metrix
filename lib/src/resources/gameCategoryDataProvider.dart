@@ -1,4 +1,3 @@
-
 enum GameCategoryType {
   CALCULATOR,
   SIGN,
@@ -10,3 +9,4 @@ enum GameCategoryType {
   QUICK_CALCULATION,
   MATH_MACHINE
 }
+enum PuzzleType { MATH_PUZZLE, MEMORY_PUZZLE, BRAIN_PUZZLE }
