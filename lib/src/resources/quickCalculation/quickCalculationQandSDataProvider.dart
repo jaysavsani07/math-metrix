@@ -1,25 +1,38 @@
 import 'package:mathgame/src/models/quickCalculation/quickCalculationQandS.dart';
+import 'package:mathgame/src/utility/mathUtil.dart';
 
 class QuickCalculationQandSDataProvider {
-  static getQuickCalculationDataList() {
+  static getQuickCalculationDataList(int level, int noItem) {
     List<QuickCalculationQandS> list = List();
 
-    list.add(QuickCalculationQandS(1, "5+4", 9));
-    list.add(QuickCalculationQandS(2, "5-4", 1));
-    list.add(QuickCalculationQandS(3, "5*4", 20));
-    list.add(QuickCalculationQandS(4, "4/4", 1));
-    list.add(QuickCalculationQandS(5, "8+4", 12));
-    list.add(QuickCalculationQandS(5, "7-6", 1));
-    list.add(QuickCalculationQandS(5, "11+4", 15));
-    list.add(QuickCalculationQandS(5, "27+5", 32));
-    list.add(QuickCalculationQandS(5, "19-17", 2));
-    list.add(QuickCalculationQandS(5, "7*9", 63));
-    list.add(QuickCalculationQandS(5, "55/5", 11));
-    list.add(QuickCalculationQandS(5, "42-7", 35));
-    list.add(QuickCalculationQandS(5, "26+6", 32));
-    list.add(QuickCalculationQandS(5, "72-8", 64));
-    list.add(QuickCalculationQandS(5, "54-23", 31));
+    int i = 0;
+
+    int min = 3;
+    min = min < 1 ? 1 : min;
+    int max = 10;
+
+    while (i < noItem) {
+      int x1 = MathUtil.generateRandomAnswer(min, max);
+      String x2 = MathUtil.generateRandomSign();
+      int x3 = MathUtil.generateRandomAnswer(min, max);
+      if (MathUtil.evaluate(x1, x2, x3) > 0 &&
+          !list.contains(QuickCalculationQandS(
+              1, "$x1 $x2 $x3", MathUtil.evaluate(x1, x2, x3)))) {
+        if ((x2 == "/" && x1 > x3 && x1 % x3 == 0) || x2 != "/") {
+          list.add(QuickCalculationQandS(
+              1, "$x1 $x2 $x3", MathUtil.evaluate(x1, x2, x3)));
+          print("$x1 $x2 $x3 = ${MathUtil.evaluate(x1, x2, x3)}");
+          i++;
+        }
+      }
+    }
 
     return list;
+  }
+}
+
+void main() {
+  for (int i = 1; i < 2; i++) {
+    QuickCalculationQandSDataProvider.getQuickCalculationDataList(i, 1);
   }
 }
