@@ -9,10 +9,13 @@ import '../models/gameCategory.dart';
 
 class DashboardViewModel extends ChangeNotifier {
   int _overallScore = 0;
+  int _totalCoin = 0;
   List<GameCategory> _list;
   SharedPreferences _preferences;
 
   int get overallScore => _overallScore;
+
+  int get totalCoin => _totalCoin;
 
   List<GameCategory> get list => _list;
 
@@ -21,6 +24,7 @@ class DashboardViewModel extends ChangeNotifier {
   Future<void> initialise() async {
     _preferences = await SharedPreferences.getInstance();
     _overallScore = getOverallScore();
+    _totalCoin = getTotalCoin();
   }
 
   Future<void> getGameByPuzzleType(PuzzleType puzzleType) async {
@@ -71,9 +75,13 @@ class DashboardViewModel extends ChangeNotifier {
     _preferences.setString(gameCategoryType, json.encode(scoreboard.toJson()));
   }
 
-  void updateScoreboard(GameCategoryType gameCategoryType, double newScore) {
+  void updateScoreboard(
+      GameCategoryType gameCategoryType, double newScore, double coin) {
     list.forEach((gameCategory) {
       if (gameCategory.gameCategoryType == gameCategoryType) {
+        gameCategory.scoreboard.coin =
+            gameCategory.scoreboard.coin + coin.toInt();
+        setTotalCoin(coin.toInt());
         if (gameCategory.scoreboard.highestScore < newScore.toInt()) {
           setOverallScore(
               gameCategory.scoreboard.highestScore, newScore.toInt());
@@ -91,5 +99,14 @@ class DashboardViewModel extends ChangeNotifier {
   void setOverallScore(int highestScore, int newScore) {
     _overallScore = getOverallScore() - highestScore + newScore;
     _preferences.setInt("overall_score", _overallScore);
+  }
+
+  int getTotalCoin() {
+    return _preferences.getInt("total_coin") ?? 0;
+  }
+
+  void setTotalCoin(int coin) {
+    _totalCoin = getTotalCoin() + coin;
+    _preferences.setInt("total_coin", _totalCoin);
   }
 }

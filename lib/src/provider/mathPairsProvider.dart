@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/mathPairs/MathPairsRootQandS.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/mathPairs/mathPairsQandSDataProvider.dart';
+import 'package:mathgame/src/utility/coinUtil.dart';
 import 'package:mathgame/src/utility/dashboardViewModel.dart';
 import 'package:mathgame/src/utility/scoreUtil.dart';
 import 'package:mathgame/src/utility/timeUtil.dart';
@@ -83,8 +84,10 @@ class MathPairsProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
-      homeViewModel.updateScoreboard(GameCategoryType.MATH_PAIRS,
-          _index * ScoreUtil.mathematicalPairsScore);
+      homeViewModel.updateScoreboard(
+          GameCategoryType.MATH_PAIRS,
+          _index * ScoreUtil.mathematicalPairsScore,
+          _index * CoinUtil.mathematicalPairsCoin);
       this._timeOut = true;
       notifyListeners();
     });

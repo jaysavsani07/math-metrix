@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/squareRoot/SquareRootQandS.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/squareRoot/squareRootQandSDataProvider.dart';
+import 'package:mathgame/src/utility/coinUtil.dart';
 import 'package:mathgame/src/utility/dashboardViewModel.dart';
 import 'package:mathgame/src/utility/scoreUtil.dart';
 import 'package:mathgame/src/utility/timeUtil.dart';
@@ -71,8 +72,8 @@ class SquareRootProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
-      homeViewModel.updateScoreboard(
-          GameCategoryType.SQUARE_ROOT, _index * ScoreUtil.squareRootScore);
+      homeViewModel.updateScoreboard(GameCategoryType.SQUARE_ROOT,
+          _index * ScoreUtil.squareRootScore, _index * CoinUtil.squareRootCoin);
       this._timeOut = true;
       notifyListeners();
     });

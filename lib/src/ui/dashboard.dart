@@ -14,14 +14,14 @@ class DashBoardPage extends StatelessWidget {
           reuseExisting: true,
           viewModel: GetIt.I<DashboardViewModel>(),
           onModelReady: (model) => model.initialise(),
-          builder: (context, model, child) => Container(
+          builder: (context, DashboardViewModel model, child) => Container(
                 color: Colors.green,
                 constraints: BoxConstraints.expand(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text("Overall score ${model.overallScore}"),
+                    Text("${model.overallScore} ${model.totalCoin}"),
                     Card(
                       child: RaisedButton(
                         onPressed: () {

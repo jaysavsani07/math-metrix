@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/whatsTheSign/SignQandS.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/whatsTheSign/signQandSDataProvider.dart';
+import 'package:mathgame/src/utility/coinUtil.dart';
 import 'package:mathgame/src/utility/dashboardViewModel.dart';
 import 'package:mathgame/src/utility/scoreUtil.dart';
 import 'package:mathgame/src/utility/timeUtil.dart';
@@ -70,8 +71,8 @@ class SignProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
-      homeViewModel.updateScoreboard(
-          GameCategoryType.SIGN, _index * ScoreUtil.signScore);
+      homeViewModel.updateScoreboard(GameCategoryType.SIGN,
+          _index * ScoreUtil.signScore, _index * CoinUtil.signCoin);
       this._timeOut = true;
       notifyListeners();
     });

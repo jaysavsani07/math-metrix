@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/mentalArithmetic/mentalArithmeticQandS.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/mentalArithmetic/mentalArithmeticQandSDataProvider.dart';
+import 'package:mathgame/src/utility/coinUtil.dart';
 import 'package:mathgame/src/utility/dashboardViewModel.dart';
 import 'package:mathgame/src/utility/scoreUtil.dart';
 import 'package:mathgame/src/utility/timeUtil.dart';
@@ -90,8 +91,10 @@ class MentalArithmeticProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
-      homeViewModel.updateScoreboard(GameCategoryType.MENTAL_ARITHMETIC,
-          _index * ScoreUtil.mentalArithmeticScore);
+      homeViewModel.updateScoreboard(
+          GameCategoryType.MENTAL_ARITHMETIC,
+          _index * ScoreUtil.mentalArithmeticScore,
+          _index * CoinUtil.mentalArithmeticCoin);
       this._timeOut = true;
       notifyListeners();
     });
