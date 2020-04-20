@@ -69,49 +69,80 @@ class MentalArithmetic extends StatelessWidget {
                   )),
               Expanded(
                 flex: 5,
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    height: 600,
+                    width: 400,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                      ),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          MentalArithmeticButton("1", 1),
-                          MentalArithmeticButton("4", 1),
-                          MentalArithmeticButton("7", 1),
+                          Expanded(
+                            child: Row(
+                              children: <Widget>[
+                                MentalArithmeticButton(
+                                    "7",
+                                    BorderRadius.only(
+                                        topLeft: Radius.circular(40))),
+                                MentalArithmeticButton(
+                                    "8", BorderRadius.all(Radius.zero)),
+                                MentalArithmeticButton(
+                                    "9",
+                                    BorderRadius.only(
+                                        topRight: Radius.circular(40)))
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Row(
+                              children: <Widget>[
+                                MentalArithmeticButton(
+                                    "4", BorderRadius.all(Radius.zero)),
+                                MentalArithmeticButton(
+                                    "5", BorderRadius.all(Radius.zero)),
+                                MentalArithmeticButton(
+                                    "6", BorderRadius.all(Radius.zero))
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Row(
+                              children: <Widget>[
+                                MentalArithmeticButton(
+                                    "1", BorderRadius.all(Radius.zero)),
+                                MentalArithmeticButton(
+                                    "2", BorderRadius.all(Radius.zero)),
+                                MentalArithmeticButton(
+                                    "3", BorderRadius.all(Radius.zero))
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Row(
+                              children: <Widget>[
+                                MentalArithmeticButton(
+                                    "0",
+                                    BorderRadius.only(
+                                        bottomLeft: Radius.circular(40))),
+                                MentalArithmeticButton(
+                                    "-",
+                                    BorderRadius.only(
+                                        bottomLeft: Radius.zero)),
+                                MentalArithmeticButton(
+                                    "CLEAR",
+                                    BorderRadius.only(
+                                        bottomRight: Radius.circular(40)))
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        children: <Widget>[
-                          MentalArithmeticButton("2", 1),
-                          MentalArithmeticButton("5", 1),
-                          MentalArithmeticButton("8", 1),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        children: <Widget>[
-                          MentalArithmeticButton("3", 1),
-                          MentalArithmeticButton("6", 1),
-                          MentalArithmeticButton("9", 1),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        children: <Widget>[
-                          MentalArithmeticButton("-", 1),
-                          MentalArithmeticButton("0", 1),
-                          MentalArithmeticButton("CE", 1),
-                        ],
-                      ),
-                    )
-                  ],
+                  ),
                 ),
               ),
               Expanded(flex: 1, child: SizedBox()),
