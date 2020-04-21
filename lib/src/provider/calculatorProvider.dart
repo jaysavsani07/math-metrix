@@ -21,6 +21,7 @@ class CalculatorProvider with ChangeNotifier {
   CalculatorQandS _currentState;
   String _result;
   int _index = 0;
+  int currentScore = 0;
 
   bool _timeOut;
   int _time;

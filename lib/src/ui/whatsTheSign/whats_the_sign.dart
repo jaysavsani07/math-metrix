@@ -21,12 +21,7 @@ class WhatsTheSign extends StatelessWidget {
                 children: <Widget>[
                   Expanded(
                       flex: 1,
-                      child: SizedBox(
-                        child: Align(
-                          alignment: Alignment.bottomLeft,
-                          child: Timer(GameCategoryType.SIGN),
-                        ),
-                      )),
+                      child: Timer(GameCategoryType.SIGN)),
                   Expanded(
                       flex: 2,
                       child: Row(

@@ -40,7 +40,26 @@ class Timer extends StatelessWidget {
     }
 //    return Text(provider.time.toString(), style: TextStyle(fontSize: 20));
     return Container(
-
+      alignment: Alignment.center,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Column(
+            children: <Widget>[
+              Text("Score", style: Theme.of(context).textTheme.subhead),
+              Text(provider.currentScore.toString(),
+                  style: Theme.of(context).textTheme.headline)
+            ],
+          ),
+          Column(
+              children: <Widget>[
+                Text("Timer", style: Theme.of(context).textTheme.subhead),
+                Text(provider.time.toString(),
+                    style: Theme.of(context).textTheme.headline)
+              ]
+          )
+        ],
+      ),
     );
   }
 }
