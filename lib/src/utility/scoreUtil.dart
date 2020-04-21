@@ -5,7 +5,7 @@ class ScoreUtil {
 
   static double correctAnswerScore = 1;
 
-  static double quickCalculationScore = 0.2;
+  static double quickCalculationScore = 1;
 
   static double mentalArithmeticScore = 2;
 

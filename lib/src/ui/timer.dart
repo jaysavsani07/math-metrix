@@ -51,12 +51,15 @@ class Timer extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline)
             ],
           ),
-          Column(
-              children: <Widget>[
-                Text("Timer", style: Theme.of(context).textTheme.subhead),
-                Text(provider.time.toString(),
-                    style: Theme.of(context).textTheme.headline)
-              ]
+          Visibility(
+            visible: !(type == GameCategoryType.QUICK_CALCULATION) ? true : false ,
+            child: Column(
+                children: <Widget>[
+                  Text("Timer", style: Theme.of(context).textTheme.subhead),
+                  Text(provider.time.toString(),
+                      style: Theme.of(context).textTheme.headline)
+                ]
+            ),
           )
         ],
       ),

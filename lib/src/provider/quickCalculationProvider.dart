@@ -24,6 +24,7 @@ class QuickCalculationProvider with ChangeNotifier {
   bool _timeOut;
   double _time;
   bool _pause = false;
+  int currentScore = 0 ;
 
   bool get timeOut => _timeOut;
 
@@ -60,6 +61,7 @@ class QuickCalculationProvider with ChangeNotifier {
       _currentState.userAnswer = _currentState.userAnswer + answer;
       notifyListeners();
       if (int.parse(_currentState.userAnswer) == _currentState.answer) {
+        currentScore = currentScore + (ScoreUtil.quickCalculationScore ).toInt();
         await Future.delayed(Duration(milliseconds: 300));
         _list.addAll(
             QuickCalculationQandSDataProvider.getQuickCalculationDataList(
