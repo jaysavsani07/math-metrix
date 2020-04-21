@@ -2,8 +2,10 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/MathGrid/MathGridModel.dart';
+import 'package:mathgame/src/resources/dialog_service.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/mathGrid/MathGridDataProvider.dart';
+import 'package:mathgame/src/resources/navigation_service.dart';
 import 'package:mathgame/src/utility/coinUtil.dart';
 import 'package:mathgame/src/provider/dashboardViewModel.dart';
 import 'package:mathgame/src/utility/scoreUtil.dart';
@@ -11,6 +13,7 @@ import 'package:mathgame/src/utility/timeUtil.dart';
 
 class MathGridProvider with ChangeNotifier {
   var homeViewModel = GetIt.I<DashboardViewModel>();
+  final DialogService _dialogService = GetIt.I<DialogService>();
 
   List<MathGridModel> _list;
   MathGridModel _currentState;
@@ -18,16 +21,23 @@ class MathGridProvider with ChangeNotifier {
   int answerIndex = 0;
   bool _timeOut;
   int _time;
+  bool _pause = false;
 
   bool get timeOut => _timeOut;
 
   int get time => _time;
+
+  bool get pause => _pause;
 
   StreamSubscription timerSubscription;
 
   MathGridModel get currentState => _currentState;
 
   MathGridProvider() {
+    startGame();
+  }
+
+  void startGame() {
     _list = MathGridDataProvider.getMathGridData();
     _currentState = _list[_index];
     _time = TimeUtil.mathMachineTimeOut;
@@ -78,8 +88,11 @@ class MathGridProvider with ChangeNotifier {
       notifyListeners();
     }, onDone: () {
       homeViewModel.updateScoreboard(
-          GameCategoryType.MATH_MACHINE, _index * ScoreUtil.mathMachineScore,_index * CoinUtil.mathMachineCoin);
+          GameCategoryType.MATH_MACHINE,
+          _index * ScoreUtil.mathMachineScore,
+          _index * CoinUtil.mathMachineCoin);
       this._timeOut = true;
+      showDialog();
       notifyListeners();
     });
   }
@@ -87,6 +100,39 @@ class MathGridProvider with ChangeNotifier {
   void restartTimer() {
     timerSubscription.cancel();
     startTimer();
+  }
+
+  void pauseTimer() {
+    _pause = true;
+    timerSubscription.pause();
+    notifyListeners();
+    showDialog();
+  }
+
+  Future showDialog() async {
+    notifyListeners();
+    var dialogResult = await _dialogService.showDialog(
+        gameCategoryType: GameCategoryType.MATH_MACHINE,
+        score: _index * ScoreUtil.mathMachineScore,
+        coin: _index * CoinUtil.mathMachineCoin,
+        isPause: _pause);
+
+    if (dialogResult.exit) {
+      homeViewModel.updateScoreboard(
+          GameCategoryType.MATH_MACHINE,
+          _index * ScoreUtil.mathMachineScore,
+          _index * CoinUtil.mathMachineCoin);
+      GetIt.I<NavigationService>().goBack();
+    } else if (dialogResult.restart) {
+      timerSubscription.cancel();
+      _index = 0;
+      startGame();
+    } else if (dialogResult.play) {
+      timerSubscription.resume();
+      _pause = false;
+      notifyListeners();
+    }
+    notifyListeners();
   }
 
   void dispose() {
