@@ -31,7 +31,7 @@ class CorrectAnswerButton extends StatelessWidget {
           child: Center(
             child: Text(
               text,
-              style: Theme.of(context).textTheme.title,
+              style: Theme.of(context).textTheme.display1,
             ),
           ),
         ),

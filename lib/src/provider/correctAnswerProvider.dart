@@ -20,6 +20,7 @@ class CorrectAnswerProvider with ChangeNotifier {
   CorrectAnswerQandS _currentState;
   String _result;
   int _index = 0;
+  int currentScore = 0;
 
   bool _timeOut;
   int _time;
@@ -55,6 +56,7 @@ class CorrectAnswerProvider with ChangeNotifier {
       _result = answer;
       notifyListeners();
       if (int.parse(_result) == _currentState.answer) {
+        currentScore = currentScore + (ScoreUtil.correctAnswerScore * _time).toInt();
         await Future.delayed(Duration(milliseconds: 300));
         if (_list.length - 1 == _index) {
           _list.addAll(CorrectAnswerQandSDataProvider.getCorrectAnswerDataList(
