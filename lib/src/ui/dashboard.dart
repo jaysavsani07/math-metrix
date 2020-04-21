@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/provider/dashboardViewModel.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
+import 'package:mathgame/src/resources/navigation_service.dart';
+import 'package:mathgame/src/utility/keyUtil.dart';
 
 import 'package:mathgame/src/utility/sizeConfig.dart';
 
@@ -120,13 +122,9 @@ class _DashBoardPageState extends State<DashBoardPage>
                             ),
                             GestureDetector(
                               onTapDown: (tapDownDetails) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => MyHomePage(
-                                              puzzleType:
-                                                  PuzzleType.MATH_PUZZLE,
-                                            )));
+                                GetIt.I<NavigationService>().navigateTo(
+                                    KeyUtil.Home,
+                                    arguments: PuzzleType.MATH_PUZZLE);
                               },
                               child: Transform.scale(
                                 scale: 1,
@@ -145,13 +143,9 @@ class _DashBoardPageState extends State<DashBoardPage>
                             ),
                             GestureDetector(
                               onTapDown: (tapDownDetails) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => MyHomePage(
-                                              puzzleType:
-                                                  PuzzleType.MEMORY_PUZZLE,
-                                            )));
+                                GetIt.I<NavigationService>().navigateTo(
+                                    KeyUtil.Home,
+                                    arguments: PuzzleType.MEMORY_PUZZLE);
                               },
                               child: Card(
                                 margin: EdgeInsets.all(10),
@@ -167,13 +161,9 @@ class _DashBoardPageState extends State<DashBoardPage>
                             ),
                             GestureDetector(
                               onTapDown: (tapDownDetails) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => MyHomePage(
-                                              puzzleType:
-                                                  PuzzleType.BRAIN_PUZZLE,
-                                            )));
+                                GetIt.I<NavigationService>().navigateTo(
+                                    KeyUtil.Home,
+                                    arguments: PuzzleType.BRAIN_PUZZLE);
                               },
                               child: Card(
                                 margin: EdgeInsets.all(10),

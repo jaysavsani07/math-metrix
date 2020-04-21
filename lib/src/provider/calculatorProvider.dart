@@ -6,6 +6,7 @@ import 'package:mathgame/src/models/calculator/calculatorQandS.dart';
 import 'package:mathgame/src/resources/calculator/calculatorQandSDataProvider.dart';
 import 'package:mathgame/src/resources/dialog_service.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
+import 'package:mathgame/src/resources/navigation_service.dart';
 import 'package:mathgame/src/utility/coinUtil.dart';
 import 'package:mathgame/src/utility/scoreUtil.dart';
 import 'package:mathgame/src/utility/timeUtil.dart';
@@ -107,6 +108,7 @@ class CalculatorProvider with ChangeNotifier {
         isPause: _pause);
 
     if (dialogResult.exit) {
+      GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
     } else if (dialogResult.play) {
       _pause = false;
