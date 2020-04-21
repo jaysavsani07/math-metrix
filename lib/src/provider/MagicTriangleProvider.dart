@@ -115,10 +115,6 @@ class MagicTriangleProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
-      homeViewModel.updateScoreboard(
-          GameCategoryType.MAGIC_TRIANGLE,
-          _index * ScoreUtil.magicTriangleScore,
-          _index * CoinUtil.magicTriangleCoin);
       this._timeOut = true;
       showDialog();
       notifyListeners();
@@ -152,6 +148,10 @@ class MagicTriangleProvider with ChangeNotifier {
           _index * CoinUtil.magicTriangleCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
+      homeViewModel.updateScoreboard(
+          GameCategoryType.MAGIC_TRIANGLE,
+          _index * ScoreUtil.magicTriangleScore,
+          _index * CoinUtil.magicTriangleCoin);
       timerSubscription.cancel();
       _index = 0;
       startGame();

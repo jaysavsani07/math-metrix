@@ -83,8 +83,6 @@ class CalculatorProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
-      homeViewModel.updateScoreboard(GameCategoryType.CALCULATOR,
-          _index * ScoreUtil.calculatorScore, _index * CoinUtil.calculatorCoin);
       this._timeOut = true;
       showDialog();
       notifyListeners();
@@ -116,6 +114,8 @@ class CalculatorProvider with ChangeNotifier {
           _index * ScoreUtil.calculatorScore, _index * CoinUtil.calculatorCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
+      homeViewModel.updateScoreboard(GameCategoryType.CALCULATOR,
+          _index * ScoreUtil.calculatorScore, _index * CoinUtil.calculatorCoin);
       timerSubscription.cancel();
       _index = 0;
       startGame();

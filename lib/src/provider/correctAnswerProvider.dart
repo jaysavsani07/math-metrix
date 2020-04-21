@@ -82,10 +82,6 @@ class CorrectAnswerProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
-      homeViewModel.updateScoreboard(
-          GameCategoryType.CORRECT_ANSWER,
-          _index * ScoreUtil.correctAnswerScore,
-          _index * CoinUtil.correctAnswerCoin);
       showDialog();
       this._timeOut = true;
       notifyListeners();
@@ -119,6 +115,10 @@ class CorrectAnswerProvider with ChangeNotifier {
           _index * CoinUtil.correctAnswerCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
+      homeViewModel.updateScoreboard(
+          GameCategoryType.CORRECT_ANSWER,
+          _index * ScoreUtil.correctAnswerScore,
+          _index * CoinUtil.correctAnswerCoin);
       timerSubscription.cancel();
       _index = 0;
       startGame();

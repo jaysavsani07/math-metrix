@@ -82,8 +82,6 @@ class SquareRootProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
-      homeViewModel.updateScoreboard(GameCategoryType.SQUARE_ROOT,
-          _index * ScoreUtil.squareRootScore, _index * CoinUtil.squareRootCoin);
       this._timeOut = true;
       showDialog();
       notifyListeners();
@@ -115,6 +113,8 @@ class SquareRootProvider with ChangeNotifier {
           _index * ScoreUtil.squareRootScore, _index * CoinUtil.squareRootCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
+      homeViewModel.updateScoreboard(GameCategoryType.SQUARE_ROOT,
+          _index * ScoreUtil.squareRootScore, _index * CoinUtil.squareRootCoin);
       timerSubscription.cancel();
       _index = 0;
       startGame();
