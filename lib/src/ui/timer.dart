@@ -38,6 +38,9 @@ class Timer extends StatelessWidget {
     } else if (type == GameCategoryType.MATH_MACHINE) {
       provider = Provider.of<MathGridProvider>(context);
     }
-    return Text(provider.time.toString(), style: TextStyle(fontSize: 20));
+//    return Text(provider.time.toString(), style: TextStyle(fontSize: 20));
+    return Container(
+
+    );
   }
 }

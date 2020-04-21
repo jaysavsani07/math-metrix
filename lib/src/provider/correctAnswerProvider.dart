@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/correctAnswer/correctAnswerQandS.dart';
 import 'package:mathgame/src/resources/correctAnswer/correctAnswerQandSDataProvider.dart';
+import 'package:mathgame/src/resources/dialog_service.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
+import 'package:mathgame/src/resources/navigation_service.dart';
 import 'package:mathgame/src/utility/coinUtil.dart';
 import 'package:mathgame/src/provider/dashboardViewModel.dart';
 import 'package:mathgame/src/utility/scoreUtil.dart';
@@ -12,6 +14,7 @@ import 'package:mathgame/src/utility/timeUtil.dart';
 
 class CorrectAnswerProvider with ChangeNotifier {
   var homeViewModel = GetIt.I<DashboardViewModel>();
+  final DialogService _dialogService = GetIt.I<DialogService>();
 
   List<CorrectAnswerQandS> _list;
   CorrectAnswerQandS _currentState;
@@ -20,6 +23,7 @@ class CorrectAnswerProvider with ChangeNotifier {
 
   bool _timeOut;
   int _time;
+  bool _pause = false;
 
   bool get timeOut => _timeOut;
 
@@ -27,11 +31,17 @@ class CorrectAnswerProvider with ChangeNotifier {
 
   int get time => _time;
 
+  bool get pause => _pause;
+
   StreamSubscription timerSubscription;
 
   CorrectAnswerQandS get currentState => _currentState;
 
   CorrectAnswerProvider() {
+    startGame();
+  }
+
+  void startGame() {
     _list = CorrectAnswerQandSDataProvider.getCorrectAnswerDataList(1);
     _currentState = _list[_index];
     _time = TimeUtil.correctAnswerTimeOut;
@@ -72,8 +82,11 @@ class CorrectAnswerProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
-      homeViewModel.updateScoreboard(GameCategoryType.CORRECT_ANSWER,
-          _index * ScoreUtil.correctAnswerScore,_index * CoinUtil.correctAnswerCoin);
+      homeViewModel.updateScoreboard(
+          GameCategoryType.CORRECT_ANSWER,
+          _index * ScoreUtil.correctAnswerScore,
+          _index * CoinUtil.correctAnswerCoin);
+      showDialog();
       this._timeOut = true;
       notifyListeners();
     });
@@ -82,6 +95,39 @@ class CorrectAnswerProvider with ChangeNotifier {
   void restartTimer() {
     timerSubscription.cancel();
     startTimer();
+  }
+
+  void pauseTimer() {
+    _pause = true;
+    timerSubscription.pause();
+    notifyListeners();
+    showDialog();
+  }
+
+  Future showDialog() async {
+    notifyListeners();
+    var dialogResult = await _dialogService.showDialog(
+        gameCategoryType: GameCategoryType.CORRECT_ANSWER,
+        score: _index * ScoreUtil.correctAnswerScore,
+        coin: _index * CoinUtil.correctAnswerCoin,
+        isPause: _pause);
+
+    if (dialogResult.exit) {
+      homeViewModel.updateScoreboard(
+          GameCategoryType.CORRECT_ANSWER,
+          _index * ScoreUtil.correctAnswerScore,
+          _index * CoinUtil.correctAnswerCoin);
+      GetIt.I<NavigationService>().goBack();
+    } else if (dialogResult.restart) {
+      timerSubscription.cancel();
+      _index = 0;
+      startGame();
+    } else if (dialogResult.play) {
+      timerSubscription.resume();
+      _pause = false;
+      notifyListeners();
+    }
+    notifyListeners();
   }
 
   void dispose() {

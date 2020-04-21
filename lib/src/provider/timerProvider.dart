@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:mathgame/src/utility/timeUtil.dart';
 
-class TimerProvider with ChangeNotifier {
+class TimerViewModel with ChangeNotifier {
   bool _timeOut;
   int _time;
 
@@ -10,30 +11,25 @@ class TimerProvider with ChangeNotifier {
 
   int get time => _time;
 
-  StreamSubscription timerSubscription;
+  Stream<int> timer;
 
-  TimerProvider() {
+  TimerViewModel() {
     _timeOut = false;
     startTimer();
   }
 
   void startTimer() {
-    timerSubscription =
-        Stream.periodic(Duration(seconds: 1), (x) => 6 - x - 1).listen((time) {
+    timer = Stream.periodic(
+            Duration(seconds: 1), (x) => TimeUtil.calculatorTimeOut - x - 1)
+        .take(TimeUtil.calculatorTimeOut)
+        .map((time) {
       _time = time;
-      print(time);
       notifyListeners();
-    }, onDone: () {
-      this._timeOut = true;
-      notifyListeners();
+      return time;
     });
   }
 
   void restartTimer() {
     startTimer();
-  }
-
-  void dispose() {
-    this.timerSubscription.cancel();
   }
 }

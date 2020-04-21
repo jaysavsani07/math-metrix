@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/mentalArithmetic/mentalArithmeticQandS.dart';
+import 'package:mathgame/src/resources/dialog_service.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/mentalArithmetic/mentalArithmeticQandSDataProvider.dart';
+import 'package:mathgame/src/resources/navigation_service.dart';
 import 'package:mathgame/src/utility/coinUtil.dart';
 import 'package:mathgame/src/provider/dashboardViewModel.dart';
 import 'package:mathgame/src/utility/scoreUtil.dart';
@@ -12,6 +14,7 @@ import 'package:mathgame/src/utility/timeUtil.dart';
 
 class MentalArithmeticProvider with ChangeNotifier {
   var homeViewModel = GetIt.I<DashboardViewModel>();
+  final DialogService _dialogService = GetIt.I<DialogService>();
 
   List<MentalArithmeticQandS> _list;
   MentalArithmeticQandS _currentState;
@@ -21,6 +24,7 @@ class MentalArithmeticProvider with ChangeNotifier {
   bool _timeOut;
   int _time;
   bool _localTimeOut;
+  bool _pause = false;
 
   bool get timeOut => _timeOut;
 
@@ -28,12 +32,18 @@ class MentalArithmeticProvider with ChangeNotifier {
 
   int get time => _time;
 
+  bool get pause => _pause;
+
   StreamSubscription timerSubscription;
   StreamSubscription localTimerSubscription;
 
   MentalArithmeticQandS get currentState => _currentState;
 
   MentalArithmeticProvider() {
+    startGame();
+  }
+
+  void startGame() {
     _list = MentalArithmeticQandSDataProvider.getMentalArithmeticDataList();
     _currentState = _list[_index];
     _time = TimeUtil.mentalArithmeticTimeOut;
@@ -44,7 +54,8 @@ class MentalArithmeticProvider with ChangeNotifier {
   }
 
   Future<void> checkResult(String answer) async {
-    if (_localTimeOut) {
+    if (_localTimeOut &&
+        _result.length <= _currentState.answer.toString().length) {
       if (!timeOut) {
         _result = _result + answer;
         notifyListeners();
@@ -96,6 +107,7 @@ class MentalArithmeticProvider with ChangeNotifier {
           _index * ScoreUtil.mentalArithmeticScore,
           _index * CoinUtil.mentalArithmeticCoin);
       this._timeOut = true;
+      showDialog();
       notifyListeners();
     });
   }
@@ -103,6 +115,42 @@ class MentalArithmeticProvider with ChangeNotifier {
   void restartLocalTimer() {
     localTimerSubscription.cancel();
     startLocalTimer();
+  }
+
+  void pauseTimer() {
+    _pause = true;
+    timerSubscription.pause();
+    localTimerSubscription.pause();
+    notifyListeners();
+    showDialog();
+  }
+
+  Future showDialog() async {
+    notifyListeners();
+    var dialogResult = await _dialogService.showDialog(
+        gameCategoryType: GameCategoryType.MENTAL_ARITHMETIC,
+        score: _index * ScoreUtil.mentalArithmeticScore,
+        coin: _index * CoinUtil.mentalArithmeticCoin,
+        isPause: _pause);
+
+    if (dialogResult.exit) {
+      homeViewModel.updateScoreboard(
+          GameCategoryType.MENTAL_ARITHMETIC,
+          _index * ScoreUtil.mentalArithmeticScore,
+          _index * CoinUtil.mentalArithmeticCoin);
+      GetIt.I<NavigationService>().goBack();
+    } else if (dialogResult.restart) {
+      timerSubscription.cancel();
+      localTimerSubscription.cancel();
+      _index = 0;
+      startGame();
+    } else if (dialogResult.play) {
+      timerSubscription.resume();
+      localTimerSubscription.resume();
+      _pause = false;
+      notifyListeners();
+    }
+    notifyListeners();
   }
 
   void dispose() {

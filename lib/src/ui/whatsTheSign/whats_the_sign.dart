@@ -4,126 +4,109 @@ import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/ui/timer.dart';
 import 'package:mathgame/src/ui/whatsTheSign/sign_button.dart';
 import 'package:provider/provider.dart';
-import 'package:mathgame/src/utility/MultiDigitCounter.dart';
 
 class WhatsTheSign extends StatelessWidget {
-
-  final counterKey = GlobalKey();
-
   @override
   Widget build(BuildContext context) {
-
     return ChangeNotifierProvider<SignProvider>(
       create: (_) => SignProvider(),
-      child: Scaffold(
-        body: Container(
-          margin: EdgeInsets.all(20),
-          constraints: BoxConstraints.expand(),
-          child: Consumer<SignProvider>(builder: (context, signProvider, child){
-            return Column(
-              children: <Widget>[
-                Expanded(
-                  flex: 1,
-                  /*child: SizedBox(
-                      child: Align(
-                        alignment: Alignment.bottomLeft,
-                        child: Timer(GameCategoryType.SIGN),
-                      ),
-                    )*/
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Column(
-                            children: <Widget>[
-                              Text("Your Score",
-                                  style: Theme.of(context).textTheme.subhead),
-                              Text(signProvider.currentScore.toString(),
-                                  style: Theme.of(context).textTheme.subhead),
-                            ],
-                          ),Column(
-                            children: <Widget>[
-                              Text("Remaining",
-                                  style: Theme.of(context).textTheme.subhead),
-                              Text(signProvider.time.toString(),
-                                  style: Theme.of(context).textTheme.headline)
-                            ],
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-                Expanded(
-                    flex: 2,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Expanded(
-                          flex: 1,
-                          child: Center(
-                            child: Text(
-                              signProvider.currentState.firstDigit,
-                              style: Theme.of(context).textTheme.display3,
-                            ),
-                          ),
+      child: WillPopScope(
+        onWillPop: () => Future.value(false),
+        child: Scaffold(
+          body: Consumer<SignProvider>(builder: (context, signProvider, child){
+            return Container(
+              margin: EdgeInsets.all(50),
+              constraints: BoxConstraints.expand(),
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                      flex: 1,
+                      child: SizedBox(
+                        child: Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Timer(GameCategoryType.SIGN),
                         ),
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                            margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(3)),
-                              border: Border.all(
-                                  color: Theme.of(context).primaryColor,
-                                  width: 2),
-                            ),
+                      )),
+                  Expanded(
+                      flex: 2,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Expanded(
+                            flex: 1,
                             child: Center(
-                              heightFactor: 1,
                               child: Text(
-                                signProvider.result,
-                                style: Theme.of(context).textTheme.display1,
+                                signProvider.currentState.firstDigit,
+                                style: Theme
+                                    .of(context)
+                                    .textTheme
+                                    .headline,
                               ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Center(
-                            child: Text(
-                              signProvider.currentState.secondDigit,
-                              style: Theme.of(context).textTheme.display3,
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(3)),
+                                border: Border.all(
+                                    color: Theme
+                                        .of(context)
+                                        .primaryColor,
+                                    width: 2),
+                              ),
+                              child: Center(
+                                heightFactor: 1,
+                                child: Text(
+                                  signProvider.result,
+                                  style: TextStyle(fontSize: 35),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Center(
-                            child: Text(
-                              "=",
-                              style: Theme.of(context).textTheme.display3,
+                          Expanded(
+                            flex: 1,
+                            child: Center(
+                              child: Text(
+                                signProvider.currentState.secondDigit,
+                                style: Theme
+                                    .of(context)
+                                    .textTheme
+                                    .headline,
+                              ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Center(
-                            child: Text(
-                              signProvider.currentState.answer,
-                              style: Theme.of(context).textTheme.display3,
+                          Expanded(
+                            flex: 1,
+                            child: Center(
+                              child: Text(
+                                "=",
+                                style: Theme
+                                    .of(context)
+                                    .textTheme
+                                    .headline,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    )),
-                Expanded(
-                  flex: 5,
-                  child: Container(
-                    margin: EdgeInsets.all(20),
+                          Expanded(
+                            flex: 1,
+                            child: Center(
+                              child: Text(
+                                signProvider.currentState.answer,
+                                style: Theme
+                                    .of(context)
+                                    .textTheme
+                                    .headline,
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                  Expanded(
+                    flex: 5,
                     child: Align(
                       alignment: Alignment.center,
                       child: SizedBox(
@@ -170,9 +153,24 @@ class WhatsTheSign extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
-                Expanded(flex: 1, child: SizedBox()),
-              ],
+                  Expanded(
+                      flex: 1,
+                      child: InkWell(
+                        onTap: () {
+                          signProvider.pauseTimer();
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(5),
+                          child: Center(
+                            child: Icon(
+                              signProvider.pause ? Icons.play_arrow : Icons.pause,
+                              size: 40,
+                            ),
+                          ),
+                        ),
+                      )),
+                ],
+              ),
             );
           }),
         ),

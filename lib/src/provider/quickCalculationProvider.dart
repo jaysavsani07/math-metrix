@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/quickCalculation/quickCalculationQandS.dart';
+import 'package:mathgame/src/resources/dialog_service.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
+import 'package:mathgame/src/resources/navigation_service.dart';
 import 'package:mathgame/src/resources/quickCalculation/quickCalculationQandSDataProvider.dart';
 import 'package:mathgame/src/utility/coinUtil.dart';
 import 'package:mathgame/src/provider/dashboardViewModel.dart';
@@ -12,6 +14,7 @@ import 'package:mathgame/src/utility/timeUtil.dart';
 
 class QuickCalculationProvider with ChangeNotifier {
   var homeViewModel = GetIt.I<DashboardViewModel>();
+  final DialogService _dialogService = GetIt.I<DialogService>();
 
   List<QuickCalculationQandS> _list;
   QuickCalculationQandS _currentState;
@@ -20,8 +23,11 @@ class QuickCalculationProvider with ChangeNotifier {
   FixedExtentScrollController _scrollController;
   bool _timeOut;
   double _time;
+  bool _pause = false;
 
   bool get timeOut => _timeOut;
+
+  bool get pause => _pause;
 
   List<QuickCalculationQandS> get list => _list;
 
@@ -36,6 +42,10 @@ class QuickCalculationProvider with ChangeNotifier {
   QuickCalculationQandS get currentState => _currentState;
 
   QuickCalculationProvider() {
+    startGame();
+  }
+
+  void startGame() {
     _scrollController = FixedExtentScrollController();
     _list = QuickCalculationQandSDataProvider.getQuickCalculationDataList(1, 5);
     _currentState = _list[_index];
@@ -73,7 +83,6 @@ class QuickCalculationProvider with ChangeNotifier {
     timerSubscription = Stream.periodic(Duration(milliseconds: 250), (x) => x)
         .takeWhile((time) => time <= _timeLength * 4)
         .listen((time) {
-      print("$time ${time / 4} ${time / (_timeLength * 4)}");
       _time = time / (_timeLength * 4);
       notifyListeners();
     }, onDone: () {
@@ -81,6 +90,7 @@ class QuickCalculationProvider with ChangeNotifier {
           GameCategoryType.QUICK_CALCULATION,
           _index * ScoreUtil.quickCalculationScore,
           _index * CoinUtil.quickCalculationCoin);
+      showDialog();
       this._timeOut = true;
       notifyListeners();
     });
@@ -89,6 +99,39 @@ class QuickCalculationProvider with ChangeNotifier {
   void restartTimer() {
     timerSubscription.cancel();
     startTimer();
+  }
+
+  void pauseTimer() {
+    _pause = true;
+    timerSubscription.pause();
+    notifyListeners();
+    showDialog();
+  }
+
+  Future showDialog() async {
+    notifyListeners();
+    var dialogResult = await _dialogService.showDialog(
+        gameCategoryType: GameCategoryType.QUICK_CALCULATION,
+        score: _index * ScoreUtil.quickCalculationScore,
+        coin: _index * CoinUtil.quickCalculationCoin,
+        isPause: _pause);
+
+    if (dialogResult.exit) {
+      homeViewModel.updateScoreboard(
+          GameCategoryType.QUICK_CALCULATION,
+          _index * ScoreUtil.quickCalculationScore,
+          _index * CoinUtil.quickCalculationCoin);
+      GetIt.I<NavigationService>().goBack();
+    } else if (dialogResult.restart) {
+      timerSubscription.cancel();
+      _index = 0;
+      startGame();
+    } else if (dialogResult.play) {
+      timerSubscription.resume();
+      _pause = false;
+      notifyListeners();
+    }
+    notifyListeners();
   }
 
   void dispose() {

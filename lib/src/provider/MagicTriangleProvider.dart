@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/MagicTriangle/MagicTriangleModel.dart';
 import 'package:mathgame/src/resources/MagicTriangle/MagicTriangleDataProvider.dart';
+import 'package:mathgame/src/resources/dialog_service.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
+import 'package:mathgame/src/resources/navigation_service.dart';
 import 'package:mathgame/src/utility/coinUtil.dart';
 import 'package:mathgame/src/provider/dashboardViewModel.dart';
 import 'package:mathgame/src/utility/scoreUtil.dart';
@@ -12,6 +14,7 @@ import 'package:mathgame/src/utility/timeUtil.dart';
 
 class MagicTriangleProvider with ChangeNotifier {
   var homeViewModel = GetIt.I<DashboardViewModel>();
+  final DialogService _dialogService = GetIt.I<DialogService>();
 
   List<MagicTriangleModel> _list;
   MagicTriangleModel _currentState;
@@ -19,16 +22,23 @@ class MagicTriangleProvider with ChangeNotifier {
   int selectedTriangleIndex = 0;
   bool _timeOut;
   int _time;
+  bool _pause = false;
 
   bool get timeOut => _timeOut;
 
   int get time => _time;
+
+  bool get pause => _pause;
 
   StreamSubscription timerSubscription;
 
   MagicTriangleModel get currentState => _currentState;
 
   MagicTriangleProvider() {
+    startGame();
+  }
+
+  void startGame() {
     _list = MagicTriangleDataProvider.getTriangleDataProviderList();
     _currentState = _list[_index];
     _time = TimeUtil.magicTriangleTimeOut;
@@ -57,7 +67,7 @@ class MagicTriangleProvider with ChangeNotifier {
     }
   }
 
-  Future<void> checkResult(int index, MagicTriangleGrid digit) async {
+  Future<void> checkResult(int index, MagicTriangleGrid digit) async    {
     if (!timeOut) {
       int activeTriangelIndex =
           _currentState.listTriangle.indexWhere((val) => val.isActive == true);
@@ -105,9 +115,12 @@ class MagicTriangleProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
-      homeViewModel.updateScoreboard(GameCategoryType.MAGIC_TRIANGLE,
-          _index * ScoreUtil.magicTriangleScore,_index * CoinUtil.magicTriangleCoin);
+      homeViewModel.updateScoreboard(
+          GameCategoryType.MAGIC_TRIANGLE,
+          _index * ScoreUtil.magicTriangleScore,
+          _index * CoinUtil.magicTriangleCoin);
       this._timeOut = true;
+      showDialog();
       notifyListeners();
     });
   }
@@ -115,6 +128,39 @@ class MagicTriangleProvider with ChangeNotifier {
   void restartTimer() {
     timerSubscription.cancel();
     startTimer();
+  }
+
+  void pauseTimer() {
+    _pause = true;
+    timerSubscription.pause();
+    notifyListeners();
+    showDialog();
+  }
+
+  Future showDialog() async {
+    notifyListeners();
+    var dialogResult = await _dialogService.showDialog(
+        gameCategoryType: GameCategoryType.MAGIC_TRIANGLE,
+        score: _index * ScoreUtil.magicTriangleScore,
+        coin: _index * CoinUtil.magicTriangleCoin,
+        isPause: _pause);
+
+    if (dialogResult.exit) {
+      homeViewModel.updateScoreboard(
+          GameCategoryType.MAGIC_TRIANGLE,
+          _index * ScoreUtil.magicTriangleScore,
+          _index * CoinUtil.magicTriangleCoin);
+      GetIt.I<NavigationService>().goBack();
+    } else if (dialogResult.restart) {
+      timerSubscription.cancel();
+      _index = 0;
+      startGame();
+    } else if (dialogResult.play) {
+      timerSubscription.resume();
+      _pause = false;
+      notifyListeners();
+    }
+    notifyListeners();
   }
 
   void dispose() {
