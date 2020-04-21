@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/provider/MagicTriangleProvider.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
-import 'package:mathgame/src/ui/calculator/triangle_button.dart';
-import 'package:mathgame/src/ui/calculator/triangle_input_button.dart';
+import 'package:mathgame/src/ui/magicTriangle/triangle_button.dart';
+import 'package:mathgame/src/ui/magicTriangle/triangle_input_button.dart';
 import 'package:mathgame/src/ui/magicTriangle/TrianglePainter.dart';
 import 'package:mathgame/src/ui/timer.dart';
 import 'package:provider/provider.dart';

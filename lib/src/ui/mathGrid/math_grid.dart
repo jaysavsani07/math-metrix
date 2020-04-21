@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/provider/MathGridProvider.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
-import 'package:mathgame/src/ui/calculator/square_button.dart';
+import 'package:mathgame/src/ui/mathGrid/square_button.dart';
 import 'package:mathgame/src/ui/timer.dart';
 import 'package:provider/provider.dart';
 
