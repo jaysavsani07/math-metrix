@@ -57,6 +57,7 @@ class CalculatorProvider with ChangeNotifier {
       _result = _result + answer;
       notifyListeners();
       if (int.parse(_result) == _currentState.answer) {
+        currentScore = currentScore + (ScoreUtil.calculatorScore * _time).toInt();
         await Future.delayed(Duration(milliseconds: 300));
         if (_list.length - 1 == _index) {
           _list.addAll(CalculatorQandSDataProvider.getCalculatorDataList(
