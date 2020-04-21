@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/mathPairs/MathPairsRootQandS.dart';
+import 'package:mathgame/src/resources/dialog_service.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/mathPairs/mathPairsQandSDataProvider.dart';
+import 'package:mathgame/src/resources/navigation_service.dart';
 import 'package:mathgame/src/utility/coinUtil.dart';
 import 'package:mathgame/src/provider/dashboardViewModel.dart';
 import 'package:mathgame/src/utility/scoreUtil.dart';
@@ -12,6 +14,7 @@ import 'package:mathgame/src/utility/timeUtil.dart';
 
 class MathPairsProvider with ChangeNotifier {
   var homeViewModel = GetIt.I<DashboardViewModel>();
+  final DialogService _dialogService = GetIt.I<DialogService>();
 
   List<MathPairsQandS> _list;
   MathPairsQandS _currentState;
@@ -21,16 +24,23 @@ class MathPairsProvider with ChangeNotifier {
 
   bool _timeOut;
   int _time;
+  bool _pause = false;
 
   bool get timeOut => _timeOut;
 
   int get time => _time;
+
+  bool get pause => _pause;
 
   StreamSubscription timerSubscription;
 
   MathPairsQandS get currentState => _currentState;
 
   MathPairsProvider() {
+    startGame();
+  }
+
+  void startGame() {
     _list = MathPairsQandSDataProvider.getMathPairsDataList(1);
     _currentState = _list[_index];
     _time = TimeUtil.mathematicalPairsTimeOut;
@@ -89,6 +99,7 @@ class MathPairsProvider with ChangeNotifier {
           _index * ScoreUtil.mathematicalPairsScore,
           _index * CoinUtil.mathematicalPairsCoin);
       this._timeOut = true;
+      showDialog();
       notifyListeners();
     });
   }
@@ -96,6 +107,39 @@ class MathPairsProvider with ChangeNotifier {
   void restartTimer() {
     timerSubscription.cancel();
     startTimer();
+  }
+
+  void pauseTimer() {
+    _pause = true;
+    timerSubscription.pause();
+    notifyListeners();
+    showDialog();
+  }
+
+  Future showDialog() async {
+    notifyListeners();
+    var dialogResult = await _dialogService.showDialog(
+        gameCategoryType: GameCategoryType.MATH_PAIRS,
+        score: _index * ScoreUtil.mathematicalPairsScore,
+        coin: _index * CoinUtil.mathematicalPairsCoin,
+        isPause: _pause);
+
+    if (dialogResult.exit) {
+      homeViewModel.updateScoreboard(
+          GameCategoryType.MATH_PAIRS,
+          _index * ScoreUtil.mathematicalPairsScore,
+          _index * CoinUtil.mathematicalPairsCoin);
+      GetIt.I<NavigationService>().goBack();
+    } else if (dialogResult.restart) {
+      timerSubscription.cancel();
+      _index = 0;
+      startGame();
+    } else if (dialogResult.play) {
+      timerSubscription.resume();
+      _pause = false;
+      notifyListeners();
+    }
+    notifyListeners();
   }
 
   void dispose() {
