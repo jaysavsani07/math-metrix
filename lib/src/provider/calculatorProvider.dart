@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/calculator/calculatorQandS.dart';
 import 'package:mathgame/src/resources/calculator/calculatorQandSDataProvider.dart';
+import 'package:mathgame/src/resources/dialog_service.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/utility/coinUtil.dart';
 import 'package:mathgame/src/utility/scoreUtil.dart';
@@ -13,6 +14,7 @@ import 'dashboardViewModel.dart';
 
 class CalculatorProvider with ChangeNotifier {
   var homeViewModel = GetIt.I<DashboardViewModel>();
+  final DialogService _dialogService = GetIt.I<DialogService>();
 
   List<CalculatorQandS> _list;
   CalculatorQandS _currentState;
@@ -76,6 +78,7 @@ class CalculatorProvider with ChangeNotifier {
       homeViewModel.updateScoreboard(GameCategoryType.CALCULATOR,
           _index * ScoreUtil.calculatorScore, _index * CoinUtil.calculatorCoin);
       this._timeOut = true;
+      doThings();
       notifyListeners();
     });
   }
@@ -83,6 +86,19 @@ class CalculatorProvider with ChangeNotifier {
   void restartTimer() {
     timerSubscription.cancel();
     startTimer();
+  }
+
+  Future doThings() async {
+    print('dialog shown');
+    var dialogResult = await _dialogService.showDialog(
+        title: 'Dialog Manager',
+        description: 'FilledStacks architecture is always awesome');
+
+    if (dialogResult.confirmed) {
+      print('User has confirmed');
+    } else {
+      print('User cancelled the dialog');
+    }
   }
 
   void dispose() {
