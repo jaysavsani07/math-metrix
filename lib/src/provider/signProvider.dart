@@ -17,6 +17,7 @@ class SignProvider with ChangeNotifier {
   SignQandS _currentState;
   String _result;
   int _index = 0;
+  int currentScore = 0;
 
   bool _timeOut;
   int _time;
@@ -45,6 +46,12 @@ class SignProvider with ChangeNotifier {
       _result = answer;
       notifyListeners();
       if (_result == _currentState.sign) {
+        print("_index $_index");
+        print(" _time = $_time");
+        print("current score $currentScore");
+        currentScore = currentScore + (ScoreUtil.signScore * _time).toInt();
+        restartTimer();
+        notifyListeners();
         await Future.delayed(Duration(milliseconds: 300));
         if (_list.length - 1 == _index) {
           _list.addAll(SignQandSDataProvider.getSignDataList(_index ~/ 5 + 1));
@@ -52,7 +59,6 @@ class SignProvider with ChangeNotifier {
         _index = _index + 1;
         _result = "";
         _currentState = _list[_index];
-        restartTimer();
         notifyListeners();
       }
     }
@@ -71,8 +77,8 @@ class SignProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
-      homeViewModel.updateScoreboard(GameCategoryType.SIGN,
-          _index * ScoreUtil.signScore, _index * CoinUtil.signCoin);
+      homeViewModel.updateScoreboard(GameCategoryType.SIGN, ScoreUtil.signScore,
+          _index * CoinUtil.signCoin);
       this._timeOut = true;
       notifyListeners();
     });
