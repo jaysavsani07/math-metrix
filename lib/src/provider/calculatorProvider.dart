@@ -39,12 +39,7 @@ class CalculatorProvider with ChangeNotifier {
   CalculatorQandS get currentState => _currentState;
 
   CalculatorProvider() {
-    _list = CalculatorQandSDataProvider.getCalculatorDataList(1);
-    _currentState = _list[_index];
-    _time = TimeUtil.calculatorTimeOut;
-    _timeOut = false;
-    _result = "";
-    startTimer();
+    startGame();
   }
 
   void startGame() {
@@ -117,6 +112,8 @@ class CalculatorProvider with ChangeNotifier {
         isPause: _pause);
 
     if (dialogResult.exit) {
+      homeViewModel.updateScoreboard(GameCategoryType.CALCULATOR,
+          _index * ScoreUtil.calculatorScore, _index * CoinUtil.calculatorCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
       timerSubscription.cancel();

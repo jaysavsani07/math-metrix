@@ -110,6 +110,8 @@ class SignProvider with ChangeNotifier {
         isPause: _pause);
 
     if (dialogResult.exit) {
+      homeViewModel.updateScoreboard(GameCategoryType.SIGN,
+          _index * ScoreUtil.signScore, _index * CoinUtil.signCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
       timerSubscription.cancel();
