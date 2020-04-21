@@ -14,54 +14,69 @@ class MathGrid extends StatelessWidget {
         onWillPop: () => Future.value(false),
         child: Scaffold(body: Consumer<MathGridProvider>(
           builder: (context, mathGridProvider, child) {
-            return Column(
-              children: <Widget>[
-                Timer(GameCategoryType.MATH_MACHINE),
-                Consumer<MathGridProvider>(builder: (context, provider, child) {
-                  return InkWell(
-                    onTap: () {
-                      provider.pauseTimer();
-                    },
+            return SafeArea(
+              top: true,
+              bottom: true,
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    flex: 1,
                     child: Container(
-                      margin: EdgeInsets.all(5),
-                      child: Center(
-                        child: Icon(
-                          provider.pause ? Icons.play_arrow : Icons.pause,
-                          size: 40,
-                        ),
-                      ),
-                    ),
-                  );
-                }),
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                            mathGridProvider.currentState.currentAnswer
-                                .toString(),
-                            style: TextStyle(fontSize: 40))
-                      ],
+                      margin: EdgeInsets.all(20),
+                      child: Timer(GameCategoryType.MATH_MACHINE),
                     ),
                   ),
-                ),
-                Expanded(
-                  flex: 8,
-                  child: GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 9),
-                      itemCount:
-                          mathGridProvider.currentState.listForSquare.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return SquareButton(
-                            mathGridProvider
-                                .currentState.listForSquare[index].value,
-                            mathGridProvider.currentState.listForSquare[index]);
-                      }),
-                )
-              ],
+                  Expanded(
+                    flex: 1,
+                    child: Consumer<MathGridProvider>(builder: (context, provider, child) {
+                      return InkWell(
+                        onTap: () {
+                          provider.pauseTimer();
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(5),
+                          child: Center(
+                            child: Icon(
+                              provider.pause ? Icons.play_arrow : Icons.pause,
+                              size: 40,
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                              mathGridProvider.currentState.currentAnswer
+                                  .toString(),
+                              style: TextStyle(fontSize: 40))
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 6,
+                    child: Center(
+                      child: GridView.builder(
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 9),
+                          itemCount:
+                              mathGridProvider.currentState.listForSquare.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return SquareButton(
+                                mathGridProvider
+                                    .currentState.listForSquare[index].value,
+                                mathGridProvider.currentState.listForSquare[index]);
+                          }),
+                    ),
+                  )
+                ],
+              ),
             );
           },
         )),

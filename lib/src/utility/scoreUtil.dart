@@ -15,5 +15,5 @@ class ScoreUtil {
 
   static double magicTriangleScore = 20;
 
-  static double mathMachineScore = 10;
+  static double mathMachineScore = 5;
 }

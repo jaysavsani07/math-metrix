@@ -22,6 +22,7 @@ class MathGridProvider with ChangeNotifier {
   bool _timeOut;
   int _time;
   bool _pause = false;
+  int currentScore = 0;
 
   bool get timeOut => _timeOut;
 
@@ -68,6 +69,7 @@ class MathGridProvider with ChangeNotifier {
         listOfIndex[i].isActive = false;
         listOfIndex[i].isRemoved = true;
       }
+      currentScore = currentScore + (ScoreUtil.mathMachineScore).toInt();
       answerIndex = answerIndex + 1;
       _currentState.currentAnswer = _currentState.listOfAnswer[answerIndex];
     }
