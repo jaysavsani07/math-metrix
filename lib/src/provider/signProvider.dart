@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/whatsTheSign/SignQandS.dart';
+import 'package:mathgame/src/resources/dialog_service.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
+import 'package:mathgame/src/resources/navigation_service.dart';
 import 'package:mathgame/src/resources/whatsTheSign/signQandSDataProvider.dart';
 import 'package:mathgame/src/utility/coinUtil.dart';
 import 'package:mathgame/src/provider/dashboardViewModel.dart';
@@ -12,6 +14,7 @@ import 'package:mathgame/src/utility/timeUtil.dart';
 
 class SignProvider with ChangeNotifier {
   var homeViewModel = GetIt.I<DashboardViewModel>();
+  final DialogService _dialogService = GetIt.I<DialogService>();
 
   List<SignQandS> _list;
   SignQandS _currentState;
@@ -20,6 +23,7 @@ class SignProvider with ChangeNotifier {
 
   bool _timeOut;
   int _time;
+  bool _pause = false;
 
   bool get timeOut => _timeOut;
 
@@ -27,11 +31,17 @@ class SignProvider with ChangeNotifier {
 
   int get time => _time;
 
+  bool get pause => _pause;
+
   StreamSubscription timerSubscription;
 
   SignQandS get currentState => _currentState;
 
   SignProvider() {
+    startGame();
+  }
+
+  void startGame() {
     _list = SignQandSDataProvider.getSignDataList(1);
     _currentState = _list[_index];
     _time = TimeUtil.signTimeOut;
@@ -74,6 +84,7 @@ class SignProvider with ChangeNotifier {
       homeViewModel.updateScoreboard(GameCategoryType.SIGN,
           _index * ScoreUtil.signScore, _index * CoinUtil.signCoin);
       this._timeOut = true;
+      showDialog();
       notifyListeners();
     });
   }
@@ -81,6 +92,35 @@ class SignProvider with ChangeNotifier {
   void restartTimer() {
     timerSubscription.cancel();
     startTimer();
+  }
+
+  void pauseTimer() {
+    _pause = true;
+    timerSubscription.pause();
+    notifyListeners();
+    showDialog();
+  }
+
+  Future showDialog() async {
+    notifyListeners();
+    var dialogResult = await _dialogService.showDialog(
+        gameCategoryType: GameCategoryType.CALCULATOR,
+        score: _index * ScoreUtil.calculatorScore,
+        coin: _index * CoinUtil.calculatorCoin,
+        isPause: _pause);
+
+    if (dialogResult.exit) {
+      GetIt.I<NavigationService>().goBack();
+    } else if (dialogResult.restart) {
+      timerSubscription.cancel();
+      _index = 0;
+      startGame();
+    } else if (dialogResult.play) {
+      timerSubscription.resume();
+      _pause = false;
+      notifyListeners();
+    }
+    notifyListeners();
   }
 
   void dispose() {

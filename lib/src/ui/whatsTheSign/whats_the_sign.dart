@@ -133,7 +133,25 @@ class WhatsTheSign extends StatelessWidget {
                   ),
                 ),
               ),
-              Expanded(flex: 1, child: SizedBox()),
+              Expanded(flex: 1, child:Consumer<SignProvider>(
+                  builder: (context, provider, child) {
+                    return InkWell(
+                      onTap: () {
+                        provider.pauseTimer();
+                      },
+                      child: Container(
+                        margin: EdgeInsets.all(5),
+                        child: Center(
+                          child: Icon(
+                            provider.pause
+                                ? Icons.play_arrow
+                                : Icons.pause,
+                            size: 40,
+                          ),
+                        ),
+                      ),
+                    );
+                  })),
             ],
           ),
         ),
