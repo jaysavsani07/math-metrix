@@ -128,9 +128,9 @@ class MentalArithmeticProvider with ChangeNotifier {
   Future showDialog() async {
     notifyListeners();
     var dialogResult = await _dialogService.showDialog(
-        gameCategoryType: GameCategoryType.CALCULATOR,
-        score: _index * ScoreUtil.calculatorScore,
-        coin: _index * CoinUtil.calculatorCoin,
+        gameCategoryType: GameCategoryType.MENTAL_ARITHMETIC,
+        score: _index * ScoreUtil.mentalArithmeticScore,
+        coin: _index * CoinUtil.mentalArithmeticCoin,
         isPause: _pause);
 
     if (dialogResult.exit) {

@@ -111,9 +111,9 @@ class QuickCalculationProvider with ChangeNotifier {
   Future showDialog() async {
     notifyListeners();
     var dialogResult = await _dialogService.showDialog(
-        gameCategoryType: GameCategoryType.CALCULATOR,
-        score: _index * ScoreUtil.calculatorScore,
-        coin: _index * CoinUtil.calculatorCoin,
+        gameCategoryType: GameCategoryType.QUICK_CALCULATION,
+        score: _index * ScoreUtil.quickCalculationScore,
+        coin: _index * CoinUtil.quickCalculationCoin,
         isPause: _pause);
 
     if (dialogResult.exit) {

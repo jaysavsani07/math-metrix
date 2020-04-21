@@ -107,9 +107,9 @@ class CorrectAnswerProvider with ChangeNotifier {
   Future showDialog() async {
     notifyListeners();
     var dialogResult = await _dialogService.showDialog(
-        gameCategoryType: GameCategoryType.CALCULATOR,
-        score: _index * ScoreUtil.calculatorScore,
-        coin: _index * CoinUtil.calculatorCoin,
+        gameCategoryType: GameCategoryType.CORRECT_ANSWER,
+        score: _index * ScoreUtil.correctAnswerScore,
+        coin: _index * CoinUtil.correctAnswerCoin,
         isPause: _pause);
 
     if (dialogResult.exit) {

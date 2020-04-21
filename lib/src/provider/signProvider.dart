@@ -104,9 +104,9 @@ class SignProvider with ChangeNotifier {
   Future showDialog() async {
     notifyListeners();
     var dialogResult = await _dialogService.showDialog(
-        gameCategoryType: GameCategoryType.CALCULATOR,
-        score: _index * ScoreUtil.calculatorScore,
-        coin: _index * CoinUtil.calculatorCoin,
+        gameCategoryType: GameCategoryType.SIGN,
+        score: _index * ScoreUtil.signScore,
+        coin: _index * CoinUtil.signCoin,
         isPause: _pause);
 
     if (dialogResult.exit) {
