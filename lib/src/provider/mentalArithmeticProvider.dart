@@ -25,6 +25,7 @@ class MentalArithmeticProvider with ChangeNotifier {
   int _time;
   bool _localTimeOut;
   bool _pause = false;
+  int currentScore = 0;
 
   bool get timeOut => _timeOut;
 
@@ -60,6 +61,7 @@ class MentalArithmeticProvider with ChangeNotifier {
         _result = _result + answer;
         notifyListeners();
         if (_result != "-" && int.parse(_result) == _currentState.answer) {
+          currentScore = currentScore + (ScoreUtil.mentalArithmeticScore).toInt();
           await Future.delayed(Duration(milliseconds: 300));
           _index = _index + 1;
           _currentState = _list[_index];
