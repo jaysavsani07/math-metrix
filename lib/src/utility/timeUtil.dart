@@ -1,5 +1,5 @@
 class TimeUtil {
-  static int calculatorTimeOut = 3;
+  static int calculatorTimeOut = 5;
 
   static int signTimeOut = 5;
 

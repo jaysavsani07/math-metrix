@@ -47,6 +47,15 @@ class CalculatorProvider with ChangeNotifier {
     startTimer();
   }
 
+  void startGame() {
+    _list = CalculatorQandSDataProvider.getCalculatorDataList(1);
+    _currentState = _list[_index];
+    _time = TimeUtil.calculatorTimeOut;
+    _timeOut = false;
+    _result = "";
+    startTimer();
+  }
+
   Future<void> checkResult(String answer) async {
     if (_result.length < 2 && !timeOut) {
       _result = _result + answer;
@@ -94,7 +103,7 @@ class CalculatorProvider with ChangeNotifier {
 
   void pauseTimer() {
     _pause = true;
-    timerSubscription.cancel();
+    timerSubscription.pause();
     notifyListeners();
     showDialog();
   }
@@ -110,9 +119,12 @@ class CalculatorProvider with ChangeNotifier {
     if (dialogResult.exit) {
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
+      timerSubscription.cancel();
+      _index = 0;
+      startGame();
     } else if (dialogResult.play) {
+      timerSubscription.resume();
       _pause = false;
-      restartTimer();
       notifyListeners();
     }
     notifyListeners();
