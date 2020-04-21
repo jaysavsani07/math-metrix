@@ -6,7 +6,6 @@ import 'package:mathgame/src/ui/timer.dart';
 import 'package:provider/provider.dart';
 
 class MathGrid extends StatelessWidget {
-  List<int> list = List<int>.generate(99, (i) => i + 1);
 
   @override
   Widget build(BuildContext context) {

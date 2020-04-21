@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
           primaryColorDark: Color(0x673ab7),
           primaryColorLight: Color(0x8561c5),
           primarySwatch: Colors.yellow,
+          accentColor: Colors.deepOrange[300],
           scaffoldBackgroundColor: Color(0xFF121212),
           dialogBackgroundColor: Colors.blueGrey[900],
           splashColor: Colors.grey,
