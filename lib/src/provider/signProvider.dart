@@ -87,8 +87,6 @@ class SignProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
-      homeViewModel.updateScoreboard(GameCategoryType.SIGN, ScoreUtil.signScore,
-          _index * CoinUtil.signCoin);
       this._timeOut = true;
       showDialog();
       notifyListeners();
@@ -120,6 +118,8 @@ class SignProvider with ChangeNotifier {
           _index * ScoreUtil.signScore, _index * CoinUtil.signCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
+      homeViewModel.updateScoreboard(GameCategoryType.SIGN, ScoreUtil.signScore,
+          _index * CoinUtil.signCoin);
       timerSubscription.cancel();
       _index = 0;
       startGame();

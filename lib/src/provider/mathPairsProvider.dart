@@ -94,10 +94,6 @@ class MathPairsProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
-      homeViewModel.updateScoreboard(
-          GameCategoryType.MATH_PAIRS,
-          _index * ScoreUtil.mathematicalPairsScore,
-          _index * CoinUtil.mathematicalPairsCoin);
       this._timeOut = true;
       showDialog();
       notifyListeners();
@@ -131,6 +127,10 @@ class MathPairsProvider with ChangeNotifier {
           _index * CoinUtil.mathematicalPairsCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
+      homeViewModel.updateScoreboard(
+          GameCategoryType.MATH_PAIRS,
+          _index * ScoreUtil.mathematicalPairsScore,
+          _index * CoinUtil.mathematicalPairsCoin);
       timerSubscription.cancel();
       _index = 0;
       startGame();

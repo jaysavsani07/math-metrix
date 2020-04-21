@@ -86,10 +86,6 @@ class QuickCalculationProvider with ChangeNotifier {
       _time = time / (_timeLength * 4);
       notifyListeners();
     }, onDone: () {
-      homeViewModel.updateScoreboard(
-          GameCategoryType.QUICK_CALCULATION,
-          _index * ScoreUtil.quickCalculationScore,
-          _index * CoinUtil.quickCalculationCoin);
       showDialog();
       this._timeOut = true;
       notifyListeners();
@@ -123,6 +119,10 @@ class QuickCalculationProvider with ChangeNotifier {
           _index * CoinUtil.quickCalculationCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
+      homeViewModel.updateScoreboard(
+          GameCategoryType.QUICK_CALCULATION,
+          _index * ScoreUtil.quickCalculationScore,
+          _index * CoinUtil.quickCalculationCoin);
       timerSubscription.cancel();
       _index = 0;
       startGame();

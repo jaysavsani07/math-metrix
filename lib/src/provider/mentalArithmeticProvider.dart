@@ -102,10 +102,6 @@ class MentalArithmeticProvider with ChangeNotifier {
       _time = time;
       notifyListeners();
     }, onDone: () {
-      homeViewModel.updateScoreboard(
-          GameCategoryType.MENTAL_ARITHMETIC,
-          _index * ScoreUtil.mentalArithmeticScore,
-          _index * CoinUtil.mentalArithmeticCoin);
       this._timeOut = true;
       showDialog();
       notifyListeners();
@@ -140,6 +136,10 @@ class MentalArithmeticProvider with ChangeNotifier {
           _index * CoinUtil.mentalArithmeticCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
+      homeViewModel.updateScoreboard(
+          GameCategoryType.MENTAL_ARITHMETIC,
+          _index * ScoreUtil.mentalArithmeticScore,
+          _index * CoinUtil.mentalArithmeticCoin);
       timerSubscription.cancel();
       localTimerSubscription.cancel();
       _index = 0;
