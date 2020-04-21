@@ -33,7 +33,7 @@ class SquareRoot extends StatelessWidget {
                           child: Center(
                             child: Text(
                               squareRootProvider.currentState.question,
-                              style: Theme.of(context).textTheme.headline,
+                              style: Theme.of(context).textTheme.display2,
                             ),
                           )),
                       Expanded(
