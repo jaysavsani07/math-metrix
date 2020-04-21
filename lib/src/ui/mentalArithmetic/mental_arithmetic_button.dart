@@ -15,7 +15,7 @@ class MentalArithmeticButton extends StatelessWidget {
       flex: 1,
       child: InkWell(
         onTap: () {
-          if (text == "CE") {
+          if (text == "CLEAR") {
             provider.clear();
           } else {
             provider.checkResult(text);
