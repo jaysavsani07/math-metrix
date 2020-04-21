@@ -13,7 +13,7 @@ class ScoreUtil {
 
   static double mathematicalPairsScore = 3;
 
-  static double magicTriangleScore = 10;
+  static double magicTriangleScore = 20;
 
   static double mathMachineScore = 10;
 }

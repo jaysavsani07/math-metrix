@@ -9,6 +9,7 @@ import 'package:mathgame/src/provider/quickCalculationProvider.dart';
 import 'package:mathgame/src/provider/signProvider.dart';
 import 'package:mathgame/src/provider/squareRootProvider.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
+import 'package:mathgame/src/utility/MultiDigitCounter.dart';
 import 'package:provider/provider.dart';
 
 class Timer extends StatelessWidget {

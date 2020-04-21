@@ -23,6 +23,7 @@ class MagicTriangleProvider with ChangeNotifier {
   bool _timeOut;
   int _time;
   bool _pause = false;
+  int currentScore = 0 ;
 
   bool get timeOut => _timeOut;
 
@@ -91,7 +92,7 @@ class MagicTriangleProvider with ChangeNotifier {
         if (_currentState.answer == sumOfLeftSide &&
             _currentState.answer == sumOfRightSide &&
             _currentState.answer == sumOfBottomSide) {
-          print("voila it's correct");
+          currentScore = currentScore + (ScoreUtil.magicTriangleScore).toInt();
           await Future.delayed(Duration(milliseconds: 300));
           _index = _index + 1;
           _currentState = _list[_index];
