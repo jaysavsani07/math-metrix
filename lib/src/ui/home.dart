@@ -54,8 +54,8 @@ class MyHomePage extends StatelessWidget {
                                   child: Container(
                                     margin: EdgeInsets.fromLTRB(40, 12, 40, 12),
                                     child: Card(
-                                      color: Color(0xFF242424),
-                                      elevation: 20,
+                                      color: Color(0xFF262626),
+                                      elevation: 5,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(20),
                                       ),

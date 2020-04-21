@@ -129,6 +129,8 @@ class _DashBoardPageState extends State<DashBoardPage>
                               child: Transform.scale(
                                 scale: 1,
                                 child: Card(
+                                  color: Color(0xFF222222),
+                                  elevation: 20,
                                   margin: EdgeInsets.all(10),
                                   child: Container(
                                       alignment: Alignment.center,
