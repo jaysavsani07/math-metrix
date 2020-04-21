@@ -20,22 +20,37 @@ class _DashBoardPageState extends State<DashBoardPage>
     with SingleTickerProviderStateMixin {
   double _scale;
   AnimationController _controller;
+  Animation<Offset> _offsetLeftEnter;
+  Animation<Offset> _offsetRightEnter;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
+      duration: Duration(milliseconds: 700),
       vsync: this,
-      duration: Duration(milliseconds: 400),
-      lowerBound: 0.0,
-      upperBound: 0.6,
     );
+    _offsetLeftEnter = Tween<Offset>(
+      begin: Offset(2.0, 0.0),
+      end: Offset.zero,
+    ).animate(_controller);
+
+    _offsetRightEnter = Tween<Offset>(
+      begin: Offset(-2.0, 0.0),
+      end: Offset.zero,
+    ).animate(_controller);
+
+    /*_offsetLeftEnter.addListener(() {
+      setState(() {});
+    });*/
+    _controller.forward();
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
+    _controller.dispose();
   }
 
   void _onTapDown(TapDownDetails details) {
@@ -80,7 +95,8 @@ class _DashBoardPageState extends State<DashBoardPage>
                                 Expanded(
                                   flex: 1,
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.center,
                                     children: <Widget>[
                                       Icon(Icons.credit_card,
                                           color: Colors.deepOrange[300]),
@@ -126,8 +142,8 @@ class _DashBoardPageState extends State<DashBoardPage>
                                     KeyUtil.Home,
                                     arguments: PuzzleType.MATH_PUZZLE);
                               },
-                              child: Transform.scale(
-                                scale: 1,
+                              child: SlideTransition(
+                                position: _offsetLeftEnter,
                                 child: Card(
                                   color: Color(0xFF222222),
                                   elevation: 20,
@@ -149,16 +165,19 @@ class _DashBoardPageState extends State<DashBoardPage>
                                     KeyUtil.Home,
                                     arguments: PuzzleType.MEMORY_PUZZLE);
                               },
-                              child: Card(
-                                margin: EdgeInsets.all(10),
-                                child: Container(
-                                    alignment: Alignment.center,
-                                    width: (SizeConfig.screenWidth / 10) * 6,
-                                    margin: EdgeInsets.all(20),
-                                    child: Text("Memory Puzzle",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline)),
+                              child: SlideTransition(
+                                position: _offsetRightEnter,
+                                child: Card(
+                                  margin: EdgeInsets.all(10),
+                                  child: Container(
+                                      alignment: Alignment.center,
+                                      width: (SizeConfig.screenWidth / 10) * 6,
+                                      margin: EdgeInsets.all(20),
+                                      child: Text("Memory Puzzle",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline)),
+                                ),
                               ),
                             ),
                             GestureDetector(
@@ -167,16 +186,19 @@ class _DashBoardPageState extends State<DashBoardPage>
                                     KeyUtil.Home,
                                     arguments: PuzzleType.BRAIN_PUZZLE);
                               },
-                              child: Card(
-                                margin: EdgeInsets.all(10),
-                                child: Container(
-                                    alignment: Alignment.center,
-                                    width: (SizeConfig.screenWidth / 10) * 6,
-                                    margin: EdgeInsets.all(20),
-                                    child: Text("Train Your Brain",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline)),
+                              child: SlideTransition(
+                                position: _offsetLeftEnter,
+                                child: Card(
+                                  margin: EdgeInsets.all(10),
+                                  child: Container(
+                                      alignment: Alignment.center,
+                                      width: (SizeConfig.screenWidth / 10) * 6,
+                                      margin: EdgeInsets.all(20),
+                                      child: Text("Train Your Brain",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline)),
+                                ),
                               ),
                             )
                           ],
