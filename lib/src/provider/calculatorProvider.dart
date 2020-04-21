@@ -23,12 +23,15 @@ class CalculatorProvider with ChangeNotifier {
 
   bool _timeOut;
   int _time;
+  bool _pause = false;
 
   bool get timeOut => _timeOut;
 
   String get result => _result;
 
   int get time => _time;
+
+  bool get pause => _pause;
 
   StreamSubscription timerSubscription;
 
@@ -78,7 +81,7 @@ class CalculatorProvider with ChangeNotifier {
       homeViewModel.updateScoreboard(GameCategoryType.CALCULATOR,
           _index * ScoreUtil.calculatorScore, _index * CoinUtil.calculatorCoin);
       this._timeOut = true;
-      doThings();
+      showDialog();
       notifyListeners();
     });
   }
@@ -88,17 +91,29 @@ class CalculatorProvider with ChangeNotifier {
     startTimer();
   }
 
-  Future doThings() async {
-    print('dialog shown');
-    var dialogResult = await _dialogService.showDialog(
-        title: 'Dialog Manager',
-        description: 'FilledStacks architecture is always awesome');
+  void pauseTimer() {
+    _pause = true;
+    timerSubscription.cancel();
+    notifyListeners();
+    showDialog();
+  }
 
-    if (dialogResult.confirmed) {
-      print('User has confirmed');
-    } else {
-      print('User cancelled the dialog');
+  Future showDialog() async {
+    notifyListeners();
+    var dialogResult = await _dialogService.showDialog(
+        gameCategoryType: GameCategoryType.CALCULATOR,
+        score: _index * ScoreUtil.calculatorScore,
+        coin: _index * CoinUtil.calculatorCoin,
+        isPause: _pause);
+
+    if (dialogResult.exit) {
+    } else if (dialogResult.restart) {
+    } else if (dialogResult.play) {
+      _pause = false;
+      restartTimer();
+      notifyListeners();
     }
+    notifyListeners();
   }
 
   void dispose() {

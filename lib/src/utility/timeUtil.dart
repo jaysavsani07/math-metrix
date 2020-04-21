@@ -1,5 +1,5 @@
 class TimeUtil {
-  static int calculatorTimeOut = 5;
+  static int calculatorTimeOut = 3;
 
   static int signTimeOut = 5;
 
@@ -9,6 +9,7 @@ class TimeUtil {
   static int quickCalculationPlusTime = 1;
 
   static int mentalArithmeticTimeOut = 120;
+
   //this is fix don't change this
   static int mentalArithmeticLocalTimeOut = 4;
 

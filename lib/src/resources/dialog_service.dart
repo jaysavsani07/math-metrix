@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:mathgame/src/models/alert_request.dart';
 import 'package:mathgame/src/models/alert_response.dart';
+import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 
 class DialogService {
   Function(AlertRequest) _showDialogListener;
@@ -12,13 +13,16 @@ class DialogService {
   }
 
   Future<AlertResponse> showDialog(
-      {String title, String description, String buttonTitle = 'OK'}) {
+      {GameCategoryType gameCategoryType,
+      double score,
+      double coin,
+      bool isPause}) {
     _dialogCompleter = Completer<AlertResponse>();
     _showDialogListener(AlertRequest(
-      title: title,
-      description: description,
-      buttonTitle: buttonTitle,
-    ));
+        gameCategoryType: gameCategoryType,
+        score: score,
+        coin: coin,
+        isPause: isPause));
     return _dialogCompleter.future;
   }
 

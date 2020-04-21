@@ -1,11 +1,10 @@
-class AlertRequest {
-  final String title;
-  final String description;
-  final String buttonTitle;
+import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 
-  AlertRequest({
-    this.title,
-    this.description,
-    this.buttonTitle,
-  });
+class AlertRequest {
+  final GameCategoryType gameCategoryType;
+  final double score;
+  final double coin;
+  final bool isPause;
+
+  AlertRequest({this.gameCategoryType, this.score, this.coin, this.isPause});
 }

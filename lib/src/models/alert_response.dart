@@ -1,11 +1,7 @@
 class AlertResponse {
-  final String fieldOne;
-  final String fieldTwo;
-  final bool confirmed;
+  final bool exit;
+  final bool restart;
+  final bool play;
 
-  AlertResponse({
-    this.fieldOne,
-    this.fieldTwo,
-    this.confirmed,
-  });
+  AlertResponse({this.exit, this.restart, this.play});
 }
