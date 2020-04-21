@@ -33,7 +33,7 @@ class MathPairsButton extends StatelessWidget {
             child: Center(
               child: Text(
                 mathPairs.text,
-                style: TextStyle(fontSize: 20),
+                style: Theme.of(context).textTheme.headline,
               ),
             ),
           ),

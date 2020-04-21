@@ -25,6 +25,7 @@ class MathPairsProvider with ChangeNotifier {
   bool _timeOut;
   int _time;
   bool _pause = false;
+  int currentScore = 0;
 
   bool get timeOut => _timeOut;
 
@@ -59,7 +60,6 @@ class MathPairsProvider with ChangeNotifier {
         if (_currentState.list[first].uid == _currentState.list[index].uid) {
           _currentState.list[first].isVisible = false;
           _currentState.list[index].isVisible = false;
-
           _currentState.availableItem = _currentState.availableItem - 2;
           first = -1;
           notifyListeners();
@@ -69,6 +69,7 @@ class MathPairsProvider with ChangeNotifier {
               _list.addAll(MathPairsQandSDataProvider.getMathPairsDataList(
                   _index ~/ 5 + 1));
             }
+            currentScore = currentScore + (ScoreUtil.mathematicalPairsScore).toInt();
             _index = _index + 1;
             _currentState = _list[_index];
             restartTimer();

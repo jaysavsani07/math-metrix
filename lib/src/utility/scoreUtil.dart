@@ -11,7 +11,7 @@ class ScoreUtil {
 
   static double squareRootScore = 1;
 
-  static double mathematicalPairsScore = 5;
+  static double mathematicalPairsScore = 3;
 
   static double magicTriangleScore = 10;
 
