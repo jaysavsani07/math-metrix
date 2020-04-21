@@ -28,7 +28,8 @@ dependencies:
   provider_architecture: ^1.0.6
   get_it: ^4.0.1
   shared_preferences: ^0.5.6+3
-#  flutter_svg: ^0.17.3+1
+  rflutter_alert: ^1.0.3
+
 
 dev_dependencies:
   flutter_test:

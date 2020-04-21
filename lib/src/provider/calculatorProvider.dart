@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/calculator/calculatorQandS.dart';
 import 'package:mathgame/src/resources/calculator/calculatorQandSDataProvider.dart';
+import 'package:mathgame/src/resources/dialog_service.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
+import 'package:mathgame/src/resources/navigation_service.dart';
 import 'package:mathgame/src/utility/coinUtil.dart';
 import 'package:mathgame/src/utility/scoreUtil.dart';
 import 'package:mathgame/src/utility/timeUtil.dart';
@@ -13,6 +15,7 @@ import 'dashboardViewModel.dart';
 
 class CalculatorProvider with ChangeNotifier {
   var homeViewModel = GetIt.I<DashboardViewModel>();
+  final DialogService _dialogService = GetIt.I<DialogService>();
 
   List<CalculatorQandS> _list;
   CalculatorQandS _currentState;
@@ -21,12 +24,15 @@ class CalculatorProvider with ChangeNotifier {
 
   bool _timeOut;
   int _time;
+  bool _pause = false;
 
   bool get timeOut => _timeOut;
 
   String get result => _result;
 
   int get time => _time;
+
+  bool get pause => _pause;
 
   StreamSubscription timerSubscription;
 
@@ -76,6 +82,7 @@ class CalculatorProvider with ChangeNotifier {
       homeViewModel.updateScoreboard(GameCategoryType.CALCULATOR,
           _index * ScoreUtil.calculatorScore, _index * CoinUtil.calculatorCoin);
       this._timeOut = true;
+      showDialog();
       notifyListeners();
     });
   }
@@ -83,6 +90,32 @@ class CalculatorProvider with ChangeNotifier {
   void restartTimer() {
     timerSubscription.cancel();
     startTimer();
+  }
+
+  void pauseTimer() {
+    _pause = true;
+    timerSubscription.cancel();
+    notifyListeners();
+    showDialog();
+  }
+
+  Future showDialog() async {
+    notifyListeners();
+    var dialogResult = await _dialogService.showDialog(
+        gameCategoryType: GameCategoryType.CALCULATOR,
+        score: _index * ScoreUtil.calculatorScore,
+        coin: _index * CoinUtil.calculatorCoin,
+        isPause: _pause);
+
+    if (dialogResult.exit) {
+      GetIt.I<NavigationService>().goBack();
+    } else if (dialogResult.restart) {
+    } else if (dialogResult.play) {
+      _pause = false;
+      restartTimer();
+      notifyListeners();
+    }
+    notifyListeners();
   }
 
   void dispose() {

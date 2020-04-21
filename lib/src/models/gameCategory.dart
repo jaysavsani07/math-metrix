@@ -6,8 +6,9 @@ class GameCategory {
   String name;
   String key;
   GameCategoryType gameCategoryType;
+  String routePath;
   Scoreboard scoreboard;
 
-  GameCategory(
-      this.id, this.name, this.key, this.gameCategoryType, this.scoreboard);
+  GameCategory(this.id, this.name, this.key, this.gameCategoryType,
+      this.routePath, this.scoreboard);
 }

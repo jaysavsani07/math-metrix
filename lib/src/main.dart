@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/provider/dashboardViewModel.dart';
+import 'package:mathgame/src/resources/dialog_service.dart';
+import 'package:mathgame/src/resources/navigation_service.dart';
+import 'package:mathgame/src/resources/router.dart';
 import 'package:mathgame/src/ui/dashboard.dart';
+import 'package:mathgame/src/ui/dialog_manager.dart';
+import 'package:mathgame/src/utility/keyUtil.dart';
 
 void main() {
   setupServiceLocator();
@@ -9,7 +14,9 @@ void main() {
 }
 
 setupServiceLocator() {
+  GetIt.I.registerLazySingleton(() => NavigationService());
   GetIt.I.registerSingleton<DashboardViewModel>(DashboardViewModel());
+  GetIt.I.registerLazySingleton(() => DialogService());
 }
 
 class MyApp extends StatelessWidget {
@@ -64,6 +71,15 @@ class MyApp extends StatelessWidget {
             button:
                 TextStyle(fontFamily: fontFamily, fontWeight: FontWeight.w500),
           )),
+      builder: (context, widget) => Navigator(
+        onGenerateRoute: (settings) => MaterialPageRoute(
+            builder: (context) => DialogManager(
+                  child: widget,
+                )),
+      ),
+      navigatorKey: GetIt.I<NavigationService>().navigatorKey,
+      onGenerateRoute: generateRoute,
+      initialRoute: KeyUtil.Dashboard,
       home: DashBoardPage(),
     );
   }

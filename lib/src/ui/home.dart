@@ -2,15 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
-import 'package:mathgame/src/ui/calculator/calculator.dart';
-import 'package:mathgame/src/ui/correctAnswer/correct_answer.dart';
-import 'package:mathgame/src/ui/magicTriangle/magic_triangle.dart';
-import 'package:mathgame/src/ui/mathGrid/math_grid.dart';
-import 'package:mathgame/src/ui/mathPairs/mathPairs.dart';
-import 'package:mathgame/src/ui/mentalArithmetic/mental_arithmetic.dart';
-import 'package:mathgame/src/ui/quickCalculation/quickCalculation.dart';
-import 'package:mathgame/src/ui/squareRoot/square_root.dart';
-import 'package:mathgame/src/ui/whatsTheSign/whats_the_sign.dart';
+import 'package:mathgame/src/resources/navigation_service.dart';
 import 'package:provider_architecture/provider_architecture.dart';
 
 import 'package:mathgame/src/provider/dashboardViewModel.dart';
@@ -56,71 +48,8 @@ class MyHomePage extends StatelessWidget {
                               itemBuilder: (BuildContext context, int index) {
                                 return GestureDetector(
                                   onTap: () {
-                                    switch (model.list[index].id) {
-                                      case 1:
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Calculator()));
-                                        break;
-                                      case 2:
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    WhatsTheSign()));
-                                        break;
-                                      case 3:
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    SquareRoot()));
-                                        break;
-                                      case 4:
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MathPairs()));
-                                        break;
-                                      case 5:
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    CorrectAnswer()));
-                                        break;
-                                      case 6:
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MagicTriangle()));
-                                        break;
-                                      case 7:
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MentalArithmetic()));
-                                        break;
-                                      case 8:
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    QuickCalculation()));
-                                        break;
-                                      case 9:
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MathGrid()));
-                                        break;
-                                    }
+                                    GetIt.I<NavigationService>().navigateTo(
+                                        model.list[index].routePath);
                                   },
                                   child: Container(
                                     margin: EdgeInsets.fromLTRB(40, 12, 40, 12),
