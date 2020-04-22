@@ -4,12 +4,14 @@ import 'package:mathgame/src/provider/quickCalculationProvider.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/ui/quickCalculation/quick_calculation_button.dart';
 import 'package:mathgame/src/ui/timer.dart';
+import 'package:mathgame/src/utility/sizeConfig.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
 class QuickCalculation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return ChangeNotifierProvider<QuickCalculationProvider>(
       create: (_) => QuickCalculationProvider(),
       child: WillPopScope(
@@ -19,64 +21,67 @@ class QuickCalculation extends StatelessWidget {
             top: true,
             bottom: true,
             child: Container(
-              margin: EdgeInsets.all(20),
-              constraints: BoxConstraints.expand(),
+              height: SizeConfig.screenHeight,
+              margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: Column(
                 children: <Widget>[
-                  Expanded(
-                    flex: 2,
-                    child: Timer(GameCategoryType.QUICK_CALCULATION),
-                  ),
-                  Expanded(
-                      flex: 6,
-                      child: Consumer<QuickCalculationProvider>(
-                        builder: (context, provider, child) {
-                          return AbsorbPointer(
-                            absorbing: true,
-                            child: CircularPercentIndicator(
-                              radius: 230.0,
-                              lineWidth: 15.0,
-                              animation: true,
-                              animationDuration: 250,
-                              animateFromLastPercent: true,
-                              percent: provider.time,
-                              center: CupertinoPicker(
-                                itemExtent: 30,
-                                diameterRatio: 1,
-                                squeeze: 1.4,
-                                scrollController: provider.scrollController,
-                                backgroundColor: Colors.transparent,
-                                children: provider.list.map((data) {
-                                  return Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Text(data.question,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline),
-                                      Text(" = ",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline),
-                                      Text(
-                                        data.userAnswer,
-                                        style: Theme.of(context)
+                  Container(
+                      height: (SizeConfig.safeBlockVertical * 0.08),
+                      child: Timer(GameCategoryType.QUICK_CALCULATION)),
+                  Container(
+                    height: (SizeConfig.safeBlockVertical * 0.33),
+                    child: Consumer<QuickCalculationProvider>(
+                      builder: (context, provider, child) {
+                        return AbsorbPointer(
+                          absorbing: true,
+                          child: CircularPercentIndicator(
+                            radius: (SizeConfig.safeBlockVertical * 0.30),
+                            lineWidth: 15.0,
+                            animation: true,
+                            animationDuration: 250,
+                            animateFromLastPercent: true,
+                            percent: provider.time,
+                            center: CupertinoPicker(
+                              itemExtent: 30,
+                              diameterRatio: 1,
+                              squeeze: 1.4,
+                              scrollController: provider.scrollController,
+                              backgroundColor: Colors.transparent,
+                              children: provider.list.map((data) {
+                                return Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text(data.question,
+                                        style: Theme
+                                            .of(context)
                                             .textTheme
-                                            .headline,
-                                      )
-                                    ],
-                                  );
-                                }).toList(),
-                                onSelectedItemChanged: (_) {},
-                              ),
-                              circularStrokeCap: CircularStrokeCap.round,
-                              progressColor: Colors.green,
+                                            .headline),
+                                    Text(" = ",
+                                        style: Theme
+                                            .of(context)
+                                            .textTheme
+                                            .headline),
+                                    Text(
+                                      data.userAnswer,
+                                      style: Theme
+                                          .of(context)
+                                          .textTheme
+                                          .headline,
+                                    )
+                                  ],
+                                );
+                              }).toList(),
+                              onSelectedItemChanged: (_) {},
                             ),
-                          );
-                        },
-                      )),
-                  Expanded(
-                    flex: 9,
+                            circularStrokeCap: CircularStrokeCap.round,
+                            progressColor: Colors.green,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  Container(
+                    height: (SizeConfig.safeBlockVertical * 0.5),
                     child: Align(
                       alignment: Alignment.center,
                       child: SizedBox(
@@ -149,25 +154,30 @@ class QuickCalculation extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Expanded(
-                      flex: 1,
-                      child: Consumer<QuickCalculationProvider>(
-                          builder: (context, provider, child) {
-                        return InkWell(
-                          onTap: () {
-                            provider.pauseTimer();
-                          },
-                          child: Container(
-                            margin: EdgeInsets.all(5),
-                            child: Center(
-                              child: Icon(
-                                provider.pause ? Icons.play_arrow : Icons.pause,
-                                size: 40,
-                              ),
+                  Container(
+                    height: (SizeConfig.safeBlockVertical * 0.07),
+                    child: Consumer<QuickCalculationProvider>(
+                        builder: (context, provider, child) {
+                          return Container(
+                            margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                IconButton(
+                                  icon: provider.pause
+                                      ? Icon(Icons.play_arrow)
+                                      : Icon(Icons.pause),
+                                  iconSize: 40,
+                                  onPressed: () {
+                                    provider.pauseTimer();
+                                  },
+                                )
+                              ],
                             ),
-                          ),
-                        );
-                      })),
+                          );
+                        }),
+                  ),
                 ],
               ),
             ),
