@@ -16,6 +16,8 @@ class MathPairsButton extends StatelessWidget {
     return Expanded(
       flex: flex,
       child: InkWell(
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
         onTap: () {
           mathPairsProvider.checkResult(mathPairs, index);
         },
@@ -26,14 +28,17 @@ class MathPairsButton extends StatelessWidget {
               shape: BoxShape.rectangle,
               borderRadius: BorderRadius.all(Radius.circular(5)),
               border: Border.all(
-                  color: mathPairs.isActive ? Colors.blue : Colors.grey),
+                  width: 2,
+                  color: mathPairs.isActive
+                      ? Theme.of(context).accentColor
+                      : Theme.of(context).dialogBackgroundColor),
             ),
             margin: EdgeInsets.all(5),
             constraints: BoxConstraints.expand(),
             child: Center(
               child: Text(
                 mathPairs.text,
-                style: Theme.of(context).textTheme.headline,
+                style: Theme.of(context).textTheme.display1,
               ),
             ),
           ),

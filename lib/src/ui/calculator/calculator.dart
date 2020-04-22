@@ -17,29 +17,31 @@ class Calculator extends StatelessWidget {
             top: true,
             bottom: true,
             child: Container(
-              margin: EdgeInsets.all(20),
+              margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
               constraints: BoxConstraints.expand(),
               child: Column(
                 children: <Widget>[
-                  Expanded(flex: 1, child: Timer(GameCategoryType.CALCULATOR)),
-                  Consumer<CalculatorProvider>(
-                      builder: (context, calculatorProvider, child) {
-                    return Expanded(
-                        flex: 2,
-                        child: Center(
-                          child: Text(
-                            calculatorProvider.currentState.question,
-                            style: TextStyle(fontSize: 35),
-                          ),
-                        ));
-                  }),
+                  Expanded(flex: 10, child: Timer(GameCategoryType.CALCULATOR)),
                   Expanded(
-                      flex: 2,
+                    flex: 10,
+                    child: Consumer<CalculatorProvider>(
+                        builder: (context, calculatorProvider, child) {
+                      return Center(
+                        child: Text(
+                          calculatorProvider.currentState.question,
+                          style: Theme.of(context).textTheme.headline,
+                        ),
+                      );
+                    }),
+                  ),
+                  Expanded(
+                      flex: 15,
                       child: Container(
                         decoration: BoxDecoration(
                           shape: BoxShape.rectangle,
                           borderRadius: BorderRadius.all(Radius.circular(5)),
-                          border: Border.all(color: Colors.grey),
+                          border:
+                              Border.all(color: Theme.of(context).accentColor),
                         ),
                         margin: EdgeInsets.fromLTRB(5, 10, 5, 20),
                         constraints: BoxConstraints.expand(),
@@ -48,15 +50,14 @@ class Calculator extends StatelessWidget {
                             builder: (context, calculatorProvider, child) {
                               return Text(
                                 calculatorProvider.result,
-                                style: TextStyle(
-                                    fontSize: 45, fontWeight: FontWeight.w700),
+                                style: Theme.of(context).textTheme.display1,
                               );
                             },
                           ),
                         ),
                       )),
                   Expanded(
-                    flex: 5,
+                    flex: 55,
                     child: Align(
                       alignment: Alignment.center,
                       child: SizedBox(
@@ -130,22 +131,26 @@ class Calculator extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                      flex: 1,
+                      flex: 10,
                       child: Consumer<CalculatorProvider>(
                           builder: (context, calculatorProvider, child) {
-                        return InkWell(
-                          onTap: () {
-                            calculatorProvider.pauseTimer();
-                          },
+                        return Container(
                           child: Container(
-                            margin: EdgeInsets.all(5),
-                            child: Center(
-                              child: Icon(
-                                calculatorProvider.pause
-                                    ? Icons.play_arrow
-                                    : Icons.pause,
-                                size: 40,
-                              ),
+                            margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                IconButton(
+                                  icon: calculatorProvider.pause
+                                      ? Icon(Icons.play_arrow)
+                                      : Icon(Icons.pause),
+                                  iconSize: 40,
+                                  onPressed: () {
+                                    calculatorProvider.pauseTimer();
+                                  },
+                                )
+                              ],
                             ),
                           ),
                         );

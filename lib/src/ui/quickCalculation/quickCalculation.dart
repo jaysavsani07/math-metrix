@@ -37,6 +37,7 @@ class QuickCalculation extends StatelessWidget {
                               radius: 230.0,
                               lineWidth: 15.0,
                               animation: true,
+                              animationDuration: 250,
                               animateFromLastPercent: true,
                               percent: provider.time,
                               center: CupertinoPicker(
@@ -47,8 +48,7 @@ class QuickCalculation extends StatelessWidget {
                                 backgroundColor: Colors.transparent,
                                 children: provider.list.map((data) {
                                   return Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       Text(data.question,
                                           style: Theme.of(context)
@@ -161,9 +161,7 @@ class QuickCalculation extends StatelessWidget {
                             margin: EdgeInsets.all(5),
                             child: Center(
                               child: Icon(
-                                provider.pause
-                                    ? Icons.play_arrow
-                                    : Icons.pause,
+                                provider.pause ? Icons.play_arrow : Icons.pause,
                                 size: 40,
                               ),
                             ),

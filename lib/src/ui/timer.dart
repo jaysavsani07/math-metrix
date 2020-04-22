@@ -10,6 +10,7 @@ import 'package:mathgame/src/provider/signProvider.dart';
 import 'package:mathgame/src/provider/squareRootProvider.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/utility/MultiDigitCounter.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
 class Timer extends StatelessWidget {
@@ -52,15 +53,24 @@ class Timer extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline)
             ],
           ),
+          LinearPercentIndicator(
+            width: 140.0,
+            lineHeight: 14.0,
+            animation: true,
+            animateFromLastPercent: true,
+            animationDuration: 1000,
+            percent: provider.time / 5,
+            backgroundColor: Colors.grey,
+            progressColor: Colors.blue,
+          ),
           Visibility(
-            visible: !(type == GameCategoryType.QUICK_CALCULATION) ? true : false ,
-            child: Column(
-                children: <Widget>[
-                  Text("Timer", style: Theme.of(context).textTheme.subhead),
-                  Text(provider.time.toString(),
-                      style: Theme.of(context).textTheme.headline)
-                ]
-            ),
+            visible:
+                !(type == GameCategoryType.QUICK_CALCULATION) ? true : false,
+            child: Column(children: <Widget>[
+              Text("Timer", style: Theme.of(context).textTheme.subhead),
+              Text(provider.time.toString(),
+                  style: Theme.of(context).textTheme.headline)
+            ]),
           )
         ],
       ),
