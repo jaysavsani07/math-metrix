@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/provider/dashboardViewModel.dart';
@@ -10,7 +11,11 @@ import 'package:mathgame/src/utility/keyUtil.dart';
 
 void main() {
   setupServiceLocator();
-  runApp(MyApp());
+  runApp(DevicePreview(
+    usePreferences: false,
+    areSettingsEnabled: false,
+    builder: (context) => MyApp(),
+  ));
 }
 
 setupServiceLocator() {
@@ -46,8 +51,10 @@ class MyApp extends StatelessWidget {
           textTheme: TextTheme(
             display4:
                 TextStyle(fontFamily: fontFamily, fontWeight: FontWeight.w300),
-            display3:
-                TextStyle(fontFamily: fontFamily, fontWeight: FontWeight.w500, color: Colors.white),
+            display3: TextStyle(
+                fontFamily: fontFamily,
+                fontWeight: FontWeight.w500,
+                color: Colors.white),
             display2: TextStyle(
                 fontFamily: fontFamily,
                 fontWeight: FontWeight.w400,

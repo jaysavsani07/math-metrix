@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/screenutil.dart';
 import 'package:mathgame/src/models/MagicTriangle/MagicTriangleModel.dart';
 import 'package:mathgame/src/provider/MagicTriangleProvider.dart';
 import 'package:provider/provider.dart';
@@ -7,8 +8,9 @@ import 'package:provider/provider.dart';
 class TriangleButton extends StatelessWidget {
   final MagicTriangleGrid digit;
   final int index;
+  final double size;
 
-  TriangleButton(this.digit, this.index);
+  TriangleButton(this.digit, this.index, this.size);
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +24,7 @@ class TriangleButton extends StatelessWidget {
             side: BorderSide(color: Colors.white70, width: 3),
           ),
           child: Container(
-            height: 80,
-            width: 80,
+           constraints: BoxConstraints.expand(),
             child: FlatButton(
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
