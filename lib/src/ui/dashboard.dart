@@ -9,6 +9,7 @@ import 'package:mathgame/src/utility/sizeConfig.dart';
 
 import 'home.dart';
 import 'package:mathgame/src/ui/home.dart';
+import 'package:async/async.dart';
 import 'package:provider_architecture/provider_architecture.dart';
 
 class DashBoardPage extends StatefulWidget {
@@ -145,8 +146,8 @@ class _DashBoardPageState extends State<DashBoardPage>
                               child: SlideTransition(
                                 position: _offsetLeftEnter,
                                 child: Card(
-                                  color: Color(0xFF222222),
-                                  elevation: 20,
+                                  color: Color(0xFF363636),
+                                  elevation: 10,
                                   margin: EdgeInsets.all(10),
                                   child: Container(
                                       alignment: Alignment.center,
@@ -168,6 +169,8 @@ class _DashBoardPageState extends State<DashBoardPage>
                               child: SlideTransition(
                                 position: _offsetRightEnter,
                                 child: Card(
+                                  color: Color(0xFF363636),
+                                  elevation: 10,
                                   margin: EdgeInsets.all(10),
                                   child: Container(
                                       alignment: Alignment.center,
@@ -189,6 +192,8 @@ class _DashBoardPageState extends State<DashBoardPage>
                               child: SlideTransition(
                                 position: _offsetLeftEnter,
                                 child: Card(
+                                  color: Color(0xFF363636),
+                                  elevation: 10,
                                   margin: EdgeInsets.all(10),
                                   child: Container(
                                       alignment: Alignment.center,

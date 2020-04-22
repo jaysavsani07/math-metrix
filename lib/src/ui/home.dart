@@ -25,7 +25,7 @@ class MyHomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Expanded(
-                    flex: 6,
+                    flex: 10,
                     child: Container(),
                   ),
                   Expanded(
@@ -37,14 +37,14 @@ class MyHomePage extends StatelessWidget {
                             style: Theme.of(context).textTheme.display2)),
                   ),
                   Expanded(
-                    flex: 74,
+                    flex: 70,
                     child: ViewModelProvider<DashboardViewModel>.withConsumer(
                         onModelReady: (model) =>
                             model.getGameByPuzzleType(puzzleType),
                         reuseExisting: true,
                         viewModel: GetIt.I<DashboardViewModel>(),
                         builder: (context, model, child) => GridView.builder(
-                              padding: EdgeInsets.only(bottom: 80.0),
+                              padding: EdgeInsets.only(bottom: 20.0),
                               itemBuilder: (BuildContext context, int index) {
                                 return GestureDetector(
                                   onTap: () {
@@ -52,17 +52,17 @@ class MyHomePage extends StatelessWidget {
                                         model.list[index].routePath);
                                   },
                                   child: Container(
-                                    margin: EdgeInsets.fromLTRB(40, 12, 40, 12),
+                                    margin: EdgeInsets.fromLTRB(40, 5, 40, 5),
                                     child: Card(
-                                      color: Color(0xFF262626),
-                                      elevation: 5,
+                                      color: Color(0xFF363636),
+                                      elevation: 10,
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(5),
                                       ),
                                       child: Container(
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                                BorderRadius.circular(20)),
+                                                BorderRadius.circular(5)),
                                         child: Column(
                                           children: <Widget>[
                                             Expanded(
@@ -87,7 +87,7 @@ class MyHomePage extends StatelessWidget {
                                                     model.list[index].name,
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .headline,
+                                                        .title,
                                                   )),
                                             ),
                                             Expanded(
@@ -183,29 +183,31 @@ class MyHomePage extends StatelessWidget {
                               itemCount: model.list.length,
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
-                                      childAspectRatio: 2.8, crossAxisCount: 1),
+                                      childAspectRatio: 3.3, crossAxisCount: 1),
                             )),
                   ),
                   Expanded(
                     flex: 10,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: <Widget>[
-                        IconButton(
-                          icon: Icon(Icons.home),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          iconSize: 40,
-                          padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.info_outline),
-                          iconSize: 40,
-                          padding: EdgeInsets.fromLTRB(0, 0, 30, 0),
-                        )
-                      ],
+                    child: Container(
+//                      color: Colors.blueGrey,
+                      margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          IconButton(
+                            icon: Icon(Icons.home),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            iconSize: 40,
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.info_outline),
+                            iconSize: 40,
+                          )
+                        ],
+                      ),
                     ),
                   )
                 ],
