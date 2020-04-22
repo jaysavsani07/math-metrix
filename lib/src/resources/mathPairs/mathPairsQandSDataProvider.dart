@@ -16,7 +16,9 @@ class MathPairsQandSDataProvider {
       String x2 = MathUtil.generateRandomSign();
       int x3 = MathUtil.generateRandomAnswer(min, max);
       if (MathUtil.evaluate(x1, x2, x3) > 0 &&
-          !list.contains(MathPair(1, "$x1 $x2 $x3", false, true))) {
+          !list.contains(MathPair(1, "$x1 $x2 $x3", false, true)) &&
+          !list.contains(
+              MathPair(1, "${MathUtil.evaluate(x1, x2, x3)}", false, true))) {
         if ((x2 == "/" && x1 > x3 && x1 % x3 == 0) || x2 != "/") {
           x.add(MathPair(i, "$x1 $x2 $x3", false, true));
           x.add(MathPair(i, "${MathUtil.evaluate(x1, x2, x3)}", false, true));
