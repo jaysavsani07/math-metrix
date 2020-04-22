@@ -18,7 +18,7 @@ class MagicTriangle extends StatelessWidget {
     var sizeConfig = SizeConfig().init(context);
     print("device width factor ${SizeConfig.heightWidthFactor}");
     triangleHeight = (MediaQuery.of(context).size.width) * 0.8660254;
-    print("triangle height ${SizeConfig.screenHeight}");
+    print("triangle height ${SizeConfig.safeBlockVertical}");
     return ChangeNotifierProvider<MagicTriangleProvider>(
       create: (_) => MagicTriangleProvider(),
       child: WillPopScope(
@@ -33,11 +33,11 @@ class MagicTriangle extends StatelessWidget {
                 margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                 child: Column(children: <Widget>[
                   Container(
-                      height: (SizeConfig.screenHeight * 0.08),
+                      height: (SizeConfig.safeBlockVertical * 0.08),
                       margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
                       child: Timer(GameCategoryType.MAGIC_TRIANGLE)),
                   Container(
-                    height: (SizeConfig.screenHeight * 0.06),
+                    height: (SizeConfig.safeBlockVertical * 0.08),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -49,7 +49,7 @@ class MagicTriangle extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: (SizeConfig.screenHeight * 0.50),
+                    height: (SizeConfig.safeBlockVertical * 0.50),
                     child: Center(
                       child: Stack(
                         children: <Widget>[
@@ -137,7 +137,7 @@ class MagicTriangle extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: (SizeConfig.screenHeight * 0.22),
+                    height: (SizeConfig.safeBlockVertical * 0.22),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
@@ -175,7 +175,7 @@ class MagicTriangle extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: (SizeConfig.screenHeight * 0.07),
+                    height: (SizeConfig.safeBlockVertical * 0.08),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
