@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.w400,
                 color: Colors.white),
             display1:
-                TextStyle(fontFamily: fontFamily, fontWeight: FontWeight.w400),
+                TextStyle(fontFamily: fontFamily, fontWeight: FontWeight.w400, color: Colors.white),
             headline:
                 TextStyle(fontFamily: fontFamily, fontWeight: FontWeight.w400),
             title:

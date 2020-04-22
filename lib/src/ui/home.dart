@@ -189,7 +189,7 @@ class MyHomePage extends StatelessWidget {
                   Expanded(
                     flex: 10,
                     child: Container(
-//                      color: Colors.blueGrey,
+                      color: Colors.blueGrey,
                       margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
