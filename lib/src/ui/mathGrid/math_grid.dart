@@ -20,33 +20,14 @@ class MathGrid extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Expanded(
-                    flex: 1,
+                    flex: 10,
                     child: Container(
-                      margin: EdgeInsets.all(20),
+                      margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
                       child: Timer(GameCategoryType.MATH_MACHINE),
                     ),
                   ),
                   Expanded(
-                    flex: 1,
-                    child: Consumer<MathGridProvider>(builder: (context, provider, child) {
-                      return InkWell(
-                        onTap: () {
-                          provider.pauseTimer();
-                        },
-                        child: Container(
-                          margin: EdgeInsets.all(5),
-                          child: Center(
-                            child: Icon(
-                              provider.pause ? Icons.play_arrow : Icons.pause,
-                              size: 40,
-                            ),
-                          ),
-                        ),
-                      );
-                    }),
-                  ),
-                  Expanded(
-                    flex: 1,
+                    flex: 10,
                     child: Container(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -54,27 +35,54 @@ class MathGrid extends StatelessWidget {
                           Text(
                               mathGridProvider.currentState.currentAnswer
                                   .toString(),
-                              style: TextStyle(fontSize: 40))
+                              style: Theme.of(context).textTheme.display1)
                         ],
                       ),
                     ),
                   ),
                   Expanded(
-                    flex: 6,
-                    child: Center(
-                      child: GridView.builder(
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 9),
-                          itemCount:
-                              mathGridProvider.currentState.listForSquare.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return SquareButton(
-                                mathGridProvider
-                                    .currentState.listForSquare[index].value,
-                                mathGridProvider.currentState.listForSquare[index]);
-                          }),
-                    ),
-                  )
+                    flex: 5,
+                    child: Container(),
+                  ),
+                  Expanded(
+                    flex: 55,
+                    child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 9),
+                        itemCount:
+                            mathGridProvider.currentState.listForSquare.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return SquareButton(
+                              mathGridProvider
+                                  .currentState.listForSquare[index].value,
+                              mathGridProvider.currentState.listForSquare[index]);
+                        }),
+                  ),
+                  Expanded(
+                    flex: 10,
+                    child: Consumer<MathGridProvider>(builder: (context, provider, child) {
+                      return Container(
+                        child: Container(
+                          margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              IconButton(
+                                icon: provider.pause
+                                    ? Icon(Icons.play_arrow)
+                                    : Icon(Icons.pause),
+                                iconSize: 40,
+                                onPressed: () {
+                                  provider.pauseTimer();
+                                },
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    }),
+                  ),
                 ],
               ),
             );

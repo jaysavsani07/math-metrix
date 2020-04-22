@@ -17,21 +17,24 @@ class MathPairs extends StatelessWidget {
             top: true,
             bottom: true,
             child: Container(
-              margin: EdgeInsets.all(20),
+              margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
               constraints: BoxConstraints.expand(),
               child: Column(
                 children: <Widget>[
                   Expanded(
-                      flex: 1,
+                      flex: 10,
                       child: SizedBox(
                         child: Align(
                           alignment: Alignment.bottomLeft,
                           child: Timer(GameCategoryType.MATH_PAIRS),
                         ),
                       )),
-                  Expanded(flex: 2, child: SizedBox()),
                   Expanded(
-                    flex: 5,
+                    flex: 10,
+                    child: Container(),
+                  ),
+                  Expanded(
+                    flex: 60,
                     child: Consumer<MathPairsProvider>(
                         builder: (context, mathPairsProvider, child) {
                       return Row(
@@ -90,20 +93,30 @@ class MathPairs extends StatelessWidget {
                     }),
                   ),
                   Expanded(
-                      flex: 2,
+                    flex: 10,
+                    child: Container(),
+                  ),
+                  Expanded(
+                      flex: 10,
                       child: Consumer<MathPairsProvider>(
                           builder: (context, provider, child) {
-                        return InkWell(
-                          onTap: () {
-                            provider.pauseTimer();
-                          },
+                        return Container(
                           child: Container(
-                            margin: EdgeInsets.all(5),
-                            child: Center(
-                              child: Icon(
-                                provider.pause ? Icons.play_arrow : Icons.pause,
-                                size: 40,
-                              ),
+                            margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                IconButton(
+                                  icon: provider.pause
+                                      ? Icon(Icons.play_arrow)
+                                      : Icon(Icons.pause),
+                                  iconSize: 40,
+                                  onPressed: () {
+                                    provider.pauseTimer();
+                                  },
+                                )
+                              ],
                             ),
                           ),
                         );
