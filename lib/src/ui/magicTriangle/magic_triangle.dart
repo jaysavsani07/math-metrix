@@ -175,30 +175,25 @@ class MagicTriangle extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: (SizeConfig.screenHeight * 0.03),
-                    child: Consumer<MagicTriangleProvider>(
-                        builder: (context, provider, child) {
-                      return Container(
-                        child: Container(
-                          margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              IconButton(
-                                icon: provider.pause
-                                    ? Icon(Icons.play_arrow)
-                                    : Icon(Icons.pause),
-                                iconSize: 50,
-                                onPressed: () {
-                                  provider.pauseTimer();
-                                },
-                              )
-                            ],
-                          ),
-                        ),
-                      );
-                    }),
+                    height: (SizeConfig.screenHeight * 0.07),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Consumer<MagicTriangleProvider>(
+                            builder: (context, provider, child) {
+                          return IconButton(
+                            icon: provider.pause
+                                ? Icon(Icons.play_arrow)
+                                : Icon(Icons.pause),
+                            iconSize: 30,
+                            onPressed: () {
+                              provider.pauseTimer();
+                            },
+                          );
+                        })
+                      ],
+                    ),
                   )
                 ]),
               ),
