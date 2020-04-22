@@ -14,6 +14,7 @@ void main() {
   runApp(DevicePreview(
     usePreferences: false,
     areSettingsEnabled: false,
+    enabled: false,
     builder: (context) => MyApp(),
   ));
 }

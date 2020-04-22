@@ -53,7 +53,7 @@ class Timer extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline)
             ],
           ),
-          LinearPercentIndicator(
+          /*LinearPercentIndicator(
             width: 140.0,
             lineHeight: 14.0,
             animation: true,
@@ -62,7 +62,7 @@ class Timer extends StatelessWidget {
             percent: provider.time / 5,
             backgroundColor: Colors.grey,
             progressColor: Colors.blue,
-          ),
+          ),*/
           Visibility(
             visible:
                 !(type == GameCategoryType.QUICK_CALCULATION) ? true : false,

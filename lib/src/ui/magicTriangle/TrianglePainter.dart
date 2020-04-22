@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 
 class TrianglePainter extends CustomPainter {
   final Color color;
-  final double radius;
-  final double padding;
 
-  TrianglePainter(this.color, this.radius, this.padding);
+  TrianglePainter(this.color);
 
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint();
+    double radius = 40;
+    double padding = 20;
     paint.style = PaintingStyle.stroke;
     paint.color = color;
     paint.strokeWidth = 4.0;
