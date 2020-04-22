@@ -23,4 +23,14 @@ class MathPair {
   String toString() {
     return 'MathPairs{text: $text, uid: $uid}';
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MathPair &&
+          runtimeType == other.runtimeType &&
+          text == other.text;
+
+  @override
+  int get hashCode => text.hashCode;
 }
