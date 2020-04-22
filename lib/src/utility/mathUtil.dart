@@ -10,7 +10,7 @@ class MathUtil {
   static String generateRandomSign() {
     var x = ['/', '*', '-', '+'];
     final _random = new Random();
-    int result = _random.nextInt(3);
+    int result = _random.nextInt(4);
     return x[result];
   }
 

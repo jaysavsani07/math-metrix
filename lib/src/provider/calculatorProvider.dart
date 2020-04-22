@@ -61,6 +61,7 @@ class CalculatorProvider with ChangeNotifier {
             currentScore + (ScoreUtil.calculatorScore * _time).toInt();
         await Future.delayed(Duration(milliseconds: 300));
         if (_list.length - 1 == _index) {
+          print(_index ~/ 5 + 1);
           _list.addAll(CalculatorQandSDataProvider.getCalculatorDataList(
               _index ~/ 5 + 1));
         }
@@ -85,7 +86,7 @@ class CalculatorProvider with ChangeNotifier {
         .take(TimeUtil.calculatorTimeOut)
         .listen((time) {
       _time = time;
-      print("$time ${time / 5}  ");
+//      print("$time ${time / 5}  ");
       notifyListeners();
     }, onDone: () {
       this._timeOut = true;
