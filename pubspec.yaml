@@ -29,8 +29,6 @@ dependencies:
   get_it: ^4.0.1
   shared_preferences: ^0.5.6+3
   rflutter_alert: ^1.0.3
-  device_preview: ^0.4.4
-  flutter_screenutil: ^1.1.0
 
 
 dev_dependencies:
