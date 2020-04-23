@@ -48,6 +48,7 @@ class SignProvider with ChangeNotifier {
     _time = TimeUtil.signTimeOut;
     _timeOut = false;
     _result = "";
+    currentScore = 0;
     startTimer();
   }
 
@@ -56,19 +57,22 @@ class SignProvider with ChangeNotifier {
       _result = answer;
       notifyListeners();
       if (_result == _currentState.sign) {
-
         restartTimer();
         notifyListeners();
         await Future.delayed(Duration(milliseconds: 300));
         if (_list.length - 1 == _index) {
           _list.addAll(SignQandSDataProvider.getSignDataList(_index ~/ 5 + 1));
         }
-        _time=TimeUtil.signTimeOut;
+        _time = TimeUtil.signTimeOut;
         _index = _index + 1;
-        currentScore = (ScoreUtil.signScore * _index).toInt();
+        currentScore = currentScore + (ScoreUtil.signScore).toInt();
         _result = "";
         _currentState = _list[_index];
         notifyListeners();
+      } else {
+        if (currentScore > 0) {
+          currentScore = currentScore - 1;
+        }
       }
     }
   }
@@ -108,17 +112,17 @@ class SignProvider with ChangeNotifier {
     notifyListeners();
     var dialogResult = await _dialogService.showDialog(
         gameCategoryType: GameCategoryType.SIGN,
-        score: _index * ScoreUtil.signScore,
+        score: currentScore.toDouble(),
         coin: _index * CoinUtil.signCoin,
         isPause: _pause);
 
     if (dialogResult.exit) {
       homeViewModel.updateScoreboard(GameCategoryType.SIGN,
-          _index * ScoreUtil.signScore, _index * CoinUtil.signCoin);
+          currentScore.toDouble(), _index * CoinUtil.signCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
-      homeViewModel.updateScoreboard(GameCategoryType.SIGN, ScoreUtil.signScore,
-          _index * CoinUtil.signCoin);
+      homeViewModel.updateScoreboard(GameCategoryType.SIGN,
+          currentScore.toDouble(), _index * CoinUtil.signCoin);
       timerSubscription.cancel();
       _index = 0;
       startGame();
