@@ -59,14 +59,15 @@ class SignProvider with ChangeNotifier {
         print("_index $_index");
         print(" _time = $_time");
         print("current score $currentScore");
-        currentScore = currentScore + (ScoreUtil.signScore * _time).toInt();
         restartTimer();
         notifyListeners();
         await Future.delayed(Duration(milliseconds: 300));
         if (_list.length - 1 == _index) {
           _list.addAll(SignQandSDataProvider.getSignDataList(_index ~/ 5 + 1));
         }
+        _time=TimeUtil.signTimeOut;
         _index = _index + 1;
+        currentScore = (ScoreUtil.signScore * _index).toInt();
         _result = "";
         _currentState = _list[_index];
         notifyListeners();

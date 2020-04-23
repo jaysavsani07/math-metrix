@@ -56,13 +56,13 @@ class CorrectAnswerProvider with ChangeNotifier {
       _result = answer;
       notifyListeners();
       if (int.parse(_result) == _currentState.answer) {
-        currentScore = currentScore + (ScoreUtil.correctAnswerScore * _time).toInt();
         await Future.delayed(Duration(milliseconds: 300));
         if (_list.length - 1 == _index) {
           _list.addAll(CorrectAnswerQandSDataProvider.getCorrectAnswerDataList(
               _index ~/ 5 + 1));
         }
         _index = _index + 1;
+        currentScore = (ScoreUtil.correctAnswerScore * _index).toInt();
         _currentState = _list[_index];
         _result = "";
         restartTimer();

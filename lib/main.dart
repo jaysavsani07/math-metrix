@@ -1,5 +1,5 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/provider/dashboardViewModel.dart';
 import 'package:mathgame/src/resources/dialog_service.dart';
@@ -11,12 +11,7 @@ import 'package:mathgame/src/utility/keyUtil.dart';
 
 void main() {
   setupServiceLocator();
-  runApp(DevicePreview(
-    usePreferences: false,
-    areSettingsEnabled: false,
-    enabled: false,
-    builder: (context) => MyApp(),
-  ));
+  runApp(MyApp());
 }
 
 setupServiceLocator() {
@@ -30,8 +25,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+//    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     return MaterialApp(
-      title: 'Math Game',
+      title: 'Math Matrix',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
           backgroundColor: Color(0xFFaa0000),
           brightness: Brightness.dark,
@@ -60,8 +62,10 @@ class MyApp extends StatelessWidget {
                 fontFamily: fontFamily,
                 fontWeight: FontWeight.w400,
                 color: Colors.white),
-            display1:
-                TextStyle(fontFamily: fontFamily, fontWeight: FontWeight.w400, color: Colors.white),
+            display1: TextStyle(
+                fontFamily: fontFamily,
+                fontWeight: FontWeight.w400,
+                color: Colors.white),
             headline:
                 TextStyle(fontFamily: fontFamily, fontWeight: FontWeight.w400),
             title:

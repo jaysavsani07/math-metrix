@@ -69,8 +69,8 @@ class MathPairsProvider with ChangeNotifier {
               _list.addAll(MathPairsQandSDataProvider.getMathPairsDataList(
                   _index ~/ 5 + 1));
             }
-            currentScore = currentScore + (ScoreUtil.mathematicalPairsScore).toInt();
             _index = _index + 1;
+            currentScore = (ScoreUtil.mathematicalPairsScore * _index).toInt();
             _currentState = _list[_index];
             restartTimer();
             notifyListeners();
