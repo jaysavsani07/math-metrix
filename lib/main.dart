@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/provider/dashboardViewModel.dart';
 import 'package:mathgame/src/resources/dialog_service.dart';
@@ -24,8 +25,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+//    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     return MaterialApp(
-      title: 'Math Game',
+      title: 'Math Matrix',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
           backgroundColor: Color(0xFFaa0000),
           brightness: Brightness.dark,
