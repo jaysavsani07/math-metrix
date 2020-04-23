@@ -56,9 +56,7 @@ class SignProvider with ChangeNotifier {
       _result = answer;
       notifyListeners();
       if (_result == _currentState.sign) {
-        print("_index $_index");
-        print(" _time = $_time");
-        print("current score $currentScore");
+
         restartTimer();
         notifyListeners();
         await Future.delayed(Duration(milliseconds: 300));

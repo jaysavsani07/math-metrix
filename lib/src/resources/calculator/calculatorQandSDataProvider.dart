@@ -26,7 +26,23 @@ class CalculatorQandSDataProvider {
       }
     }
 
+    for (int i = 0; i < list.length; i++) {
+      var result = list.where((result) => result.question.contains("/"));
+      if (!(result.length > 0)) {
+        while (i < 2) {
+          int x1 = MathUtil.generateRandomAnswer(min, max);
+          String x2 = "/";
+          int x3 = MathUtil.generateRandomAnswer(min, max);
+          if ((MathUtil.evaluate(x1, x2, x3) >= 0 && x1 > x3 && x1 % x3 == 0)) {
+            list.add(CalculatorQandS(
+                1, "$x1 $x2 $x3", MathUtil.evaluate(x1, x2, x3)));
+            print("$x1 $x2 $x3 = ${MathUtil.evaluate(x1, x2, x3)}");
+            i++;
+          }
+        }
+      }
+    }
+    list.shuffle();
     return list;
   }
 }
-
