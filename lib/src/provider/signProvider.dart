@@ -59,7 +59,6 @@ class SignProvider with ChangeNotifier {
         print("_index $_index");
         print(" _time = $_time");
         print("current score $currentScore");
-        currentScore = currentScore + (ScoreUtil.signScore * _time).toInt();
         restartTimer();
         notifyListeners();
         await Future.delayed(Duration(milliseconds: 300));
@@ -68,6 +67,7 @@ class SignProvider with ChangeNotifier {
         }
         _time=TimeUtil.signTimeOut;
         _index = _index + 1;
+        currentScore = (ScoreUtil.signScore * _index).toInt();
         _result = "";
         _currentState = _list[_index];
         notifyListeners();

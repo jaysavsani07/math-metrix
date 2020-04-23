@@ -92,9 +92,9 @@ class MagicTriangleProvider with ChangeNotifier {
         if (_currentState.answer == sumOfLeftSide &&
             _currentState.answer == sumOfRightSide &&
             _currentState.answer == sumOfBottomSide) {
-          currentScore = currentScore + (ScoreUtil.magicTriangleScore).toInt();
           await Future.delayed(Duration(milliseconds: 300));
           _index = _index + 1;
+          currentScore = (ScoreUtil.magicTriangleScore * _index).toInt();
           _currentState = _list[_index];
           restartTimer();
           notifyListeners();

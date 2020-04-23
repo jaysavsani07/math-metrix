@@ -61,12 +61,12 @@ class QuickCalculationProvider with ChangeNotifier {
       _currentState.userAnswer = _currentState.userAnswer + answer;
       notifyListeners();
       if (int.parse(_currentState.userAnswer) == _currentState.answer) {
-        currentScore = currentScore + (ScoreUtil.quickCalculationScore ).toInt();
         await Future.delayed(Duration(milliseconds: 300));
         _list.addAll(
             QuickCalculationQandSDataProvider.getQuickCalculationDataList(
                 _index ~/ 5 + 1, 1));
         _index = _index + 1;
+        currentScore = (ScoreUtil.quickCalculationScore * _index).toInt();
         _timeLength = _timeLength + TimeUtil.quickCalculationPlusTime * 4;
         _currentState = _list[_index];
         scrollController.jumpToItem(_index);

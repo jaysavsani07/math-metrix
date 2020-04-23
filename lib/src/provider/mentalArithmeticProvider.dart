@@ -61,9 +61,9 @@ class MentalArithmeticProvider with ChangeNotifier {
         _result = _result + answer;
         notifyListeners();
         if (_result != "-" && int.parse(_result) == _currentState.answer) {
-          currentScore = currentScore + (ScoreUtil.mentalArithmeticScore).toInt();
           await Future.delayed(Duration(milliseconds: 300));
           _index = _index + 1;
+          currentScore = (ScoreUtil.mentalArithmeticScore * _index).toInt();
           _currentState = _list[_index];
           _result = "";
           restartLocalTimer();
