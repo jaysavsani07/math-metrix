@@ -29,6 +29,7 @@ dependencies:
   get_it: ^4.0.1
   shared_preferences: ^0.5.6+3
   rflutter_alert: ^1.0.3
+  giffy_dialog: 1.7.0
 
 
 dev_dependencies:
@@ -48,8 +49,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-#  assets:
-#    - assets/images/calculator.svg
+  assets:
+    - assets/calculator-intro.gif
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

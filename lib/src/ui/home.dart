@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/navigation_service.dart';
 import 'package:provider_architecture/provider_architecture.dart';
@@ -209,7 +210,35 @@ class MyHomePage extends StatelessWidget {
                           IconButton(
                             icon: Icon(Icons.info_outline),
                             iconSize: 40,
-                            onPressed: () {},
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (_) => AssetGiffyDialog(
+                                        buttonCancelColor:
+                                            Theme.of(context).accentColor,
+                                        onlyCancelButton: true,
+                                        buttonCancelText:
+                                            Text("        Got it      "),
+                                        title: Text(
+                                          'Calculator',
+                                          style: TextStyle(
+                                              fontSize: 22.0,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        image: Image.asset(
+                                            "assets/calculator-intro.gif"),
+                                        description: Text(
+                                          '''You need to solve given equation correctly
+                                      
++1 for correct answer
+-1 for wrong answer''',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(),
+                                        ),
+                                        entryAnimation: EntryAnimation.BOTTOM,
+                                        onOkButtonPressed: () {},
+                                      ));
+                            },
                           )
                         ],
                       ),
