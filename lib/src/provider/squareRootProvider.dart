@@ -44,6 +44,8 @@ class SquareRootProvider with ChangeNotifier {
 
   void startGame() {
     _list = SquareRootQandSDataProvider.getSquareDataList(1);
+    _index = 0;
+    currentScore = 0;
     _currentState = _list[_index];
     _time = TimeUtil.squareRootTimeOut;
     _timeOut = false;
@@ -62,7 +64,7 @@ class SquareRootProvider with ChangeNotifier {
               SquareRootQandSDataProvider.getSquareDataList(_index ~/ 5 + 1));
         }
         _index = _index + 1;
-        currentScore = (ScoreUtil.squareRootScore * _index).toInt();
+        currentScore = currentScore + (ScoreUtil.squareRootScore).toInt();
         _currentState = _list[_index];
         _result = "";
         restartTimer();
@@ -106,19 +108,18 @@ class SquareRootProvider with ChangeNotifier {
     notifyListeners();
     var dialogResult = await _dialogService.showDialog(
         gameCategoryType: GameCategoryType.SQUARE_ROOT,
-        score: _index * ScoreUtil.squareRootScore,
+        score: currentScore.toDouble(),
         coin: _index * CoinUtil.squareRootCoin,
         isPause: _pause);
 
     if (dialogResult.exit) {
       homeViewModel.updateScoreboard(GameCategoryType.SQUARE_ROOT,
-          _index * ScoreUtil.squareRootScore, _index * CoinUtil.squareRootCoin);
+          currentScore.toDouble(), _index * CoinUtil.squareRootCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
       homeViewModel.updateScoreboard(GameCategoryType.SQUARE_ROOT,
-          _index * ScoreUtil.squareRootScore, _index * CoinUtil.squareRootCoin);
+          currentScore.toDouble(), _index * CoinUtil.squareRootCoin);
       timerSubscription.cancel();
-      _index = 0;
       startGame();
     } else if (dialogResult.play) {
       timerSubscription.resume();

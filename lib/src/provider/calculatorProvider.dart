@@ -45,6 +45,8 @@ class CalculatorProvider with ChangeNotifier {
 
   void startGame() {
     _list = CalculatorQandSDataProvider.getCalculatorDataList(1);
+    _index = 0;
+    currentScore = 0;
     _currentState = _list[_index];
     _time = TimeUtil.calculatorTimeOut;
     _timeOut = false;
@@ -64,7 +66,7 @@ class CalculatorProvider with ChangeNotifier {
               _index ~/ 5 + 1));
         }
         _index = _index + 1;
-        currentScore = (ScoreUtil.calculatorScore * _index).toInt();
+        currentScore = currentScore + (ScoreUtil.calculatorScore).toInt();
         _result = "";
         _time = TimeUtil.calculatorTimeOut;
         _currentState = _list[_index];
@@ -109,19 +111,18 @@ class CalculatorProvider with ChangeNotifier {
     notifyListeners();
     var dialogResult = await _dialogService.showDialog(
         gameCategoryType: GameCategoryType.CALCULATOR,
-        score: _index * ScoreUtil.calculatorScore,
+        score: currentScore.toDouble(),
         coin: _index * CoinUtil.calculatorCoin,
         isPause: _pause);
 
     if (dialogResult.exit) {
       homeViewModel.updateScoreboard(GameCategoryType.CALCULATOR,
-          _index * ScoreUtil.calculatorScore, _index * CoinUtil.calculatorCoin);
+          currentScore.toDouble(), _index * CoinUtil.calculatorCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
       homeViewModel.updateScoreboard(GameCategoryType.CALCULATOR,
-          _index * ScoreUtil.calculatorScore, _index * CoinUtil.calculatorCoin);
+          currentScore.toDouble(), _index * CoinUtil.calculatorCoin);
       timerSubscription.cancel();
-      _index = 0;
       startGame();
     } else if (dialogResult.play) {
       timerSubscription.resume();

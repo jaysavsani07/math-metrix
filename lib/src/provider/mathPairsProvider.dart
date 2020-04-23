@@ -43,6 +43,8 @@ class MathPairsProvider with ChangeNotifier {
 
   void startGame() {
     _list = MathPairsQandSDataProvider.getMathPairsDataList(1);
+    _index = 0;
+    currentScore = 0;
     _currentState = _list[_index];
     _time = TimeUtil.mathematicalPairsTimeOut;
     _timeOut = false;
@@ -70,7 +72,7 @@ class MathPairsProvider with ChangeNotifier {
                   _index ~/ 5 + 1));
             }
             _index = _index + 1;
-            currentScore = (ScoreUtil.mathematicalPairsScore * _index).toInt();
+            currentScore = currentScore+ (ScoreUtil.mathematicalPairsScore ).toInt();
             _currentState = _list[_index];
             restartTimer();
             notifyListeners();
@@ -117,23 +119,22 @@ class MathPairsProvider with ChangeNotifier {
     notifyListeners();
     var dialogResult = await _dialogService.showDialog(
         gameCategoryType: GameCategoryType.MATH_PAIRS,
-        score: _index * ScoreUtil.mathematicalPairsScore,
+        score: currentScore.toDouble(),
         coin: _index * CoinUtil.mathematicalPairsCoin,
         isPause: _pause);
 
     if (dialogResult.exit) {
       homeViewModel.updateScoreboard(
           GameCategoryType.MATH_PAIRS,
-          _index * ScoreUtil.mathematicalPairsScore,
+          currentScore.toDouble(),
           _index * CoinUtil.mathematicalPairsCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
       homeViewModel.updateScoreboard(
           GameCategoryType.MATH_PAIRS,
-          _index * ScoreUtil.mathematicalPairsScore,
+          currentScore.toDouble(),
           _index * CoinUtil.mathematicalPairsCoin);
       timerSubscription.cancel();
-      _index = 0;
       startGame();
     } else if (dialogResult.play) {
       timerSubscription.resume();

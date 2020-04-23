@@ -26,6 +26,7 @@ class DashboardViewModel extends ChangeNotifier {
     _preferences = await SharedPreferences.getInstance();
     _overallScore = getOverallScore();
     _totalCoin = getTotalCoin();
+    notifyListeners();
   }
 
   Future<void> getGameByPuzzleType(PuzzleType puzzleType) async {
@@ -118,8 +119,8 @@ class DashboardViewModel extends ChangeNotifier {
         if (gameCategory.scoreboard.highestScore < newScore.toInt()) {
           setOverallScore(
               gameCategory.scoreboard.highestScore, newScore.toInt());
+          gameCategory.scoreboard.highestScore = newScore.toInt();
         }
-        gameCategory.scoreboard.highestScore = newScore.toInt();
         setScoreboard(gameCategory.key, gameCategory.scoreboard);
       }
     });
