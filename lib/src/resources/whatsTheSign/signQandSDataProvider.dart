@@ -8,12 +8,13 @@ class SignQandSDataProvider {
     int i = 0;
     int min = 3;
     min = min < 1 ? 1 : min;
-    int max = 10;
+    int max = 10 + level;
 
     while (i < 5) {
       int x1 = MathUtil.generateRandomAnswer(min, max);
       String x2 = MathUtil.generateRandomSign();
       int x3 = MathUtil.generateRandomAnswer(min, max);
+      print(" $x1 $x2 $x3 ");
       if (MathUtil.evaluate(x1, x2, x3) > 0 &&
           !list.contains(SignQandS(1, x1.toString(), x2, x3.toString(),
               MathUtil.evaluate(x1, x2, x3).toString()))) {
