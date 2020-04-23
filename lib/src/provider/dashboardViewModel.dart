@@ -26,6 +26,7 @@ class DashboardViewModel extends ChangeNotifier {
     _preferences = await SharedPreferences.getInstance();
     _overallScore = getOverallScore();
     _totalCoin = getTotalCoin();
+    notifyListeners();
   }
 
   Future<void> getGameByPuzzleType(PuzzleType puzzleType) async {
