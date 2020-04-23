@@ -48,6 +48,7 @@ class CorrectAnswerProvider with ChangeNotifier {
     _time = TimeUtil.correctAnswerTimeOut;
     _timeOut = false;
     _result = "";
+    currentScore = 0;
     startTimer();
   }
 
@@ -62,11 +63,15 @@ class CorrectAnswerProvider with ChangeNotifier {
               _index ~/ 5 + 1));
         }
         _index = _index + 1;
-        currentScore = (ScoreUtil.correctAnswerScore * _index).toInt();
+        currentScore = currentScore + (ScoreUtil.correctAnswerScore).toInt();
         _currentState = _list[_index];
         _result = "";
         restartTimer();
         notifyListeners();
+      } else {
+        if (currentScore > 0 ){
+          currentScore = currentScore - 1;
+        }
       }
     }
   }
@@ -106,21 +111,17 @@ class CorrectAnswerProvider with ChangeNotifier {
     notifyListeners();
     var dialogResult = await _dialogService.showDialog(
         gameCategoryType: GameCategoryType.CORRECT_ANSWER,
-        score: _index * ScoreUtil.correctAnswerScore,
+        score: currentScore.toDouble(),
         coin: _index * CoinUtil.correctAnswerCoin,
         isPause: _pause);
 
     if (dialogResult.exit) {
-      homeViewModel.updateScoreboard(
-          GameCategoryType.CORRECT_ANSWER,
-          _index * ScoreUtil.correctAnswerScore,
-          _index * CoinUtil.correctAnswerCoin);
+      homeViewModel.updateScoreboard(GameCategoryType.CORRECT_ANSWER,
+          currentScore.toDouble(), _index * CoinUtil.correctAnswerCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
-      homeViewModel.updateScoreboard(
-          GameCategoryType.CORRECT_ANSWER,
-          _index * ScoreUtil.correctAnswerScore,
-          _index * CoinUtil.correctAnswerCoin);
+      homeViewModel.updateScoreboard(GameCategoryType.CORRECT_ANSWER,
+          currentScore.toDouble(), _index * CoinUtil.correctAnswerCoin);
       timerSubscription.cancel();
       _index = 0;
       startGame();

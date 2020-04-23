@@ -1,7 +1,7 @@
 class TimeUtil {
   static int calculatorTimeOut = 5;
 
-  static int signTimeOut = 60;
+  static int signTimeOut = 6;
 
   static int correctAnswerTimeOut = 5;
 
