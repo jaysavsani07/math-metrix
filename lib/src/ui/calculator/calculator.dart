@@ -23,17 +23,16 @@ class Calculator extends StatelessWidget {
                 children: <Widget>[
                   Expanded(flex: 10, child: Timer(GameCategoryType.CALCULATOR)),
                   Expanded(
-                    flex: 10,
-                    child: Consumer<CalculatorProvider>(
-                        builder: (context, calculatorProvider, child) {
-                      return Center(
-                        child: Text(
-                          calculatorProvider.currentState.question,
-                          style: Theme.of(context).textTheme.headline,
-                        ),
-                      );
-                    }),
-                  ),
+                      flex: 10,
+                      child: Center(
+                        child: Consumer<CalculatorProvider>(
+                            builder: (context, calculatorProvider, child) {
+                          return Text(
+                            calculatorProvider.currentState.question,
+                            style: Theme.of(context).textTheme.headline,
+                          );
+                        }),
+                      )),
                   Expanded(
                       flex: 15,
                       child: Container(
@@ -132,29 +131,24 @@ class Calculator extends StatelessWidget {
                   ),
                   Expanded(
                       flex: 10,
-                      child: Consumer<CalculatorProvider>(
-                          builder: (context, calculatorProvider, child) {
-                        return Container(
-                          child: Container(
-                            margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                IconButton(
-                                  icon: calculatorProvider.pause
-                                      ? Icon(Icons.play_arrow)
-                                      : Icon(Icons.pause),
-                                  iconSize: 40,
-                                  onPressed: () {
-                                    calculatorProvider.pauseTimer();
-                                  },
-                                )
-                              ],
-                            ),
-                          ),
-                        );
-                      }))
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Consumer<CalculatorProvider>(
+                              builder: (context, calculatorProvider, child) {
+                            return IconButton(
+                              icon: calculatorProvider.pause
+                                  ? Icon(Icons.play_arrow)
+                                  : Icon(Icons.pause),
+                              iconSize: 40,
+                              onPressed: () {
+                                calculatorProvider.pauseTimer();
+                              },
+                            );
+                          })
+                        ],
+                      ))
                 ],
               ),
             ),
