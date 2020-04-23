@@ -41,7 +41,7 @@ class _DialogManagerState extends State<DialogManager> {
         ),
       ),
       titleStyle: TextStyle(
-        color: Colors.red,
+        color: request.isPause ? Colors.green : Colors.red,
         fontWeight: FontWeight.w900,
         fontSize: 28,
       ),
@@ -50,7 +50,7 @@ class _DialogManagerState extends State<DialogManager> {
     Alert(
       context: context,
       style: alertStyle,
-      title: "Game Over",
+      title: request.isPause ? "Resume Game" : "Game Over",
       buttons: [],
       content: Column(
         children: <Widget>[
