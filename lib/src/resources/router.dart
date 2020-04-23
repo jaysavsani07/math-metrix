@@ -21,7 +21,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case KeyUtil.Home:
       var puzzleType = settings.arguments as PuzzleType;
       return MaterialPageRoute(
-          builder: (context) => MyHomePage(puzzleType: puzzleType));
+          builder: (context) => MyHomePage(
+                puzzleType: puzzleType,
+                title: puzzleType == PuzzleType.MATH_PUZZLE
+                    ? "Math Puzzle"
+                    : (puzzleType == PuzzleType.MEMORY_PUZZLE
+                        ? "Memory Puzzle"
+                        : "Train Your Brain"),
+              ));
     case KeyUtil.Calculator:
       return MaterialPageRoute(builder: (context) => Calculator());
     case KeyUtil.Sign:

@@ -9,8 +9,10 @@ import 'package:mathgame/src/provider/dashboardViewModel.dart';
 
 class MyHomePage extends StatelessWidget {
   final PuzzleType puzzleType;
+  final String title;
 
-  MyHomePage({Key key, @required this.puzzleType}) : super(key: key);
+  MyHomePage({Key key, @required this.puzzleType, @required this.title})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +34,12 @@ class MyHomePage extends StatelessWidget {
                     flex: 10,
                     child: Container(
                         constraints: BoxConstraints.expand(),
+                        margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
                         alignment: Alignment.center,
-                        child: Text("Math Puzzle",
-                            style: Theme.of(context).textTheme.display2)),
+                        child: FittedBox(
+                          child: Text(title,
+                              style: Theme.of(context).textTheme.display2),
+                        )),
                   ),
                   Expanded(
                     flex: 70,
@@ -197,13 +202,14 @@ class MyHomePage extends StatelessWidget {
                           IconButton(
                             icon: Icon(Icons.home),
                             onPressed: () {
-                              Navigator.pop(context);
+                              GetIt.I<NavigationService>().goBack();
                             },
                             iconSize: 40,
                           ),
                           IconButton(
                             icon: Icon(Icons.info_outline),
                             iconSize: 40,
+                            onPressed: () {},
                           )
                         ],
                       ),
