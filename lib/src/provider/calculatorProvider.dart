@@ -53,7 +53,7 @@ class CalculatorProvider with ChangeNotifier {
   }
 
   Future<void> checkResult(String answer) async {
-    if (_result.length < 2 && !timeOut) {
+    if (_result.length <= _currentState.answer && !timeOut) {
       _result = _result + answer;
       notifyListeners();
       if (int.parse(_result) == _currentState.answer) {
