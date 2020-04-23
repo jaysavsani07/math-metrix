@@ -24,7 +24,7 @@ class QuickCalculationProvider with ChangeNotifier {
   bool _timeOut;
   double _time;
   bool _pause = false;
-  int currentScore = 0 ;
+  int currentScore = 0;
 
   bool get timeOut => _timeOut;
 
@@ -50,6 +50,7 @@ class QuickCalculationProvider with ChangeNotifier {
     _scrollController = FixedExtentScrollController();
     _list = QuickCalculationQandSDataProvider.getQuickCalculationDataList(1, 5);
     _currentState = _list[_index];
+    scrollController.jumpToItem(_index);
     _time = 0;
     _timeLength = TimeUtil.quickCalculationTimeOut;
     _timeOut = false;
@@ -57,7 +58,9 @@ class QuickCalculationProvider with ChangeNotifier {
   }
 
   Future<void> checkResult(String answer) async {
-    if (_currentState.userAnswer.length < 2 && !timeOut) {
+    if (_currentState.userAnswer.length <
+            _currentState.answer.toString().length &&
+        !timeOut) {
       _currentState.userAnswer = _currentState.userAnswer + answer;
       notifyListeners();
       if (int.parse(_currentState.userAnswer) == _currentState.answer) {
@@ -67,7 +70,8 @@ class QuickCalculationProvider with ChangeNotifier {
                 _index ~/ 5 + 1, 1));
         _index = _index + 1;
         currentScore = (ScoreUtil.quickCalculationScore * _index).toInt();
-        _timeLength = _timeLength + TimeUtil.quickCalculationPlusTime * 4;
+        if (time >= 0.0125)
+          _timeLength = _timeLength + TimeUtil.quickCalculationPlusTime;
         _currentState = _list[_index];
         scrollController.jumpToItem(_index);
         scrollController.notifyListeners();
@@ -85,7 +89,12 @@ class QuickCalculationProvider with ChangeNotifier {
     timerSubscription = Stream.periodic(Duration(milliseconds: 250), (x) => x)
         .takeWhile((time) => time <= _timeLength * 4)
         .listen((time) {
-      _time = time / (_timeLength * 4);
+      print(
+          "B ${time} ${_timeLength} ${(time - ((_timeLength - TimeUtil.quickCalculationTimeOut) * 4)) / (TimeUtil.quickCalculationTimeOut * 4)}");
+      double x =
+          (time - ((_timeLength - TimeUtil.quickCalculationTimeOut) * 4)) /
+              (TimeUtil.quickCalculationTimeOut * 4);
+      _time = x < 0 ? 0 : x;
       notifyListeners();
     }, onDone: () {
       showDialog();
