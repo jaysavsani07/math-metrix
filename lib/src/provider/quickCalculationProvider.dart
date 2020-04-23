@@ -43,17 +43,21 @@ class QuickCalculationProvider with ChangeNotifier {
   QuickCalculationQandS get currentState => _currentState;
 
   QuickCalculationProvider() {
+    _scrollController = FixedExtentScrollController();
     startGame();
   }
 
   void startGame() {
-    _scrollController = FixedExtentScrollController();
     _list = QuickCalculationQandSDataProvider.getQuickCalculationDataList(1, 5);
+    _index = 0;
+    currentScore = 0;
     _currentState = _list[_index];
-    scrollController.jumpToItem(_index);
     _time = 0;
     _timeLength = TimeUtil.quickCalculationTimeOut;
     _timeOut = false;
+    _scrollController.jumpToItem(_index);
+    _scrollController.notifyListeners();
+    notifyListeners();
     startTimer();
   }
 
@@ -69,12 +73,12 @@ class QuickCalculationProvider with ChangeNotifier {
             QuickCalculationQandSDataProvider.getQuickCalculationDataList(
                 _index ~/ 5 + 1, 1));
         _index = _index + 1;
-        currentScore = (ScoreUtil.quickCalculationScore * _index).toInt();
+        currentScore = currentScore + (ScoreUtil.quickCalculationScore).toInt();
         if (time >= 0.0125)
           _timeLength = _timeLength + TimeUtil.quickCalculationPlusTime;
         _currentState = _list[_index];
-        scrollController.jumpToItem(_index);
-        scrollController.notifyListeners();
+        _scrollController.jumpToItem(_index);
+        _scrollController.notifyListeners();
         notifyListeners();
       }
     }
@@ -89,8 +93,6 @@ class QuickCalculationProvider with ChangeNotifier {
     timerSubscription = Stream.periodic(Duration(milliseconds: 250), (x) => x)
         .takeWhile((time) => time <= _timeLength * 4)
         .listen((time) {
-      print(
-          "B ${time} ${_timeLength} ${(time - ((_timeLength - TimeUtil.quickCalculationTimeOut) * 4)) / (TimeUtil.quickCalculationTimeOut * 4)}");
       double x =
           (time - ((_timeLength - TimeUtil.quickCalculationTimeOut) * 4)) /
               (TimeUtil.quickCalculationTimeOut * 4);
@@ -119,23 +121,18 @@ class QuickCalculationProvider with ChangeNotifier {
     notifyListeners();
     var dialogResult = await _dialogService.showDialog(
         gameCategoryType: GameCategoryType.QUICK_CALCULATION,
-        score: _index * ScoreUtil.quickCalculationScore,
+        score: currentScore.toDouble(),
         coin: _index * CoinUtil.quickCalculationCoin,
         isPause: _pause);
 
     if (dialogResult.exit) {
-      homeViewModel.updateScoreboard(
-          GameCategoryType.QUICK_CALCULATION,
-          _index * ScoreUtil.quickCalculationScore,
-          _index * CoinUtil.quickCalculationCoin);
+      homeViewModel.updateScoreboard(GameCategoryType.QUICK_CALCULATION,
+          currentScore.toDouble(), _index * CoinUtil.quickCalculationCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
-      homeViewModel.updateScoreboard(
-          GameCategoryType.QUICK_CALCULATION,
-          _index * ScoreUtil.quickCalculationScore,
-          _index * CoinUtil.quickCalculationCoin);
+      homeViewModel.updateScoreboard(GameCategoryType.QUICK_CALCULATION,
+          currentScore.toDouble(), _index * CoinUtil.quickCalculationCoin);
       timerSubscription.cancel();
-      _index = 0;
       startGame();
     } else if (dialogResult.play) {
       timerSubscription.resume();

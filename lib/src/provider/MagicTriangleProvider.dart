@@ -41,6 +41,8 @@ class MagicTriangleProvider with ChangeNotifier {
 
   void startGame() {
     _list = MagicTriangleDataProvider.getTriangleDataProviderList();
+    _index = 0;
+    currentScore = 0;
     _currentState = _list[_index];
     _time = TimeUtil.magicTriangleTimeOut;
     _timeOut = false;
@@ -94,7 +96,7 @@ class MagicTriangleProvider with ChangeNotifier {
             _currentState.answer == sumOfBottomSide) {
           await Future.delayed(Duration(milliseconds: 300));
           _index = _index + 1;
-          currentScore = (ScoreUtil.magicTriangleScore * _index).toInt();
+          currentScore = currentScore+(ScoreUtil.magicTriangleScore ).toInt();
           _currentState = _list[_index];
           restartTimer();
           notifyListeners();
@@ -138,23 +140,22 @@ class MagicTriangleProvider with ChangeNotifier {
     notifyListeners();
     var dialogResult = await _dialogService.showDialog(
         gameCategoryType: GameCategoryType.MAGIC_TRIANGLE,
-        score: _index * ScoreUtil.magicTriangleScore,
+        score:  currentScore.toDouble(),
         coin: _index * CoinUtil.magicTriangleCoin,
         isPause: _pause);
 
     if (dialogResult.exit) {
       homeViewModel.updateScoreboard(
           GameCategoryType.MAGIC_TRIANGLE,
-          _index * ScoreUtil.magicTriangleScore,
+          currentScore.toDouble(),
           _index * CoinUtil.magicTriangleCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
       homeViewModel.updateScoreboard(
           GameCategoryType.MAGIC_TRIANGLE,
-          _index * ScoreUtil.magicTriangleScore,
+          currentScore.toDouble(),
           _index * CoinUtil.magicTriangleCoin);
       timerSubscription.cancel();
-      _index = 0;
       startGame();
     } else if (dialogResult.play) {
       timerSubscription.resume();

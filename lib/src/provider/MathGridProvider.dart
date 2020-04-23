@@ -40,6 +40,8 @@ class MathGridProvider with ChangeNotifier {
 
   void startGame() {
     _list = MathGridDataProvider.getMathGridData();
+    _index = 0;
+    currentScore = 0;
     _currentState = _list[_index];
     _time = TimeUtil.mathMachineTimeOut;
     _timeOut = false;
@@ -111,23 +113,22 @@ class MathGridProvider with ChangeNotifier {
     notifyListeners();
     var dialogResult = await _dialogService.showDialog(
         gameCategoryType: GameCategoryType.MATH_MACHINE,
-        score: _index * ScoreUtil.mathMachineScore,
+        score:  currentScore.toDouble(),
         coin: _index * CoinUtil.mathMachineCoin,
         isPause: _pause);
 
     if (dialogResult.exit) {
       homeViewModel.updateScoreboard(
           GameCategoryType.MATH_MACHINE,
-          _index * ScoreUtil.mathMachineScore,
+          currentScore.toDouble(),
           _index * CoinUtil.mathMachineCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
       homeViewModel.updateScoreboard(
           GameCategoryType.MATH_MACHINE,
-          _index * ScoreUtil.mathMachineScore,
+          currentScore.toDouble(),
           _index * CoinUtil.mathMachineCoin);
       timerSubscription.cancel();
-      _index = 0;
       startGame();
     } else if (dialogResult.play) {
       timerSubscription.resume();

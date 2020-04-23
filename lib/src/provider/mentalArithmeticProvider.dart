@@ -46,6 +46,8 @@ class MentalArithmeticProvider with ChangeNotifier {
 
   void startGame() {
     _list = MentalArithmeticQandSDataProvider.getMentalArithmeticDataList();
+    _index = 0;
+    currentScore = 0;
     _currentState = _list[_index];
     _time = TimeUtil.mentalArithmeticTimeOut;
     _timeOut = false;
@@ -63,7 +65,7 @@ class MentalArithmeticProvider with ChangeNotifier {
         if (_result != "-" && int.parse(_result) == _currentState.answer) {
           await Future.delayed(Duration(milliseconds: 300));
           _index = _index + 1;
-          currentScore = (ScoreUtil.mentalArithmeticScore * _index).toInt();
+          currentScore =  currentScore+(ScoreUtil.mentalArithmeticScore ).toInt();
           _currentState = _list[_index];
           _result = "";
           restartLocalTimer();
@@ -127,24 +129,23 @@ class MentalArithmeticProvider with ChangeNotifier {
     notifyListeners();
     var dialogResult = await _dialogService.showDialog(
         gameCategoryType: GameCategoryType.MENTAL_ARITHMETIC,
-        score: _index * ScoreUtil.mentalArithmeticScore,
+        score:  currentScore.toDouble(),
         coin: _index * CoinUtil.mentalArithmeticCoin,
         isPause: _pause);
 
     if (dialogResult.exit) {
       homeViewModel.updateScoreboard(
           GameCategoryType.MENTAL_ARITHMETIC,
-          _index * ScoreUtil.mentalArithmeticScore,
+          currentScore.toDouble(),
           _index * CoinUtil.mentalArithmeticCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
       homeViewModel.updateScoreboard(
           GameCategoryType.MENTAL_ARITHMETIC,
-          _index * ScoreUtil.mentalArithmeticScore,
+          currentScore.toDouble(),
           _index * CoinUtil.mentalArithmeticCoin);
       timerSubscription.cancel();
       localTimerSubscription.cancel();
-      _index = 0;
       startGame();
     } else if (dialogResult.play) {
       timerSubscription.resume();
