@@ -226,7 +226,7 @@ class MyHomePage extends StatelessWidget {
                                               fontWeight: FontWeight.w600),
                                         ),
                                         image: Image.asset(
-                                            "assets/calculator-intro.gif"),
+                                            "assets/magic-triangle-intro.gif"),
                                         description: Text(
                                           '''You need to solve given equation correctly
                                       
