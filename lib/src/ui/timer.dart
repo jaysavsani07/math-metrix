@@ -10,6 +10,7 @@ import 'package:mathgame/src/provider/signProvider.dart';
 import 'package:mathgame/src/provider/squareRootProvider.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/utility/MultiDigitCounter.dart';
+import 'package:mathgame/src/utility/timeUtil.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
@@ -21,24 +22,34 @@ class Timer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var provider;
+    int timeConstant;
     if (type == GameCategoryType.CALCULATOR) {
       provider = Provider.of<CalculatorProvider>(context);
+      timeConstant = TimeUtil.calculatorTimeOut;
     } else if (type == GameCategoryType.SIGN) {
       provider = Provider.of<SignProvider>(context);
+      timeConstant = TimeUtil.signTimeOut;
     } else if (type == GameCategoryType.SQUARE_ROOT) {
       provider = Provider.of<SquareRootProvider>(context);
+      timeConstant = TimeUtil.squareRootTimeOut;
     } else if (type == GameCategoryType.MATH_PAIRS) {
       provider = Provider.of<MathPairsProvider>(context);
+      timeConstant = TimeUtil.mathMachineTimeOut;
     } else if (type == GameCategoryType.CORRECT_ANSWER) {
       provider = Provider.of<CorrectAnswerProvider>(context);
+      timeConstant = TimeUtil.correctAnswerTimeOut;
     } else if (type == GameCategoryType.MENTAL_ARITHMETIC) {
       provider = Provider.of<MentalArithmeticProvider>(context);
+      timeConstant = TimeUtil.mentalArithmeticTimeOut;
     } else if (type == GameCategoryType.QUICK_CALCULATION) {
       provider = Provider.of<QuickCalculationProvider>(context);
+      timeConstant = TimeUtil.quickCalculationTimeOut;
     } else if (type == GameCategoryType.MAGIC_TRIANGLE) {
       provider = Provider.of<MagicTriangleProvider>(context);
+      timeConstant = TimeUtil.magicTriangleTimeOut;
     } else if (type == GameCategoryType.MATH_MACHINE) {
       provider = Provider.of<MathGridProvider>(context);
+      timeConstant = TimeUtil.mathMachineTimeOut;
     }
 //    return Text(provider.time.toString(), style: TextStyle(fontSize: 20));
     return Container(
@@ -53,15 +64,19 @@ class Timer extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline)
             ],
           ),
-          /*LinearPercentIndicator(
-            width: 140.0,
-            lineHeight: 14.0,
-            animation: true,
-            animateFromLastPercent: true,
-            animationDuration: 1000,
-            percent: provider.time / 5,
-            backgroundColor: Colors.grey,
-            progressColor: Colors.blue,
+          /* Visibility(
+            visible:
+                !(type == GameCategoryType.QUICK_CALCULATION) ? true : false,
+            child: LinearPercentIndicator(
+              width: 140.0,
+              lineHeight: 14.0,
+              animation: true,
+              animateFromLastPercent: true,
+              animationDuration: 1000,
+              percent: provider.time / timeConstant,
+              backgroundColor: Colors.grey,
+              progressColor: Colors.blue,
+            ),
           ),*/
           Visibility(
             visible:

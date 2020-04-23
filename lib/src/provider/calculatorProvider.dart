@@ -85,7 +85,6 @@ class CalculatorProvider with ChangeNotifier {
         .take(TimeUtil.calculatorTimeOut)
         .listen((time) {
       _time = time;
-      print("$time ${time / 5}  ");
       notifyListeners();
     }, onDone: () {
       this._timeOut = true;

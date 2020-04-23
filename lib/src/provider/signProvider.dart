@@ -66,6 +66,7 @@ class SignProvider with ChangeNotifier {
         if (_list.length - 1 == _index) {
           _list.addAll(SignQandSDataProvider.getSignDataList(_index ~/ 5 + 1));
         }
+        _time=TimeUtil.signTimeOut;
         _index = _index + 1;
         _result = "";
         _currentState = _list[_index];
