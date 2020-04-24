@@ -55,7 +55,7 @@ class CalculatorProvider with ChangeNotifier {
     startTimer();
 
     if (homeViewModel.isFirstTime(GameCategoryType.CALCULATOR)) {
-      showInfoDialog();
+      showInfoDialogWithDelay();
     }
   }
 
@@ -138,8 +138,12 @@ class CalculatorProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future showInfoDialog() async {
+  Future showInfoDialogWithDelay() async {
     await Future.delayed(Duration(milliseconds: 500));
+    showInfoDialog();
+  }
+
+  Future showInfoDialog() async {
     _pause = true;
     timerSubscription.pause();
     notifyListeners();
@@ -150,7 +154,8 @@ class CalculatorProvider with ChangeNotifier {
         coin: 0,
         isPause: false);
 
-    if (dialogResult.play) {
+    if (dialogResult.exit) {
+      homeViewModel.setFirstTime(GameCategoryType.CALCULATOR);
       timerSubscription.resume();
       _pause = false;
       notifyListeners();

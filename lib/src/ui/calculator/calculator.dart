@@ -155,32 +155,6 @@ class Calculator extends StatelessWidget {
                               iconSize: 40,
                               onPressed: () {
                                 calculatorProvider.showInfoDialog();
-//                                showDialog(
-//                                    context: context,
-//                                    builder: (_) => AssetGiffyDialog(
-//                                          buttonCancelColor:
-//                                              Theme.of(context).accentColor,
-//                                          onlyCancelButton: true,
-//                                          buttonCancelText: Text("Got it"),
-//                                          title: Text(
-//                                            'Calculator',
-//                                            style: TextStyle(
-//                                                fontSize: 22.0,
-//                                                fontWeight: FontWeight.w600),
-//                                          ),
-//                                          image: Image.asset(
-//                                              "assets/magic-triangle-intro.gif"),
-//                                          description: Text(
-//                                            '''You need to solve given equation correctly
-//
-//+1 for correct answer
-//-1 for wrong answer''',
-//                                            textAlign: TextAlign.center,
-//                                            style: TextStyle(),
-//                                          ),
-//                                          entryAnimation: EntryAnimation.BOTTOM,
-//                                          onOkButtonPressed: () {},
-//                                        ));
                               },
                             );
                           })

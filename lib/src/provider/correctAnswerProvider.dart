@@ -51,6 +51,10 @@ class CorrectAnswerProvider with ChangeNotifier {
     _result = "";
     currentScore = 0;
     startTimer();
+
+    if (homeViewModel.isFirstTime(GameCategoryType.CORRECT_ANSWER)) {
+      showInfoDialogWithDelay();
+    }
   }
 
   Future<void> checkResult(String answer) async {
@@ -70,7 +74,7 @@ class CorrectAnswerProvider with ChangeNotifier {
         restartTimer();
         notifyListeners();
       } else {
-        if (currentScore > 0 ){
+        if (currentScore > 0) {
           currentScore = currentScore - 1;
         }
       }
@@ -133,6 +137,31 @@ class CorrectAnswerProvider with ChangeNotifier {
       notifyListeners();
     }
     notifyListeners();
+  }
+
+  Future showInfoDialogWithDelay() async {
+    await Future.delayed(Duration(milliseconds: 500));
+    showInfoDialog();
+  }
+
+  Future showInfoDialog() async {
+    await Future.delayed(Duration(milliseconds: 500));
+    _pause = true;
+    timerSubscription.pause();
+    notifyListeners();
+    var dialogResult = await _dialogService.showDialog(
+        type: KeyUtil.InfoDialog,
+        gameCategoryType: GameCategoryType.CORRECT_ANSWER,
+        score: 0,
+        coin: 0,
+        isPause: false);
+
+    if (dialogResult.exit) {
+      homeViewModel.setFirstTime(GameCategoryType.CORRECT_ANSWER);
+      timerSubscription.resume();
+      _pause = false;
+      notifyListeners();
+    }
   }
 
   void dispose() {

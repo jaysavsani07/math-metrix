@@ -113,6 +113,13 @@ class CorrectAnswer extends StatelessWidget {
                                     onPressed: () {
                                       correctAnswerProvider.pauseTimer();
                                     },
+                                  ),
+                                  IconButton(
+                                    icon: Icon(Icons.info_outline),
+                                    iconSize: 40,
+                                    onPressed: () {
+                                      correctAnswerProvider.showInfoDialog();
+                                    },
                                   )
                                 ],
                               ),
