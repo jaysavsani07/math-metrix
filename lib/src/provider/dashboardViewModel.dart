@@ -143,4 +143,22 @@ class DashboardViewModel extends ChangeNotifier {
     _totalCoin = getTotalCoin() + coin;
     _preferences.setInt("total_coin", _totalCoin);
   }
+
+  bool isFirstTime(GameCategoryType gameCategoryType) {
+    return list
+        .where((GameCategory gameCategory) =>
+            gameCategory.gameCategoryType == gameCategoryType)
+        .first
+        .scoreboard
+        .firstTime;
+  }
+
+  void setFirstTime(GameCategoryType gameCategoryType) {
+    list.forEach((gameCategory) {
+      if (gameCategory.gameCategoryType == gameCategoryType) {
+        gameCategory.scoreboard.firstTime = false;
+        setScoreboard(gameCategory.key, gameCategory.scoreboard);
+      }
+    });
+  }
 }
