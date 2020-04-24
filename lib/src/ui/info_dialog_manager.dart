@@ -4,7 +4,6 @@ import 'package:mathgame/src/models/alert_request.dart';
 import 'package:mathgame/src/models/alert_response.dart';
 import 'package:mathgame/src/module/giffy_dialog.dart';
 import 'package:mathgame/src/resources/dialog_service.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
 class InfoDialogManager extends StatefulWidget {
   final Widget child;
@@ -20,7 +19,7 @@ class _InfoDialogManagerState extends State<InfoDialogManager> {
   @override
   void initState() {
     super.initState();
-    _dialogService.registerInfoDialogListener(_showInfoDialog);
+//    _dialogService.registerInfoDialogListener(_showInfoDialog);
   }
 
   @override
@@ -48,8 +47,8 @@ class _InfoDialogManagerState extends State<InfoDialogManager> {
       ),
       entryAnimation: EntryAnimation.BOTTOM,
       onOkButtonPressed: () {
-        _dialogService.dialogInfoComplete(
-            AlertResponse(play: true, exit: false, restart: false));
+//        _dialogService.dialogInfoComplete(
+//            AlertResponse(play: true, exit: false, restart: false));
       },
     );
   }

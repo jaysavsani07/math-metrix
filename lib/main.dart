@@ -86,10 +86,6 @@ class MyApp extends StatelessWidget {
           )),
       builder: (context, widget) => Navigator(
         onGenerateRoute: (settings) => MaterialPageRoute(
-            builder: (context) => InfoDialogManager(
-                  child: widget,
-                )),
-        onUnknownRoute: (settings) => MaterialPageRoute(
             builder: (context) => DialogManager(
                   child: widget,
                 )),

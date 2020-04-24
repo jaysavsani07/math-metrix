@@ -28,6 +28,14 @@ class _DialogManagerState extends State<DialogManager> {
   }
 
   void _showDialog(AlertRequest request) {
+    Alert view = request.type == "gameOver"
+        ? getGameOverDialog(request)
+        : getInfoDialog(request);
+
+    view.show();
+  }
+
+  Alert getGameOverDialog(AlertRequest request) {
     var alertStyle = AlertStyle(
       animationType: AnimationType.fromTop,
       isCloseButton: false,
@@ -46,8 +54,7 @@ class _DialogManagerState extends State<DialogManager> {
         fontSize: 28,
       ),
     );
-
-    Alert(
+    return Alert(
       context: context,
       style: alertStyle,
       title: request.isPause ? "Resume Game" : "Game Over",
@@ -119,6 +126,82 @@ class _DialogManagerState extends State<DialogManager> {
           ),
         ],
       ),
-    ).show();
+    );
+  }
+
+  Alert getInfoDialog(AlertRequest request) {
+    var alertStyle = AlertStyle(
+      animationType: AnimationType.fromTop,
+      isCloseButton: false,
+      buttonAreaPadding: EdgeInsets.all(5),
+      isOverlayTapDismiss: false,
+      animationDuration: Duration(milliseconds: 600),
+      alertBorder: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5),
+        side: BorderSide(
+          color: Colors.grey,
+        ),
+      ),
+      titleStyle: TextStyle(
+        fontWeight: FontWeight.w600,
+        fontSize: 22,
+      ),
+    );
+    return Alert(
+      context: context,
+      style: alertStyle,
+      title: "Calculator",
+      buttons: [],
+      content: Container(
+        height: MediaQuery.of(context).size.height * 0.7,
+        width: MediaQuery.of(context).size.width * 0.6,
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                  padding: EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(8.0),
+                        topLeft: Radius.circular(8.0)),
+                  ),
+                  child: Image.asset("assets/magic-triangle-intro.gif")),
+            ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      '''You need to solve given equation correctly
+                                        
++1 for correct answer
+-1 for wrong answer''',
+                      textAlign: TextAlign.center,
+                      style: TextStyle( fontSize: 16),
+                    ),
+                  ),
+                  RaisedButton(
+                    color: Theme.of(context).accentColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0)),
+                    onPressed: () {
+                      _dialogService.dialogComplete(AlertResponse(
+                          exit: true, restart: false, play: false));
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      'Got it',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

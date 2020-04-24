@@ -53,9 +53,9 @@ class CalculatorProvider with ChangeNotifier {
     _result = "";
     startTimer();
 
-    /*if (homeViewModel.isFirstTime(GameCategoryType.CALCULATOR)) {
+    if (homeViewModel.isFirstTime(GameCategoryType.CALCULATOR)) {
       showInfoDialog();
-    }*/
+    }
   }
 
   Future<void> checkResult(String answer) async {
@@ -114,6 +114,7 @@ class CalculatorProvider with ChangeNotifier {
   Future showDialog() async {
     notifyListeners();
     var dialogResult = await _dialogService.showDialog(
+        type: "gameOver",
         gameCategoryType: GameCategoryType.CALCULATOR,
         score: currentScore.toDouble(),
         coin: _index * CoinUtil.calculatorCoin,
@@ -137,14 +138,16 @@ class CalculatorProvider with ChangeNotifier {
   }
 
   Future showInfoDialog() async {
+    await Future.delayed(Duration(milliseconds: 500));
     _pause = true;
     timerSubscription.pause();
     notifyListeners();
-    var dialogResult = await _dialogService.showInfoDialog(
+    var dialogResult = await _dialogService.showDialog(
+        type: "info",
         gameCategoryType: GameCategoryType.CALCULATOR,
-        score: currentScore.toDouble(),
-        coin: _index * CoinUtil.calculatorCoin,
-        isPause: _pause);
+        score: 0,
+        coin: 0,
+        isPause: false);
 
     if (dialogResult.play) {
       timerSubscription.resume();
