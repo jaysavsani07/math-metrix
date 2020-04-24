@@ -8,6 +8,7 @@ import 'package:mathgame/src/resources/dialog_service.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/navigation_service.dart';
 import 'package:mathgame/src/utility/coinUtil.dart';
+import 'package:mathgame/src/utility/keyUtil.dart';
 import 'package:mathgame/src/utility/scoreUtil.dart';
 import 'package:mathgame/src/utility/timeUtil.dart';
 
@@ -114,7 +115,7 @@ class CalculatorProvider with ChangeNotifier {
   Future showDialog() async {
     notifyListeners();
     var dialogResult = await _dialogService.showDialog(
-        type: "gameOver",
+        type: KeyUtil.GameOverDialog,
         gameCategoryType: GameCategoryType.CALCULATOR,
         score: currentScore.toDouble(),
         coin: _index * CoinUtil.calculatorCoin,
@@ -143,7 +144,7 @@ class CalculatorProvider with ChangeNotifier {
     timerSubscription.pause();
     notifyListeners();
     var dialogResult = await _dialogService.showDialog(
-        type: "info",
+        type: KeyUtil.InfoDialog,
         gameCategoryType: GameCategoryType.CALCULATOR,
         score: 0,
         coin: 0,

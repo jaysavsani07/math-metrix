@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/alert_request.dart';
 import 'package:mathgame/src/models/alert_response.dart';
 import 'package:mathgame/src/resources/dialog_service.dart';
+import 'package:mathgame/src/utility/keyUtil.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class DialogManager extends StatefulWidget {
@@ -28,7 +29,7 @@ class _DialogManagerState extends State<DialogManager> {
   }
 
   void _showDialog(AlertRequest request) {
-    Alert view = request.type == "gameOver"
+    Alert view = request.type == KeyUtil.GameOverDialog
         ? getGameOverDialog(request)
         : getInfoDialog(request);
 
@@ -179,7 +180,7 @@ class _DialogManagerState extends State<DialogManager> {
 +1 for correct answer
 -1 for wrong answer''',
                       textAlign: TextAlign.center,
-                      style: TextStyle( fontSize: 16),
+                      style: TextStyle(fontSize: 16),
                     ),
                   ),
                   RaisedButton(

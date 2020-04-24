@@ -9,6 +9,7 @@ import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/navigation_service.dart';
 import 'package:mathgame/src/utility/coinUtil.dart';
 import 'package:mathgame/src/provider/dashboardViewModel.dart';
+import 'package:mathgame/src/utility/keyUtil.dart';
 import 'package:mathgame/src/utility/scoreUtil.dart';
 import 'package:mathgame/src/utility/timeUtil.dart';
 
@@ -139,6 +140,7 @@ class MagicTriangleProvider with ChangeNotifier {
   Future showDialog() async {
     notifyListeners();
     var dialogResult = await _dialogService.showDialog(
+        type: KeyUtil.GameOverDialog,
         gameCategoryType: GameCategoryType.MAGIC_TRIANGLE,
         score:  currentScore.toDouble(),
         coin: _index * CoinUtil.magicTriangleCoin,
