@@ -52,6 +52,10 @@ class CalculatorProvider with ChangeNotifier {
     _timeOut = false;
     _result = "";
     startTimer();
+
+    /*if (homeViewModel.isFirstTime(GameCategoryType.CALCULATOR)) {
+      showInfoDialog();
+    }*/
   }
 
   Future<void> checkResult(String answer) async {
@@ -130,6 +134,23 @@ class CalculatorProvider with ChangeNotifier {
       notifyListeners();
     }
     notifyListeners();
+  }
+
+  Future showInfoDialog() async {
+    _pause = true;
+    timerSubscription.pause();
+    notifyListeners();
+    var dialogResult = await _dialogService.showInfoDialog(
+        gameCategoryType: GameCategoryType.CALCULATOR,
+        score: currentScore.toDouble(),
+        coin: _index * CoinUtil.calculatorCoin,
+        isPause: _pause);
+
+    if (dialogResult.play) {
+      timerSubscription.resume();
+      _pause = false;
+      notifyListeners();
+    }
   }
 
   void dispose() {

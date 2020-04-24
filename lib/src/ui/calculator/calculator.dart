@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mathgame/src/module/giffy_dialog.dart';
 import 'package:mathgame/src/provider/calculatorProvider.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/ui/calculator/calculator_button.dart';
@@ -6,8 +7,10 @@ import 'package:mathgame/src/ui/timer.dart';
 import 'package:provider/provider.dart';
 
 class Calculator extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+
     return ChangeNotifierProvider<CalculatorProvider>(
       create: (_) => CalculatorProvider(),
       child: WillPopScope(
@@ -146,7 +149,41 @@ class Calculator extends StatelessWidget {
                                 calculatorProvider.pauseTimer();
                               },
                             );
-                          })
+                          }),
+                          IconButton(
+                            icon: Icon(Icons.info_outline),
+                            iconSize: 40,
+                            onPressed: () {
+
+                              /*showDialog(
+                                  context: context,
+                                  builder: (_) => AssetGiffyDialog(
+                                    buttonCancelColor:
+                                    Theme.of(context).accentColor,
+                                    onlyCancelButton: true,
+                                    buttonCancelText:
+                                    Text("Got it"),
+                                    title: Text(
+                                      'Calculator',
+                                      style: TextStyle(
+                                          fontSize: 22.0,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    image: Image.asset(
+                                        "assets/magic-triangle-intro.gif"),
+                                    description: Text(
+                                      '''You need to solve given equation correctly
+                                      
++1 for correct answer
+-1 for wrong answer''',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(),
+                                    ),
+                                    entryAnimation: EntryAnimation.BOTTOM,
+                                    onOkButtonPressed: () {},
+                                  ))*/;
+                            },
+                          )
                         ],
                       ))
                 ],

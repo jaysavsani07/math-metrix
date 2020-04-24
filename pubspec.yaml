@@ -51,7 +51,14 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/calculator-intro.gif
+    - assets/correct-answer.gif
     - assets/magic-triangle-intro.gif
+    - math-machine-intro.gif
+    - math-pair-intro.gif
+    - mental-arith-intro.gif
+    - quick-calculation-intro.gif
+    - sqroot-intro.gif
+    - whats-the-sign-intro.gif
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

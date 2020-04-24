@@ -7,6 +7,7 @@ import 'package:mathgame/src/resources/navigation_service.dart';
 import 'package:mathgame/src/resources/router.dart';
 import 'package:mathgame/src/ui/dashboard.dart';
 import 'package:mathgame/src/ui/dialog_manager.dart';
+import 'package:mathgame/src/ui/info_dialog_manager.dart';
 import 'package:mathgame/src/utility/keyUtil.dart';
 
 void main() {
@@ -85,6 +86,10 @@ class MyApp extends StatelessWidget {
           )),
       builder: (context, widget) => Navigator(
         onGenerateRoute: (settings) => MaterialPageRoute(
+            builder: (context) => InfoDialogManager(
+                  child: widget,
+                )),
+        onUnknownRoute: (settings) => MaterialPageRoute(
             builder: (context) => DialogManager(
                   child: widget,
                 )),
