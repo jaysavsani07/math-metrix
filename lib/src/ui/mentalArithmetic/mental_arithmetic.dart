@@ -148,29 +148,34 @@ class MentalArithmetic extends StatelessWidget {
                   ),
                   Expanded(
                       flex: 10,
-                      child: Consumer<MentalArithmeticProvider>(
-                          builder: (context, provider, child) {
-                        return Container(
-                          child: Container(
-                            margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                IconButton(
-                                  icon: provider.pause
-                                      ? Icon(Icons.play_arrow)
-                                      : Icon(Icons.pause),
-                                  iconSize: 40,
-                                  onPressed: () {
-                                    provider.pauseTimer();
-                                  },
-                                )
-                              ],
-                            ),
-                          ),
-                        );
-                      })),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Consumer<MentalArithmeticProvider>(
+                              builder: (context, provider, child) {
+                            return IconButton(
+                              icon: provider.pause
+                                  ? Icon(Icons.play_arrow)
+                                  : Icon(Icons.pause),
+                              iconSize: 40,
+                              onPressed: () {
+                                provider.pauseTimer();
+                              },
+                            );
+                          }),
+                          Consumer<MentalArithmeticProvider>(
+                              builder: (context, provider, child) {
+                            return IconButton(
+                              icon: Icon(Icons.info_outline),
+                              iconSize: 40,
+                              onPressed: () {
+                                provider.showInfoDialog();
+                              },
+                            );
+                          })
+                        ],
+                      )),
                 ],
               ),
             ),

@@ -51,6 +51,9 @@ class SignProvider with ChangeNotifier {
     _result = "";
     currentScore = 0;
     startTimer();
+    if (homeViewModel.isFirstTime(GameCategoryType.SIGN)) {
+      showInfoDialogWithDelay();
+    }
   }
 
   Future<void> checkResult(String answer) async {
@@ -134,6 +137,30 @@ class SignProvider with ChangeNotifier {
       notifyListeners();
     }
     notifyListeners();
+  }
+
+  Future showInfoDialogWithDelay() async {
+    await Future.delayed(Duration(milliseconds: 500));
+    showInfoDialog();
+  }
+
+  Future showInfoDialog() async {
+    _pause = true;
+    timerSubscription.pause();
+    notifyListeners();
+    var dialogResult = await _dialogService.showDialog(
+        type: KeyUtil.InfoDialog,
+        gameCategoryType: GameCategoryType.SIGN,
+        score: 0,
+        coin: 0,
+        isPause: false);
+
+    if (dialogResult.exit) {
+      homeViewModel.setFirstTime(GameCategoryType.SIGN);
+      timerSubscription.resume();
+      _pause = false;
+      notifyListeners();
+    }
   }
 
   void dispose() {

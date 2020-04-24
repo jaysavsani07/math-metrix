@@ -44,13 +44,21 @@ class MathPairs extends StatelessWidget {
                             child: Column(
                               children: <Widget>[
                                 MathPairsButton(
-                                    mathPairsProvider.currentState.list[0], 1, 0),
+                                    mathPairsProvider.currentState.list[0],
+                                    1,
+                                    0),
                                 MathPairsButton(
-                                    mathPairsProvider.currentState.list[1], 1, 1),
+                                    mathPairsProvider.currentState.list[1],
+                                    1,
+                                    1),
                                 MathPairsButton(
-                                    mathPairsProvider.currentState.list[2], 1, 2),
+                                    mathPairsProvider.currentState.list[2],
+                                    1,
+                                    2),
                                 MathPairsButton(
-                                    mathPairsProvider.currentState.list[3], 1, 3),
+                                    mathPairsProvider.currentState.list[3],
+                                    1,
+                                    3),
                               ],
                             ),
                           ),
@@ -59,13 +67,21 @@ class MathPairs extends StatelessWidget {
                             child: Column(
                               children: <Widget>[
                                 MathPairsButton(
-                                    mathPairsProvider.currentState.list[4], 1, 4),
+                                    mathPairsProvider.currentState.list[4],
+                                    1,
+                                    4),
                                 MathPairsButton(
-                                    mathPairsProvider.currentState.list[5], 1, 5),
+                                    mathPairsProvider.currentState.list[5],
+                                    1,
+                                    5),
                                 MathPairsButton(
-                                    mathPairsProvider.currentState.list[6], 1, 6),
+                                    mathPairsProvider.currentState.list[6],
+                                    1,
+                                    6),
                                 MathPairsButton(
-                                    mathPairsProvider.currentState.list[7], 1, 7),
+                                    mathPairsProvider.currentState.list[7],
+                                    1,
+                                    7),
                               ],
                             ),
                           ),
@@ -74,9 +90,13 @@ class MathPairs extends StatelessWidget {
                             child: Column(
                               children: <Widget>[
                                 MathPairsButton(
-                                    mathPairsProvider.currentState.list[8], 1, 8),
+                                    mathPairsProvider.currentState.list[8],
+                                    1,
+                                    8),
                                 MathPairsButton(
-                                    mathPairsProvider.currentState.list[9], 1, 9),
+                                    mathPairsProvider.currentState.list[9],
+                                    1,
+                                    9),
                                 MathPairsButton(
                                     mathPairsProvider.currentState.list[10],
                                     1,
@@ -98,29 +118,34 @@ class MathPairs extends StatelessWidget {
                   ),
                   Expanded(
                       flex: 10,
-                      child: Consumer<MathPairsProvider>(
-                          builder: (context, provider, child) {
-                        return Container(
-                          child: Container(
-                            margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                IconButton(
-                                  icon: provider.pause
-                                      ? Icon(Icons.play_arrow)
-                                      : Icon(Icons.pause),
-                                  iconSize: 40,
-                                  onPressed: () {
-                                    provider.pauseTimer();
-                                  },
-                                )
-                              ],
-                            ),
-                          ),
-                        );
-                      })),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Consumer<MathPairsProvider>(
+                              builder: (context, provider, child) {
+                            return IconButton(
+                              icon: provider.pause
+                                  ? Icon(Icons.play_arrow)
+                                  : Icon(Icons.pause),
+                              iconSize: 40,
+                              onPressed: () {
+                                provider.pauseTimer();
+                              },
+                            );
+                          }),
+                          Consumer<MathPairsProvider>(
+                              builder: (context, provider, child) {
+                            return IconButton(
+                              icon: Icon(Icons.info_outline),
+                              iconSize: 40,
+                              onPressed: () {
+                                provider.showInfoDialog();
+                              },
+                            );
+                          })
+                        ],
+                      )),
                 ],
               ),
             ),

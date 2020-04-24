@@ -60,6 +60,9 @@ class QuickCalculationProvider with ChangeNotifier {
     _scrollController.notifyListeners();
     notifyListeners();
     startTimer();
+    if (homeViewModel.isFirstTime(GameCategoryType.QUICK_CALCULATION)) {
+      showInfoDialogWithDelay();
+    }
   }
 
   Future<void> checkResult(String answer) async {
@@ -142,6 +145,30 @@ class QuickCalculationProvider with ChangeNotifier {
       notifyListeners();
     }
     notifyListeners();
+  }
+
+  Future showInfoDialogWithDelay() async {
+    await Future.delayed(Duration(milliseconds: 500));
+    showInfoDialog();
+  }
+
+  Future showInfoDialog() async {
+    _pause = true;
+    timerSubscription.pause();
+    notifyListeners();
+    var dialogResult = await _dialogService.showDialog(
+        type: KeyUtil.InfoDialog,
+        gameCategoryType: GameCategoryType.QUICK_CALCULATION,
+        score: 0,
+        coin: 0,
+        isPause: false);
+
+    if (dialogResult.exit) {
+      homeViewModel.setFirstTime(GameCategoryType.QUICK_CALCULATION);
+      timerSubscription.resume();
+      _pause = false;
+      notifyListeners();
+    }
   }
 
   void dispose() {

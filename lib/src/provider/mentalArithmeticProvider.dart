@@ -55,6 +55,9 @@ class MentalArithmeticProvider with ChangeNotifier {
     _result = "";
     startTimer();
     startLocalTimer();
+    if (homeViewModel.isFirstTime(GameCategoryType.MENTAL_ARITHMETIC)) {
+      showInfoDialogWithDelay();
+    }
   }
 
   Future<void> checkResult(String answer) async {
@@ -157,6 +160,30 @@ class MentalArithmeticProvider with ChangeNotifier {
     }
     notifyListeners();
   }
+  Future showInfoDialogWithDelay() async {
+    await Future.delayed(Duration(milliseconds: 500));
+    showInfoDialog();
+  }
+
+  Future showInfoDialog() async {
+    _pause = true;
+    timerSubscription.pause();
+    notifyListeners();
+    var dialogResult = await _dialogService.showDialog(
+        type: KeyUtil.InfoDialog,
+        gameCategoryType: GameCategoryType.MENTAL_ARITHMETIC,
+        score: 0,
+        coin: 0,
+        isPause: false);
+
+    if (dialogResult.exit) {
+      homeViewModel.setFirstTime(GameCategoryType.MENTAL_ARITHMETIC);
+      timerSubscription.resume();
+      _pause = false;
+      notifyListeners();
+    }
+  }
+
 
   void dispose() {
     this.timerSubscription.cancel();

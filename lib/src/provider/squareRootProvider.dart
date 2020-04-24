@@ -52,6 +52,9 @@ class SquareRootProvider with ChangeNotifier {
     _timeOut = false;
     _result = "";
     startTimer();
+    if (homeViewModel.isFirstTime(GameCategoryType.SQUARE_ROOT)) {
+      showInfoDialogWithDelay();
+    }
   }
 
   Future<void> checkResult(String answer) async {
@@ -129,6 +132,30 @@ class SquareRootProvider with ChangeNotifier {
       notifyListeners();
     }
     notifyListeners();
+  }
+
+  Future showInfoDialogWithDelay() async {
+    await Future.delayed(Duration(milliseconds: 500));
+    showInfoDialog();
+  }
+
+  Future showInfoDialog() async {
+    _pause = true;
+    timerSubscription.pause();
+    notifyListeners();
+    var dialogResult = await _dialogService.showDialog(
+        type: KeyUtil.InfoDialog,
+        gameCategoryType: GameCategoryType.SQUARE_ROOT,
+        score: 0,
+        coin: 0,
+        isPause: false);
+
+    if (dialogResult.exit) {
+      homeViewModel.setFirstTime(GameCategoryType.SQUARE_ROOT);
+      timerSubscription.resume();
+      _pause = false;
+      notifyListeners();
+    }
   }
 
   void dispose() {

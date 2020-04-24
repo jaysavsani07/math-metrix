@@ -16,15 +16,14 @@ class WhatsTheSign extends StatelessWidget {
           body: SafeArea(
             top: true,
             bottom: true,
-            child: Consumer<SignProvider>(builder: (context, signProvider, child){
+            child:
+                Consumer<SignProvider>(builder: (context, signProvider, child) {
               return Container(
                 margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
                 constraints: BoxConstraints.expand(),
                 child: Column(
                   children: <Widget>[
-                    Expanded(
-                        flex: 10,
-                        child: Timer(GameCategoryType.SIGN)),
+                    Expanded(flex: 10, child: Timer(GameCategoryType.SIGN)),
                     Expanded(
                         flex: 20,
                         child: Row(
@@ -35,10 +34,7 @@ class WhatsTheSign extends StatelessWidget {
                               child: Center(
                                 child: Text(
                                   signProvider.currentState.firstDigit,
-                                  style: Theme
-                                      .of(context)
-                                      .textTheme
-                                      .display1,
+                                  style: Theme.of(context).textTheme.display1,
                                 ),
                               ),
                             ),
@@ -49,11 +45,9 @@ class WhatsTheSign extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   shape: BoxShape.rectangle,
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(3)),
+                                      BorderRadius.all(Radius.circular(3)),
                                   border: Border.all(
-                                      color: Theme
-                                          .of(context)
-                                          .primaryColor,
+                                      color: Theme.of(context).primaryColor,
                                       width: 1),
                                 ),
                                 child: Center(
@@ -70,10 +64,7 @@ class WhatsTheSign extends StatelessWidget {
                               child: Center(
                                 child: Text(
                                   signProvider.currentState.secondDigit,
-                                  style: Theme
-                                      .of(context)
-                                      .textTheme
-                                      .display1,
+                                  style: Theme.of(context).textTheme.display1,
                                 ),
                               ),
                             ),
@@ -82,10 +73,7 @@ class WhatsTheSign extends StatelessWidget {
                               child: Center(
                                 child: Text(
                                   "=",
-                                  style: Theme
-                                      .of(context)
-                                      .textTheme
-                                      .display1,
+                                  style: Theme.of(context).textTheme.display1,
                                 ),
                               ),
                             ),
@@ -94,10 +82,7 @@ class WhatsTheSign extends StatelessWidget {
                               child: Center(
                                 child: Text(
                                   signProvider.currentState.answer,
-                                  style: Theme
-                                      .of(context)
-                                      .textTheme
-                                      .display1,
+                                  style: Theme.of(context).textTheme.display1,
                                 ),
                               ),
                             ),
@@ -113,7 +98,8 @@ class WhatsTheSign extends StatelessWidget {
                           child: Container(
                             margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(30)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30)),
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -166,6 +152,13 @@ class WhatsTheSign extends StatelessWidget {
                                 iconSize: 40,
                                 onPressed: () {
                                   signProvider.pauseTimer();
+                                },
+                              ),
+                              IconButton(
+                                icon: Icon(Icons.info_outline),
+                                iconSize: 40,
+                                onPressed: () {
+                                  signProvider.showInfoDialog();
                                 },
                               )
                             ],

@@ -149,12 +149,12 @@ class Calculator extends StatelessWidget {
                             );
                           }),
                           Consumer<CalculatorProvider>(
-                              builder: (context, calculatorProvider, child) {
+                              builder: (context, provider, child) {
                             return IconButton(
                               icon: Icon(Icons.info_outline),
                               iconSize: 40,
                               onPressed: () {
-                                calculatorProvider.showInfoDialog();
+                                provider.showInfoDialog();
                               },
                             );
                           })

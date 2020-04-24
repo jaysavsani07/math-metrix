@@ -191,6 +191,16 @@ class MagicTriangle extends StatelessWidget {
                               provider.pauseTimer();
                             },
                           );
+                        }),
+                        Consumer<MagicTriangleProvider>(
+                            builder: (context, provider, child) {
+                          return IconButton(
+                            icon: Icon(Icons.info_outline),
+                            iconSize: 40,
+                            onPressed: () {
+                              provider.showInfoDialog();
+                            },
+                          );
                         })
                       ],
                     ),

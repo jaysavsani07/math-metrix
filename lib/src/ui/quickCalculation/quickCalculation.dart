@@ -52,21 +52,17 @@ class QuickCalculation extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     Text(data.question,
-                                        style: Theme
-                                            .of(context)
+                                        style: Theme.of(context)
                                             .textTheme
                                             .headline),
                                     Text(" = ",
-                                        style: Theme
-                                            .of(context)
+                                        style: Theme.of(context)
                                             .textTheme
                                             .headline),
                                     Text(
                                       data.userAnswer,
-                                      style: Theme
-                                          .of(context)
-                                          .textTheme
-                                          .headline,
+                                      style:
+                                          Theme.of(context).textTheme.headline,
                                     )
                                   ],
                                 );
@@ -156,27 +152,34 @@ class QuickCalculation extends StatelessWidget {
                   ),
                   Container(
                     height: (SizeConfig.safeBlockVertical * 0.07),
-                    child: Consumer<QuickCalculationProvider>(
-                        builder: (context, provider, child) {
-                          return Container(
-                            margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                IconButton(
-                                  icon: provider.pause
-                                      ? Icon(Icons.play_arrow)
-                                      : Icon(Icons.pause),
-                                  iconSize: 40,
-                                  onPressed: () {
-                                    provider.pauseTimer();
-                                  },
-                                )
-                              ],
-                            ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Consumer<QuickCalculationProvider>(
+                            builder: (context, provider, child) {
+                          return IconButton(
+                            icon: provider.pause
+                                ? Icon(Icons.play_arrow)
+                                : Icon(Icons.pause),
+                            iconSize: 40,
+                            onPressed: () {
+                              provider.pauseTimer();
+                            },
                           );
                         }),
+                        Consumer<QuickCalculationProvider>(
+                            builder: (context, provider, child) {
+                          return IconButton(
+                            icon: Icon(Icons.info_outline),
+                            iconSize: 40,
+                            onPressed: () {
+                              provider.showInfoDialog();
+                            },
+                          );
+                        })
+                      ],
+                    ),
                   ),
                 ],
               ),

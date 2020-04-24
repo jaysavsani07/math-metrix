@@ -50,6 +50,9 @@ class MathPairsProvider with ChangeNotifier {
     _time = TimeUtil.mathematicalPairsTimeOut;
     _timeOut = false;
     startTimer();
+    if (homeViewModel.isFirstTime(GameCategoryType.MATH_PAIRS)) {
+      showInfoDialogWithDelay();
+    }
   }
 
   Future<void> checkResult(MathPair mathPair, int index) async {
@@ -144,6 +147,30 @@ class MathPairsProvider with ChangeNotifier {
       notifyListeners();
     }
     notifyListeners();
+  }
+
+  Future showInfoDialogWithDelay() async {
+    await Future.delayed(Duration(milliseconds: 500));
+    showInfoDialog();
+  }
+
+  Future showInfoDialog() async {
+    _pause = true;
+    timerSubscription.pause();
+    notifyListeners();
+    var dialogResult = await _dialogService.showDialog(
+        type: KeyUtil.InfoDialog,
+        gameCategoryType: GameCategoryType.MATH_PAIRS,
+        score: 0,
+        coin: 0,
+        isPause: false);
+
+    if (dialogResult.exit) {
+      homeViewModel.setFirstTime(GameCategoryType.MATH_PAIRS);
+      timerSubscription.resume();
+      _pause = false;
+      notifyListeners();
+    }
   }
 
   void dispose() {

@@ -47,6 +47,9 @@ class MathGridProvider with ChangeNotifier {
     _time = TimeUtil.mathMachineTimeOut;
     _timeOut = false;
     startTimer();
+    if (homeViewModel.isFirstTime(GameCategoryType.MATH_MACHINE)) {
+      showInfoDialogWithDelay();
+    }
   }
 
   void inputTriangleSelection(int index, MathGridModel input) {}
@@ -115,21 +118,17 @@ class MathGridProvider with ChangeNotifier {
     var dialogResult = await _dialogService.showDialog(
         type: KeyUtil.GameOverDialog,
         gameCategoryType: GameCategoryType.MATH_MACHINE,
-        score:  currentScore.toDouble(),
+        score: currentScore.toDouble(),
         coin: _index * CoinUtil.mathMachineCoin,
         isPause: _pause);
 
     if (dialogResult.exit) {
-      homeViewModel.updateScoreboard(
-          GameCategoryType.MATH_MACHINE,
-          currentScore.toDouble(),
-          _index * CoinUtil.mathMachineCoin);
+      homeViewModel.updateScoreboard(GameCategoryType.MATH_MACHINE,
+          currentScore.toDouble(), _index * CoinUtil.mathMachineCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
-      homeViewModel.updateScoreboard(
-          GameCategoryType.MATH_MACHINE,
-          currentScore.toDouble(),
-          _index * CoinUtil.mathMachineCoin);
+      homeViewModel.updateScoreboard(GameCategoryType.MATH_MACHINE,
+          currentScore.toDouble(), _index * CoinUtil.mathMachineCoin);
       timerSubscription.cancel();
       startGame();
     } else if (dialogResult.play) {
@@ -138,6 +137,30 @@ class MathGridProvider with ChangeNotifier {
       notifyListeners();
     }
     notifyListeners();
+  }
+
+  Future showInfoDialogWithDelay() async {
+    await Future.delayed(Duration(milliseconds: 500));
+    showInfoDialog();
+  }
+
+  Future showInfoDialog() async {
+    _pause = true;
+    timerSubscription.pause();
+    notifyListeners();
+    var dialogResult = await _dialogService.showDialog(
+        type: KeyUtil.InfoDialog,
+        gameCategoryType: GameCategoryType.MATH_MACHINE,
+        score: 0,
+        coin: 0,
+        isPause: false);
+
+    if (dialogResult.exit) {
+      homeViewModel.setFirstTime(GameCategoryType.MATH_MACHINE);
+      timerSubscription.resume();
+      _pause = false;
+      notifyListeners();
+    }
   }
 
   void dispose() {

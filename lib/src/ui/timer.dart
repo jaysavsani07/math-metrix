@@ -116,16 +116,8 @@ class _TimerState extends State<Timer> with SingleTickerProviderStateMixin {
                 : false,
             child: Column(children: <Widget>[
               Text("Timer", style: Theme.of(context).textTheme.subhead),
-              Transform(
-                alignment: Alignment.center,
-                transform: new Matrix4.diagonal3Values(
-                  avatarSize.value,
-                  avatarSize.value,
-                  1.0,
-                ),
-                child: Text(provider.time.toString(),
-                    style: Theme.of(context).textTheme.headline),
-              )
+              Text(provider.time.toString(),
+                  style: Theme.of(context).textTheme.headline)
             ]),
           )
         ],

@@ -62,12 +62,14 @@ class SquareRoot extends StatelessWidget {
                                               squareRootProvider
                                                   .currentState.firstAns,
                                               BorderRadius.only(
-                                                  topLeft: Radius.circular(40))),
+                                                  topLeft:
+                                                      Radius.circular(40))),
                                           SquareRootButton(
                                               squareRootProvider
                                                   .currentState.secondAns,
                                               BorderRadius.only(
-                                                  topRight: Radius.circular(40)))
+                                                  topRight:
+                                                      Radius.circular(40)))
                                         ],
                                       ),
                                     ),
@@ -97,26 +99,34 @@ class SquareRoot extends StatelessWidget {
                         ),
                         Expanded(
                             flex: 10,
-                            child: Consumer<SquareRootProvider>(
-                                builder: (context, provider, child) {
-                              return Container(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: <Widget>[
-                                    IconButton(
-                                      icon: provider.pause
-                                          ? Icon(Icons.play_arrow)
-                                          : Icon(Icons.pause),
-                                      iconSize: 40,
-                                      onPressed: () {
-                                        provider.pauseTimer();
-                                      },
-                                    )
-                                  ],
-                                ),
-                              );
-                            })),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Consumer<SquareRootProvider>(
+                                    builder: (context, provider, child) {
+                                  return IconButton(
+                                    icon: provider.pause
+                                        ? Icon(Icons.play_arrow)
+                                        : Icon(Icons.pause),
+                                    iconSize: 40,
+                                    onPressed: () {
+                                      provider.pauseTimer();
+                                    },
+                                  );
+                                }),
+                                Consumer<SquareRootProvider>(
+                                    builder: (context, provider, child) {
+                                  return IconButton(
+                                    icon: Icon(Icons.info_outline),
+                                    iconSize: 40,
+                                    onPressed: () {
+                                      provider.showInfoDialog();
+                                    },
+                                  );
+                                })
+                              ],
+                            )),
                       ],
                     );
                   },

@@ -48,6 +48,10 @@ class MagicTriangleProvider with ChangeNotifier {
     _time = TimeUtil.magicTriangleTimeOut;
     _timeOut = false;
     startTimer();
+
+    if (homeViewModel.isFirstTime(GameCategoryType.MAGIC_TRIANGLE)) {
+      showInfoDialogWithDelay();
+    }
   }
 
   void inputTriangleSelection(int index, MagicTriangleInput input) {
@@ -165,6 +169,30 @@ class MagicTriangleProvider with ChangeNotifier {
       notifyListeners();
     }
     notifyListeners();
+  }
+
+  Future showInfoDialogWithDelay() async {
+    await Future.delayed(Duration(milliseconds: 500));
+    showInfoDialog();
+  }
+
+  Future showInfoDialog() async {
+    _pause = true;
+    timerSubscription.pause();
+    notifyListeners();
+    var dialogResult = await _dialogService.showDialog(
+        type: KeyUtil.InfoDialog,
+        gameCategoryType: GameCategoryType.MAGIC_TRIANGLE,
+        score: 0,
+        coin: 0,
+        isPause: false);
+
+    if (dialogResult.exit) {
+      homeViewModel.setFirstTime(GameCategoryType.MAGIC_TRIANGLE);
+      timerSubscription.resume();
+      _pause = false;
+      notifyListeners();
+    }
   }
 
   void dispose() {
