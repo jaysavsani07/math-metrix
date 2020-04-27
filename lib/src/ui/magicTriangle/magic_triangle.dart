@@ -15,10 +15,7 @@ class MagicTriangle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var sizeConfig = SizeConfig().init(context);
-    print("device width factor ${SizeConfig.heightWidthFactor}");
     triangleHeight = (MediaQuery.of(context).size.width) * 0.8660254;
-    print("triangle height ${SizeConfig.safeBlockVertical}");
     return ChangeNotifierProvider<MagicTriangleProvider>(
       create: (_) => MagicTriangleProvider(),
       child: WillPopScope(
@@ -58,7 +55,9 @@ class MagicTriangle extends StatelessWidget {
                               children: <Widget>[
                                 CustomPaint(
                                   painter: TrianglePainter(
-                                      Theme.of(context).primaryColor),
+                                      Theme.of(context).primaryColor,
+                                      radius,
+                                      padding),
                                   size: Size(
                                       (MediaQuery.of(context).size.width),
                                       triangleHeight),
@@ -197,7 +196,7 @@ class MagicTriangle extends StatelessWidget {
                             builder: (context, provider, child) {
                           return IconButton(
                             icon: Icon(Icons.info_outline),
-                            iconSize: 40,
+                            iconSize: 30,
                             onPressed: () {
                               provider.showInfoDialog();
                             },

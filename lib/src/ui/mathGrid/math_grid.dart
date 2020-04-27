@@ -41,7 +41,7 @@ class MathGrid extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    flex: 5,
+                    flex: 2,
                     child: Container(),
                   ),
                   Expanded(
