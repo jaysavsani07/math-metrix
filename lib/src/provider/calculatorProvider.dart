@@ -77,6 +77,11 @@ class CalculatorProvider with ChangeNotifier {
         _currentState = _list[_index];
         restartTimer();
         notifyListeners();
+      } else if (_result.length == _currentState.answer.toString().length) {
+        if (currentScore > 0) {
+          currentScore =
+              currentScore + (ScoreUtil.calculatorScoreMinus).toInt();
+        }
       }
     }
   }

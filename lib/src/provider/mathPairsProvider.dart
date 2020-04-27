@@ -68,6 +68,8 @@ class MathPairsProvider with ChangeNotifier {
           _currentState.list[index].isVisible = false;
           _currentState.availableItem = _currentState.availableItem - 2;
           first = -1;
+          currentScore =
+              currentScore + (ScoreUtil.mathematicalPairsScore).toInt();
           notifyListeners();
           if (_currentState.availableItem == 0) {
             await Future.delayed(Duration(milliseconds: 300));
@@ -76,7 +78,6 @@ class MathPairsProvider with ChangeNotifier {
                   _index ~/ 5 + 1));
             }
             _index = _index + 1;
-            currentScore = currentScore+ (ScoreUtil.mathematicalPairsScore ).toInt();
             _currentState = _list[_index];
             restartTimer();
             notifyListeners();
@@ -84,6 +85,10 @@ class MathPairsProvider with ChangeNotifier {
         } else {
           _currentState.list[first].isActive = false;
           _currentState.list[index].isActive = false;
+          if (currentScore > 0) {
+            currentScore =
+                currentScore + (ScoreUtil.mathematicalPairsScoreMinus).toInt();
+          }
           first = -1;
           notifyListeners();
         }
@@ -129,16 +134,12 @@ class MathPairsProvider with ChangeNotifier {
         isPause: _pause);
 
     if (dialogResult.exit) {
-      homeViewModel.updateScoreboard(
-          GameCategoryType.MATH_PAIRS,
-          currentScore.toDouble(),
-          _index * CoinUtil.mathematicalPairsCoin);
+      homeViewModel.updateScoreboard(GameCategoryType.MATH_PAIRS,
+          currentScore.toDouble(), _index * CoinUtil.mathematicalPairsCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
-      homeViewModel.updateScoreboard(
-          GameCategoryType.MATH_PAIRS,
-          currentScore.toDouble(),
-          _index * CoinUtil.mathematicalPairsCoin);
+      homeViewModel.updateScoreboard(GameCategoryType.MATH_PAIRS,
+          currentScore.toDouble(), _index * CoinUtil.mathematicalPairsCoin);
       timerSubscription.cancel();
       startGame();
     } else if (dialogResult.play) {

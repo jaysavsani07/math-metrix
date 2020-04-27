@@ -75,7 +75,7 @@ class SignProvider with ChangeNotifier {
         notifyListeners();
       } else {
         if (currentScore > 0) {
-          currentScore = currentScore - 1;
+          currentScore = currentScore + (ScoreUtil.signScoreMinus).toInt();
         }
       }
     }

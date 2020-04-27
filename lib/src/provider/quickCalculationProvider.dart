@@ -84,6 +84,12 @@ class QuickCalculationProvider with ChangeNotifier {
         _scrollController.jumpToItem(_index);
         _scrollController.notifyListeners();
         notifyListeners();
+      } else if (_currentState.userAnswer.length ==
+          _currentState.answer.toString().length) {
+        if (currentScore > 0) {
+          currentScore =
+              currentScore + (ScoreUtil.quickCalculationScoreMinus).toInt();
+        }
       }
     }
   }

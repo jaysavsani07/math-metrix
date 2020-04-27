@@ -73,6 +73,11 @@ class SquareRootProvider with ChangeNotifier {
         _result = "";
         restartTimer();
         notifyListeners();
+      } else {
+        if (currentScore > 0) {
+          currentScore =
+              currentScore + (ScoreUtil.squareRootScoreMinus).toInt();
+        }
       }
     }
   }
