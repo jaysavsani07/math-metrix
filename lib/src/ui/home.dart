@@ -205,7 +205,7 @@ class MyHomePage extends StatelessWidget {
                       child: Container(
                         margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             IconButton(

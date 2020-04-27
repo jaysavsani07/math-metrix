@@ -1,5 +1,6 @@
 import 'package:mathgame/src/models/gameInfoDialog.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
+import 'package:mathgame/src/utility/scoreUtil.dart';
 
 class InfoDialogDataProvider {
   // ignore: missing_return
@@ -11,8 +12,8 @@ class InfoDialogDataProvider {
             image: "assets/calculator-intro.gif",
             dec: '''You need to solve given equation correctly.
                                         
-+1 for correct answer
--1 for wrong answer''');
+${ScoreUtil.calculatorScore} for correct answer
+${ScoreUtil.calculatorScoreMinus} for wrong answer''');
         break;
       case GameCategoryType.SIGN:
         return GameInfoDialog(
@@ -20,8 +21,8 @@ class InfoDialogDataProvider {
             image: "assets/whats-the-sign-intro.gif",
             dec: '''You need to find correct sign that finishes the given equation.
                                         
-+1 for correct answer
--1 for wrong answer''');
+${ScoreUtil.signScore} for correct answer
+${ScoreUtil.signScoreMinus} for wrong answer''');
         break;
       case GameCategoryType.SQUARE_ROOT:
         return GameInfoDialog(
@@ -29,8 +30,8 @@ class InfoDialogDataProvider {
             image: "assets/sqroot-intro.gif",
             dec: '''square root the given number
                                         
-+1 for correct answer
--1 for wrong answer''');
+${ScoreUtil.squareRootScore} for correct answer
+${ScoreUtil.squareRootScoreMinus} for wrong answer''');
         break;
       case GameCategoryType.MATH_PAIRS:
         return GameInfoDialog(
@@ -38,8 +39,8 @@ class InfoDialogDataProvider {
             image: "assets/math-pair-intro.gif",
             dec: '''Each card contains either equation or an answer. Match the equation with correct answer.
                                         
-+3 for correct answer
--1 for wrong answer''');
+${ScoreUtil.mathematicalPairsScore} for correct answer
+${ScoreUtil.mathematicalPairsScoreMinus} for wrong answer''');
         break;
       case GameCategoryType.CORRECT_ANSWER:
         return GameInfoDialog(
@@ -47,8 +48,8 @@ class InfoDialogDataProvider {
             image: "assets/correct-answer.gif",
             dec: '''Select the correct number to finish the equation.
                                         
-+1 for correct answer
--1 for wrong answer''');
+${ScoreUtil.correctAnswerScore} for correct answer
+${ScoreUtil.correctAnswerScoreMinus} for wrong answer''');
         break;
       case GameCategoryType.MAGIC_TRIANGLE:
         return GameInfoDialog(
@@ -56,8 +57,8 @@ class InfoDialogDataProvider {
             image: "assets/magic-triangle-intro.gif",
             dec: '''Sum of the each side of triangle should be equal to the given number. To place any number, select triangle circle and press any given number from panel.
                                         
-+1 for correct answer
--1 for wrong answer''');
+${ScoreUtil.magicTriangleScore} for correct answer
+''');
         break;
       case GameCategoryType.MENTAL_ARITHMETIC:
         return GameInfoDialog(
@@ -65,8 +66,8 @@ class InfoDialogDataProvider {
             image: "assets/mental-arith-intro.gif",
             dec: '''Number with operator will be shown one by one. You need to remember the number with operator and write final answer(No precedency).
                                         
-+3 for correct answer
--1 for wrong answer''');
+${ScoreUtil.mentalArithmeticScore} for correct answer
+${ScoreUtil.mentalArithmeticScoreMinus} for wrong answer''');
         break;
       case GameCategoryType.QUICK_CALCULATION:
         return GameInfoDialog(
@@ -74,7 +75,8 @@ class InfoDialogDataProvider {
             image: "assets/quick-calculation-intro.gif",
             dec: '''Solve simple equation one by one. Faster you solve, more time will be given to solve next equation.
                                         
-+1 for correct answer
+${ScoreUtil.quickCalculationScore} for correct answer
+${ScoreUtil.quickCalculationScoreMinus} for wrong answer
 ''');
         break;
       case GameCategoryType.MATH_MACHINE:
@@ -83,7 +85,7 @@ class InfoDialogDataProvider {
             image: "assets/math-machine-intro.gif",
             dec: '''Select number from math grid to reach answer shown above. You can select any number to reach above answer. 
                                         
-+5 for each correct equation
+${ScoreUtil.mathMachineScore} for each correct equation
 ''');
         break;
     }

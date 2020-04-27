@@ -1,28 +1,28 @@
 class ScoreUtil {
   static double calculatorScore = 1;
-  //yes
+  static double calculatorScoreMinus = -1;
+
 
   static double signScore = 1;
-  // yes
+  static double signScoreMinus = -1;
+
 
   static double correctAnswerScore = 1;
-  // yes
+  static double correctAnswerScoreMinus = -1;
 
   static double quickCalculationScore = 1;
-  // yes
+  static double quickCalculationScoreMinus = -1;
 
   static double mentalArithmeticScore = 3;
-  // yes
+  static double mentalArithmeticScoreMinus = -3;
 
   static double squareRootScore = 1;
-  // yes
+  static double squareRootScoreMinus = -1;
 
   static double mathematicalPairsScore = 3;
-  // yes
+  static double mathematicalPairsScoreMinus = -1;
 
   static double magicTriangleScore = 20;
-  //no
 
   static double mathMachineScore = 5;
-  //no
 }
