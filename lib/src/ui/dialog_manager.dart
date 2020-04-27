@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/alert_request.dart';
 import 'package:mathgame/src/models/alert_response.dart';
+import 'package:mathgame/src/models/gameInfoDialog.dart';
 import 'package:mathgame/src/resources/dialog_service.dart';
+import 'package:mathgame/src/resources/infoDialogDataProvider.dart';
 import 'package:mathgame/src/utility/keyUtil.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -148,10 +150,13 @@ class _DialogManagerState extends State<DialogManager> {
         fontSize: 22,
       ),
     );
+
+    GameInfoDialog dialog =
+        InfoDialogDataProvider.getInfoDialogData(request.gameCategoryType);
     return Alert(
       context: context,
       style: alertStyle,
-      title: "Calculator",
+      title: dialog.title,
       buttons: [],
       content: Container(
         height: MediaQuery.of(context).size.height * 0.7,
@@ -166,7 +171,7 @@ class _DialogManagerState extends State<DialogManager> {
                         topRight: Radius.circular(8.0),
                         topLeft: Radius.circular(8.0)),
                   ),
-                  child: Image.asset("assets/magic-triangle-intro.gif")),
+                  child: Image.asset(dialog.image)),
             ),
             Expanded(
               child: Column(
@@ -175,10 +180,7 @@ class _DialogManagerState extends State<DialogManager> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      '''You need to solve given equation correctly
-                                        
-+1 for correct answer
--1 for wrong answer''',
+                      dialog.dec,
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 16),
                     ),
