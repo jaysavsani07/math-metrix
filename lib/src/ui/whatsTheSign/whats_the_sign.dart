@@ -142,7 +142,7 @@ class WhatsTheSign extends StatelessWidget {
                         flex: 10,
                         child: Container(
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
                               IconButton(

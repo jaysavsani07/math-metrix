@@ -61,33 +61,36 @@ class MathGrid extends StatelessWidget {
                   ),
                   Expanded(
                     flex: 10,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Consumer<MathGridProvider>(
-                            builder: (context, provider, child) {
-                          return IconButton(
-                            icon: provider.pause
-                                ? Icon(Icons.play_arrow)
-                                : Icon(Icons.pause),
-                            iconSize: 40,
-                            onPressed: () {
-                              provider.pauseTimer();
-                            },
-                          );
-                        }),
-                        Consumer<MathGridProvider>(
-                            builder: (context, provider, child) {
-                          return IconButton(
-                            icon: Icon(Icons.info_outline),
-                            iconSize: 40,
-                            onPressed: () {
-                              provider.showInfoDialog();
-                            },
-                          );
-                        })
-                      ],
+                    child: Container(
+                      margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Consumer<MathGridProvider>(
+                              builder: (context, provider, child) {
+                            return IconButton(
+                              icon: provider.pause
+                                  ? Icon(Icons.play_arrow)
+                                  : Icon(Icons.pause),
+                              iconSize: 40,
+                              onPressed: () {
+                                provider.pauseTimer();
+                              },
+                            );
+                          }),
+                          Consumer<MathGridProvider>(
+                              builder: (context, provider, child) {
+                            return IconButton(
+                              icon: Icon(Icons.info_outline),
+                              iconSize: 40,
+                              onPressed: () {
+                                provider.showInfoDialog();
+                              },
+                            );
+                          })
+                        ],
+                      ),
                     ),
                   ),
                 ],

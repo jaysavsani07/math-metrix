@@ -100,7 +100,7 @@ class SquareRoot extends StatelessWidget {
                         Expanded(
                             flex: 10,
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Consumer<SquareRootProvider>(

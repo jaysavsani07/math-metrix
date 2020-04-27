@@ -145,10 +145,7 @@ class _DialogManagerState extends State<DialogManager> {
           color: Colors.grey,
         ),
       ),
-      titleStyle: TextStyle(
-        fontWeight: FontWeight.w600,
-        fontSize: 22,
-      ),
+      titleStyle: Theme.of(context).textTheme.headline
     );
 
     GameInfoDialog dialog =
@@ -165,7 +162,7 @@ class _DialogManagerState extends State<DialogManager> {
           children: <Widget>[
             Expanded(
               child: Container(
-                  padding: EdgeInsets.all(5),
+                  padding: EdgeInsets.all(1),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                         topRight: Radius.circular(8.0),
@@ -178,11 +175,11 @@ class _DialogManagerState extends State<DialogManager> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(0.0),
                     child: Text(
                       dialog.dec,
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 16),
+                      style: Theme.of(context).textTheme.body1
                     ),
                   ),
                   RaisedButton(

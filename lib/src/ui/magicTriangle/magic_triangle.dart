@@ -176,8 +176,9 @@ class MagicTriangle extends StatelessWidget {
                   ),
                   Container(
                     height: (SizeConfig.safeBlockVertical * 0.08),
+                    margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Consumer<MagicTriangleProvider>(

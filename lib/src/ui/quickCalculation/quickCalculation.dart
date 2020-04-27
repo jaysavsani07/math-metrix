@@ -153,7 +153,7 @@ class QuickCalculation extends StatelessWidget {
                   Container(
                     height: (SizeConfig.safeBlockVertical * 0.07),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Consumer<QuickCalculationProvider>(

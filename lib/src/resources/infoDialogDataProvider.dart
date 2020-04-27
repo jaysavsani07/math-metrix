@@ -8,44 +8,44 @@ class InfoDialogDataProvider {
       case GameCategoryType.CALCULATOR:
         return GameInfoDialog(
             title: "Calculator",
-            image: "assets/magic-triangle-intro.gif",
-            dec: '''You need to solve given equation correctly
+            image: "assets/calculator-intro.gif",
+            dec: '''You need to solve given equation correctly.
                                         
 +1 for correct answer
 -1 for wrong answer''');
         break;
       case GameCategoryType.SIGN:
         return GameInfoDialog(
-            title: "What's the sign?",
-            image: "assets/magic-triangle-intro.gif",
-            dec: '''You need to solve given equation correctly
+            title: "Find The Sign?",
+            image: "assets/whats-the-sign-intro.gif",
+            dec: '''You need to find correct sign that finishes the given equation.
                                         
 +1 for correct answer
 -1 for wrong answer''');
         break;
       case GameCategoryType.SQUARE_ROOT:
         return GameInfoDialog(
-            title: "Square root",
-            image: "assets/magic-triangle-intro.gif",
-            dec: '''You need to solve given equation correctly
+            title: "Square Root",
+            image: "assets/sqroot-intro.gif",
+            dec: '''square root the given number
                                         
 +1 for correct answer
 -1 for wrong answer''');
         break;
       case GameCategoryType.MATH_PAIRS:
         return GameInfoDialog(
-            title: "Mathematical pairs",
-            image: "assets/magic-triangle-intro.gif",
-            dec: '''You need to solve given equation correctly
+            title: "Math Pairs",
+            image: "assets/math-pair-intro.gif",
+            dec: '''Each card contains either equation or an answer. Match the equation with correct answer.
                                         
-+1 for correct answer
++3 for correct answer
 -1 for wrong answer''');
         break;
       case GameCategoryType.CORRECT_ANSWER:
         return GameInfoDialog(
             title: "Correct answer",
-            image: "assets/magic-triangle-intro.gif",
-            dec: '''You need to solve given equation correctly
+            image: "assets/correct-answer.gif",
+            dec: '''Select the correct number to finish the equation.
                                         
 +1 for correct answer
 -1 for wrong answer''');
@@ -54,37 +54,37 @@ class InfoDialogDataProvider {
         return GameInfoDialog(
             title: "Magic triangle",
             image: "assets/magic-triangle-intro.gif",
-            dec: '''You need to solve given equation correctly
+            dec: '''Sum of the each side of triangle should be equal to the given number. To place any number, select triangle circle and press any given number from panel.
                                         
 +1 for correct answer
 -1 for wrong answer''');
         break;
       case GameCategoryType.MENTAL_ARITHMETIC:
         return GameInfoDialog(
-            title: "Mental arithmetic",
-            image: "assets/magic-triangle-intro.gif",
-            dec: '''You need to solve given equation correctly
+            title: "Mental Arithmetic",
+            image: "assets/mental-arith-intro.gif",
+            dec: '''Number with operator will be shown one by one. You need to remember the number with operator and write final answer(No precedency).
                                         
-+1 for correct answer
++3 for correct answer
 -1 for wrong answer''');
         break;
       case GameCategoryType.QUICK_CALCULATION:
         return GameInfoDialog(
             title: "Quick calculation",
-            image: "assets/magic-triangle-intro.gif",
-            dec: '''You need to solve given equation correctly
+            image: "assets/quick-calculation-intro.gif",
+            dec: '''Solve simple equation one by one. Faster you solve, more time will be given to solve next equation.
                                         
 +1 for correct answer
--1 for wrong answer''');
+''');
         break;
       case GameCategoryType.MATH_MACHINE:
         return GameInfoDialog(
-            title: "Math Machine Square",
-            image: "assets/magic-triangle-intro.gif",
-            dec: '''You need to solve given equation correctly
+            title: "Math Grid",
+            image: "assets/math-machine-intro.gif",
+            dec: '''Select number from math grid to reach answer shown above. You can select any number to reach above answer. 
                                         
-+1 for correct answer
--1 for wrong answer''');
++5 for each correct equation
+''');
         break;
     }
   }
