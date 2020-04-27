@@ -24,15 +24,16 @@ class TriangleButton extends StatelessWidget {
           side: BorderSide(color: Colors.white70, width: 2),
         ),
         child: Container(
-          height: 60,
-          width: 60,
+          height: 58,
+          width: 58,
           child: FlatButton(
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onPressed: () {
               magicTriangleProvider.checkResult(index, digit);
             },
-            child: Text(digit.value, style: Theme.of(context).textTheme.headline),
+            child:
+                Text(digit.value, style: Theme.of(context).textTheme.headline),
           ),
         ),
       ),
