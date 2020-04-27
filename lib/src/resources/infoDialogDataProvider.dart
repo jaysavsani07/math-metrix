@@ -12,17 +12,18 @@ class InfoDialogDataProvider {
             image: "assets/calculator-intro.gif",
             dec: '''You need to solve given equation correctly.
                                         
-${ScoreUtil.calculatorScore} for correct answer
-${ScoreUtil.calculatorScoreMinus} for wrong answer''');
+${ScoreUtil.calculatorScore.toInt()} for correct answer
+${ScoreUtil.calculatorScoreMinus.toInt()} for wrong answer''');
         break;
       case GameCategoryType.SIGN:
         return GameInfoDialog(
             title: "Find The Sign?",
             image: "assets/whats-the-sign-intro.gif",
-            dec: '''You need to find correct sign that finishes the given equation.
+            dec:
+                '''You need to find correct sign that finishes the given equation.
                                         
-${ScoreUtil.signScore} for correct answer
-${ScoreUtil.signScoreMinus} for wrong answer''');
+${ScoreUtil.signScore.toInt()} for correct answer
+${ScoreUtil.signScoreMinus.toInt()} for wrong answer''');
         break;
       case GameCategoryType.SQUARE_ROOT:
         return GameInfoDialog(
@@ -30,17 +31,18 @@ ${ScoreUtil.signScoreMinus} for wrong answer''');
             image: "assets/sqroot-intro.gif",
             dec: '''square root the given number
                                         
-${ScoreUtil.squareRootScore} for correct answer
-${ScoreUtil.squareRootScoreMinus} for wrong answer''');
+${ScoreUtil.squareRootScore.toInt()} for correct answer
+${ScoreUtil.squareRootScoreMinus.toInt()} for wrong answer''');
         break;
       case GameCategoryType.MATH_PAIRS:
         return GameInfoDialog(
             title: "Math Pairs",
             image: "assets/math-pair-intro.gif",
-            dec: '''Each card contains either equation or an answer. Match the equation with correct answer.
+            dec:
+                '''Each card contains either equation or an answer. Match the equation with correct answer.
                                         
-${ScoreUtil.mathematicalPairsScore} for correct answer
-${ScoreUtil.mathematicalPairsScoreMinus} for wrong answer''');
+${ScoreUtil.mathematicalPairsScore.toInt()} for correct answer
+${ScoreUtil.mathematicalPairsScoreMinus.toInt()} for wrong answer''');
         break;
       case GameCategoryType.CORRECT_ANSWER:
         return GameInfoDialog(
@@ -48,44 +50,48 @@ ${ScoreUtil.mathematicalPairsScoreMinus} for wrong answer''');
             image: "assets/correct-answer.gif",
             dec: '''Select the correct number to finish the equation.
                                         
-${ScoreUtil.correctAnswerScore} for correct answer
-${ScoreUtil.correctAnswerScoreMinus} for wrong answer''');
+${ScoreUtil.correctAnswerScore.toInt()} for correct answer
+${ScoreUtil.correctAnswerScoreMinus.toInt()} for wrong answer''');
         break;
       case GameCategoryType.MAGIC_TRIANGLE:
         return GameInfoDialog(
             title: "Magic triangle",
             image: "assets/magic-triangle-intro.gif",
-            dec: '''Sum of the each side of triangle should be equal to the given number. To place any number, select triangle circle and press any given number from panel.
+            dec:
+                '''Sum of the each side of triangle should be equal to the given number. To place any number, select triangle circle and press any given number from panel.
                                         
-${ScoreUtil.magicTriangleScore} for correct answer
+${ScoreUtil.magicTriangleScore.toInt()} for correct answer
 ''');
         break;
       case GameCategoryType.MENTAL_ARITHMETIC:
         return GameInfoDialog(
             title: "Mental Arithmetic",
             image: "assets/mental-arith-intro.gif",
-            dec: '''Number with operator will be shown one by one. You need to remember the number with operator and write final answer(No precedency).
+            dec:
+                '''Number with operator will be shown one by one. You need to remember the number with operator and write final answer(No precedency).
                                         
-${ScoreUtil.mentalArithmeticScore} for correct answer
-${ScoreUtil.mentalArithmeticScoreMinus} for wrong answer''');
+${ScoreUtil.mentalArithmeticScore.toInt()} for correct answer
+${ScoreUtil.mentalArithmeticScoreMinus.toInt()} for wrong answer''');
         break;
       case GameCategoryType.QUICK_CALCULATION:
         return GameInfoDialog(
             title: "Quick calculation",
             image: "assets/quick-calculation-intro.gif",
-            dec: '''Solve simple equation one by one. Faster you solve, more time will be given to solve next equation.
+            dec:
+                '''Solve simple equation one by one. Faster you solve, more time will be given to solve next equation.
                                         
-${ScoreUtil.quickCalculationScore} for correct answer
-${ScoreUtil.quickCalculationScoreMinus} for wrong answer
+${ScoreUtil.quickCalculationScore.toInt()} for correct answer
+${ScoreUtil.quickCalculationScoreMinus.toInt()} for wrong answer
 ''');
         break;
       case GameCategoryType.MATH_MACHINE:
         return GameInfoDialog(
             title: "Math Grid",
             image: "assets/math-machine-intro.gif",
-            dec: '''Select number from math grid to reach answer shown above. You can select any number to reach above answer. 
+            dec:
+                '''Select number from math grid to reach answer shown above. You can select any number to reach above answer. 
                                         
-${ScoreUtil.mathMachineScore} for each correct equation
+${ScoreUtil.mathMachineScore.toInt()} for each correct equation
 ''');
         break;
     }
