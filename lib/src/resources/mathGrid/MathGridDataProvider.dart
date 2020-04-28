@@ -41,7 +41,7 @@ class MathGridDataProvider {
 
   static List<int> listOfAnswer() {
     List<int> listRandom = new List();
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 100; i++) {
       listRandom.add(generateRandomAnswer());
     }
     return listRandom;

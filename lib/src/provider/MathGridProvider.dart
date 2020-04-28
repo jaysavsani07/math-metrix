@@ -60,6 +60,17 @@ class MathGridProvider with ChangeNotifier {
       notifyListeners();
       return;
     }
+
+    var listOfUnRemovedIndex = _currentState.listForSquare.where((result) => result.isRemoved == false).toList();
+    if (listOfUnRemovedIndex.length <= 12) {
+      print("less then 10");
+      var possiblePairs = getCountOfPossiblePairs(listOfUnRemovedIndex, _currentState.currentAnswer);
+      print("possible pairs : $possiblePairs");
+      _index = _index + 1 ;
+      print("_index + $_index");
+      _currentState = _list[_index];
+    }
+
     gridModel.isActive = true;
     int total = 0;
     var listOfIndex = _currentState.listForSquare
@@ -77,10 +88,24 @@ class MathGridProvider with ChangeNotifier {
       }
       currentScore = currentScore + (ScoreUtil.mathMachineScore).toInt();
       answerIndex = answerIndex + 1;
+      print("answer indiex $answerIndex");
+      print("list of answer legnth ${_currentState.listOfAnswer.length}");
       _currentState.currentAnswer = _currentState.listOfAnswer[answerIndex];
     }
     print("total $total");
     notifyListeners();
+  }
+
+  int getCountOfPossiblePairs(List<MathGridCellModel> arr, int sum) {
+    int count = 0;
+    for (int i = 0; i < arr.length; i++) {
+      for (int j = (i + 1); j < arr.length; j++) {
+        if ((arr[i].value + arr[j].value) == sum) {
+          count++;
+        }
+      }
+    }
+    return count;
   }
 
   clear() {
