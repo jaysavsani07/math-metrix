@@ -2,13 +2,8 @@ import 'package:mathgame/src/models/mentalArithmetic/mentalArithmeticQandS.dart'
 import 'package:mathgame/src/utility/mathUtil.dart';
 
 class MentalArithmeticQandSDataProvider {
-  static getMentalArithmeticDataList() {
+  static getMentalArithmeticDataList(int level) {
     List<MentalArithmeticQandS> list = List();
-
-    list.add(MentalArithmeticQandS(1, ["5", "-1", "*5", ""], 20));
-    list.add(MentalArithmeticQandS(2, ["5", "/5", "+1", ""], 2));
-    list.add(MentalArithmeticQandS(3, ["11", "-6", "*2", ""], 10));
-    list.add(MentalArithmeticQandS(4, ["-5", "-6", "+1", ""], -10));
 
     int i = 0;
 
@@ -28,6 +23,7 @@ class MentalArithmeticQandSDataProvider {
         if ((x2 == "/" && x1 > x3 && x1 % x3 == 0) || x2 != "/") {
           list.add(MentalArithmeticQandS(
               1, [x1.toString(), "$x2$x3", "$x4$x5", ""], x));
+          print("$x1 $x2$x3 $x4$x5 = $x");
         }
         i++;
       }

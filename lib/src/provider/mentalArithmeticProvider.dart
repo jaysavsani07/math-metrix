@@ -46,7 +46,7 @@ class MentalArithmeticProvider with ChangeNotifier {
   }
 
   void startGame() {
-    _list = MentalArithmeticQandSDataProvider.getMentalArithmeticDataList();
+    _list = MentalArithmeticQandSDataProvider.getMentalArithmeticDataList(1);
     _index = 0;
     currentScore = 0;
     _currentState = _list[_index];
@@ -68,6 +68,11 @@ class MentalArithmeticProvider with ChangeNotifier {
       notifyListeners();
       if (_result != "-" && int.parse(_result) == _currentState.answer) {
         await Future.delayed(Duration(milliseconds: 300));
+        if (_list.length - 1 == _index) {
+          _list.addAll(
+              MentalArithmeticQandSDataProvider.getMentalArithmeticDataList(
+                  _index ~/ 5 + 1));
+        }
         _index = _index + 1;
         currentScore = currentScore + (ScoreUtil.mentalArithmeticScore).toInt();
         _currentState = _list[_index];

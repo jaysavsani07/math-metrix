@@ -66,7 +66,6 @@ class CalculatorProvider with ChangeNotifier {
       if (int.parse(_result) == _currentState.answer) {
         await Future.delayed(Duration(milliseconds: 300));
         if (_list.length - 1 == _index) {
-          print(_index ~/ 5 + 1);
           _list.addAll(CalculatorQandSDataProvider.getCalculatorDataList(
               _index ~/ 5 + 1));
         }
