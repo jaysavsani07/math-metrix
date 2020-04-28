@@ -6,9 +6,11 @@ class SquareRootQandSDataProvider {
     List<SquareRootQandS> list = List();
 
     int i = 0;
-    int min = 3;
+    int min = 2 ;
     min = min < 1 ? 1 : min;
-    int max = 10;
+    int max = 13 + level;
+
+    print("level $level");
 
     while (i < 5) {
       int x1 = MathUtil.generateRandomAnswer(min, max);

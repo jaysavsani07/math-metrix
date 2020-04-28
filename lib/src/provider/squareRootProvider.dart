@@ -66,6 +66,7 @@ class SquareRootProvider with ChangeNotifier {
         if (_list.length - 1 == _index) {
           _list.addAll(
               SquareRootQandSDataProvider.getSquareDataList(_index ~/ 5 + 1));
+          print("_index $_index");
         }
         _index = _index + 1;
         currentScore = currentScore + (ScoreUtil.squareRootScore).toInt();
