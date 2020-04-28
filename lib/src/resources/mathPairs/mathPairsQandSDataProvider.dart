@@ -16,8 +16,8 @@ class MathPairsQandSDataProvider {
       String x2 = MathUtil.generateRandomSign();
       int x3 = MathUtil.generateRandomAnswer(min, max);
       if (MathUtil.evaluate(x1, x2, x3) > 0 &&
-          !list.contains(MathPair(1, "$x1 $x2 $x3", false, true)) &&
-          !list.contains(
+          !x.contains(MathPair(1, "$x1 $x2 $x3", false, true)) &&
+          !x.contains(
               MathPair(1, "${MathUtil.evaluate(x1, x2, x3)}", false, true))) {
         if ((x2 == "/" && x1 > x3 && x1 % x3 == 0) || x2 != "/") {
           x.add(MathPair(i, "$x1 $x2 $x3", false, true));
@@ -27,9 +27,12 @@ class MathPairsQandSDataProvider {
       }
     }
     x.shuffle();
-    print(x.toString());
     list.add(MathPairsQandS(2, x, 12));
-
+    list.forEach((MathPairsQandS m) {
+      m.list.forEach((MathPair m1) {
+        print(m1.text);
+      });
+    });
     return list;
   }
 }

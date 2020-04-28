@@ -30,7 +30,4 @@ class MathPair {
       other is MathPair &&
           runtimeType == other.runtimeType &&
           text == other.text;
-
-  @override
-  int get hashCode => text.hashCode;
 }

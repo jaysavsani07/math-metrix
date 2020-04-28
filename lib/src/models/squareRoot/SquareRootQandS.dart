@@ -14,4 +14,16 @@ class SquareRootQandS {
   String toString() {
     return 'SignQandS{id: $id, question: $question, firstAns: $firstAns, secondAns: $secondAns, thirdAns: $thirdAns, fourthAns: $fourthAns, answer: $answer}';
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is SquareRootQandS &&
+              runtimeType == other.runtimeType &&
+              question == other.question;
+
+  @override
+  int get hashCode => question.hashCode;
+
+
 }

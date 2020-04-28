@@ -20,7 +20,7 @@ class CalculatorQandSDataProvider {
         if ((x2 == "/" && x1 > x3 && x1 % x3 == 0) || x2 != "/") {
           list.add(
               CalculatorQandS(1, "$x1 $x2 $x3", MathUtil.evaluate(x1, x2, x3)));
-//          print("$x1 $x2 $x3 = ${MathUtil.evaluate(x1, x2, x3)}");
+          print("$x1 $x2 $x3 = ${MathUtil.evaluate(x1, x2, x3)}");
         }
         i++;
       }
@@ -45,4 +45,7 @@ class CalculatorQandSDataProvider {
     list.shuffle();
     return list;
   }
+}
+void main(){
+  CalculatorQandSDataProvider.getCalculatorDataList(1);
 }

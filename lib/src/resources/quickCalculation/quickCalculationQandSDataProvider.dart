@@ -26,18 +26,32 @@ class QuickCalculationQandSDataProvider {
         }
       }
     }
+    for (int i = 0; i < list.length; i++) {
+      var result = list.where((result) => result.question.contains("/"));
+      if (!(result.length > 0)) {
+        while (i < 2) {
+          int x1 = MathUtil.generateRandomAnswer(min, max);
+          String x2 = "/";
+          int x3 = MathUtil.generateRandomAnswer(min, max);
+          if (MathUtil.evaluate(x1, x2, x3) > 0 &&
+              !list.contains(QuickCalculationQandS(
+                  1, "$x1 $x2 $x3", MathUtil.evaluate(x1, x2, x3)))) {
+            if ((x2 == "/" && x1 > x3 && x1 % x3 == 0) || x2 != "/") {
+              list.add(QuickCalculationQandS(
+                  1, "$x1 $x2 $x3", MathUtil.evaluate(x1, x2, x3)));
+              print("$x1 $x2 $x3 = ${MathUtil.evaluate(x1, x2, x3)}");
+              i++;
+            }
+          }
+        }
+      }
+    }
+    list.shuffle();
 
     return list;
   }
 }
 
 void main() {
-  int _timeLength = 10;
-  Stream.periodic(Duration(milliseconds: 250), (x) => x)
-      .takeWhile((time) => time <= _timeLength * 4)
-      .listen((time) {
-    print("$time ${time /( _timeLength * 4)}");
-  }, onDone: () {
-    print("done");
-  });
+  QuickCalculationQandSDataProvider.getQuickCalculationDataList(1, 5);
 }
