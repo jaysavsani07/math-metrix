@@ -14,4 +14,16 @@ class MentalArithmeticQandS {
   String toString() {
     return 'CalculatorQandS{id: $id, question: $questionList, answer: $answer}';
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is MentalArithmeticQandS &&
+              runtimeType == other.runtimeType &&
+              currentQuestion == other.currentQuestion;
+
+  @override
+  int get hashCode => currentQuestion.hashCode;
+
+
 }
