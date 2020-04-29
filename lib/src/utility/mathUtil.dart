@@ -14,6 +14,7 @@ class MathUtil {
     return x[result];
   }
 
+  // ignore: missing_return
   static int evaluate(int x1, String sign, int x3) {
     switch (sign) {
       case "+":
@@ -29,7 +30,8 @@ class MathUtil {
 }
 
 void main() {
-  for(int i=0;i<100;i++){
-    print("${MathUtil.generateRandomAnswer(10, 30)} ${MathUtil.generateRandomAnswer(10, 30)}");
+  for (int i = 0; i < 100; i++) {
+    print(
+        "${MathUtil.generateRandomAnswer(10, 30)} ${MathUtil.generateRandomAnswer(10, 30)}");
   }
 }

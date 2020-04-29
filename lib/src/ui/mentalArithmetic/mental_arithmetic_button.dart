@@ -40,6 +40,5 @@ class MentalArithmeticButton extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

@@ -8,9 +8,6 @@ import 'package:mathgame/src/utility/keyUtil.dart';
 
 import 'package:mathgame/src/utility/sizeConfig.dart';
 
-import 'home.dart';
-import 'package:mathgame/src/ui/home.dart';
-import 'package:async/async.dart';
 import 'package:provider_architecture/provider_architecture.dart';
 
 class DashBoardPage extends StatefulWidget {

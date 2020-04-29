@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/provider/signProvider.dart';
-import 'package:provider/provider.dart';
 import 'SingleDigitCounter.dart';
 
 

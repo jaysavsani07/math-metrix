@@ -36,6 +36,5 @@ class SquareRootButton extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

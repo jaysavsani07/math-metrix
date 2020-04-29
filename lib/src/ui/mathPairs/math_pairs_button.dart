@@ -45,6 +45,5 @@ class MathPairsButton extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

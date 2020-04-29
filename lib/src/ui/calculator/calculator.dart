@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/module/giffy_dialog.dart';
 import 'package:mathgame/src/provider/calculatorProvider.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/ui/calculator/calculator_button.dart';

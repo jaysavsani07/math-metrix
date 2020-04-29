@@ -191,6 +191,7 @@ class MentalArithmeticProvider with ChangeNotifier {
   }
 
   void dispose() {
+    super.dispose();
     this.timerSubscription.cancel();
     this.localTimerSubscription.cancel();
   }
