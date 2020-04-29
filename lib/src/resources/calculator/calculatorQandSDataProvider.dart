@@ -4,48 +4,35 @@ import 'package:mathgame/src/utility/mathUtil.dart';
 class CalculatorQandSDataProvider {
   static getCalculatorDataList(int level) {
     List<CalculatorQandS> list = List();
+
+    int min = level == 1 ? 1 : (5 * level) - 5;
+    int max = level == 1 ? 10 : (5 * level) + 5;
+    print("$min $max");
     int i = 0;
-
-    int min = 3;
-    min = min < 1 ? 1 : min;
-    int max = 10 + level;
-
-    while (i < 5) {
-      int x1 = MathUtil.generateRandomAnswer(min, max);
-      String x2 = MathUtil.generateRandomSign();
-      int x3 = MathUtil.generateRandomAnswer(min, max);
-      if (MathUtil.evaluate(x1, x2, x3) >= 0 &&
-          !list.contains(CalculatorQandS(
-              1, "$x1 $x2 $x3", MathUtil.evaluate(x1, x2, x3)))) {
-        if ((x2 == "/" && x1 > x3 && x1 % x3 == 0) || x2 != "/") {
-          list.add(
-              CalculatorQandS(1, "$x1 $x2 $x3", MathUtil.evaluate(x1, x2, x3)));
-          print("$x1 $x2 $x3 = ${MathUtil.evaluate(x1, x2, x3)}");
-        }
-        i++;
-      }
-    }
-
-    for (int i = 0; i < list.length; i++) {
-      var result = list.where((result) => result.question.contains("/"));
-      if (!(result.length > 0)) {
-        while (i < 2) {
-          int x1 = MathUtil.generateRandomAnswer(min, max);
-          String x2 = "/";
-          int x3 = MathUtil.generateRandomAnswer(min, max);
-          if ((MathUtil.evaluate(x1, x2, x3) >= 0 && x1 > x3 && x1 % x3 == 0)) {
-            list.add(CalculatorQandS(
-                1, "$x1 $x2 $x3", MathUtil.evaluate(x1, x2, x3)));
-            print("$x1 $x2 $x3 = ${MathUtil.evaluate(x1, x2, x3)}");
-            i++;
-          }
+    var x1 = MathUtil.generate(min, max, 10);
+    var x2 = MathUtil.generateRandomSign1(10);
+    var x3 = MathUtil.generate(min, max, 10);
+    while (list.length < 5 && i < 10) {
+      if (MathUtil.evaluate(int.parse(x1[i]), x2[i], int.parse(x3[i])) >= 0 &&
+          !list.contains(CalculatorQandS(1, "${x1[i]} ${x2[i]} ${x3[i]}",
+              MathUtil.evaluate(int.parse(x1[i]), x2[i], int.parse(x3[i]))))) {
+        if ((x2[i] == "/" && int.parse(x1[i]) % int.parse(x3[i]) == 0) ||
+            x2[i] != "/") {
+          list.add(CalculatorQandS(1, "${x1[i]} ${x2[i]} ${x3[i]}",
+              MathUtil.evaluate(int.parse(x1[i]), x2[i], int.parse(x3[i]))));
+          print(
+              "${x1[i]} ${x2[i]} ${x3[i]} ${MathUtil.evaluate(int.parse(x1[i]), x2[i], int.parse(x3[i]))}");
         }
       }
+      i++;
     }
-    list.shuffle();
     return list;
   }
 }
-void main(){
-  CalculatorQandSDataProvider.getCalculatorDataList(1);
+
+void main() {
+  for (int i = 1; i <= 5; i++) {
+    CalculatorQandSDataProvider.getCalculatorDataList(i);
+    print("**************");
+  }
 }

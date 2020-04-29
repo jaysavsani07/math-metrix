@@ -50,6 +50,8 @@ class QuickCalculationQandSDataProvider {
 
     return list;
   }
+
+
 }
 
 void main() {
