@@ -18,9 +18,14 @@ class MentalArithmeticQandSDataProvider {
       String x4 = MathUtil.generateRandomSign();
       int x5 = MathUtil.generateRandomAnswer(min, max);
       int x = MathUtil.evaluate(MathUtil.evaluate(x1, x2, x3), x4, x5);
-      if (!list.contains(MentalArithmeticQandS(
-          1, [x1.toString(), "$x2$x3", "$x4$x5", ""], x))) {
-        if ((x2 == "/" && x1 > x3 && x1 % x3 == 0) || x2 != "/") {
+      if ("$x2$x3" != "$x4$x5" &&
+          !list.contains(MentalArithmeticQandS(
+              1, [x1.toString(), "$x2$x3", "$x4$x5", ""], x))) {
+        if (((x2 == "/" && x3 != 0 && x1 % x3 == 0) || x2 != "/") &&
+            ((x4 == "/" &&
+                    x5 != 0 &&
+                    MathUtil.evaluate(x1, x2, x3) % x5 == 0) ||
+                x4 != "/")) {
           list.add(MentalArithmeticQandS(
               1, [x1.toString(), "$x2$x3", "$x4$x5", ""], x));
           print("$x1 $x2$x3 $x4$x5 = $x");
@@ -29,5 +34,11 @@ class MentalArithmeticQandSDataProvider {
       }
     }
     return list;
+  }
+}
+
+void main() {
+  for (int i = 0; i < 10; i++) {
+    MentalArithmeticQandSDataProvider.getMentalArithmeticDataList(1);
   }
 }

@@ -17,7 +17,7 @@ ${ScoreUtil.calculatorScoreMinus.toInt()} for wrong answer''');
         break;
       case GameCategoryType.SIGN:
         return GameInfoDialog(
-            title: "Find The Sign?",
+            title: "Guess the sign?",
             image: "assets/whats-the-sign-intro.gif",
             dec:
                 '''You need to find correct sign that finishes the given equation.
