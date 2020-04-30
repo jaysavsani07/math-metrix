@@ -4,7 +4,6 @@ import 'package:mathgame/src/provider/mathPairsProvider.dart';
 import 'package:provider/provider.dart';
 
 class MathPairsButton extends StatelessWidget {
-
   final MathPair mathPairs;
   final int index;
 
@@ -35,9 +34,12 @@ class MathPairsButton extends StatelessWidget {
             margin: EdgeInsets.all(5),
             constraints: BoxConstraints.expand(),
             child: Center(
-              child: Text(
-                mathPairs.text,
-                style: Theme.of(context).textTheme.headline,
+              child: FittedBox(
+                fit: BoxFit.fitWidth,
+                child: Text(
+                  mathPairs.text,
+                  style: Theme.of(context).textTheme.headline,
+                ),
               ),
             ),
           ),
