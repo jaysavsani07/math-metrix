@@ -4,17 +4,16 @@ import 'package:mathgame/src/provider/mathPairsProvider.dart';
 import 'package:provider/provider.dart';
 
 class MathPairsButton extends StatelessWidget {
-  final int flex;
+
   final MathPair mathPairs;
   final int index;
 
-  MathPairsButton(this.mathPairs, this.flex, this.index);
+  MathPairsButton(this.mathPairs, this.index);
 
   @override
   Widget build(BuildContext context) {
     final mathPairsProvider = Provider.of<MathPairsProvider>(context);
-    return Expanded(
-      flex: flex,
+    return Container(
       child: InkWell(
         highlightColor: Colors.transparent,
         splashColor: Colors.transparent,
@@ -38,7 +37,7 @@ class MathPairsButton extends StatelessWidget {
             child: Center(
               child: Text(
                 mathPairs.text,
-                style: Theme.of(context).textTheme.display1,
+                style: Theme.of(context).textTheme.headline,
               ),
             ),
           ),

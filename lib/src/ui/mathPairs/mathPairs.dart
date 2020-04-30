@@ -30,90 +30,33 @@ class MathPairs extends StatelessWidget {
                         ),
                       )),
                   Expanded(
-                    flex: 10,
+                    flex: 5,
                     child: Container(),
                   ),
                   Expanded(
-                    flex: 60,
-                    child: Consumer<MathPairsProvider>(
-                        builder: (context, mathPairsProvider, child) {
-                      return Row(
-                        children: <Widget>[
-                          Expanded(
-                            flex: 1,
-                            child: Column(
-                              children: <Widget>[
-                                MathPairsButton(
-                                    mathPairsProvider.currentState.list[0],
-                                    1,
-                                    0),
-                                MathPairsButton(
-                                    mathPairsProvider.currentState.list[1],
-                                    1,
-                                    1),
-                                MathPairsButton(
-                                    mathPairsProvider.currentState.list[2],
-                                    1,
-                                    2),
-                                MathPairsButton(
-                                    mathPairsProvider.currentState.list[3],
-                                    1,
-                                    3),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: Column(
-                              children: <Widget>[
-                                MathPairsButton(
-                                    mathPairsProvider.currentState.list[4],
-                                    1,
-                                    4),
-                                MathPairsButton(
-                                    mathPairsProvider.currentState.list[5],
-                                    1,
-                                    5),
-                                MathPairsButton(
-                                    mathPairsProvider.currentState.list[6],
-                                    1,
-                                    6),
-                                MathPairsButton(
-                                    mathPairsProvider.currentState.list[7],
-                                    1,
-                                    7),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: Column(
-                              children: <Widget>[
-                                MathPairsButton(
-                                    mathPairsProvider.currentState.list[8],
-                                    1,
-                                    8),
-                                MathPairsButton(
-                                    mathPairsProvider.currentState.list[9],
-                                    1,
-                                    9),
-                                MathPairsButton(
-                                    mathPairsProvider.currentState.list[10],
-                                    1,
-                                    10),
-                                MathPairsButton(
-                                    mathPairsProvider.currentState.list[11],
-                                    1,
-                                    11),
-                              ],
-                            ),
-                          ),
-                        ],
-                      );
-                    }),
+                    flex: 70,
+                    child: Center(
+                      child: AspectRatio(
+                        aspectRatio: 0.7,
+                        child: Consumer<MathPairsProvider>(
+                            builder: (context, mathPairsProvider, child) {
+                          return GridView.builder(
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 3, childAspectRatio: 1.5),
+                              itemCount: mathPairsProvider.currentState.list.length,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemBuilder: (BuildContext context, int index) {
+                                return MathPairsButton(
+                                    mathPairsProvider.currentState.list[index],
+                                    index);
+                              });
+                        }),
+                      ),
+                    ),
                   ),
                   Expanded(
-                    flex: 10,
+                    flex: 5,
                     child: Container(),
                   ),
                   Expanded(
