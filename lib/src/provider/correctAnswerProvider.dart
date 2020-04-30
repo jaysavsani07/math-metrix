@@ -21,7 +21,7 @@ class CorrectAnswerProvider with ChangeNotifier {
   CorrectAnswerQandS _currentState;
   String _result;
   int _index = 0;
-  int currentScore = 0;
+  double currentScore = 0;
 
   bool _timeOut;
   int _time;
@@ -68,7 +68,7 @@ class CorrectAnswerProvider with ChangeNotifier {
               _index ~/ 5 + 1));
         }
         _index = _index + 1;
-        currentScore = currentScore + (ScoreUtil.correctAnswerScore).toInt();
+        currentScore = currentScore + ScoreUtil.correctAnswerScore;
         _currentState = _list[_index];
         _result = "";
         if (!timeOut) {
@@ -78,7 +78,7 @@ class CorrectAnswerProvider with ChangeNotifier {
       } else {
         if (currentScore > 0) {
           currentScore =
-              currentScore + (ScoreUtil.correctAnswerScoreMinus).toInt();
+              currentScore + ScoreUtil.correctAnswerScoreMinus;
         }
       }
     }
@@ -120,17 +120,17 @@ class CorrectAnswerProvider with ChangeNotifier {
     var dialogResult = await _dialogService.showDialog(
         type: KeyUtil.GameOverDialog,
         gameCategoryType: GameCategoryType.CORRECT_ANSWER,
-        score: currentScore.toDouble(),
+        score: currentScore,
         coin: _index * CoinUtil.correctAnswerCoin,
         isPause: _pause);
 
     if (dialogResult.exit) {
       homeViewModel.updateScoreboard(GameCategoryType.CORRECT_ANSWER,
-          currentScore.toDouble(), _index * CoinUtil.correctAnswerCoin);
+          currentScore, _index * CoinUtil.correctAnswerCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
       homeViewModel.updateScoreboard(GameCategoryType.CORRECT_ANSWER,
-          currentScore.toDouble(), _index * CoinUtil.correctAnswerCoin);
+          currentScore, _index * CoinUtil.correctAnswerCoin);
       timerSubscription.cancel();
       _index = 0;
       startGame();

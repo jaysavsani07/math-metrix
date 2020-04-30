@@ -27,7 +27,7 @@ class MathPairsProvider with ChangeNotifier {
   bool _timeOut;
   int _time;
   bool _pause = false;
-  int currentScore = 0;
+  double currentScore = 0;
 
   bool get timeOut => _timeOut;
 
@@ -71,7 +71,7 @@ class MathPairsProvider with ChangeNotifier {
             _currentState.availableItem = _currentState.availableItem - 2;
             first = -1;
             currentScore =
-                currentScore + (ScoreUtil.mathematicalPairsScore).toInt();
+                currentScore + ScoreUtil.mathematicalPairsScore;
             notifyListeners();
             if (_currentState.availableItem == 0) {
               await Future.delayed(Duration(milliseconds: 300));
@@ -91,7 +91,7 @@ class MathPairsProvider with ChangeNotifier {
             _currentState.list[index].isActive = false;
             if (currentScore > 0) {
               currentScore = currentScore +
-                  (ScoreUtil.mathematicalPairsScoreMinus).toInt();
+                  ScoreUtil.mathematicalPairsScoreMinus;
             }
             first = -1;
             notifyListeners();
@@ -139,17 +139,17 @@ class MathPairsProvider with ChangeNotifier {
     var dialogResult = await _dialogService.showDialog(
         type: KeyUtil.GameOverDialog,
         gameCategoryType: GameCategoryType.MATH_PAIRS,
-        score: currentScore.toDouble(),
+        score: currentScore,
         coin: _index * CoinUtil.mathematicalPairsCoin,
         isPause: _pause);
 
     if (dialogResult.exit) {
       homeViewModel.updateScoreboard(GameCategoryType.MATH_PAIRS,
-          currentScore.toDouble(), _index * CoinUtil.mathematicalPairsCoin);
+          currentScore, _index * CoinUtil.mathematicalPairsCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
       homeViewModel.updateScoreboard(GameCategoryType.MATH_PAIRS,
-          currentScore.toDouble(), _index * CoinUtil.mathematicalPairsCoin);
+          currentScore, _index * CoinUtil.mathematicalPairsCoin);
       timerSubscription.cancel();
       startGame();
     } else if (dialogResult.play) {

@@ -23,7 +23,7 @@ class MathGridProvider with ChangeNotifier {
   bool _timeOut;
   int _time;
   bool _pause = false;
-  int currentScore = 0;
+  double currentScore = 0;
 
   bool get timeOut => _timeOut;
 
@@ -86,7 +86,7 @@ class MathGridProvider with ChangeNotifier {
         listOfIndex[i].isActive = false;
         listOfIndex[i].isRemoved = true;
       }
-      currentScore = currentScore + (ScoreUtil.mathMachineScore).toInt();
+      currentScore = currentScore + ScoreUtil.mathMachineScore;
       answerIndex = answerIndex + 1;
       print("answer indiex $answerIndex");
       print("list of answer legnth ${_currentState.listOfAnswer.length}");
@@ -143,17 +143,17 @@ class MathGridProvider with ChangeNotifier {
     var dialogResult = await _dialogService.showDialog(
         type: KeyUtil.GameOverDialog,
         gameCategoryType: GameCategoryType.MATH_MACHINE,
-        score: currentScore.toDouble(),
+        score: currentScore,
         coin: _index * CoinUtil.mathMachineCoin,
         isPause: _pause);
 
     if (dialogResult.exit) {
       homeViewModel.updateScoreboard(GameCategoryType.MATH_MACHINE,
-          currentScore.toDouble(), _index * CoinUtil.mathMachineCoin);
+          currentScore, _index * CoinUtil.mathMachineCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
       homeViewModel.updateScoreboard(GameCategoryType.MATH_MACHINE,
-          currentScore.toDouble(), _index * CoinUtil.mathMachineCoin);
+          currentScore, _index * CoinUtil.mathMachineCoin);
       timerSubscription.cancel();
       startGame();
     } else if (dialogResult.play) {

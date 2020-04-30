@@ -1,19 +1,19 @@
 class CoinUtil {
-  static double calculatorCoin = 2;
+  static double calculatorCoin = 0.3;
 
-  static double signCoin = 2;
+  static double signCoin = 0.3;
 
-  static double correctAnswerCoin = 2;
+  static double correctAnswerCoin = 0.3;
 
-  static double quickCalculationCoin = 1;
+  static double quickCalculationCoin = 0.25;
 
-  static double mentalArithmeticCoin = 3;
+  static double mentalArithmeticCoin = 0.5;
 
-  static double squareRootCoin = 3;
+  static double squareRootCoin = 0.3;
 
-  static double mathematicalPairsCoin = 5;
+  static double mathematicalPairsCoin = 1;
 
-  static double magicTriangleCoin = 8;
+  static double magicTriangleCoin = 3;
 
-  static double mathMachineCoin = 8;
+  static double mathMachineCoin = 3;
 }

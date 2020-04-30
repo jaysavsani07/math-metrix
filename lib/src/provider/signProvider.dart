@@ -21,7 +21,7 @@ class SignProvider with ChangeNotifier {
   SignQandS _currentState;
   String _result;
   int _index = 0;
-  int currentScore = 0;
+  double currentScore = 0;
 
   bool _timeOut;
   int _time;
@@ -67,7 +67,7 @@ class SignProvider with ChangeNotifier {
         }
         _time = TimeUtil.signTimeOut;
         _index = _index + 1;
-        currentScore = currentScore + (ScoreUtil.signScore).toInt();
+        currentScore = currentScore + ScoreUtil.signScore;
         _result = "";
         _currentState = _list[_index];
         if (!timeOut) {
@@ -76,7 +76,7 @@ class SignProvider with ChangeNotifier {
         }
       } else {
         if (currentScore > 0) {
-          currentScore = currentScore + (ScoreUtil.signScoreMinus).toInt();
+          currentScore = currentScore + ScoreUtil.signScoreMinus;
         }
       }
     }
@@ -118,17 +118,17 @@ class SignProvider with ChangeNotifier {
     var dialogResult = await _dialogService.showDialog(
         type: KeyUtil.GameOverDialog,
         gameCategoryType: GameCategoryType.SIGN,
-        score: currentScore.toDouble(),
+        score: currentScore,
         coin: _index * CoinUtil.signCoin,
         isPause: _pause);
 
     if (dialogResult.exit) {
       homeViewModel.updateScoreboard(GameCategoryType.SIGN,
-          currentScore.toDouble(), _index * CoinUtil.signCoin);
+          currentScore, _index * CoinUtil.signCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
       homeViewModel.updateScoreboard(GameCategoryType.SIGN,
-          currentScore.toDouble(), _index * CoinUtil.signCoin);
+          currentScore, _index * CoinUtil.signCoin);
       timerSubscription.cancel();
       _index = 0;
       startGame();
