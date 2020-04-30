@@ -35,7 +35,7 @@ class MathPairsButton extends StatelessWidget {
             constraints: BoxConstraints.expand(),
             child: Center(
               child: FittedBox(
-                fit: BoxFit.fitWidth,
+                fit: BoxFit.contain,
                 child: Text(
                   mathPairs.text,
                   style: Theme.of(context).textTheme.headline,
