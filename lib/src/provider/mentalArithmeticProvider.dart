@@ -174,6 +174,7 @@ class MentalArithmeticProvider with ChangeNotifier {
   Future showInfoDialog() async {
     _pause = true;
     timerSubscription.pause();
+    localTimerSubscription.pause();
     notifyListeners();
     var dialogResult = await _dialogService.showDialog(
         type: KeyUtil.InfoDialog,
@@ -185,6 +186,7 @@ class MentalArithmeticProvider with ChangeNotifier {
     if (dialogResult.exit) {
       homeViewModel.setFirstTime(GameCategoryType.MENTAL_ARITHMETIC);
       timerSubscription.resume();
+      localTimerSubscription.resume();
       _pause = false;
       notifyListeners();
     }
