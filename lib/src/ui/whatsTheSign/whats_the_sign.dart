@@ -34,7 +34,7 @@ class WhatsTheSign extends StatelessWidget {
                               child: Center(
                                 child: Text(
                                   signProvider.currentState.firstDigit,
-                                  style: Theme.of(context).textTheme.display1,
+                                  style: Theme.of(context).textTheme.headline,
                                 ),
                               ),
                             ),
@@ -54,7 +54,7 @@ class WhatsTheSign extends StatelessWidget {
                                   heightFactor: 1,
                                   child: Text(
                                     signProvider.result,
-                                    style: Theme.of(context).textTheme.display1,
+                                    style: Theme.of(context).textTheme.headline,
                                   ),
                                 ),
                               ),
@@ -64,7 +64,7 @@ class WhatsTheSign extends StatelessWidget {
                               child: Center(
                                 child: Text(
                                   signProvider.currentState.secondDigit,
-                                  style: Theme.of(context).textTheme.display1,
+                                  style: Theme.of(context).textTheme.headline,
                                 ),
                               ),
                             ),
@@ -73,7 +73,7 @@ class WhatsTheSign extends StatelessWidget {
                               child: Center(
                                 child: Text(
                                   "=",
-                                  style: Theme.of(context).textTheme.display1,
+                                  style: Theme.of(context).textTheme.headline,
                                 ),
                               ),
                             ),
@@ -82,7 +82,7 @@ class WhatsTheSign extends StatelessWidget {
                               child: Center(
                                 child: Text(
                                   signProvider.currentState.answer,
-                                  style: Theme.of(context).textTheme.display1,
+                                  style: Theme.of(context).textTheme.headline,
                                 ),
                               ),
                             ),
