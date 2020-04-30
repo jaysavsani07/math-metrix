@@ -9,25 +9,38 @@ class MathPairsQandSDataProvider {
     int min = 3;
     min = min < 1 ? 1 : min;
     int max = 10;
+    int totalPairs = level <= 2 ? 12 : 18;
+    print("level $level   total pairs $totalPairs");
 
     List<MathPair> x = List();
-    while (x.length < 12) {
-      int x1 = MathUtil.generateRandomAnswer(min, max);
-      String x2 = MathUtil.generateRandomSign();
-      int x3 = MathUtil.generateRandomAnswer(min, max);
-      if (MathUtil.evaluate(x1, x2, x3) > 0 &&
-          !x.contains(MathPair(1, "$x1 $x2 $x3", false, true)) &&
-          !x.contains(
-              MathPair(1, "${MathUtil.evaluate(x1, x2, x3)}", false, true))) {
-        if ((x2 == "/" && x1 > x3 && x1 % x3 == 0) || x2 != "/") {
-          x.add(MathPair(i, "$x1 $x2 $x3", false, true));
-          x.add(MathPair(i, "${MathUtil.evaluate(x1, x2, x3)}", false, true));
+    while (x.length < totalPairs) {
+      int firstNo = 0;
+      int secondNo = 0;
+      String sign = MathUtil.generateRandomSign();
+
+      if (sign == "/" || sign == "*") {
+        firstNo = MathUtil.generateRandomAnswer(min, max);
+        secondNo = MathUtil.generateRandomAnswer(min, max);
+      } else {
+        firstNo = MathUtil.generateRandomAnswer(min, 100);
+        secondNo = MathUtil.generateRandomAnswer(min, 100);
+      }
+
+      if (MathUtil.evaluate(firstNo, sign, secondNo) > 0 &&
+          !x.contains(MathPair(1, "$firstNo $sign $secondNo", false, true)) &&
+          !x.contains(MathPair(1,
+              "${MathUtil.evaluate(firstNo, sign, secondNo)}", false, true))) {
+        if ((sign == "/" && firstNo > secondNo && firstNo % secondNo == 0) ||
+            sign != "/") {
+          x.add(MathPair(i, "$firstNo $sign $secondNo", false, true));
+          x.add(MathPair(
+              i, "${MathUtil.evaluate(firstNo, sign, secondNo)}", false, true));
         }
         i++;
       }
     }
     x.shuffle();
-    list.add(MathPairsQandS(2, x, 12));
+    list.add(MathPairsQandS(2, x, totalPairs));
     list.forEach((MathPairsQandS m) {
       m.list.forEach((MathPair m1) {
         print(m1.text);

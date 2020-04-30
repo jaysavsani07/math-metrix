@@ -76,8 +76,10 @@ class MathPairsProvider with ChangeNotifier {
             if (_currentState.availableItem == 0) {
               await Future.delayed(Duration(milliseconds: 300));
               if (_list.length - 1 == _index) {
+                print("index $_index");
+                print("index tild ${_index % 5 + 2}");
                 _list.addAll(MathPairsQandSDataProvider.getMathPairsDataList(
-                    _index ~/ 5 + 1));
+                    _index));
               }
               _index = _index + 1;
               _currentState = _list[_index];
