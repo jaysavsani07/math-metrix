@@ -72,8 +72,10 @@ class SquareRootProvider with ChangeNotifier {
         currentScore = currentScore + (ScoreUtil.squareRootScore).toInt();
         _currentState = _list[_index];
         _result = "";
-        restartTimer();
-        notifyListeners();
+        if (!timeOut) {
+          restartTimer();
+          notifyListeners();
+        }
       } else {
         if (currentScore > 0) {
           currentScore =

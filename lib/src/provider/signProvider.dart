@@ -61,8 +61,6 @@ class SignProvider with ChangeNotifier {
       _result = answer;
       notifyListeners();
       if (_result == _currentState.sign) {
-        restartTimer();
-        notifyListeners();
         await Future.delayed(Duration(milliseconds: 300));
         if (_list.length - 1 == _index) {
           _list.addAll(SignQandSDataProvider.getSignDataList(_index ~/ 5 + 1));
@@ -72,7 +70,10 @@ class SignProvider with ChangeNotifier {
         currentScore = currentScore + (ScoreUtil.signScore).toInt();
         _result = "";
         _currentState = _list[_index];
-        notifyListeners();
+        if (!timeOut) {
+          restartTimer();
+          notifyListeners();
+        }
       } else {
         if (currentScore > 0) {
           currentScore = currentScore + (ScoreUtil.signScoreMinus).toInt();
