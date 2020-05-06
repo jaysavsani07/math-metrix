@@ -1,85 +1,68 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/models/correctAnswer/correctAnswerQandS.dart';
-import 'package:mathgame/src/resources/correctAnswer/correctAnswerQandSDataProvider.dart';
-import 'package:mathgame/src/resources/dialog_service.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
-import 'package:mathgame/src/resources/navigation_service.dart';
-import 'package:mathgame/src/utility/coinUtil.dart';
-import 'package:mathgame/src/provider/dashboardViewModel.dart';
-import 'package:mathgame/src/utility/keyUtil.dart';
-import 'package:mathgame/src/utility/scoreUtil.dart';
 import 'package:mathgame/src/utility/timeUtil.dart';
 
-class CorrectAnswerProvider with ChangeNotifier {
-  var homeViewModel = GetIt.I<DashboardViewModel>();
-  final DialogService _dialogService = GetIt.I<DialogService>();
+import 'gameViewModel.dart';
 
-  List<CorrectAnswerQandS> _list;
-  CorrectAnswerQandS _currentState;
+class CorrectAnswerProvider
+    with ChangeNotifier
+    implements GameAccess<CorrectAnswerQandS> {
+  GameViewModelImp gameViewModel;
+
   String _result;
-  int _index = 0;
-  double currentScore = 0;
-
-  bool _timeOut;
-  int _time;
-  bool _pause = false;
-
-  bool get timeOut => _timeOut;
 
   String get result => _result;
 
+  int _time;
+
   int get time => _time;
+
+  bool _pause = false;
 
   bool get pause => _pause;
 
-  StreamSubscription timerSubscription;
+  CorrectAnswerQandS _currentState;
 
   CorrectAnswerQandS get currentState => _currentState;
 
+  double _currentScore = 0;
+
+  double get currentScore => _currentScore;
+  bool _timeOut;
+
   CorrectAnswerProvider() {
-    startGame();
+    gameViewModel = GameViewModelImp<CorrectAnswerQandS>(
+        gameAccess: this, gameCategoryType: GameCategoryType.CORRECT_ANSWER);
+    startGame1();
   }
 
-  void startGame() {
-    _list = CorrectAnswerQandSDataProvider.getCorrectAnswerDataList(1);
-    _currentState = _list[_index];
-    _time = TimeUtil.correctAnswerTimeOut;
+  @override
+  void startGame1() {
+    _time = TimeUtil.calculatorTimeOut;
     _timeOut = false;
     _result = "";
-    currentScore = 0;
-    startTimer();
-
-    if (homeViewModel.isFirstTime(GameCategoryType.CORRECT_ANSWER)) {
-      showInfoDialogWithDelay();
-    }
+    _currentScore = 0;
+    gameViewModel.startGame();
   }
 
   Future<void> checkResult(String answer) async {
-    if (!timeOut) {
+    if (_result.length < currentState.answer.toString().length && !_timeOut) {
       _result = answer;
       notifyListeners();
-      if (int.parse(_result) == _currentState.answer) {
+      if (int.parse(_result) == currentState.answer) {
         await Future.delayed(Duration(milliseconds: 300));
-        if (_list.length - 1 == _index) {
-          _list.addAll(CorrectAnswerQandSDataProvider.getCorrectAnswerDataList(
-              _index ~/ 5 + 1));
-        }
-        _index = _index + 1;
-        currentScore = currentScore + ScoreUtil.correctAnswerScore;
-        _currentState = _list[_index];
+        gameViewModel.loadNewDataIfRequired();
         _result = "";
-        if (!timeOut) {
-          restartTimer();
-          notifyListeners();
+        _time = TimeUtil.correctAnswerTimeOut;
+        if (!_timeOut) {
+          gameViewModel.restartGame();
         }
-      } else {
-        if (currentScore > 0) {
-          currentScore =
-              currentScore + ScoreUtil.correctAnswerScoreMinus;
-        }
+        notifyListeners();
+      } else if (_result.length == currentState.answer.toString().length) {
+        gameViewModel.wrongAnswer();
       }
     }
   }
@@ -89,86 +72,50 @@ class CorrectAnswerProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void startTimer() {
-    timerSubscription = Stream.periodic(
-            Duration(seconds: 1), (x) => TimeUtil.correctAnswerTimeOut - x - 1)
-        .take(TimeUtil.correctAnswerTimeOut)
-        .listen((time) {
-      _time = time;
-      notifyListeners();
-    }, onDone: () {
-      showDialog();
-      this._timeOut = true;
-      notifyListeners();
-    });
-  }
-
-  void restartTimer() {
-    timerSubscription.cancel();
-    startTimer();
+  void showInfoDialog() {
+    _pause = true;
+    gameViewModel.pauseGame();
+    gameViewModel.showInfoDialog();
   }
 
   void pauseTimer() {
     _pause = true;
-    timerSubscription.pause();
+    gameViewModel.pauseGame();
     notifyListeners();
-    showDialog();
+    gameViewModel.showPauseGameDialog();
   }
 
-  Future showDialog() async {
-    notifyListeners();
-    var dialogResult = await _dialogService.showDialog(
-        type: KeyUtil.GameOverDialog,
-        gameCategoryType: GameCategoryType.CORRECT_ANSWER,
-        score: currentScore,
-        coin: _index * CoinUtil.correctAnswerCoin,
-        isPause: _pause);
+  @override
+  void onGameTimeOut() {
+    this._timeOut = true;
+  }
 
-    if (dialogResult.exit) {
-      homeViewModel.updateScoreboard(GameCategoryType.CORRECT_ANSWER,
-          currentScore, _index * CoinUtil.correctAnswerCoin);
-      GetIt.I<NavigationService>().goBack();
-    } else if (dialogResult.restart) {
-      homeViewModel.updateScoreboard(GameCategoryType.CORRECT_ANSWER,
-          currentScore, _index * CoinUtil.correctAnswerCoin);
-      timerSubscription.cancel();
-      _index = 0;
-      startGame();
-    } else if (dialogResult.play) {
-      timerSubscription.resume();
-      _pause = false;
-      notifyListeners();
-    }
+  @override
+  void onGameTimeUpdate(int time) {
+    _time = time;
     notifyListeners();
   }
 
-  Future showInfoDialogWithDelay() async {
-    await Future.delayed(Duration(milliseconds: 500));
-    showInfoDialog();
+  @override
+  void onCurrentStateUpdate(CorrectAnswerQandS currentState) {
+    _currentState = currentState;
+    notifyListeners();
   }
 
-  Future showInfoDialog() async {
-    await Future.delayed(Duration(milliseconds: 500));
-    _pause = true;
-    timerSubscription.pause();
+  @override
+  void onScoreUpdate(double time) {
+    _currentScore = time;
     notifyListeners();
-    var dialogResult = await _dialogService.showDialog(
-        type: KeyUtil.InfoDialog,
-        gameCategoryType: GameCategoryType.CORRECT_ANSWER,
-        score: 0,
-        coin: 0,
-        isPause: false);
+  }
 
-    if (dialogResult.exit) {
-      homeViewModel.setFirstTime(GameCategoryType.CORRECT_ANSWER);
-      timerSubscription.resume();
-      _pause = false;
-      notifyListeners();
-    }
+  @override
+  void onResumeGame() {
+    _pause = false;
+    notifyListeners();
   }
 
   void dispose() {
     super.dispose();
-    this.timerSubscription.cancel();
+    gameViewModel.exitGame();
   }
 }

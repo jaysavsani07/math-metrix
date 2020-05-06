@@ -1,3 +1,4 @@
+
 import 'package:mathgame/src/models/calculator/calculatorQandS.dart';
 import 'package:mathgame/src/utility/mathUtil.dart';
 
@@ -46,6 +47,6 @@ class CalculatorQandSDataProvider {
     return list;
   }
 }
-void main(){
-  CalculatorQandSDataProvider.getCalculatorDataList(1);
+void main()  {
+
 }

@@ -151,7 +151,7 @@ class WhatsTheSign extends StatelessWidget {
                                     : Icon(Icons.pause),
                                 iconSize: 40,
                                 onPressed: () {
-                                  signProvider.pauseTimer();
+                                  signProvider.pauseGame();
                                 },
                               ),
                               IconButton(

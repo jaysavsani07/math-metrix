@@ -16,9 +16,9 @@ class CalculatorButton extends StatelessWidget {
       child: InkWell(
         onTap: () {
           if (text == "CLEAR") {
-            provider.clear();
+            provider.clearGameInput();
           } else {
-            provider.checkResult(text);
+            provider.checkGameResult(text);
           }
         },
         borderRadius: borderRadius,
