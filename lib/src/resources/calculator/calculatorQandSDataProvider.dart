@@ -5,27 +5,17 @@ class CalculatorQandSDataProvider {
   static getCalculatorDataList(int level) {
     List<CalculatorQandS> list = List();
 
-    int min = level == 1 ? 1 : (5 * level) - 5;
-    int max = level == 1 ? 10 : (5 * level) + 5;
-    print("$min $max");
-    int i = 0;
-    var x1 = MathUtil.generate(min, max, 10);
-    var x2 = MathUtil.generateRandomSign1(10);
-    var x3 = MathUtil.generate(min, max, 10);
-    while (list.length < 5 && i < 10) {
-      if (MathUtil.evaluate(int.parse(x1[i]), x2[i], int.parse(x3[i])) >= 0 &&
-          !list.contains(CalculatorQandS(1, "${x1[i]} ${x2[i]} ${x3[i]}",
-              MathUtil.evaluate(int.parse(x1[i]), x2[i], int.parse(x3[i]))))) {
-        if ((x2[i] == "/" && int.parse(x1[i]) % int.parse(x3[i]) == 0) ||
-            x2[i] != "/") {
-          list.add(CalculatorQandS(1, "${x1[i]} ${x2[i]} ${x3[i]}",
-              MathUtil.evaluate(int.parse(x1[i]), x2[i], int.parse(x3[i]))));
-          print(
-              "${x1[i]} ${x2[i]} ${x3[i]} ${MathUtil.evaluate(int.parse(x1[i]), x2[i], int.parse(x3[i]))}");
-        }
-      }
-      i++;
-    }
+    List<Expression> expressionList = MathUtil.generate(level, 5);
+    expressionList.forEach((Expression expression) {
+      list.add(CalculatorQandS(
+          1,
+          "${expression.firstOperand} ${expression.operator} ${expression.secondOperand}",
+          expression.answer));
+    });
+
+    list.forEach((CalculatorQandS q) {
+      print("${q.toString()}");
+    });
     return list;
   }
 }
