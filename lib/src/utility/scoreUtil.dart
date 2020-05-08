@@ -20,6 +20,10 @@ class ScoreUtil {
   static double mathematicalPairsScore = 1;
   static double mathematicalPairsScoreMinus = -0.5;
 
+//in Mental Arithmetic, Math Pairs, Magic Tringle and Math Machine
+//only toInt() value display in InfoDilog
+//so,if score is double then change toInt() to toDoule() in InfoDialg
+
   static double magicTriangleScore = 5;
 
   static double mathMachineScore = 5;
