@@ -143,7 +143,7 @@ class Calculator extends StatelessWidget {
                                   : Icon(Icons.pause),
                               iconSize: 40,
                               onPressed: () {
-                                calculatorProvider.pauseTimer();
+                                calculatorProvider.pauseGame();
                               },
                             );
                           }),

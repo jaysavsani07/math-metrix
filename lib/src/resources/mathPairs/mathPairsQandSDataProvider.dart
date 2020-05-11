@@ -4,7 +4,7 @@ import 'package:mathgame/src/utility/mathUtil.dart';
 class MathPairsQandSDataProvider {
   static List<int> listHasCode = List();
 
-  static List<MathPairsQandS> getMathPairsDataList(int level) {
+  static getMathPairsDataList(int level) {
     if (level == 1) {
       listHasCode.clear();
     }
@@ -35,7 +35,7 @@ class MathPairsQandSDataProvider {
     }
 
     list.shuffle();
-    return [MathPairsQandS(list, totalPairs)];
+    return <MathPairsQandS>[MathPairsQandS(list, totalPairs)];
   }
 }
 
