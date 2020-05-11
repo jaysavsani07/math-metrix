@@ -103,7 +103,6 @@ class MagicTriangleProvider with ChangeNotifier {
           _index = _index + 1;
           currentScore = currentScore + ScoreUtil.magicTriangleScore;
           _currentState = _list[_index];
-          restartTimer();
           notifyListeners();
         }
       }

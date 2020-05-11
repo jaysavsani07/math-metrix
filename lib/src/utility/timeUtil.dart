@@ -9,12 +9,13 @@ class TimeUtil {
   static int quickCalculationPlusTime = 1;
 
   static int mentalArithmeticTimeOut = 60;
+
   //this is fix don't change this
   static int mentalArithmeticLocalTimeOut = 4;
 
   static int squareRootTimeOut = 5;
 
-  static int mathematicalPairsTimeOut = 120;
+  static int mathematicalPairsTimeOut = 60;
   static int magicTriangleTimeOut = 120;
   static int mathMachineTimeOut = 120;
 }
