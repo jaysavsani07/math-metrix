@@ -362,13 +362,13 @@ class MathUtil {
               expression = MathUtil.getMinusSignExp(min, max);
               break;
             case "*":
-              expression = MathUtil.getMultiplySignExp(1, 15);
+              expression = MathUtil.getMultiplySignExp(1, 10);
               break;
             case "/":
-              expression = MathUtil.getDivideSignExp(min, max);
+              expression = MathUtil.getDivideSignExp(1, 10);
               break;
           }
-        } else if (level <= 4) {
+        } else if (level <= 3) {
           switch (sign) {
             case "+":
               expression = MathUtil.getPlusSignExp(min, max);
@@ -377,10 +377,25 @@ class MathUtil {
               expression = MathUtil.getMinusSignExp(min, max);
               break;
             case "*":
-              expression = MathUtil.getMixExp(1, 15);
+              expression = MathUtil.getMultiplySignExp(1, 15);
               break;
             case "/":
-              expression = MathUtil.getDivideSignExp(min, max);
+              expression = MathUtil.getDivideSignExp(1, 15);
+              break;
+          }
+        } else {
+          switch (sign) {
+            case "+":
+              expression = MathUtil.getPlusSignExp(min, max);
+              break;
+            case "-":
+              expression = MathUtil.getMinusSignExp(min, max);
+              break;
+            case "*":
+              expression = MathUtil.getMultiplySignExp(5, 30);
+              break;
+            case "/":
+              expression = MathUtil.getDivideSignExp(5, 30);
               break;
           }
         }
@@ -390,7 +405,7 @@ class MathUtil {
       });
     }
     list.forEach((Expression q) {
-//      print("${q.toString()}");
+      print("${q.toString()}");
     });
     return list;
   }
@@ -453,7 +468,6 @@ class MathUtil {
 }
 
 void main() {
-
   for (int i = 1; i < 15; i++) {
 //    MathUtil.getMixExp(1, 10);
     print("******$i*********");

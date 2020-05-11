@@ -70,8 +70,7 @@ class MathPairsProvider with ChangeNotifier {
             _currentState.list[index].isVisible = false;
             _currentState.availableItem = _currentState.availableItem - 2;
             first = -1;
-            currentScore =
-                currentScore + ScoreUtil.mathematicalPairsScore;
+            currentScore = currentScore + ScoreUtil.mathematicalPairsScore;
             notifyListeners();
             if (_currentState.availableItem == 0) {
               await Future.delayed(Duration(milliseconds: 300));
@@ -79,7 +78,7 @@ class MathPairsProvider with ChangeNotifier {
                 print("index $_index");
                 print("index tild ${_index % 5 + 2}");
                 _list.addAll(MathPairsQandSDataProvider.getMathPairsDataList(
-                    _index));
+                    _index + 2));
               }
               _index = _index + 1;
               _currentState = _list[_index];
@@ -90,8 +89,8 @@ class MathPairsProvider with ChangeNotifier {
             _currentState.list[first].isActive = false;
             _currentState.list[index].isActive = false;
             if (currentScore > 0) {
-              currentScore = currentScore +
-                  ScoreUtil.mathematicalPairsScoreMinus;
+              currentScore =
+                  currentScore + ScoreUtil.mathematicalPairsScoreMinus;
             }
             first = -1;
             notifyListeners();
@@ -144,12 +143,12 @@ class MathPairsProvider with ChangeNotifier {
         isPause: _pause);
 
     if (dialogResult.exit) {
-      homeViewModel.updateScoreboard(GameCategoryType.MATH_PAIRS,
-          currentScore, _index * CoinUtil.mathematicalPairsCoin);
+      homeViewModel.updateScoreboard(GameCategoryType.MATH_PAIRS, currentScore,
+          _index * CoinUtil.mathematicalPairsCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
-      homeViewModel.updateScoreboard(GameCategoryType.MATH_PAIRS,
-          currentScore, _index * CoinUtil.mathematicalPairsCoin);
+      homeViewModel.updateScoreboard(GameCategoryType.MATH_PAIRS, currentScore,
+          _index * CoinUtil.mathematicalPairsCoin);
       timerSubscription.cancel();
       startGame();
     } else if (dialogResult.play) {

@@ -1,13 +1,12 @@
 class MathPairsQandS {
-  int id;
   List<MathPair> list;
   int availableItem;
 
-  MathPairsQandS(this.id, this.list, this.availableItem);
+  MathPairsQandS(this.list, this.availableItem);
 
   @override
   String toString() {
-    return 'MathPairsQandS{id: $id, list: $list}';
+    return 'MathPairsQandS{list: $list}';
   }
 }
 
