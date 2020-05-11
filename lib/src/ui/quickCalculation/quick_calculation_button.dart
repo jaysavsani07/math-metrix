@@ -42,6 +42,5 @@ class QuickCalculationButton extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

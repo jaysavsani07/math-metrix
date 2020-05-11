@@ -25,7 +25,7 @@ class QuickCalculationProvider with ChangeNotifier {
   bool _timeOut;
   double _time;
   bool _pause = false;
-  int currentScore = 0;
+  double currentScore = 0;
 
   bool get timeOut => _timeOut;
 
@@ -77,7 +77,7 @@ class QuickCalculationProvider with ChangeNotifier {
             QuickCalculationQandSDataProvider.getQuickCalculationDataList(
                 _index ~/ 5 + 1, 1));
         _index = _index + 1;
-        currentScore = currentScore + (ScoreUtil.quickCalculationScore).toInt();
+        currentScore = currentScore + ScoreUtil.quickCalculationScore;
         if (time >= 0.0125)
           _timeLength = _timeLength + TimeUtil.quickCalculationPlusTime;
         _currentState = _list[_index];
@@ -88,7 +88,7 @@ class QuickCalculationProvider with ChangeNotifier {
           _currentState.answer.toString().length) {
         if (currentScore > 0) {
           currentScore =
-              currentScore + (ScoreUtil.quickCalculationScoreMinus).toInt();
+              currentScore + ScoreUtil.quickCalculationScoreMinus;
         }
       }
     }
@@ -132,17 +132,17 @@ class QuickCalculationProvider with ChangeNotifier {
     var dialogResult = await _dialogService.showDialog(
         type: KeyUtil.GameOverDialog,
         gameCategoryType: GameCategoryType.QUICK_CALCULATION,
-        score: currentScore.toDouble(),
+        score: currentScore,
         coin: _index * CoinUtil.quickCalculationCoin,
         isPause: _pause);
 
     if (dialogResult.exit) {
       homeViewModel.updateScoreboard(GameCategoryType.QUICK_CALCULATION,
-          currentScore.toDouble(), _index * CoinUtil.quickCalculationCoin);
+          currentScore, _index * CoinUtil.quickCalculationCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
       homeViewModel.updateScoreboard(GameCategoryType.QUICK_CALCULATION,
-          currentScore.toDouble(), _index * CoinUtil.quickCalculationCoin);
+          currentScore, _index * CoinUtil.quickCalculationCoin);
       timerSubscription.cancel();
       startGame();
     } else if (dialogResult.play) {
@@ -178,6 +178,7 @@ class QuickCalculationProvider with ChangeNotifier {
   }
 
   void dispose() {
+    super.dispose();
     this.timerSubscription.cancel();
   }
 }

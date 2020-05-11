@@ -21,7 +21,7 @@ class SquareRootProvider with ChangeNotifier {
   SquareRootQandS _currentState;
   String _result;
   int _index = 0;
-  int currentScore = 0;
+  double currentScore = 0;
 
   bool _timeOut;
   int _time;
@@ -69,15 +69,17 @@ class SquareRootProvider with ChangeNotifier {
           print("_index $_index");
         }
         _index = _index + 1;
-        currentScore = currentScore + (ScoreUtil.squareRootScore).toInt();
+        currentScore = currentScore + ScoreUtil.squareRootScore;
         _currentState = _list[_index];
         _result = "";
-        restartTimer();
-        notifyListeners();
+        if (!timeOut) {
+          restartTimer();
+          notifyListeners();
+        }
       } else {
         if (currentScore > 0) {
           currentScore =
-              currentScore + (ScoreUtil.squareRootScoreMinus).toInt();
+              currentScore + ScoreUtil.squareRootScoreMinus;
         }
       }
     }
@@ -119,17 +121,17 @@ class SquareRootProvider with ChangeNotifier {
     var dialogResult = await _dialogService.showDialog(
         type: KeyUtil.GameOverDialog,
         gameCategoryType: GameCategoryType.SQUARE_ROOT,
-        score: currentScore.toDouble(),
+        score: currentScore,
         coin: _index * CoinUtil.squareRootCoin,
         isPause: _pause);
 
     if (dialogResult.exit) {
       homeViewModel.updateScoreboard(GameCategoryType.SQUARE_ROOT,
-          currentScore.toDouble(), _index * CoinUtil.squareRootCoin);
+          currentScore, _index * CoinUtil.squareRootCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
       homeViewModel.updateScoreboard(GameCategoryType.SQUARE_ROOT,
-          currentScore.toDouble(), _index * CoinUtil.squareRootCoin);
+          currentScore, _index * CoinUtil.squareRootCoin);
       timerSubscription.cancel();
       startGame();
     } else if (dialogResult.play) {
@@ -165,6 +167,7 @@ class SquareRootProvider with ChangeNotifier {
   }
 
   void dispose() {
+    super.dispose();
     this.timerSubscription.cancel();
   }
 }

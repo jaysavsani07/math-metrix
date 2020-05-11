@@ -37,6 +37,5 @@ class CorrectAnswerButton extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

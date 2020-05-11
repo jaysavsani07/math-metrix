@@ -51,7 +51,7 @@ class WhatsTheSign extends StatelessWidget {
                                   heightFactor: 1,
                                   child: Text(
                                     signProvider.result,
-                                    style: Theme.of(context).textTheme.display1,
+                                    style: Theme.of(context).textTheme.headline,
                                   ),
                                 ),
                               ),

@@ -23,7 +23,7 @@ class MathGridProvider with ChangeNotifier {
   bool _timeOut;
   int _time;
   bool _pause = false;
-  int currentScore = 0;
+  double currentScore = 0;
 
   bool get timeOut => _timeOut;
 
@@ -60,6 +60,17 @@ class MathGridProvider with ChangeNotifier {
       notifyListeners();
       return;
     }
+
+    var listOfUnRemovedIndex = _currentState.listForSquare.where((result) => result.isRemoved == false).toList();
+    if (listOfUnRemovedIndex.length <= 12) {
+      print("less then 10");
+      var possiblePairs = getCountOfPossiblePairs(listOfUnRemovedIndex, _currentState.currentAnswer);
+      print("possible pairs : $possiblePairs");
+      _index = _index + 1 ;
+      print("_index + $_index");
+      _currentState = _list[_index];
+    }
+
     gridModel.isActive = true;
     int total = 0;
     var listOfIndex = _currentState.listForSquare
@@ -75,12 +86,26 @@ class MathGridProvider with ChangeNotifier {
         listOfIndex[i].isActive = false;
         listOfIndex[i].isRemoved = true;
       }
-      currentScore = currentScore + (ScoreUtil.mathMachineScore).toInt();
+      currentScore = currentScore + ScoreUtil.mathMachineScore;
       answerIndex = answerIndex + 1;
+      print("answer indiex $answerIndex");
+      print("list of answer legnth ${_currentState.listOfAnswer.length}");
       _currentState.currentAnswer = _currentState.listOfAnswer[answerIndex];
     }
     print("total $total");
     notifyListeners();
+  }
+
+  int getCountOfPossiblePairs(List<MathGridCellModel> arr, int sum) {
+    int count = 0;
+    for (int i = 0; i < arr.length; i++) {
+      for (int j = (i + 1); j < arr.length; j++) {
+        if ((arr[i].value + arr[j].value) == sum) {
+          count++;
+        }
+      }
+    }
+    return count;
   }
 
   clear() {
@@ -118,17 +143,17 @@ class MathGridProvider with ChangeNotifier {
     var dialogResult = await _dialogService.showDialog(
         type: KeyUtil.GameOverDialog,
         gameCategoryType: GameCategoryType.MATH_MACHINE,
-        score: currentScore.toDouble(),
+        score: currentScore,
         coin: _index * CoinUtil.mathMachineCoin,
         isPause: _pause);
 
     if (dialogResult.exit) {
       homeViewModel.updateScoreboard(GameCategoryType.MATH_MACHINE,
-          currentScore.toDouble(), _index * CoinUtil.mathMachineCoin);
+          currentScore, _index * CoinUtil.mathMachineCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
       homeViewModel.updateScoreboard(GameCategoryType.MATH_MACHINE,
-          currentScore.toDouble(), _index * CoinUtil.mathMachineCoin);
+          currentScore, _index * CoinUtil.mathMachineCoin);
       timerSubscription.cancel();
       startGame();
     } else if (dialogResult.play) {
@@ -164,6 +189,7 @@ class MathGridProvider with ChangeNotifier {
   }
 
   void dispose() {
+    super.dispose();
     this.timerSubscription.cancel();
   }
 }

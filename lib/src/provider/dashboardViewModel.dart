@@ -41,7 +41,7 @@ class DashboardViewModel extends ChangeNotifier {
             GameCategoryType.CALCULATOR,
             KeyUtil.Calculator,
             getScoreboard("calculator")));
-        list.add(GameCategory(2, "What's the sign?", "sign",
+        list.add(GameCategory(2, "Guess the sign?", "sign",
             GameCategoryType.SIGN, KeyUtil.Sign, getScoreboard("sign")));
         list.add(GameCategory(
             5,
@@ -91,7 +91,7 @@ class DashboardViewModel extends ChangeNotifier {
             getScoreboard("magic_tringle")));
         list.add(GameCategory(
             9,
-            "Math Machine Square",
+            "Math Grid",
             "math_machine",
             GameCategoryType.MATH_MACHINE,
             KeyUtil.MathMachine,

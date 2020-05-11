@@ -453,6 +453,7 @@ class MathUtil {
 }
 
 void main() {
+
   for (int i = 1; i < 15; i++) {
 //    MathUtil.getMixExp(1, 10);
     print("******$i*********");

@@ -22,7 +22,7 @@ class CalculatorProvider with ChangeNotifier {
   CalculatorQandS _currentState;
   String _result;
   int _index = 0;
-  int currentScore = 0;
+  double currentScore = 0;
 
   bool _timeOut;
   int _time;
@@ -70,16 +70,18 @@ class CalculatorProvider with ChangeNotifier {
               _index ~/ 5 + 1));
         }
         _index = _index + 1;
-        currentScore = currentScore + (ScoreUtil.calculatorScore).toInt();
+        currentScore = currentScore + ScoreUtil.calculatorScore;
         _result = "";
         _time = TimeUtil.calculatorTimeOut;
         _currentState = _list[_index];
-        restartTimer();
-        notifyListeners();
+        if (!timeOut) {
+          restartTimer();
+          notifyListeners();
+        }
       } else if (_result.length == _currentState.answer.toString().length) {
         if (currentScore > 0) {
           currentScore =
-              currentScore + (ScoreUtil.calculatorScoreMinus).toInt();
+              currentScore + ScoreUtil.calculatorScoreMinus;
         }
       }
     }
@@ -121,17 +123,17 @@ class CalculatorProvider with ChangeNotifier {
     var dialogResult = await _dialogService.showDialog(
         type: KeyUtil.GameOverDialog,
         gameCategoryType: GameCategoryType.CALCULATOR,
-        score: currentScore.toDouble(),
+        score: currentScore,
         coin: _index * CoinUtil.calculatorCoin,
         isPause: _pause);
 
     if (dialogResult.exit) {
       homeViewModel.updateScoreboard(GameCategoryType.CALCULATOR,
-          currentScore.toDouble(), _index * CoinUtil.calculatorCoin);
+          currentScore, _index * CoinUtil.calculatorCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
       homeViewModel.updateScoreboard(GameCategoryType.CALCULATOR,
-          currentScore.toDouble(), _index * CoinUtil.calculatorCoin);
+          currentScore, _index * CoinUtil.calculatorCoin);
       timerSubscription.cancel();
       startGame();
     } else if (dialogResult.play) {
@@ -167,6 +169,7 @@ class CalculatorProvider with ChangeNotifier {
   }
 
   void dispose() {
+    super.dispose();
     this.timerSubscription.cancel();
   }
 }

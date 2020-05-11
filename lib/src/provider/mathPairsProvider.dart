@@ -23,10 +23,11 @@ class MathPairsProvider with ChangeNotifier {
   int first = -1;
   int second = -1;
 
+  bool _lock;
   bool _timeOut;
   int _time;
   bool _pause = false;
-  int currentScore = 0;
+  double currentScore = 0;
 
   bool get timeOut => _timeOut;
 
@@ -46,6 +47,7 @@ class MathPairsProvider with ChangeNotifier {
     _list = MathPairsQandSDataProvider.getMathPairsDataList(1);
     _index = 0;
     currentScore = 0;
+    _lock = false;
     _currentState = _list[_index];
     _time = TimeUtil.mathematicalPairsTimeOut;
     _timeOut = false;
@@ -57,43 +59,51 @@ class MathPairsProvider with ChangeNotifier {
 
   Future<void> checkResult(MathPair mathPair, int index) async {
     if (!timeOut) {
-      _currentState.list[index].isActive = true;
-      notifyListeners();
-      await Future.delayed(Duration(milliseconds: 300));
-      if (first != -1) {
-        print(_currentState.list[first]);
-        print(_currentState.list[index]);
-        if (_currentState.list[first].uid == _currentState.list[index].uid) {
-          _currentState.list[first].isVisible = false;
-          _currentState.list[index].isVisible = false;
-          _currentState.availableItem = _currentState.availableItem - 2;
-          first = -1;
-          currentScore =
-              currentScore + (ScoreUtil.mathematicalPairsScore).toInt();
-          notifyListeners();
-          if (_currentState.availableItem == 0) {
-            await Future.delayed(Duration(milliseconds: 300));
-            if (_list.length - 1 == _index) {
-              _list.addAll(MathPairsQandSDataProvider.getMathPairsDataList(
-                  _index ~/ 5 + 1));
+      _lock = true;
+      if (!_currentState.list[index].isActive) {
+        _currentState.list[index].isActive = true;
+        notifyListeners();
+        await Future.delayed(Duration(milliseconds: 300));
+        if (first != -1) {
+          if (_currentState.list[first].uid == _currentState.list[index].uid) {
+            _currentState.list[first].isVisible = false;
+            _currentState.list[index].isVisible = false;
+            _currentState.availableItem = _currentState.availableItem - 2;
+            first = -1;
+            currentScore =
+                currentScore + ScoreUtil.mathematicalPairsScore;
+            notifyListeners();
+            if (_currentState.availableItem == 0) {
+              await Future.delayed(Duration(milliseconds: 300));
+              if (_list.length - 1 == _index) {
+                print("index $_index");
+                print("index tild ${_index % 5 + 2}");
+                _list.addAll(MathPairsQandSDataProvider.getMathPairsDataList(
+                    _index));
+              }
+              _index = _index + 1;
+              _currentState = _list[_index];
+              restartTimer();
+              notifyListeners();
             }
-            _index = _index + 1;
-            _currentState = _list[_index];
-            restartTimer();
+          } else {
+            _currentState.list[first].isActive = false;
+            _currentState.list[index].isActive = false;
+            if (currentScore > 0) {
+              currentScore = currentScore +
+                  ScoreUtil.mathematicalPairsScoreMinus;
+            }
+            first = -1;
             notifyListeners();
           }
         } else {
-          _currentState.list[first].isActive = false;
-          _currentState.list[index].isActive = false;
-          if (currentScore > 0) {
-            currentScore =
-                currentScore + (ScoreUtil.mathematicalPairsScoreMinus).toInt();
-          }
-          first = -1;
-          notifyListeners();
+          first = index;
         }
+        _lock = false;
       } else {
-        first = index;
+        first = -1;
+        _currentState.list[index].isActive = false;
+        notifyListeners();
       }
     }
   }
@@ -129,17 +139,17 @@ class MathPairsProvider with ChangeNotifier {
     var dialogResult = await _dialogService.showDialog(
         type: KeyUtil.GameOverDialog,
         gameCategoryType: GameCategoryType.MATH_PAIRS,
-        score: currentScore.toDouble(),
+        score: currentScore,
         coin: _index * CoinUtil.mathematicalPairsCoin,
         isPause: _pause);
 
     if (dialogResult.exit) {
       homeViewModel.updateScoreboard(GameCategoryType.MATH_PAIRS,
-          currentScore.toDouble(), _index * CoinUtil.mathematicalPairsCoin);
+          currentScore, _index * CoinUtil.mathematicalPairsCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
       homeViewModel.updateScoreboard(GameCategoryType.MATH_PAIRS,
-          currentScore.toDouble(), _index * CoinUtil.mathematicalPairsCoin);
+          currentScore, _index * CoinUtil.mathematicalPairsCoin);
       timerSubscription.cancel();
       startGame();
     } else if (dialogResult.play) {
@@ -175,6 +185,7 @@ class MathPairsProvider with ChangeNotifier {
   }
 
   void dispose() {
+    super.dispose();
     this.timerSubscription.cancel();
   }
 }

@@ -24,7 +24,7 @@ class MagicTriangleProvider with ChangeNotifier {
   bool _timeOut;
   int _time;
   bool _pause = false;
-  int currentScore = 0 ;
+  double currentScore = 0;
 
   bool get timeOut => _timeOut;
 
@@ -75,7 +75,7 @@ class MagicTriangleProvider with ChangeNotifier {
     }
   }
 
-  Future<void> checkResult(int index, MagicTriangleGrid digit) async    {
+  Future<void> checkResult(int index, MagicTriangleGrid digit) async {
     if (!timeOut) {
       int activeTriangelIndex =
           _currentState.listTriangle.indexWhere((val) => val.isActive == true);
@@ -101,7 +101,7 @@ class MagicTriangleProvider with ChangeNotifier {
             _currentState.answer == sumOfBottomSide) {
           await Future.delayed(Duration(milliseconds: 300));
           _index = _index + 1;
-          currentScore = currentScore+(ScoreUtil.magicTriangleScore ).toInt();
+          currentScore = currentScore + ScoreUtil.magicTriangleScore;
           _currentState = _list[_index];
           restartTimer();
           notifyListeners();
@@ -146,21 +146,17 @@ class MagicTriangleProvider with ChangeNotifier {
     var dialogResult = await _dialogService.showDialog(
         type: KeyUtil.GameOverDialog,
         gameCategoryType: GameCategoryType.MAGIC_TRIANGLE,
-        score:  currentScore.toDouble(),
+        score: currentScore,
         coin: _index * CoinUtil.magicTriangleCoin,
         isPause: _pause);
 
     if (dialogResult.exit) {
-      homeViewModel.updateScoreboard(
-          GameCategoryType.MAGIC_TRIANGLE,
-          currentScore.toDouble(),
-          _index * CoinUtil.magicTriangleCoin);
+      homeViewModel.updateScoreboard(GameCategoryType.MAGIC_TRIANGLE,
+          currentScore, _index * CoinUtil.magicTriangleCoin);
       GetIt.I<NavigationService>().goBack();
     } else if (dialogResult.restart) {
-      homeViewModel.updateScoreboard(
-          GameCategoryType.MAGIC_TRIANGLE,
-          currentScore.toDouble(),
-          _index * CoinUtil.magicTriangleCoin);
+      homeViewModel.updateScoreboard(GameCategoryType.MAGIC_TRIANGLE,
+          currentScore, _index * CoinUtil.magicTriangleCoin);
       timerSubscription.cancel();
       startGame();
     } else if (dialogResult.play) {
@@ -196,6 +192,7 @@ class MagicTriangleProvider with ChangeNotifier {
   }
 
   void dispose() {
+    super.dispose();
     this.timerSubscription.cancel();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/provider/dashboardViewModel.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
@@ -7,9 +8,6 @@ import 'package:mathgame/src/utility/keyUtil.dart';
 
 import 'package:mathgame/src/utility/sizeConfig.dart';
 
-import 'home.dart';
-import 'package:mathgame/src/ui/home.dart';
-import 'package:async/async.dart';
 import 'package:provider_architecture/provider_architecture.dart';
 
 class DashBoardPage extends StatefulWidget {
@@ -96,19 +94,24 @@ class _DashBoardPageState extends State<DashBoardPage>
                                 Expanded(
                                   flex: 1,
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
-                                      Icon(Icons.credit_card,
-                                          color: Colors.deepOrange[300]),
+                                      SvgPicture.asset(
+                                        "assets/images/goal.svg",
+                                        width: 18,
+                                        height: 18,
+                                      ),
                                       SizedBox(width: 5),
                                       Text(model.overallScore.toString(),
                                           style: Theme.of(context)
                                               .textTheme
                                               .subhead),
                                       SizedBox(width: 30),
-                                      Icon(Icons.monetization_on,
-                                          color: Colors.yellow[300]),
+                                      SvgPicture.asset(
+                                        "assets/images/money.svg",
+                                        width: 18,
+                                        height: 18,
+                                      ),
                                       SizedBox(width: 5),
                                       Text(model.totalCoin.toString(),
                                           style: Theme.of(context)

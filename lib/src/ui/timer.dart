@@ -57,7 +57,7 @@ class Timer extends StatelessWidget {
           Column(
             children: <Widget>[
               Text("Score", style: Theme.of(context).textTheme.subhead),
-              Text(provider.currentScore.toString(),
+              Text(provider.currentScore.toInt().toString(),
                   style: Theme.of(context).textTheme.headline)
             ],
           ),
