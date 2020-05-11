@@ -85,21 +85,15 @@ class MagicTriangleProvider with ChangeNotifier {
       _currentState.listTriangle[selectedTriangleIndex].value = digit.value;
       _currentState.listGrid[index].isVisible = false;
       _currentState.availableDigit = _currentState.availableDigit - 1;
+
       if (_currentState.availableDigit == 0) {
         // check if total of triangle is as per given answer
-        int sumOfLeftSide = (int.parse(_currentState.listTriangle[0].value) +
-            int.parse(_currentState.listTriangle[1].value) +
-            int.parse(_currentState.listTriangle[3].value));
-        int sumOfRightSide = (int.parse(_currentState.listTriangle[0].value) +
-            int.parse(_currentState.listTriangle[2].value) +
-            int.parse(_currentState.listTriangle[5].value));
-        int sumOfBottomSide = (int.parse(_currentState.listTriangle[3].value) +
-            int.parse(_currentState.listTriangle[4].value) +
-            int.parse(_currentState.listTriangle[5].value));
-        if (_currentState.answer == sumOfLeftSide &&
-            _currentState.answer == sumOfRightSide &&
-            _currentState.answer == sumOfBottomSide) {
+        if (_currentState.checkTotal()) {
           await Future.delayed(Duration(milliseconds: 300));
+          if (_list.length - 1 == _index) {
+            _list.addAll(MagicTriangleDataProvider
+                .getNextLevelTriangleDataProviderList());
+          }
           _index = _index + 1;
           currentScore = currentScore + ScoreUtil.magicTriangleScore;
           _currentState = _list[_index];
