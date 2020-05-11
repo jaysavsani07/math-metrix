@@ -63,6 +63,7 @@ class CorrectAnswerProvider
         notifyListeners();
       } else if (_result.length == currentState.answer.toString().length) {
         gameViewModel.wrongAnswer();
+        _result = "";
       }
     }
   }

@@ -1,12 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/provider/timerProvider.dart';
-import 'package:mathgame/src/resources/MagicTriangle/MagicTriangleDataProvider.dart';
 import 'package:mathgame/src/resources/calculator/calculatorQandSDataProvider.dart';
 import 'package:mathgame/src/resources/correctAnswer/correctAnswerQandSDataProvider.dart';
 import 'package:mathgame/src/resources/dialog_service.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
-import 'package:mathgame/src/resources/mathGrid/MathGridDataProvider.dart';
 import 'package:mathgame/src/resources/mathPairs/mathPairsQandSDataProvider.dart';
 import 'package:mathgame/src/resources/mentalArithmetic/mentalArithmeticQandSDataProvider.dart';
 import 'package:mathgame/src/resources/navigation_service.dart';
@@ -102,10 +100,12 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
   @override
   void loadNewDataIfRequired() {
     if (_list.length - 1 == _index) {
-      _list.addAll(getList(_index ~/ 5 + 1));
-      print(_list.length);
+      print(_index ~/ 5 + 2);
+      if (gameCategoryType == GameCategoryType.SQUARE_ROOT)
+        _list.addAll(getList(_index ~/ 5 + 2));
+      else
+        _list.addAll(getList(_index ~/ 5 + 1));
     }
-    print("$_index  ${_list.length}");
     _index = _index + 1;
     _currentScore = _currentScore + getScoreUtil();
     gameAccess.onScoreUpdate(_currentScore);
@@ -118,6 +118,12 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
     if (_currentScore > 0) {
       _currentScore = _currentScore + getScoreMinusUtil();
       gameAccess.onScoreUpdate(_currentScore);
+    } else if (_currentScore == 0 &&
+        (gameCategoryType == GameCategoryType.SQUARE_ROOT ||
+            gameCategoryType == GameCategoryType.CORRECT_ANSWER ||
+            gameCategoryType == GameCategoryType.SIGN)) {
+      pauseGame();
+      showGameOverDialog();
     }
   }
 
