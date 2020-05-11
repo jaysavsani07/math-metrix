@@ -29,27 +29,24 @@ class WhatsTheSign extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Expanded(
-                              flex: 1,
-                              child: Center(
-                                child: Text(
-                                  signProvider.currentState.firstDigit,
-                                  style: Theme.of(context).textTheme.display1,
-                                ),
+                            Center(
+                              child: Text(
+                                signProvider.currentState.firstDigit,
+                                style: Theme.of(context).textTheme.display1,
                               ),
                             ),
-                            Expanded(
-                              flex: 1,
+                            Container(
+                              margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(3)),
+                                border: Border.all(
+                                    color: Theme.of(context).primaryColor,
+                                    width: 1),
+                              ),
                               child: Container(
-                                margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(3)),
-                                  border: Border.all(
-                                      color: Theme.of(context).primaryColor,
-                                      width: 1),
-                                ),
+                                width: 25,
                                 child: Center(
                                   heightFactor: 1,
                                   child: Text(
@@ -59,31 +56,22 @@ class WhatsTheSign extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Expanded(
-                              flex: 1,
-                              child: Center(
-                                child: Text(
-                                  signProvider.currentState.secondDigit,
-                                  style: Theme.of(context).textTheme.display1,
-                                ),
+                            Center(
+                              child: Text(
+                                signProvider.currentState.secondDigit,
+                                style: Theme.of(context).textTheme.display1,
                               ),
                             ),
-                            Expanded(
-                              flex: 1,
-                              child: Center(
-                                child: Text(
-                                  "=",
-                                  style: Theme.of(context).textTheme.display1,
-                                ),
+                            Center(
+                              child: Text(
+                                " = ",
+                                style: Theme.of(context).textTheme.display1,
                               ),
                             ),
-                            Expanded(
-                              flex: 1,
-                              child: Center(
-                                child: Text(
-                                  signProvider.currentState.answer,
-                                  style: Theme.of(context).textTheme.display1,
-                                ),
+                            Center(
+                              child: Text(
+                                signProvider.currentState.answer,
+                                style: Theme.of(context).textTheme.display1,
                               ),
                             ),
                           ],

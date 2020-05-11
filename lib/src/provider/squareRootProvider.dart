@@ -65,7 +65,7 @@ class SquareRootProvider with ChangeNotifier {
         await Future.delayed(Duration(milliseconds: 300));
         if (_list.length - 1 == _index) {
           _list.addAll(
-              SquareRootQandSDataProvider.getSquareDataList(_index ~/ 5 + 1));
+              SquareRootQandSDataProvider.getSquareDataList(_index ~/ 5 + 2));
           print("_index $_index");
         }
         _index = _index + 1;

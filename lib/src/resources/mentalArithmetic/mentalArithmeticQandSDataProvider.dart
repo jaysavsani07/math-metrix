@@ -2,32 +2,39 @@ import 'package:mathgame/src/models/mentalArithmetic/mentalArithmeticQandS.dart'
 import 'package:mathgame/src/utility/mathUtil.dart';
 
 class MentalArithmeticQandSDataProvider {
+  static List<int> listHasCode = List();
+
   static getMentalArithmeticDataList(int level) {
+    if (level == 1) {
+      listHasCode.clear();
+    }
+
     List<MentalArithmeticQandS> list = List();
 
-    int i = 0;
+    while (list.length < 5) {
+      Expression expression = MathUtil.getMentalExp(level);
+      if (expression != null) {
+        MentalArithmeticQandS mentalArithmeticQandS = MentalArithmeticQandS([
+          expression.firstOperand,
+          "${expression.operator1}${expression.secondOperand}",
+          "${expression.operator2}${expression.thirdOperand}",
+          ""
+        ], expression.answer);
 
-    int min = 3;
-    min = min < 1 ? 1 : min;
-    int max = 10;
-
-    while (i < 5) {
-      int x1 = MathUtil.generateRandomAnswer(min, max);
-      String x2 = MathUtil.generateRandomSign();
-      int x3 = MathUtil.generateRandomAnswer(min, max);
-      String x4 = MathUtil.generateRandomSign();
-      int x5 = MathUtil.generateRandomAnswer(min, max);
-      int x = MathUtil.evaluate(MathUtil.evaluate(x1, x2, x3), x4, x5);
-      if (!list.contains(MentalArithmeticQandS(
-          1, [x1.toString(), "$x2$x3", "$x4$x5", ""], x))) {
-        if ((x2 == "/" && x1 > x3 && x1 % x3 == 0) || x2 != "/") {
-          list.add(MentalArithmeticQandS(
-              1, [x1.toString(), "$x2$x3", "$x4$x5", ""], x));
-          print("$x1 $x2$x3 $x4$x5 = $x");
+        if (!listHasCode.contains(mentalArithmeticQandS.hashCode)) {
+          listHasCode.add(mentalArithmeticQandS.hashCode);
+          list.add(mentalArithmeticQandS);
+          print(mentalArithmeticQandS);
         }
-        i++;
       }
     }
     return list;
+  }
+}
+
+void main() {
+  for (int i = 1; i < 10; i++) {
+    print("**********$i***********");
+    MentalArithmeticQandSDataProvider.getMentalArithmeticDataList(i);
   }
 }

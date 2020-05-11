@@ -1,19 +1,35 @@
-import 'dart:math';
-
 import 'package:mathgame/src/models/quickCalculation/quickCalculationQandS.dart';
 import 'package:mathgame/src/utility/mathUtil.dart';
 
 class QuickCalculationQandSDataProvider {
+  static List<int> listHasCode = List();
+
   static getQuickCalculationDataList(int level, int noItem) {
+    if (level == 1) {
+      listHasCode.clear();
+    }
     List<QuickCalculationQandS> list = List();
 
-    List<Expression> expressionList = MathUtil.generate(level, 5);
-    expressionList.forEach((Expression expression) {
-      list.add(QuickCalculationQandS(
-          1,
-          "${expression.firstOperand} ${expression.operator} ${expression.secondOperand}",
-          expression.answer));
-    });
+    while (list.length < noItem) {
+      MathUtil.generate(level, noItem - list.length)
+          .forEach((Expression expression) {
+        QuickCalculationQandS quickCalculationQandS;
+        if (expression.operator2 == null) {
+          quickCalculationQandS = QuickCalculationQandS(
+              "${expression.firstOperand} ${expression.operator1} ${expression.secondOperand}",
+              expression.answer);
+        } else {
+          quickCalculationQandS = QuickCalculationQandS(
+              "${expression.firstOperand} ${expression.operator1} ${expression.secondOperand} ${expression.operator2} ${expression.thirdOperand}",
+              expression.answer);
+        }
+        if (!listHasCode.contains(quickCalculationQandS.hashCode)) {
+          listHasCode.add(quickCalculationQandS.hashCode);
+          list.add(quickCalculationQandS);
+        }
+      });
+    }
+
     list.forEach((QuickCalculationQandS q) {
       print("${q.toString()}");
     });
@@ -22,5 +38,8 @@ class QuickCalculationQandSDataProvider {
 }
 
 void main() {
-  QuickCalculationQandSDataProvider.getQuickCalculationDataList(1, 5);
+  for (int i = 1; i <= 5; i++) {
+    QuickCalculationQandSDataProvider.getQuickCalculationDataList(i, 1);
+    print("**************");
+  }
 }

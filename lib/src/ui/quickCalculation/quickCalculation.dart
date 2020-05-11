@@ -29,13 +29,13 @@ class QuickCalculation extends StatelessWidget {
                       height: (SizeConfig.safeBlockVertical * 0.08),
                       child: Timer(GameCategoryType.QUICK_CALCULATION)),
                   Container(
-                    height: (SizeConfig.safeBlockVertical * 0.33),
+                    height: (SizeConfig.safeBlockVertical * 0.38),
                     child: Consumer<QuickCalculationProvider>(
                       builder: (context, provider, child) {
                         return AbsorbPointer(
                           absorbing: true,
                           child: CircularPercentIndicator(
-                            radius: (SizeConfig.safeBlockVertical * 0.30),
+                            radius: (SizeConfig.safeBlockVertical * 0.35),
                             lineWidth: 15.0,
                             animation: true,
                             animationDuration: 250,
@@ -77,7 +77,7 @@ class QuickCalculation extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: (SizeConfig.safeBlockVertical * 0.5),
+                    height: (SizeConfig.safeBlockVertical * 0.45),
                     child: Align(
                       alignment: Alignment.center,
                       child: SizedBox(
