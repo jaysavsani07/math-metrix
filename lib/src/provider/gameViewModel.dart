@@ -234,6 +234,9 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
       case GameCategoryType.MATH_MACHINE:
 //        return MathGridDataProvider.generateRandomAnswer();
         break;
+      case GameCategoryType.PICTURE_PUZZLE:
+        // TODO: Handle this case.
+        break;
     }
   }
 
@@ -265,6 +268,9 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
         break;
       case GameCategoryType.MATH_MACHINE:
         return ScoreUtil.mathMachineScore;
+        break;
+      case GameCategoryType.PICTURE_PUZZLE:
+        // TODO: Handle this case.
         break;
     }
   }
@@ -298,6 +304,9 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
       case GameCategoryType.MATH_MACHINE:
         return ScoreUtil.mathMachineScore;
         break;
+      case GameCategoryType.PICTURE_PUZZLE:
+        // TODO: Handle this case.
+        break;
     }
   }
 
@@ -330,6 +339,9 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
       case GameCategoryType.MATH_MACHINE:
         return CoinUtil.mathMachineCoin;
         break;
+      case GameCategoryType.PICTURE_PUZZLE:
+        // TODO: Handle this case.
+        break;
     }
   }
 
@@ -361,6 +373,9 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
         break;
       case GameCategoryType.MATH_MACHINE:
         return TimeUtil.mathMachineTimeOut;
+        break;
+      case GameCategoryType.PICTURE_PUZZLE:
+        // TODO: Handle this case.
         break;
     }
   }

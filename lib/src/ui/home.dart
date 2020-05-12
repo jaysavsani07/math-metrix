@@ -48,8 +48,8 @@ class MyHomePage extends StatelessWidget {
                       child: ViewModelProvider<DashboardViewModel>.withConsumer(
                           onModelReady: (model) =>
                               model.getGameByPuzzleType(puzzleType),
-                          reuseExisting: true,
-                          viewModel: GetIt.I<DashboardViewModel>(),
+                          disposeViewModel: false,
+                          viewModelBuilder: () => GetIt.I<DashboardViewModel>(),
                           builder: (context, model, child) => GridView.builder(
                                 padding: EdgeInsets.only(bottom: 20.0),
                                 itemBuilder: (BuildContext context, int index) {

@@ -83,6 +83,13 @@ class DashboardViewModel extends ChangeNotifier {
         break;
       case PuzzleType.BRAIN_PUZZLE:
         list.add(GameCategory(
+            10,
+            "Picture Puzzle",
+            "picture_puzzle",
+            GameCategoryType.PICTURE_PUZZLE,
+            KeyUtil.PicturePuzzle,
+            getScoreboard("picture_puzzle")));
+        list.add(GameCategory(
             6,
             "Magic triangle",
             "magic_tringle",

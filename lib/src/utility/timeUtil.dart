@@ -18,4 +18,6 @@ class TimeUtil {
   static int mathematicalPairsTimeOut = 60;
   static int magicTriangleTimeOut = 120;
   static int mathMachineTimeOut = 120;
+
+  static int picturePuzzleTimeOut = 120;
 }

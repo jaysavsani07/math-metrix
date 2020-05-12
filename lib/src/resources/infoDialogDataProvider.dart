@@ -94,6 +94,16 @@ ${ScoreUtil.quickCalculationScoreMinus} for wrong answer
 ${ScoreUtil.mathMachineScore.toInt()} for each correct equation
 ''');
         break;
+      case GameCategoryType.PICTURE_PUZZLE:
+        return GameInfoDialog(
+            title: "Picture Puzzle",
+            image: "assets/math-machine-intro.gif",
+            dec:
+                '''Select number from math grid to reach answer shown above. You can select any number to reach above answer. 
+                                        
+${ScoreUtil.mathMachineScore.toInt()} for each correct equation
+''');
+        break;
     }
   }
 }
