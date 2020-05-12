@@ -52,28 +52,32 @@ class MagicTriangle extends StatelessWidget {
                   Container(
                     height: (SizeConfig.safeBlockVertical * 0.50),
                     child: Center(
-                      child: Stack(
-                        children: <Widget>[
-                          Container(
-                            child: Row(
-                              children: <Widget>[
-                                CustomPaint(
-                                  painter: TrianglePainter(
-                                      Theme.of(context).primaryColor,
-                                      radius,
-                                      padding),
-                                  size: Size(
-                                      (MediaQuery.of(context).size.width),
-                                      triangleHeight),
-                                )
-                              ],
+                      child: Container(
+                        height: triangleHeight,
+                        width: MediaQuery.of(context).size.width,
+                        child: Stack(
+                          children: <Widget>[
+                            Container(
+                              child: Row(
+                                children: <Widget>[
+                                  CustomPaint(
+                                    painter: TrianglePainter(
+                                        Theme.of(context).primaryColor,
+                                        radius,
+                                        padding),
+                                    size: Size(
+                                        (MediaQuery.of(context).size.width),
+                                        triangleHeight),
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                          magicTriangleProvider.currentState.is3x3
-                              ? Triangle3x3(radius, padding, triangleHeight)
-                              : Triangle4x4(radius, padding, triangleHeight)
-                          // last one
-                        ],
+                            magicTriangleProvider.currentState.is3x3
+                                ? Triangle3x3(radius, padding, triangleHeight)
+                                : Triangle4x4(radius, padding, triangleHeight)
+                            // last one
+                          ],
+                        ),
                       ),
                     ),
                   ),

@@ -90,11 +90,12 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
     _currentScore = 0;
     currentState = _list[_index];
     gameAccess.onCurrentStateUpdate(currentState);
+    timerViewModel.startTimerNew();
     if (_homeViewModel.isFirstTime(gameCategoryType)) {
       await Future.delayed(Duration(milliseconds: 500));
+      pauseGame();
       showInfoDialog();
     }
-    timerViewModel.startTimerNew();
   }
 
   @override
