@@ -96,4 +96,4 @@ Distributed under the MIT License. See [LICENSE](https://github.com/jaysavsani07
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[product-screenshot]: https://github.com/jaysavsani07/math-metrix/blob/readme/assets/images/banner.png
+[product-screenshot]: https://github.com/jaysavsani07/math-metrix/blob/master/assets/images/banner.png
