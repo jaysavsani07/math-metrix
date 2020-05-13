@@ -83,6 +83,11 @@ Distributed under the MIT License. See [LICENSE](https://github.com/jaysavsani07
 
 [Nividata Consultancy](https://www.nividata.com/contact/)
 
+## Developers
+
+### Mehul Makwana
+Contact: [LinkedIn](https://www.linkedin.com/in/mehul-makwana-430326b9/)
+
 <!-- ACKNOWLEDGEMENTS -->
 ## This app using following awesome open source libraries
 
