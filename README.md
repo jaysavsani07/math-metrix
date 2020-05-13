@@ -1,16 +1,20 @@
-# mathgame
 
-A new Flutter application.
 
-## Getting Started
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/Fenil-Nividata/FlutterBMI/blob/master/">
+    <img src="ic_launcher.png">
+  </a>
 
-This project is a starting point for a Flutter application.
+  <h3 align="center">BMI Calculator</h3>
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+  <p align="center">
+    <br />
+    <a href="https://play.google.com/store/apps/details?id=com.nividata.bmi_calculator&hl=en">View Demo</a>
+    ·
+    <a href="https://github.com/Fenil-Nividata/FlutterBMI/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/Fenil-Nividata/FlutterBMI/issues">Request Feature</a>
+  </p>
+</p>
