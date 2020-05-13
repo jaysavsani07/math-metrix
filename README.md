@@ -27,4 +27,4 @@
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[product-screenshot]: https://github.com/Fenil-Nividata/FlutterBMI/blob/master/banner_new3.jpg
+[product-screenshot]: https://github.com/jaysavsani07/math-metrix/blob/readme/assets/images/banner.png
