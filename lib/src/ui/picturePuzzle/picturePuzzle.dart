@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/provider/mathPairsProvider.dart';
 import 'package:mathgame/src/provider/picturePuzzleProvider.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/ui/mathPairs/math_pairs_button.dart';
@@ -39,7 +38,7 @@ class PicturePuzzle extends StatelessWidget {
                     child: Center(
                       child: AspectRatio(
                         aspectRatio: 0.7,
-                        child: Consumer<MathPairsProvider>(
+                        child: Consumer<PicturePuzzleProvider>(
                             builder: (context, mathPairsProvider, child) {
                           return GridView.builder(
                               gridDelegate:
@@ -66,7 +65,7 @@ class PicturePuzzle extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-                          Consumer<MathPairsProvider>(
+                          Consumer<PicturePuzzleProvider>(
                               builder: (context, provider, child) {
                             return IconButton(
                               icon: provider.pause
@@ -78,7 +77,7 @@ class PicturePuzzle extends StatelessWidget {
                               },
                             );
                           }),
-                          Consumer<MathPairsProvider>(
+                          Consumer<PicturePuzzleProvider>(
                               builder: (context, provider, child) {
                             return IconButton(
                               icon: Icon(Icons.info_outline),

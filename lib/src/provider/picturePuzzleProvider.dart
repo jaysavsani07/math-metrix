@@ -52,7 +52,7 @@ class PicturePuzzleProvider with ChangeNotifier {
     _time = TimeUtil.mathematicalPairsTimeOut;
     _timeOut = false;
     startTimer();
-    if (homeViewModel.isFirstTime(GameCategoryType.MATH_PAIRS)) {
+    if (homeViewModel.isFirstTime(GameCategoryType.PICTURE_PUZZLE)) {
       showInfoDialogWithDelay();
     }
   }
