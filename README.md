@@ -18,3 +18,13 @@
     <a href="https://github.com/jaysavsani07/math-metrix/issues">Request Feature</a>
   </p>
 </p>
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[product-screenshot]: https://github.com/Fenil-Nividata/FlutterBMI/blob/master/banner_new3.jpg
