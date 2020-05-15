@@ -16,4 +16,6 @@ class CoinUtil {
   static double magicTriangleCoin = 3;
 
   static double mathMachineCoin = 3;
+  
+  static double picturePuzzleCoin = 1;
 }

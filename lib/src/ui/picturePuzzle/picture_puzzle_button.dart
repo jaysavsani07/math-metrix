@@ -1,50 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/models/mathPairs/MathPairsRootQandS.dart';
-import 'package:mathgame/src/provider/mathPairsProvider.dart';
-import 'package:provider/provider.dart';
+import 'package:mathgame/src/models/picturePuzzle/PicturePuzzleRootQandS.dart';
+import 'package:mathgame/src/ui/picturePuzzle/CirclePainter.dart';
+import 'package:mathgame/src/ui/picturePuzzle/SquarePainter.dart';
+
+import 'TrianglePainter.dart';
 
 class PicturePuzzleButton extends StatelessWidget {
-  final MathPair mathPairs;
-  final int index;
+  final PicturePuzzleShape picturePuzzleShape;
 
-  PicturePuzzleButton(this.mathPairs, this.index);
+  PicturePuzzleButton(this.picturePuzzleShape);
 
   @override
   Widget build(BuildContext context) {
-    final mathPairsProvider = Provider.of<MathPairsProvider>(context);
-    return Container(
-      child: InkWell(
-        highlightColor: Colors.transparent,
-        splashColor: Colors.transparent,
-        onTap: () {
-          mathPairsProvider.checkResult(mathPairs, index);
-        },
-        child: Visibility(
-          visible: mathPairs.isVisible,
-          child: Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.all(Radius.circular(5)),
-              border: Border.all(
-                  width: 2,
-                  color: mathPairs.isActive
-                      ? Theme.of(context).accentColor
-                      : Theme.of(context).dialogBackgroundColor),
-            ),
-            margin: EdgeInsets.all(5),
-            constraints: BoxConstraints.expand(),
-            child: Center(
-              child: FittedBox(
-                fit: BoxFit.contain,
+    return Stack(children: [
+      picturePuzzleShape.isSign
+          ? Container(
+              width: 40,
+              height: 40,
+              child: Center(
                 child: Text(
-                  mathPairs.text,
+                  picturePuzzleShape.sign,
                   style: Theme.of(context).textTheme.headline,
                 ),
               ),
+            )
+          : CustomPaint(
+              painter: picturePuzzleShape.picturePuzzleShapeType ==
+                      PicturePuzzleShapeType.CIRCLE
+                  ? CirclePainter(Colors.red, 2)
+                  : (picturePuzzleShape.picturePuzzleShapeType ==
+                          PicturePuzzleShapeType.TRIANGLE
+                      ? TrianglePainter(Colors.red, 2)
+                      : SquarePainter(Colors.red, 2)),
+              size: Size(40, 40),
             ),
-          ),
-        ),
-      ),
-    );
+    ]);
   }
 }
