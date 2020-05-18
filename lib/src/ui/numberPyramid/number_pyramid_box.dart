@@ -1,0 +1,50 @@
+import 'package:flutter/material.dart';
+import 'package:mathgame/src/models/numberPyramid/number_pyramid_model.dart';
+import 'package:mathgame/src/provider/calculatorProvider.dart';
+import 'package:mathgame/src/provider/numberPyramidProvider.dart';
+import 'package:mathgame/src/utility/sizeConfig.dart';
+import 'package:provider/provider.dart';
+
+class PyramidNumberBox extends StatelessWidget {
+  final String text;
+
+//  final String correctVal;
+  final NumPyramidCellModel numPyramidCellModel;
+
+  PyramidNumberBox(this.text, this.numPyramidCellModel);
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig().init(context);
+    double boxHeight = (SizeConfig.screenHeight / 100);
+    double boxWidth = (SizeConfig.screenWidth / 100);
+    final numberProvider = Provider.of<NumberPyramidProvider>(context);
+    return InkWell(
+      onTap: () {
+        numberProvider.pyramidBoxSelection(numPyramidCellModel);
+      },
+      child: Container(
+        height: boxHeight * 4.6,
+        width: boxWidth * 12,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            color: numPyramidCellModel.isHint
+                ? Theme.of(context).primaryColorLight
+                : (numPyramidCellModel.isDone
+                    ? (numPyramidCellModel.isCorrect ? Colors.transparent : Colors.redAccent)
+                    : Colors.transparent),
+            border: new Border.all(
+                color:
+                    numPyramidCellModel.isActive ? Colors.yellow : Colors.white,
+                width: 1,
+                style: BorderStyle.solid)),
+        child: Text(
+          numPyramidCellModel.isHidden
+              ? numPyramidCellModel.text
+              : numPyramidCellModel.numberOnCell.toString(),
+          style: Theme.of(context).textTheme.title,
+        ),
+      ),
+    );
+  }
+}
