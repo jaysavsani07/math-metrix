@@ -50,6 +50,55 @@ Overall all this puzzle tries to engage you in a different way to improve your m
 **1) Magic Triangle** : This is 3x3 and 4x4 triangle where you need to place 6 number in a way that sum of each side should be equal to given number.<br />
 **2) Math Grid** : You'll be given an answer and a 9x9 grid. You need to select numbers from grid one by one to reach the given number. Find the best possible way to solve max answer from 9x9 grid.<br />
 
+
+### Built With
+This application built [Flutter](https://flutter.dev/). Flutter is cross-platform open source mobile framework built by Google. Flutter use Dart as a primary language which is highly scalable and easy codebase.
+* [Getting started with Flutter](https://flutter.dev/docs).
+* [Dart](https://dart.dev/)
+
+<!-- ROADMAP -->
+## Roadmap
+
+See the [open issues](https://github.com/jaysavsani07/math-metrix/issues) for a list of proposed features (and known issues).
+
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See [LICENSE](https://github.com/jaysavsani07/math-metrix/blob/master/LICENSE) for more information.
+
+<!-- CONTACT -->
+## Contact
+
+[Nividata Consultancy](https://www.nividata.com/contact/)
+
+## Developers
+
+### Mehul Makwana
+Contact: [LinkedIn](https://www.linkedin.com/in/mehul-makwana-430326b9/)
+
+<!-- ACKNOWLEDGEMENTS -->
+## This app using following awesome open source libraries
+
+* [Provider](https://pub.dev/packages/provider)
+* [Percent Indicator](https://pub.dev/packages/percent_indicator)
+* [Provider Architecture](https://pub.dev/packages/provider_architecture)
+* [get_it](https://pub.dev/packages/get_it)
+* [Shared Preferences](https://pub.dev/packages/shared_preferences)
+* [RFlutter Alert](https://pub.dev/packages/rflutter_alert)
+* [flutter_svg](https://pub.dev/packages/flutter_svg)
+
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[product-screenshot]: https://github.com/jaysavsani07/math-metrix/blob/readme/assets/images/banner.png
+[product-screenshot]: https://github.com/jaysavsani07/math-metrix/blob/master/assets/images/banner.png
