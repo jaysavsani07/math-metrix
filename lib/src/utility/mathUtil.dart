@@ -15,6 +15,10 @@ class MathUtil {
     }
   }
 
+  static bool isOperator(String sign) {
+    return ["+", "-", "*", "/"].contains(sign);
+  }
+
   // ignore: missing_return
   static int getPrecedence(String sign) {
     switch (sign) {

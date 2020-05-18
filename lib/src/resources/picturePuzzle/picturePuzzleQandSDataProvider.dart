@@ -1,4 +1,5 @@
 import 'package:mathgame/src/models/picturePuzzle/PicturePuzzleRootQandS.dart';
+import 'package:mathgame/src/utility/mathUtil.dart';
 
 class PicturePuzzleQandSDataProvider {
   static List<int> listHasCode = List();
@@ -7,92 +8,247 @@ class PicturePuzzleQandSDataProvider {
     if (level == 1) {
       listHasCode.clear();
     }
+    List<PicturePuzzleQandS> list = List();
+    while (list.length < 1) {
+      List<PicturePuzzle> puzzleList = List();
 
-    int i = 0;
-    List<PicturePuzzle> list = List();
-    List<PicturePuzzleShape> listShape1 = List();
-    List<PicturePuzzleShape> listShape2 = List();
-    List<PicturePuzzleShape> listShape3 = List();
-    List<PicturePuzzleShape> listShape4 = List();
+      List<PicturePuzzleData> picturePuzzleDataList =
+          getPicturePuzzleData(generateMatrix(level, list.length));
 
-    listShape1.add(PicturePuzzleShape(
-        isSign: false,
-        picturePuzzleShapeType: PicturePuzzleShapeType.CIRCLE,
-        sign: ""));
-    listShape1.add(PicturePuzzleShape(isSign: true, sign: "+"));
-    listShape1.add(PicturePuzzleShape(
-        isSign: false,
-        picturePuzzleShapeType: PicturePuzzleShapeType.CIRCLE,
-        sign: ""));
-    listShape1.add(PicturePuzzleShape(isSign: true, sign: "+"));
-    listShape1.add(PicturePuzzleShape(
-        isSign: false,
-        picturePuzzleShapeType: PicturePuzzleShapeType.SQUARE,
-        sign: ""));
-    listShape1.add(PicturePuzzleShape(isSign: true, sign: "="));
-    listShape1.add(PicturePuzzleShape(isSign: true, sign: "10", answer: 10));
-    list.add(PicturePuzzle(listShape1));
+      picturePuzzleDataList
+          .asMap()
+          .forEach((int i, PicturePuzzleData picturePuzzleData) {
+        puzzleList.add(PicturePuzzle([
+          PicturePuzzleShape(
+              isSign: false,
+              picturePuzzleShapeType: picturePuzzleData.picturePuzzleShapeType1,
+              text: ""),
+          PicturePuzzleShape(isSign: true, text: picturePuzzleData.sign1),
+          PicturePuzzleShape(
+              isSign: false,
+              picturePuzzleShapeType: picturePuzzleData.picturePuzzleShapeType2,
+              text: ""),
+          PicturePuzzleShape(isSign: true, text: picturePuzzleData.sign2),
+          PicturePuzzleShape(
+              isSign: false,
+              picturePuzzleShapeType: picturePuzzleData.picturePuzzleShapeType3,
+              text: ""),
+          PicturePuzzleShape(isSign: true, text: "="),
+          PicturePuzzleShape(
+              isSign: true,
+              text: i == picturePuzzleDataList.length - 1
+                  ? "?"
+                  : picturePuzzleData.text)
+        ]));
+      });
 
-    listShape2.add(PicturePuzzleShape(
-        isSign: false,
-        picturePuzzleShapeType: PicturePuzzleShapeType.TRIANGLE,
-        sign: ""));
-    listShape2.add(PicturePuzzleShape(isSign: true, sign: "+"));
-    listShape2.add(PicturePuzzleShape(
-        isSign: false,
-        picturePuzzleShapeType: PicturePuzzleShapeType.TRIANGLE,
-        sign: ""));
-    listShape2.add(PicturePuzzleShape(isSign: true, sign: "+"));
-    listShape2.add(PicturePuzzleShape(
-        isSign: false,
-        picturePuzzleShapeType: PicturePuzzleShapeType.SQUARE,
-        sign: ""));
-    listShape2.add(PicturePuzzleShape(isSign: true, sign: "="));
-    listShape2.add(PicturePuzzleShape(isSign: true, sign: "14", answer: 14));
-    list.add(PicturePuzzle(listShape2));
+      list.add(PicturePuzzleQandS(
+          puzzleList, int.parse(picturePuzzleDataList.last.text)));
+    }
+    return list;
+  }
 
-    listShape3.add(PicturePuzzleShape(
-        isSign: false,
-        picturePuzzleShapeType: PicturePuzzleShapeType.SQUARE,
-        sign: ""));
-    listShape3.add(PicturePuzzleShape(isSign: true, sign: "+"));
-    listShape3.add(PicturePuzzleShape(
-        isSign: false,
-        picturePuzzleShapeType: PicturePuzzleShapeType.SQUARE,
-        sign: ""));
-    listShape3.add(PicturePuzzleShape(isSign: true, sign: "+"));
-    listShape3.add(PicturePuzzleShape(
-        isSign: false,
-        picturePuzzleShapeType: PicturePuzzleShapeType.SQUARE,
-        sign: ""));
-    listShape3.add(PicturePuzzleShape(isSign: true, sign: "="));
-    listShape3.add(PicturePuzzleShape(isSign: true, sign: "16", answer: 16));
-    list.add(PicturePuzzle(listShape3));
+  static List<PicturePuzzleData> getPicturePuzzleData(
+      List<List<String>> matrix) {
+    List<PicturePuzzleData> picturePuzzleData = List();
 
-    listShape4.add(PicturePuzzleShape(
-        isSign: false,
-        picturePuzzleShapeType: PicturePuzzleShapeType.CIRCLE,
-        sign: ""));
-    listShape4.add(PicturePuzzleShape(isSign: true, sign: "+"));
-    listShape4.add(PicturePuzzleShape(
-        isSign: false,
-        picturePuzzleShapeType: PicturePuzzleShapeType.TRIANGLE,
-        sign: ""));
-    listShape4.add(PicturePuzzleShape(isSign: true, sign: "+"));
-    listShape4.add(PicturePuzzleShape(
-        isSign: false,
-        picturePuzzleShapeType: PicturePuzzleShapeType.SQUARE,
-        sign: ""));
-    listShape4.add(PicturePuzzleShape(isSign: true, sign: "="));
-    listShape4.add(PicturePuzzleShape(isSign: true, sign: "?", answer: 12));
-    list.add(PicturePuzzle(listShape4));
+    Map<String, PicturePuzzleShapeType> map = Map();
 
-    return <PicturePuzzleQandS>[PicturePuzzleQandS(list, 12)];
+    matrix.forEach((list) {
+      list
+          .where((subList) => !MathUtil.isOperator(subList))
+          .toList()
+          .asMap()
+          .forEach((i, subList) {
+        if (i != list.length - 3 && !map.containsKey(subList)) {
+          map[subList] = map.length == 0
+              ? PicturePuzzleShapeType.CIRCLE
+              : (map.length == 1
+                  ? PicturePuzzleShapeType.TRIANGLE
+                  : PicturePuzzleShapeType.SQUARE);
+        }
+      });
+    });
+
+    print(map);
+    matrix.forEach((list) {
+      picturePuzzleData.add(PicturePuzzleData(
+          map[list[0]], list[1], map[list[2]], list[3], map[list[4]], list[5]));
+    });
+
+    picturePuzzleData.forEach((list) {
+      print(list);
+    });
+
+    return picturePuzzleData;
+  }
+
+  static List<List<String>> generateMatrix(int level, int index) {
+    if (level == 1) {
+      switch (index) {
+        case 0:
+        case 1:
+          List<String> listDigit = MathUtil.generateRandomNumber(1, 10, 3);
+          List<String> listSign = MathUtil.generateRandomSign1(2);
+
+          var tempList = [
+            listDigit[0],
+            listDigit[1],
+            listDigit[2],
+            listDigit[0],
+            listDigit[1],
+            listDigit[2]
+          ]..shuffle();
+
+          return [
+            [
+              tempList[0],
+              "+",
+              tempList[1],
+              "+",
+              tempList[2],
+              "${int.parse(tempList[0]) + int.parse(tempList[1]) + int.parse(tempList[2])}"
+            ],
+            [
+              tempList[3],
+              "+",
+              tempList[4],
+              "+",
+              tempList[5],
+              "${int.parse(tempList[3]) + int.parse(tempList[4]) + int.parse(tempList[5])}"
+            ],
+            [
+              listDigit[2],
+              "+",
+              listDigit[2],
+              "+",
+              listDigit[2],
+              "${int.parse(listDigit[2]) * 3}"
+            ]
+          ]
+            ..shuffle()
+            ..add([
+              listDigit[0],
+              "+",
+              listDigit[1],
+              "+",
+              listDigit[2],
+              "${int.parse(listDigit[0]) + int.parse(listDigit[1]) + int.parse(listDigit[2])}"
+            ]);
+          break;
+        case 2:
+        case 3:
+        case 4:
+          List<String> listDigit = MathUtil.generateRandomNumber(1, 10, 3);
+          List<String> listSign = ["+", "-", "*"]
+            ..shuffle()
+            ..removeAt(1);
+
+          var tempList = [
+            listDigit[0],
+            listDigit[1],
+            listDigit[2],
+            listDigit[0],
+            listDigit[1],
+            listDigit[2]
+          ]..shuffle();
+
+          return [
+            [
+              tempList[0],
+              listSign[0],
+              tempList[1],
+              "+",
+              tempList[2],
+              "${MathUtil.evaluate(int.parse(tempList[0]), listSign[0], int.parse(tempList[1])) + int.parse(tempList[2])}"
+            ],
+            [
+              tempList[3],
+              listSign[1],
+              tempList[4],
+              "-",
+              tempList[5],
+              "${MathUtil.evaluate(int.parse(tempList[3]), listSign[1], int.parse(tempList[4])) - int.parse(tempList[5])}"
+            ],
+            [
+              listDigit[2],
+              "+",
+              listDigit[2],
+              "+",
+              listDigit[2],
+              "${int.parse(listDigit[2]) * 3}"
+            ]
+          ]..add([
+              listDigit[0],
+              "+",
+              listDigit[1],
+              "+",
+              listDigit[2],
+              "${int.parse(listDigit[0]) + int.parse(listDigit[1]) + int.parse(listDigit[2])}"
+            ]);
+          break;
+      }
+    } else {
+      List<String> listDigit = List();
+      while (listDigit.length < 3) {
+        MathUtil.generateRandomNumber(level, 10 + level, 3).forEach((digit) {
+          if (!listDigit.contains(digit)) {
+            listDigit.add(digit);
+          }
+        });
+      }
+      List<String> listSign = ["+", "-", "*"]..shuffle();
+
+      var tempList = [
+        listDigit[0],
+        listDigit[1],
+        listDigit[2],
+        listDigit[0],
+        listDigit[1],
+        listDigit[2]
+      ]..shuffle();
+
+      return [
+        [
+          tempList[0],
+          listSign[0],
+          tempList[1],
+          "+",
+          tempList[2],
+          "${MathUtil.evaluate(int.parse(tempList[0]), listSign[0], int.parse(tempList[1])) + int.parse(tempList[2])}"
+        ],
+        [
+          tempList[3],
+          listSign[1],
+          tempList[4],
+          "-",
+          tempList[5],
+          "${MathUtil.evaluate(int.parse(tempList[3]), listSign[1], int.parse(tempList[4])) - int.parse(tempList[5])}"
+        ],
+        [
+          listDigit[2],
+          listSign[0],
+          listDigit[2],
+          listSign[1],
+          listDigit[2],
+          "${(MathUtil.getPrecedence(listSign[0]) >= MathUtil.getPrecedence(listSign[1])) ? (MathUtil.evaluate(MathUtil.evaluate(int.parse(listDigit[2]), listSign[0], int.parse(listDigit[2])), listSign[1], int.parse(listDigit[2]))) : (MathUtil.evaluate(int.parse(listDigit[2]), listSign[0], MathUtil.evaluate(int.parse(listDigit[2]), listSign[1], int.parse(listDigit[2]))))}"
+        ]
+      ]..add([
+          listDigit[0],
+          listSign[0],
+          listDigit[1],
+          listSign[2],
+          listDigit[2],
+          "${(MathUtil.getPrecedence(listSign[0]) >= MathUtil.getPrecedence(listSign[2])) ? (MathUtil.evaluate(MathUtil.evaluate(int.parse(listDigit[0]), listSign[0], int.parse(listDigit[1])), listSign[2], int.parse(listDigit[2]))) : (MathUtil.evaluate(int.parse(listDigit[0]), listSign[0], MathUtil.evaluate(int.parse(listDigit[1]), listSign[2], int.parse(listDigit[2]))))}"
+        ]);
+    }
   }
 }
 
 void main() {
-//  for (int i = 1; i < 6; i++) {
-  print(PicturePuzzleQandSDataProvider.getPicturePuzzleDataList(1));
-//  }
+  for (int j = 1; j < 5; j++)
+    for (int i = 0; i < 5; i++) {
+      print(PicturePuzzleQandSDataProvider.generateMatrix(j, i));
+    }
+//  print(PicturePuzzleQandSDataProvider.getPicturePuzzleDataList(1));
 }

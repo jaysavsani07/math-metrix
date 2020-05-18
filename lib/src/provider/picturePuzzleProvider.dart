@@ -40,7 +40,7 @@ class PicturePuzzleProvider
 
   @override
   void startGame1() {
-    _time = TimeUtil.calculatorTimeOut;
+    _time = TimeUtil.picturePuzzleTimeOut;
     _timeOut = false;
     _result = "";
     _currentScore = 0;
