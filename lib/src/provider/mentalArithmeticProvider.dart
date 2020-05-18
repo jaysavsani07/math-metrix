@@ -63,7 +63,8 @@ class MentalArithmeticProvider with ChangeNotifier {
   Future<void> checkResult(String answer) async {
     if (!timeOut &&
         _localTimeOut &&
-        _result.length < _currentState.answer.toString().length) {
+        _result.length < _currentState.answer.toString().length &&
+        ((_result.length == 0 && answer == "-") || (answer != "-"))) {
       _result = _result + answer;
       notifyListeners();
       if (_result != "-" && int.parse(_result) == _currentState.answer) {
@@ -81,8 +82,7 @@ class MentalArithmeticProvider with ChangeNotifier {
         notifyListeners();
       } else if (_result.length == _currentState.answer.toString().length) {
         if (currentScore > 0) {
-          currentScore =
-              currentScore + ScoreUtil.mentalArithmeticScoreMinus;
+          currentScore = currentScore + ScoreUtil.mentalArithmeticScoreMinus;
         }
       }
     }
