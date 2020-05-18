@@ -27,4 +27,6 @@ class ScoreUtil {
   static double magicTriangleScore = 5;
 
   static double mathMachineScore = 5;
+
+  static double numberPyramidScore = 5;
 }
