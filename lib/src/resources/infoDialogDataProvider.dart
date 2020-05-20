@@ -103,6 +103,17 @@ ${ScoreUtil.mathMachineScore.toInt()} for each correct equation
                                         
 ${ScoreUtil.mathMachineScore.toInt()} for each correct equation
 ''');
+      case GameCategoryType.NUMBER_PYRAMID:
+        // TODO: Handle this case.
+      return GameInfoDialog(
+        title: "Number Pyramid",
+        image: "assets/num-pyramid.gif",
+        dec: '''
+sum of consecutive cell should be placed on top cell. You need to fill all cell correctly to solve Number pyramid.
+
+${ScoreUtil.numberPyramidScore.toInt()} for each correct equation
+        '''
+      );
         break;
     }
   }

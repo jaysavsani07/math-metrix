@@ -11,7 +11,7 @@ description: A new Flutter application.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 1.0.1+2
 
 environment:
   sdk: ">=2.2.2 <3.0.0"
@@ -29,9 +29,7 @@ dependencies:
   get_it: ^4.0.1
   shared_preferences: ^0.5.6+3
   rflutter_alert: ^1.0.3
-  flare_flutter: ^2.0.3
   flutter_svg: ^0.17.3+1
-  intl: ^0.15.7
 
 
 dev_dependencies:
@@ -63,6 +61,7 @@ flutter:
     - quick-calculation-intro.gif
     - sqroot-intro.gif
     - whats-the-sign-intro.gif
+    - num-pyramid.gif
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

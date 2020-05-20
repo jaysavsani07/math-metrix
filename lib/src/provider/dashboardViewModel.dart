@@ -103,6 +103,13 @@ class DashboardViewModel extends ChangeNotifier {
             GameCategoryType.MATH_MACHINE,
             KeyUtil.MathMachine,
             getScoreboard("math_machine")));
+        list.add(GameCategory(
+            10,
+            "Number Pyramid",
+            "number_pyramid",
+            GameCategoryType.NUMBER_PYRAMID,
+            KeyUtil.NumberPyramid,
+            getScoreboard("number_pyramid")));
         break;
     }
   }

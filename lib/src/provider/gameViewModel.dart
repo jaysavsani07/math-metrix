@@ -238,6 +238,8 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
         break;
       case GameCategoryType.PICTURE_PUZZLE:
         return PicturePuzzleQandSDataProvider.getPicturePuzzleDataList(level);
+      case GameCategoryType.NUMBER_PYRAMID:
+        // TODO: Handle this case.
         break;
     }
   }
@@ -273,6 +275,8 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
         break;
       case GameCategoryType.PICTURE_PUZZLE:
         return ScoreUtil.picturePuzzleScore;
+      case GameCategoryType.NUMBER_PYRAMID:
+        // TODO: Handle this case.
         break;
     }
   }
@@ -308,6 +312,8 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
         break;
       case GameCategoryType.PICTURE_PUZZLE:
         return ScoreUtil.picturePuzzleScore;
+      case GameCategoryType.NUMBER_PYRAMID:
+        // TODO: Handle this case.
         break;
     }
   }
@@ -343,6 +349,8 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
         break;
       case GameCategoryType.PICTURE_PUZZLE:
         return CoinUtil.picturePuzzleCoin;
+      case GameCategoryType.NUMBER_PYRAMID:
+        // TODO: Handle this case.
         break;
     }
   }
@@ -378,6 +386,8 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
         break;
       case GameCategoryType.PICTURE_PUZZLE:
         return TimeUtil.picturePuzzleTimeOut;
+      case GameCategoryType.NUMBER_PYRAMID:
+        // TODO: Handle this case.
         break;
     }
   }

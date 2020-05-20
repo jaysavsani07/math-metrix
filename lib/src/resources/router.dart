@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
@@ -10,6 +12,7 @@ import 'package:mathgame/src/ui/mathGrid/math_grid.dart';
 import 'package:mathgame/src/ui/mathPairs/mathPairs.dart';
 import 'package:mathgame/src/ui/mentalArithmetic/mental_arithmetic.dart';
 import 'package:mathgame/src/ui/picturePuzzle/picturePuzzle.dart';
+import 'package:mathgame/src/ui/numberPyramid/number_pyramid.dart';
 import 'package:mathgame/src/ui/quickCalculation/quickCalculation.dart';
 import 'package:mathgame/src/ui/squareRoot/square_root.dart';
 import 'package:mathgame/src/ui/whatsTheSign/whats_the_sign.dart';
@@ -50,6 +53,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => MathGrid());
     case KeyUtil.PicturePuzzle:
       return MaterialPageRoute(builder: (context) => PicturePuzzle());
+    case KeyUtil.NumberPyramid:
+      return MaterialPageRoute(builder: (context) => NumberPyramid());
     default:
       return MaterialPageRoute(
         builder: (context) => Scaffold(

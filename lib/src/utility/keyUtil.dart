@@ -12,6 +12,7 @@ class KeyUtil {
   static const String MagicTriangle = 'MagicTriangle';
   static const String PicturePuzzle = 'PicturePuzzle';
   static const String MathMachine = 'MathMachine';
+  static const String NumberPyramid = "NumberPyramid";
 
   static const String GameOverDialog = "GameOverDialog";
   static const String InfoDialog = "InfoDialog";
