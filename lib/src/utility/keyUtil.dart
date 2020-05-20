@@ -10,6 +10,7 @@ class KeyUtil {
   static const String SquareRoot = 'SquareRoot';
   static const String MathematicalPairs = 'MathematicalPairs';
   static const String MagicTriangle = 'MagicTriangle';
+  static const String PicturePuzzle = 'PicturePuzzle';
   static const String MathMachine = 'MathMachine';
   static const String NumberPyramid = "NumberPyramid";
 

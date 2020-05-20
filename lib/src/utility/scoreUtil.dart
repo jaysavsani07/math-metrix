@@ -28,5 +28,6 @@ class ScoreUtil {
 
   static double mathMachineScore = 5;
 
+  static double picturePuzzleScore = 2;
   static double numberPyramidScore = 5;
 }

@@ -11,6 +11,7 @@ import 'package:mathgame/src/ui/magicTriangle/magic_triangle.dart';
 import 'package:mathgame/src/ui/mathGrid/math_grid.dart';
 import 'package:mathgame/src/ui/mathPairs/mathPairs.dart';
 import 'package:mathgame/src/ui/mentalArithmetic/mental_arithmetic.dart';
+import 'package:mathgame/src/ui/picturePuzzle/picturePuzzle.dart';
 import 'package:mathgame/src/ui/numberPyramid/number_pyramid.dart';
 import 'package:mathgame/src/ui/quickCalculation/quickCalculation.dart';
 import 'package:mathgame/src/ui/squareRoot/square_root.dart';
@@ -50,6 +51,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => MagicTriangle());
     case KeyUtil.MathMachine:
       return MaterialPageRoute(builder: (context) => MathGrid());
+    case KeyUtil.PicturePuzzle:
+      return MaterialPageRoute(builder: (context) => PicturePuzzle());
     case KeyUtil.NumberPyramid:
       return MaterialPageRoute(builder: (context) => NumberPyramid());
     default:

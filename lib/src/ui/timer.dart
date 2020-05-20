@@ -5,6 +5,7 @@ import 'package:mathgame/src/provider/calculatorProvider.dart';
 import 'package:mathgame/src/provider/correctAnswerProvider.dart';
 import 'package:mathgame/src/provider/mathPairsProvider.dart';
 import 'package:mathgame/src/provider/mentalArithmeticProvider.dart';
+import 'package:mathgame/src/provider/picturePuzzleProvider.dart';
 import 'package:mathgame/src/provider/numberPyramidProvider.dart';
 import 'package:mathgame/src/provider/quickCalculationProvider.dart';
 import 'package:mathgame/src/provider/signProvider.dart';
@@ -49,6 +50,9 @@ class Timer extends StatelessWidget {
     } else if (type == GameCategoryType.MATH_MACHINE) {
       provider = Provider.of<MathGridProvider>(context);
       timeConstant = TimeUtil.mathMachineTimeOut;
+    } else if (type == GameCategoryType.PICTURE_PUZZLE) {
+      provider = Provider.of<PicturePuzzleProvider>(context);
+      timeConstant = TimeUtil.picturePuzzleTimeOut;
     } else if (type == GameCategoryType.NUMBER_PYRAMID) {
       provider = Provider.of<NumberPyramidProvider>(context);
       timeConstant = TimeUtil.numPyramidTimeOut;

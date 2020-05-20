@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
+import 'package:mathgame/src/models/picturePuzzle/PicturePuzzleRootQandS.dart';
 import 'package:mathgame/src/provider/timerProvider.dart';
 import 'package:mathgame/src/resources/calculator/calculatorQandSDataProvider.dart';
 import 'package:mathgame/src/resources/correctAnswer/correctAnswerQandSDataProvider.dart';
@@ -8,6 +9,7 @@ import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
 import 'package:mathgame/src/resources/mathPairs/mathPairsQandSDataProvider.dart';
 import 'package:mathgame/src/resources/mentalArithmetic/mentalArithmeticQandSDataProvider.dart';
 import 'package:mathgame/src/resources/navigation_service.dart';
+import 'package:mathgame/src/resources/picturePuzzle/picturePuzzleQandSDataProvider.dart';
 import 'package:mathgame/src/resources/quickCalculation/quickCalculationQandSDataProvider.dart';
 import 'package:mathgame/src/resources/squareRoot/squareRootQandSDataProvider.dart';
 import 'package:mathgame/src/resources/whatsTheSign/signQandSDataProvider.dart';
@@ -234,6 +236,11 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
       case GameCategoryType.MATH_MACHINE:
 //        return MathGridDataProvider.generateRandomAnswer();
         break;
+      case GameCategoryType.PICTURE_PUZZLE:
+        return PicturePuzzleQandSDataProvider.getPicturePuzzleDataList(level);
+      case GameCategoryType.NUMBER_PYRAMID:
+        // TODO: Handle this case.
+        break;
     }
   }
 
@@ -265,6 +272,11 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
         break;
       case GameCategoryType.MATH_MACHINE:
         return ScoreUtil.mathMachineScore;
+        break;
+      case GameCategoryType.PICTURE_PUZZLE:
+        return ScoreUtil.picturePuzzleScore;
+      case GameCategoryType.NUMBER_PYRAMID:
+        // TODO: Handle this case.
         break;
     }
   }
@@ -298,6 +310,11 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
       case GameCategoryType.MATH_MACHINE:
         return ScoreUtil.mathMachineScore;
         break;
+      case GameCategoryType.PICTURE_PUZZLE:
+        return ScoreUtil.picturePuzzleScore;
+      case GameCategoryType.NUMBER_PYRAMID:
+        // TODO: Handle this case.
+        break;
     }
   }
 
@@ -330,6 +347,11 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
       case GameCategoryType.MATH_MACHINE:
         return CoinUtil.mathMachineCoin;
         break;
+      case GameCategoryType.PICTURE_PUZZLE:
+        return CoinUtil.picturePuzzleCoin;
+      case GameCategoryType.NUMBER_PYRAMID:
+        // TODO: Handle this case.
+        break;
     }
   }
 
@@ -361,6 +383,11 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
         break;
       case GameCategoryType.MATH_MACHINE:
         return TimeUtil.mathMachineTimeOut;
+        break;
+      case GameCategoryType.PICTURE_PUZZLE:
+        return TimeUtil.picturePuzzleTimeOut;
+      case GameCategoryType.NUMBER_PYRAMID:
+        // TODO: Handle this case.
         break;
     }
   }

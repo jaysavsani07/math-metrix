@@ -74,6 +74,13 @@ class DashboardViewModel extends ChangeNotifier {
             KeyUtil.SquareRoot,
             getScoreboard("square_root")));
         list.add(GameCategory(
+            10,
+            "Picture Puzzle",
+            "picture_puzzle",
+            GameCategoryType.PICTURE_PUZZLE,
+            KeyUtil.PicturePuzzle,
+            getScoreboard("picture_puzzle")));
+        list.add(GameCategory(
             4,
             "Mathematical pairs",
             "math_pairs",
