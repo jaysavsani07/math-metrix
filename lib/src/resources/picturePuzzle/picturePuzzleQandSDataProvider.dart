@@ -9,12 +9,16 @@ class PicturePuzzleQandSDataProvider {
       listHasCode.clear();
     }
     List<PicturePuzzleQandS> list = List();
-    while (list.length < 1) {
+    while (list.length < 5) {
       List<PicturePuzzle> puzzleList = List();
 
-      List<PicturePuzzleData> picturePuzzleDataList =
-          getPicturePuzzleData(generateMatrix(level, list.length));
+      List<List<String>> matrix = generateMatrix(level, list.length);
+      while (matrix[0][5] == matrix[1][5]) {
+        matrix = generateMatrix(level, list.length);
+      }
 
+      List<PicturePuzzleData> picturePuzzleDataList =
+          getPicturePuzzleData(matrix);
       picturePuzzleDataList
           .asMap()
           .forEach((int i, PicturePuzzleData picturePuzzleData) {
@@ -94,8 +98,17 @@ class PicturePuzzleQandSDataProvider {
           var tempList = [
             listDigit[0],
             listDigit[1],
-            listDigit[2],
             listDigit[0],
+            listDigit[1],
+            listDigit[0],
+            listDigit[1],
+          ]..shuffle();
+
+          var tempList1 = [
+            listDigit[1],
+            listDigit[2],
+            listDigit[1],
+            listDigit[2],
             listDigit[1],
             listDigit[2]
           ]..shuffle();
@@ -110,12 +123,12 @@ class PicturePuzzleQandSDataProvider {
               "${int.parse(tempList[0]) + int.parse(tempList[1]) + int.parse(tempList[2])}"
             ],
             [
-              tempList[3],
+              tempList1[3],
               "+",
-              tempList[4],
+              tempList1[4],
               "+",
-              tempList[5],
-              "${int.parse(tempList[3]) + int.parse(tempList[4]) + int.parse(tempList[5])}"
+              tempList1[5],
+              "${int.parse(tempList1[3]) + int.parse(tempList1[4]) + int.parse(tempList1[5])}"
             ],
             [
               listDigit[2],
@@ -246,9 +259,18 @@ class PicturePuzzleQandSDataProvider {
 }
 
 void main() {
-  for (int j = 1; j < 5; j++)
-    for (int i = 0; i < 5; i++) {
-      print(PicturePuzzleQandSDataProvider.generateMatrix(j, i));
+  for (int j = 1; j < 5; j++) {
+    for (int i = 0; i < 2; i++) {
+      List<List<String>> matrix =
+          PicturePuzzleQandSDataProvider.generateMatrix(j, i);
+      while (matrix[0][5] == matrix[1][5] ||
+          matrix[0][5] == matrix[2][5] ||
+          matrix[1][5] == matrix[2][5]) {
+        matrix = PicturePuzzleQandSDataProvider.generateMatrix(j, 1);
+      }
+
+      print(matrix);
     }
+  }
 //  print(PicturePuzzleQandSDataProvider.getPicturePuzzleDataList(1));
 }
