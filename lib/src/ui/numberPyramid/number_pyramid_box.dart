@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/models/numberPyramid/number_pyramid_model.dart';
-import 'package:mathgame/src/provider/calculatorProvider.dart';
 import 'package:mathgame/src/provider/numberPyramidProvider.dart';
 import 'package:mathgame/src/utility/sizeConfig.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +7,6 @@ import 'package:provider/provider.dart';
 class PyramidNumberBox extends StatelessWidget {
   final String text;
 
-//  final String correctVal;
   final NumPyramidCellModel numPyramidCellModel;
 
   PyramidNumberBox(this.text, this.numPyramidCellModel);
@@ -20,6 +18,8 @@ class PyramidNumberBox extends StatelessWidget {
     double boxWidth = (SizeConfig.screenWidth / 100);
     final numberProvider = Provider.of<NumberPyramidProvider>(context);
     return InkWell(
+      highlightColor: Colors.transparent,
+      splashColor: Colors.transparent,
       onTap: () {
         numberProvider.pyramidBoxSelection(numPyramidCellModel);
       },
@@ -36,7 +36,7 @@ class PyramidNumberBox extends StatelessWidget {
             border: new Border.all(
                 color:
                     numPyramidCellModel.isActive ? Colors.yellow : Colors.white,
-                width: 1,
+                width: numPyramidCellModel.isActive ? 2 : 1,
                 style: BorderStyle.solid)),
         child: Text(
           numPyramidCellModel.isHidden

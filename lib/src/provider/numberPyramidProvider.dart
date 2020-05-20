@@ -87,8 +87,11 @@ class NumberPyramidProvider with ChangeNotifier {
     }
     var listOfCellWithValues =
         _currentState.list.where((cell) => cell.text.isNotEmpty);
+
     if (value == "DONE") {
-      if (listOfCellWithValues.length > 17) {
+      print("cell with values ${listOfCellWithValues.length}");
+      print("remaining cell ${_currentState.remainingCell}");
+      if (listOfCellWithValues.length == _currentState.remainingCell) {
         checkCorrectValues();
         return;
       } else {
@@ -129,7 +132,9 @@ class NumberPyramidProvider with ChangeNotifier {
     }
     var correctVal = _currentState.list.where((cell) => cell.isCorrect == true);
 
-    if (correctVal.length == 18) {
+    print("correct val ${correctVal.length}");
+
+    if (correctVal.length == _currentState.remainingCell) {
       _index = _index + 1;
       _currentState = _list[_index];
 
@@ -142,11 +147,13 @@ class NumberPyramidProvider with ChangeNotifier {
   }
 
   void startTimer() {
+    int levelWiseTimer = (_index > 5) ? 60 : _index * 10;
     timerSubscription = Stream.periodic(
-            Duration(seconds: 1), (x) => TimeUtil.numPyramidTimeOut - x - 1)
-        .take(TimeUtil.numPyramidTimeOut)
+            Duration(seconds: 1), (x) => TimeUtil.numPyramidTimeOut - x - 1 - (levelWiseTimer))
+        .take(TimeUtil.numPyramidTimeOut - (levelWiseTimer))
         .listen((time) {
       _time = time;
+      print("time $_time");
       notifyListeners();
     }, onDone: () {
       this._timeOut = true;

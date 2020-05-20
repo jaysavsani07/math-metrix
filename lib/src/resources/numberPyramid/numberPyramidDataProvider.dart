@@ -1,41 +1,84 @@
+import 'dart:math';
+
 import 'package:mathgame/src/models/numberPyramid/number_pyramid_model.dart';
 import 'package:mathgame/src/utility/mathUtil.dart';
+import 'package:tuple/tuple.dart';
 
 class NumberPyramidDataProvider {
   static List<NumPyramidCellModel> singlePyramidList = new List();
   static int counter;
+  static List<List<int>> hintLists = [
+    [0, 6, 9, 10, 17, 20, 26],
+    [1, 5, 10, 13, 19, 21, 22, 25],
+    [3, 4, 8, 12, 16, 18, 24, 26],
+    [2, 4, 5, 14, 16, 22, 24, 27],
+    [3, 5, 8, 15, 19, 25, 27],
+    [1, 4, 9, 12, 14, 16, 25],
+    [0, 9, 11, 16, 19, 24, 25],
+    [2, 4, 5, 14, 16, 22, 24, 27],
+    [1, 3, 5, 11, 13, 15, 21, 23],
+    [3, 4, 11, 13, 21, 22, 23, 27],
+    [2, 3, 13, 16, 18, 20, 21],
+    [0, 1, 9, 13, 16, 17, 20],
+    [3, 11, 14, 19, 20, 22, 26],
+    [0, 12, 13, 21, 22, 26, 27],
+    [4, 8, 9, 19, 21, 24, 27],
+    [1, 2, 4, 5, 7, 9, 12],
+    [0, 1, 2, 4, 5, 6, 10],
+    [0, 12, 13, 18, 22, 26, 27],
+    [6, 12, 13, 18, 22, 26, 27],
+    [0, 7, 17, 21, 24, 25, 27],
+    [0, 7, 13, 18, 22, 25, 27],
+    [6, 12, 17, 21, 24, 26, 27],
+    [0, 12, 13, 21, 22, 25, 27],
+    [0, 1, 2, 3, 4, 5, 6],
+    [0, 7, 8, 9, 10, 11, 12],
+    [6, 7, 12, 14, 15, 16, 17],
+    [18, 19, 20, 21, 17, 7, 6],
+    [2, 3, 7, 8, 11, 12, 14],
+
+  ];
 
   static List<NumberPyramidModel> getPyramidDataList(int level) {
     List<NumberPyramidModel> pyramidsList = new List();
 
     for (int i = 0; i < 10; i++) {
+      var singlePyramidResult = generateSinglePyramidValues();
       pyramidsList
-          .add(NumberPyramidModel(i, generateSinglePyramidValues(), 28));
+          .add(NumberPyramidModel(i, singlePyramidResult.item1, singlePyramidResult.item2 + 1));
     }
+
+    /*for(int i = 0; i < pyramidsList.length; i++) {
+      print("remaining cell ${pyramidsList[i].remainingCell}");
+      for (int j = 0; j < pyramidsList[i].list.length; j++) {
+        print("counter $j and val ${pyramidsList[i].list[j].numberOnCell}");
+      }
+    }*/
 
     return pyramidsList;
   }
 
-  static List<NumPyramidCellModel> generateSinglePyramidValues() {
+  static Tuple2<List<NumPyramidCellModel>, int> generateSinglePyramidValues() {
     singlePyramidList = new List();
     counter = 1;
     int min = 1;
     int max = 8;
+
     List<NumPyramidCellModel> baseLineList = generateBaseLineOfPyramid(
         min, max); // generating bottom line of pyramid
     singlePyramidList.addAll(baseLineList);
     generateUpperLineOfPyramid(baseLineList,
         counter); // generating upper line of pyramid by looping one by one
 
-    var list = new List<int>.generate(27, (int index) => index); // select 8 random number for hint
-    list.shuffle();
-    var finalList = list.sublist(0, 10);
+    final _random = new Random();
+    var selectedHintList = hintLists[_random.nextInt(hintLists.length)];
 
-    for (int i = 0; i < finalList.length; i++) {
-      singlePyramidList[finalList[i]].isHidden = false;
-      singlePyramidList[finalList[i]].isHint = true;
+    for (int i = 0; i < selectedHintList.length; i++) {
+      singlePyramidList[selectedHintList[i]].isHidden = false;
+      singlePyramidList[selectedHintList[i]].isHint = true;
     }
-    return singlePyramidList;
+
+    return new Tuple2(singlePyramidList, (27- selectedHintList.length));
   }
 
   static generateUpperLineOfPyramid(
@@ -51,9 +94,10 @@ class NumberPyramidDataProvider {
     List<NumPyramidCellModel> tempList = new List();
     for (int k = 0; k < list.length - 1; k++) {
       int sum = list[k].numberOnCell + list[k + 1].numberOnCell;
-      singlePyramidList
-          .add(NumPyramidCellModel(counter, "", sum, false, false, true, false, false));
-      tempList.add(NumPyramidCellModel(counter, "", sum, false, false, true, false, false));
+      singlePyramidList.add(NumPyramidCellModel(
+          counter, "", sum, false, false, true, false, false));
+      tempList.add(NumPyramidCellModel(
+          counter, "", sum, false, false, true, false, false));
       counter++;
     }
     loopTime--;
@@ -65,11 +109,10 @@ class NumberPyramidDataProvider {
     cellList.clear();
     for (int i = 0; i < 7; i++) {
       int randomNum = MathUtil.generateRandomAnswer(min, max);
-      cellList
-          .add(NumPyramidCellModel(counter, "", randomNum, false, false, true, false, false));
+      cellList.add(NumPyramidCellModel(
+          counter, "", randomNum, false, false, true, false, false));
       counter++;
     }
     return cellList;
   }
 }
-
