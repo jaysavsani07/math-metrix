@@ -46,18 +46,22 @@ class MathGrid extends StatelessWidget {
                   ),
                   Expanded(
                     flex: 55,
-                    child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 9),
-                        itemCount:
-                            mathGridProvider.currentState.listForSquare.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return SquareButton(
-                              mathGridProvider
-                                  .currentState.listForSquare[index].value,
-                              mathGridProvider
-                                  .currentState.listForSquare[index]);
-                        }),
+                    child: Visibility(
+                      visible: !mathGridProvider.pause,
+                      child: GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 9),
+                          itemCount: mathGridProvider
+                              .currentState.listForSquare.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return SquareButton(
+                                mathGridProvider
+                                    .currentState.listForSquare[index].value,
+                                mathGridProvider
+                                    .currentState.listForSquare[index]);
+                          }),
+                    ),
                   ),
                   Expanded(
                     flex: 10,

@@ -40,17 +40,23 @@ class MathPairs extends StatelessWidget {
                         aspectRatio: 0.7,
                         child: Consumer<MathPairsProvider>(
                             builder: (context, mathPairsProvider, child) {
-                          return GridView.builder(
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 3, childAspectRatio: 1.5),
-                              itemCount: mathPairsProvider.currentState.list.length,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemBuilder: (BuildContext context, int index) {
-                                return MathPairsButton(
-                                    mathPairsProvider.currentState.list[index],
-                                    index);
-                              });
+                          return Visibility(
+                            visible: !mathPairsProvider.pause,
+                            child: GridView.builder(
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 3,
+                                        childAspectRatio: 1.5),
+                                itemCount:
+                                    mathPairsProvider.currentState.list.length,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemBuilder: (BuildContext context, int index) {
+                                  return MathPairsButton(
+                                      mathPairsProvider
+                                          .currentState.list[index],
+                                      index);
+                                }),
+                          );
                         }),
                       ),
                     ),
