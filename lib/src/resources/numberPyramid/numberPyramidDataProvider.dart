@@ -42,18 +42,11 @@ class NumberPyramidDataProvider {
   static List<NumberPyramidModel> getPyramidDataList(int level) {
     List<NumberPyramidModel> pyramidsList = new List();
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 20; i++) {
       var singlePyramidResult = generateSinglePyramidValues();
       pyramidsList
           .add(NumberPyramidModel(i, singlePyramidResult.item1, singlePyramidResult.item2 + 1));
     }
-
-    /*for(int i = 0; i < pyramidsList.length; i++) {
-      print("remaining cell ${pyramidsList[i].remainingCell}");
-      for (int j = 0; j < pyramidsList[i].list.length; j++) {
-        print("counter $j and val ${pyramidsList[i].list[j].numberOnCell}");
-      }
-    }*/
 
     return pyramidsList;
   }
