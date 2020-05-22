@@ -158,7 +158,7 @@ class PicturePuzzleQandSDataProvider {
           listShape.forEach((list) {
             if (list[0] == list[1] &&
                 list[1] == list[2] &&
-                list[2] == list[1]) {
+                list[0] == list[1]) {
               picturePuzzleData.add(PicturePuzzleData(
                   list[0],
                   "+",
@@ -169,7 +169,7 @@ class PicturePuzzleQandSDataProvider {
                       map[list[0]], "+", map[list[1]], "+", map[list[2]])));
             } else if (list[0] != list[1] &&
                 list[1] != list[2] &&
-                list[2] != list[1]) {
+                list[0] != list[1]) {
               picturePuzzleData.add(PicturePuzzleData(
                   list[0],
                   "+",
@@ -224,7 +224,7 @@ class PicturePuzzleQandSDataProvider {
       });
 
       listShape.forEach((list) {
-        if (list[0] == list[1] && list[1] == list[2] && list[2] == list[1]) {
+        if (list[0] == list[1] && list[1] == list[2] && list[0] == list[1]) {
           picturePuzzleData.add(PicturePuzzleData(
               list[0],
               listSign[0],
@@ -235,14 +235,18 @@ class PicturePuzzleQandSDataProvider {
                   map[list[2]])));
         } else if (list[0] != list[1] &&
             list[1] != list[2] &&
-            list[2] != list[1]) {
+            list[0] != list[1]) {
           picturePuzzleData.add(PicturePuzzleData(
               list[0],
-              listSign[0],
+              listSign[0] == "-" ? "+" : listSign[0],
               list[1],
-              listSign[1],
+              listSign[1] == "-" ? "+" : listSign[1],
               list[2],
-              getResult(map[list[0]], listSign[0], map[list[1]], listSign[1],
+              getResult(
+                  map[list[0]],
+                  listSign[0] == "-" ? "+" : listSign[0],
+                  map[list[1]],
+                  listSign[1] == "-" ? "+" : listSign[1],
                   map[list[2]])));
         } else if (listSign.length == 3) {
           picturePuzzleData.add(PicturePuzzleData(
@@ -447,6 +451,7 @@ class PicturePuzzleQandSDataProvider {
 }
 
 void main() {
+  for(int k=1;k<10;k++)
   for (int j = 1; j < 3; j++) {
     for (int i = 0; i < 5; i++) {
       var matrix = PicturePuzzleQandSDataProvider.generateMatrix1(j, i);
