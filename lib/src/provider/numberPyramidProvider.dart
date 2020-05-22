@@ -89,8 +89,6 @@ class NumberPyramidProvider with ChangeNotifier {
         _currentState.list.where((cell) => cell.text.isNotEmpty);
 
     if (value == "DONE") {
-      print("cell with values ${listOfCellWithValues.length}");
-      print("remaining cell ${_currentState.remainingCell}");
       if (listOfCellWithValues.length == _currentState.remainingCell) {
         checkCorrectValues();
         return;
@@ -132,12 +130,9 @@ class NumberPyramidProvider with ChangeNotifier {
     }
     var correctVal = _currentState.list.where((cell) => cell.isCorrect == true);
 
-    print("correct val ${correctVal.length}");
-
     if (correctVal.length == _currentState.remainingCell) {
       _index = _index + 1;
       _currentState = _list[_index];
-
       currentScore = currentScore + ScoreUtil.numberPyramidScore;
       if (!timeOut) {
         restartTimer();
@@ -153,7 +148,6 @@ class NumberPyramidProvider with ChangeNotifier {
         .take(TimeUtil.numPyramidTimeOut - (levelWiseTimer))
         .listen((time) {
       _time = time;
-      print("time $_time");
       notifyListeners();
     }, onDone: () {
       this._timeOut = true;
