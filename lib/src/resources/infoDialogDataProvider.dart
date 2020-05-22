@@ -97,11 +97,11 @@ ${ScoreUtil.mathMachineScore.toInt()} for each correct equation
       case GameCategoryType.PICTURE_PUZZLE:
         return GameInfoDialog(
             title: "Picture Puzzle",
-            image: "assets/math-machine-intro.gif",
+            image: "assets/picture-puzzle-intro.gif",
             dec:
-                '''Select number from math grid to reach answer shown above. You can select any number to reach above answer. 
+                '''Each shape represents a number. Find the number of each shape from given equation and solve the last equation. 
                                         
-${ScoreUtil.mathMachineScore.toInt()} for each correct equation
+${ScoreUtil.picturePuzzleScore.toInt()} for each correct equation
 ''');
       case GameCategoryType.NUMBER_PYRAMID:
         // TODO: Handle this case.

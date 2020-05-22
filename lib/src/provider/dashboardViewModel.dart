@@ -74,12 +74,12 @@ class DashboardViewModel extends ChangeNotifier {
             KeyUtil.SquareRoot,
             getScoreboard("square_root")));
         list.add(GameCategory(
-            10,
-            "Picture Puzzle",
-            "picture_puzzle",
-            GameCategoryType.PICTURE_PUZZLE,
-            KeyUtil.PicturePuzzle,
-            getScoreboard("picture_puzzle")));
+            9,
+            "Math Grid",
+            "math_machine",
+            GameCategoryType.MATH_MACHINE,
+            KeyUtil.MathMachine,
+            getScoreboard("math_machine")));
         list.add(GameCategory(
             4,
             "Mathematical pairs",
@@ -97,14 +97,14 @@ class DashboardViewModel extends ChangeNotifier {
             KeyUtil.MagicTriangle,
             getScoreboard("magic_tringle")));
         list.add(GameCategory(
-            9,
-            "Math Grid",
-            "math_machine",
-            GameCategoryType.MATH_MACHINE,
-            KeyUtil.MathMachine,
-            getScoreboard("math_machine")));
-        list.add(GameCategory(
             10,
+            "Picture Puzzle",
+            "picture_puzzle",
+            GameCategoryType.PICTURE_PUZZLE,
+            KeyUtil.PicturePuzzle,
+            getScoreboard("picture_puzzle")));
+        list.add(GameCategory(
+            11,
             "Number Pyramid",
             "number_pyramid",
             GameCategoryType.NUMBER_PYRAMID,
