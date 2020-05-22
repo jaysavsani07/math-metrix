@@ -57,6 +57,7 @@ class MathGridProvider with ChangeNotifier {
   Future<void> checkResult(int index, MathGridCellModel gridModel) async {
     if (gridModel.isActive == true) {
       gridModel.isActive = false;
+      checkForCorrectAnswer();
       notifyListeners();
       return;
     }
@@ -72,6 +73,12 @@ class MathGridProvider with ChangeNotifier {
     }
 
     gridModel.isActive = true;
+    checkForCorrectAnswer();
+
+    notifyListeners();
+  }
+
+  void checkForCorrectAnswer(){
     int total = 0;
     var listOfIndex = _currentState.listForSquare
         .where((result) => result.isActive == true)
@@ -80,7 +87,7 @@ class MathGridProvider with ChangeNotifier {
     for (int i = 0; i < listOfIndex.length; i++) {
       total = total + listOfIndex[i].value;
     }
-
+    print("total $total");
     if (_currentState.currentAnswer == total) {
       for (int i = 0; i < listOfIndex.length; i++) {
         listOfIndex[i].isActive = false;
@@ -92,8 +99,6 @@ class MathGridProvider with ChangeNotifier {
       print("list of answer legnth ${_currentState.listOfAnswer.length}");
       _currentState.currentAnswer = _currentState.listOfAnswer[answerIndex];
     }
-    print("total $total");
-    notifyListeners();
   }
 
   int getCountOfPossiblePairs(List<MathGridCellModel> arr, int sum) {
