@@ -114,6 +114,8 @@ class CalculatorProvider
     gameViewModel.showInfoDialog();
   }
 
+
+
   void dispose() {
     super.dispose();
     gameViewModel.exitGame();

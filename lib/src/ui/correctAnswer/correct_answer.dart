@@ -35,9 +35,12 @@ class CorrectAnswer extends StatelessWidget {
                         Expanded(
                             flex: 20,
                             child: Center(
-                              child: Text(
-                                correctAnswerProvider.currentState.question,
-                                style: Theme.of(context).textTheme.display1,
+                              child: Visibility(
+                                visible: !correctAnswerProvider.pause,
+                                child: Text(
+                                  correctAnswerProvider.currentState.question,
+                                  style: Theme.of(context).textTheme.display1,
+                                ),
                               ),
                             )),
                         Expanded(
@@ -102,7 +105,8 @@ class CorrectAnswer extends StatelessWidget {
                             flex: 10,
                             child: Container(
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
                                   IconButton(

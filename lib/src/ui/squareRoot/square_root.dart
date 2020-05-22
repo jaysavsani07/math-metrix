@@ -34,9 +34,12 @@ class SquareRoot extends StatelessWidget {
                         Expanded(
                             flex: 20,
                             child: Center(
-                              child: Text(
-                                squareRootProvider.currentState.question,
-                                style: Theme.of(context).textTheme.display1,
+                              child: Visibility(
+                                visible: !squareRootProvider.pause,
+                                child: Text(
+                                  squareRootProvider.currentState.question,
+                                  style: Theme.of(context).textTheme.display1,
+                                ),
                               ),
                             )),
                         Expanded(

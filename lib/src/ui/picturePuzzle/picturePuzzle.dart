@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/provider/picturePuzzleProvider.dart';
 import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
-import 'package:mathgame/src/ui/picturePuzzle/picture_puzzle_button.dart';
-import 'package:mathgame/src/ui/picturePuzzle/picture_puzzle_button1.dart';
+import 'package:mathgame/src/ui/picturePuzzle/picture_puzzle_shape_button.dart';
+import 'package:mathgame/src/ui/picturePuzzle/picture_puzzle_answer_button.dart';
 import 'package:mathgame/src/ui/timer.dart';
 import 'package:provider/provider.dart';
 
@@ -34,19 +34,22 @@ class PicturePuzzle extends StatelessWidget {
                     flex: 40,
                     child: Consumer<PicturePuzzleProvider>(
                         builder: (context, provider, child) {
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: provider.currentState.list.map((list) {
-                          return Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: list.shapeList.map((subList) {
-                                return PicturePuzzleButton(subList);
-                              }).toList(),
-                            ),
-                          );
-                        }).toList(),
+                      return Visibility(
+                        visible: !provider.pause,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: provider.currentState.list.map((list) {
+                            return Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: list.shapeList.map((subList) {
+                                  return PicturePuzzleShapeButton(subList);
+                                }).toList(),
+                              ),
+                            );
+                          }).toList(),
+                        ),
                       );
                     }),
                   ),
@@ -84,17 +87,17 @@ class PicturePuzzle extends StatelessWidget {
                           Expanded(
                             child: Row(
                               children: <Widget>[
-                                PicturePuzzleButton1(
+                                PicturePuzzleAnswerButton(
                                     "5",
                                     BorderRadius.only(
                                         topLeft: Radius.circular(40))),
-                                PicturePuzzleButton1(
+                                PicturePuzzleAnswerButton(
                                     "6", BorderRadius.all(Radius.zero)),
-                                PicturePuzzleButton1(
+                                PicturePuzzleAnswerButton(
                                     "7", BorderRadius.all(Radius.zero)),
-                                PicturePuzzleButton1(
+                                PicturePuzzleAnswerButton(
                                     "8", BorderRadius.all(Radius.zero)),
-                                PicturePuzzleButton1(
+                                PicturePuzzleAnswerButton(
                                     "9",
                                     BorderRadius.only(
                                         topRight: Radius.circular(40)))
@@ -104,15 +107,15 @@ class PicturePuzzle extends StatelessWidget {
                           Expanded(
                             child: Row(
                               children: <Widget>[
-                                PicturePuzzleButton1(
+                                PicturePuzzleAnswerButton(
                                     "0", BorderRadius.all(Radius.zero)),
-                                PicturePuzzleButton1(
+                                PicturePuzzleAnswerButton(
                                     "1", BorderRadius.all(Radius.zero)),
-                                PicturePuzzleButton1(
+                                PicturePuzzleAnswerButton(
                                     "2", BorderRadius.all(Radius.zero)),
-                                PicturePuzzleButton1(
+                                PicturePuzzleAnswerButton(
                                     "3", BorderRadius.all(Radius.zero)),
-                                PicturePuzzleButton1(
+                                PicturePuzzleAnswerButton(
                                     "4", BorderRadius.all(Radius.zero)),
                               ],
                             ),
@@ -120,7 +123,7 @@ class PicturePuzzle extends StatelessWidget {
                           Expanded(
                             child: Row(
                               children: <Widget>[
-                                PicturePuzzleButton1(
+                                PicturePuzzleAnswerButton(
                                     "CLEAR",
                                     BorderRadius.only(
                                         bottomLeft: Radius.circular(40),

@@ -41,33 +41,37 @@ class QuickCalculation extends StatelessWidget {
                             animationDuration: 250,
                             animateFromLastPercent: true,
                             percent: provider.time,
-                            center: CupertinoPicker(
-                              itemExtent: 30,
-                              diameterRatio: 1,
-                              squeeze: 1.4,
-                              scrollController: provider.scrollController,
-                              backgroundColor: Colors.transparent,
-                              children: provider.list.map((data) {
-                                return Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text(data.question,
+                            center: Visibility(
+                              visible: !provider.pause,
+                              child: CupertinoPicker(
+                                itemExtent: 30,
+                                diameterRatio: 1,
+                                squeeze: 1.4,
+                                scrollController: provider.scrollController,
+                                backgroundColor: Colors.transparent,
+                                children: provider.list.map((data) {
+                                  return Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text(data.question,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline),
+                                      Text(" = ",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline),
+                                      Text(
+                                        data.userAnswer,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline),
-                                    Text(" = ",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline),
-                                    Text(
-                                      data.userAnswer,
-                                      style:
-                                          Theme.of(context).textTheme.headline,
-                                    )
-                                  ],
-                                );
-                              }).toList(),
-                              onSelectedItemChanged: (_) {},
+                                            .headline,
+                                      )
+                                    ],
+                                  );
+                                }).toList(),
+                                onSelectedItemChanged: (_) {},
+                              ),
                             ),
                             circularStrokeCap: CircularStrokeCap.round,
                             progressColor: Colors.green,

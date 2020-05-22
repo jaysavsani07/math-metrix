@@ -5,10 +5,10 @@ import 'package:mathgame/src/ui/picturePuzzle/SquarePainter.dart';
 
 import 'TrianglePainter.dart';
 
-class PicturePuzzleButton extends StatelessWidget {
+class PicturePuzzleShapeButton extends StatelessWidget {
   final PicturePuzzleShape picturePuzzleShape;
 
-  PicturePuzzleButton(this.picturePuzzleShape);
+  PicturePuzzleShapeButton(this.picturePuzzleShape);
 
   @override
   Widget build(BuildContext context) {

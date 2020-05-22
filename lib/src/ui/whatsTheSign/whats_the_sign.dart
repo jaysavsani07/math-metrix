@@ -26,55 +26,59 @@ class WhatsTheSign extends StatelessWidget {
                     Expanded(flex: 10, child: Timer(GameCategoryType.SIGN)),
                     Expanded(
                         flex: 20,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Center(
-                              child: Text(
-                                signProvider.currentState.firstDigit,
-                                style: Theme.of(context).textTheme.display1,
+                        child: Visibility(
+                          visible: !signProvider.pause,
+
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Center(
+                                child: Text(
+                                  signProvider.currentState.firstDigit,
+                                  style: Theme.of(context).textTheme.display1,
+                                ),
                               ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.rectangle,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(3)),
-                                border: Border.all(
-                                    color: Theme.of(context).primaryColor,
-                                    width: 1),
-                              ),
-                              child: Container(
-                                width: 25,
-                                child: Center(
-                                  heightFactor: 1,
-                                  child: Text(
-                                    signProvider.result,
-                                    style: Theme.of(context).textTheme.headline,
+                              Container(
+                                margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(3)),
+                                  border: Border.all(
+                                      color: Theme.of(context).primaryColor,
+                                      width: 1),
+                                ),
+                                child: Container(
+                                  width: 25,
+                                  child: Center(
+                                    heightFactor: 1,
+                                    child: Text(
+                                      signProvider.result,
+                                      style: Theme.of(context).textTheme.headline,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Center(
-                              child: Text(
-                                signProvider.currentState.secondDigit,
-                                style: Theme.of(context).textTheme.display1,
+                              Center(
+                                child: Text(
+                                  signProvider.currentState.secondDigit,
+                                  style: Theme.of(context).textTheme.display1,
+                                ),
                               ),
-                            ),
-                            Center(
-                              child: Text(
-                                " = ",
-                                style: Theme.of(context).textTheme.display1,
+                              Center(
+                                child: Text(
+                                  " = ",
+                                  style: Theme.of(context).textTheme.display1,
+                                ),
                               ),
-                            ),
-                            Center(
-                              child: Text(
-                                signProvider.currentState.answer,
-                                style: Theme.of(context).textTheme.display1,
+                              Center(
+                                child: Text(
+                                  signProvider.currentState.answer,
+                                  style: Theme.of(context).textTheme.display1,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         )),
                     Expanded(
                       flex: 60,
