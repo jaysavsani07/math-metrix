@@ -36,7 +36,6 @@ class NumberPyramidDataProvider {
     [6, 7, 12, 14, 15, 16, 17],
     [18, 19, 20, 21, 17, 7, 6],
     [2, 3, 7, 8, 11, 12, 14],
-
   ];
 
   static List<NumberPyramidModel> getPyramidDataList(int level) {
