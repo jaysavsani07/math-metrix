@@ -97,7 +97,6 @@ class PicturePuzzleQandSDataProvider {
     list.add([shapeList[0], shapeList[0], shapeList[0]]);
     shapeList.removeAt(0);
     while (list.length < 3) {
-      shapeList.shuffle();
       if (list.length == 1)
         list.add([shapeList[0], list[0][0], shapeList[0]]..shuffle());
       else {
