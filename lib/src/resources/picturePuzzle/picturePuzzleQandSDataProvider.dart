@@ -13,7 +13,7 @@ class PicturePuzzleQandSDataProvider {
     while (list.length < 5) {
       List<PicturePuzzle> puzzleList = List();
       List<PicturePuzzleData> picturePuzzleDataList =
-      getNewShapeMatrix(level, list.length);
+          getNewShapeMatrix(level, list.length);
       print("\n");
 
       picturePuzzleDataList
@@ -24,19 +24,22 @@ class PicturePuzzleQandSDataProvider {
               isSign: false,
               picturePuzzleShapeType: picturePuzzleData.picturePuzzleShapeType1,
               text: ""),
-          PicturePuzzleShape(isSign: true, text: picturePuzzleData.sign1),
+          PicturePuzzleShape(
+              isSign: true, isAnswer: false, text: picturePuzzleData.sign1),
           PicturePuzzleShape(
               isSign: false,
               picturePuzzleShapeType: picturePuzzleData.picturePuzzleShapeType2,
               text: ""),
-          PicturePuzzleShape(isSign: true, text: picturePuzzleData.sign2),
+          PicturePuzzleShape(
+              isSign: true, isAnswer: false, text: picturePuzzleData.sign2),
           PicturePuzzleShape(
               isSign: false,
               picturePuzzleShapeType: picturePuzzleData.picturePuzzleShapeType3,
               text: ""),
-          PicturePuzzleShape(isSign: true, text: "="),
+          PicturePuzzleShape(isSign: true, isAnswer: false, text: "="),
           PicturePuzzleShape(
               isSign: true,
+              isAnswer: true,
               text: i == picturePuzzleDataList.length - 1
                   ? "?"
                   : picturePuzzleData.text)
@@ -47,9 +50,12 @@ class PicturePuzzleQandSDataProvider {
           puzzleList, int.parse(picturePuzzleDataList.last.text)));
     }
 
-//    list.forEach((list) {
-//      print("${list} ${list.answer}");
-//    });
+    list.forEach((list1) {
+      list1.list.forEach((list) {
+        print(
+            "${list.shapeList[0].picturePuzzleShapeType} ${list.shapeList[2].picturePuzzleShapeType} ${list.shapeList[4].picturePuzzleShapeType} ${list1.answer}");
+      });
+    });
     print("\n");
     return list;
   }
@@ -62,8 +68,7 @@ class PicturePuzzleQandSDataProvider {
       PicturePuzzleShapeType.CIRCLE,
       PicturePuzzleShapeType.TRIANGLE,
       PicturePuzzleShapeType.SQUARE
-    ]
-      ..shuffle();
+    ]..shuffle();
     if (level == 1) {
       switch (index) {
         case 0:
@@ -78,22 +83,10 @@ class PicturePuzzleQandSDataProvider {
           }
           list.add(getRowFirst(
               listShape[0], listSign[0], listSign[1], listDigit[0]));
-          list.add(getRowSecond(
-              listShape[0],
-              listSign[0],
-              listShape[1],
-              listSign[0],
-              listDigit[0],
-              listDigit[1],
-              listDigit[2]));
-          list.add(getRowThird(
-              listSign[0],
-              listShape[1],
-              listSign[2],
-              listShape[2],
-              listDigit[0],
-              listDigit[1],
-              listDigit[2]));
+          list.add(getRowSecond(listShape[0], listSign[0], listShape[1],
+              listSign[0], listDigit[0], listDigit[1], listDigit[2]));
+          list.add(getRowThird(listSign[0], listShape[1], listSign[2],
+              listShape[2], listDigit[0], listDigit[1], listDigit[2]));
           list.add(getRowLast(
               listShape[0],
               listSign[0],
@@ -120,31 +113,12 @@ class PicturePuzzleQandSDataProvider {
             });
           }
           list.add(getRowFirst(listShape[0], "+", "+", listDigit[0]));
-          list.add(getRowSecond(
-              listShape[0],
-              listSign[0],
-              listShape[1],
-              "+",
-              listDigit[0],
-              listDigit[1],
-              listDigit[2]));
-          list.add(getRowThird(
-              listSign[0],
-              listShape[1],
-              "-",
-              listShape[2],
-              listDigit[0],
-              listDigit[1],
-              listDigit[2]));
-          list.add(getRowLast(
-              listShape[0],
-              "+",
-              listShape[1],
-              "+",
-              listShape[2],
-              listDigit[0],
-              listDigit[1],
-              listDigit[2]));
+          list.add(getRowSecond(listShape[0], listSign[0], listShape[1], "+",
+              listDigit[0], listDigit[1], listDigit[2]));
+          list.add(getRowThird(listSign[0], listShape[1], "-", listShape[2],
+              listDigit[0], listDigit[1], listDigit[2]));
+          list.add(getRowLast(listShape[0], "+", listShape[1], "+",
+              listShape[2], listDigit[0], listDigit[1], listDigit[2]));
           break;
       }
     } else {
@@ -158,31 +132,12 @@ class PicturePuzzleQandSDataProvider {
       listSign = ["+", "-", "*"]..shuffle();
       list.add(
           getRowFirst(listShape[0], listSign[0], listSign[2], listDigit[0]));
-      list.add(getRowSecond(
-          listShape[0],
-          listSign[0],
-          listShape[1],
-          "+",
-          listDigit[0],
-          listDigit[1],
-          listDigit[2]));
-      list.add(getRowThird(
-          listSign[0],
-          listShape[1],
-          "-",
-          listShape[2],
-          listDigit[0],
-          listDigit[1],
-          listDigit[2]));
-      list.add(getRowLast(
-          listShape[0],
-          listSign[0],
-          listShape[1],
-          listSign[1],
-          listShape[2],
-          listDigit[0],
-          listDigit[1],
-          listDigit[2]));
+      list.add(getRowSecond(listShape[0], listSign[0], listShape[1], "+",
+          listDigit[0], listDigit[1], listDigit[2]));
+      list.add(getRowThird(listSign[0], listShape[1], "-", listShape[2],
+          listDigit[0], listDigit[1], listDigit[2]));
+      list.add(getRowLast(listShape[0], listSign[0], listShape[1], listSign[1],
+          listShape[2], listDigit[0], listDigit[1], listDigit[2]));
     }
 //    list.forEach((list) {
 //      print(
@@ -197,8 +152,8 @@ class PicturePuzzleQandSDataProvider {
       String sign1,
       String sign2,
       String op1) {
-    print("$op1 $sign1 $op1 $sign2 $op1 ${getResult(
-        op1, sign1, op1, sign2, op1)}");
+    print(
+        "$op1 $sign1 $op1 $sign2 $op1 ${getResult(op1, sign1, op1, sign2, op1)}");
     return PicturePuzzleData(
         picturePuzzleShapeType1,
         sign1,
@@ -220,8 +175,8 @@ class PicturePuzzleQandSDataProvider {
 //      print("dakha 6e aama");
       sign1 = "*";
     }
-    print("$op1 $sign1 $op2 $sign2 $op2 ${getResult(
-        op1, sign1, op2, sign2, op2)}");
+    print(
+        "$op1 $sign1 $op2 $sign2 $op2 ${getResult(op1, sign1, op2, sign2, op2)}");
     return PicturePuzzleData(
         picturePuzzleShapeType1,
         sign1,
@@ -231,7 +186,8 @@ class PicturePuzzleQandSDataProvider {
         getResult(op1, sign1, op2, sign2, op2));
   }
 
-  static PicturePuzzleData getRowThird(String sign1,
+  static PicturePuzzleData getRowThird(
+      String sign1,
       PicturePuzzleShapeType picturePuzzleShapeType2,
       String sign2,
       PicturePuzzleShapeType picturePuzzleShapeType3,
@@ -242,8 +198,8 @@ class PicturePuzzleQandSDataProvider {
 //      print("dakha 6e aama");
       sign2 = "*";
     }
-    print("$op2 $sign1 $op3 $sign2 $op3 ${getResult(
-        op2, sign1, op3, sign2, op3)}");
+    print(
+        "$op2 $sign1 $op3 $sign2 $op3 ${getResult(op2, sign1, op3, sign2, op3)}");
     return PicturePuzzleData(
         picturePuzzleShapeType2,
         sign1,
@@ -262,10 +218,8 @@ class PicturePuzzleQandSDataProvider {
       String op1,
       String op2,
       String op3) {
-    print("$op1 ${sign1 == "-" ? "+" : sign1} $op2 ${sign2 == "-"
-        ? "+"
-        : sign2} $op3 ${ getResult(op1, sign1 == "-" ? "+" : sign1, op2,
-        sign2 == "-" ? "+" : sign2, op3)}");
+    print(
+        "$op1 ${sign1 == "-" ? "+" : sign1} $op2 ${sign2 == "-" ? "+" : sign2} $op3 ${getResult(op1, sign1 == "-" ? "+" : sign1, op2, sign2 == "-" ? "+" : sign2, op3)}");
     return PicturePuzzleData(
         picturePuzzleShapeType1,
         sign1 == "-" ? "+" : sign1,
@@ -276,14 +230,9 @@ class PicturePuzzleQandSDataProvider {
             sign2 == "-" ? "+" : sign2, op3));
   }
 
-  static String getResult(String op1, String sign1, String op2, String sign2,
-      String op3) {
-    return "${(MathUtil.getPrecedence(sign1) >= MathUtil.getPrecedence(sign2))
-        ? (MathUtil.evaluate(
-        MathUtil.evaluate(int.parse(op1), sign1, int.parse(op2)), sign2,
-        int.parse(op3)))
-        : (MathUtil.evaluate(int.parse(op1), sign1,
-        MathUtil.evaluate(int.parse(op2), sign2, int.parse(op3))))}";
+  static String getResult(
+      String op1, String sign1, String op2, String sign2, String op3) {
+    return "${(MathUtil.getPrecedence(sign1) >= MathUtil.getPrecedence(sign2)) ? (MathUtil.evaluate(MathUtil.evaluate(int.parse(op1), sign1, int.parse(op2)), sign2, int.parse(op3))) : (MathUtil.evaluate(int.parse(op1), sign1, MathUtil.evaluate(int.parse(op2), sign2, int.parse(op3))))}";
   }
 }
 
