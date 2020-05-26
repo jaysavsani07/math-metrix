@@ -40,8 +40,9 @@ class PicturePuzzle extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: provider.currentState.list.map((list) {
                             return Padding(
-                              padding: const EdgeInsets.all(4.0),
+                              padding: const EdgeInsets.all(10),
                               child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: list.shapeList.map((subList) {
                                   return PicturePuzzleShapeButton(subList);
@@ -71,7 +72,7 @@ class PicturePuzzle extends StatelessWidget {
                               border: Border.all(
                                   color: Theme.of(context).accentColor),
                             ),
-                            margin: EdgeInsets.fromLTRB(50, 5, 50, 10),
+                            margin: EdgeInsets.fromLTRB(25, 0, 25, 15),
                             constraints: BoxConstraints.expand(),
                             child: Center(
                               child: Consumer<PicturePuzzleProvider>(

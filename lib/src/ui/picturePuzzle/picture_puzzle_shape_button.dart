@@ -27,11 +27,11 @@ class PicturePuzzleShapeButton extends StatelessWidget {
           : CustomPaint(
               painter: picturePuzzleShape.picturePuzzleShapeType ==
                       PicturePuzzleShapeType.CIRCLE
-                  ? CirclePainter(Colors.red, 2)
+                  ? CirclePainter(Theme.of(context).accentColor, 2)
                   : (picturePuzzleShape.picturePuzzleShapeType ==
                           PicturePuzzleShapeType.TRIANGLE
-                      ? TrianglePainter(Colors.red, 2)
-                      : SquarePainter(Colors.red, 2)),
+                      ? TrianglePainter(Theme.of(context).accentColor, 2)
+                      : SquarePainter(Theme.of(context).accentColor, 2)),
               size: Size(40, 40),
             ),
     ]);
