@@ -40,7 +40,7 @@ class PicturePuzzle extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: provider.currentState.list.map((list) {
                             return Padding(
-                              padding: const EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(6),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
