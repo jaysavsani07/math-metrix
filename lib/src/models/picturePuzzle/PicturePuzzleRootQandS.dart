@@ -23,10 +23,11 @@ class PicturePuzzle {
 
 class PicturePuzzleShape {
   bool isSign;
+  bool isAnswer;
   PicturePuzzleShapeType picturePuzzleShapeType;
   String text;
 
-  PicturePuzzleShape({this.isSign, this.picturePuzzleShapeType, this.text});
+  PicturePuzzleShape({this.isSign, this.picturePuzzleShapeType, this.isAnswer,this.text});
 
   @override
   String toString() {

@@ -15,8 +15,7 @@ class PicturePuzzleShapeButton extends StatelessWidget {
     return Stack(children: [
       picturePuzzleShape.isSign
           ? Container(
-              width: 40,
-              height: 40,
+              width: picturePuzzleShape.isAnswer ? 60 : 35,
               child: Center(
                 child: Text(
                   picturePuzzleShape.text,
