@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/provider/correctAnswerProvider.dart';
+import 'package:mathgame/src/ui/correctAnswer/correct_answer_view_model.dart';
 import 'package:provider/provider.dart';
 
 class CorrectAnswerButton extends StatelessWidget {

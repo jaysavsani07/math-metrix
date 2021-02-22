@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mathgame/src/provider/dashboardViewModel.dart';
-import 'package:mathgame/src/resources/dialog_service.dart';
-import 'package:mathgame/src/resources/navigation_service.dart';
-import 'package:mathgame/src/resources/router.dart';
-import 'package:mathgame/src/ui/dashboard.dart';
-import 'package:mathgame/src/ui/dialog_manager.dart';
-import 'package:mathgame/src/utility/keyUtil.dart';
+import 'package:mathgame/src/ui/dashboard/dashboard_view_model.dart';
+import 'package:mathgame/src/service/dialog_service.dart';
+import 'package:mathgame/src/service/navigation_service.dart';
+import 'package:mathgame/src/core/router.dart';
+import 'package:mathgame/src/ui/dashboard/dashboard_view.dart';
+import 'package:mathgame/src/ui/common/dialog_manager.dart';
+import 'package:mathgame/src/core/app_constant.dart';
 
 void main() {
   setupServiceLocator();
@@ -94,7 +94,7 @@ class MyApp extends StatelessWidget {
       navigatorKey: GetIt.I<NavigationService>().navigatorKey,
       onGenerateRoute: generateRoute,
       initialRoute: KeyUtil.Dashboard,
-      home: DashBoardPage(),
+      home: DashboardView(),
     );
   }
 }

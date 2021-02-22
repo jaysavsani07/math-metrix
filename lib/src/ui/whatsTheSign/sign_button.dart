@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/provider/signProvider.dart';
+import 'package:mathgame/src/ui/whatsTheSign/sign_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SignButton extends StatelessWidget {

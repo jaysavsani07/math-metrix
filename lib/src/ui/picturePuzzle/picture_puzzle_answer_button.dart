@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/provider/picturePuzzleProvider.dart';
+import 'package:mathgame/src/ui/picturePuzzle/picture_puzzle_view_model.dart';
 import 'package:provider/provider.dart';
 
 class PicturePuzzleAnswerButton extends StatelessWidget {

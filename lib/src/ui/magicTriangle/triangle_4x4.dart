@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/models/MagicTriangle/MagicTriangleModel.dart';
-import 'package:mathgame/src/provider/MagicTriangleProvider.dart';
+import 'package:mathgame/src/data/models/magic_triangle.dart';
+import 'package:mathgame/src/ui/magicTriangle/magic_triangle_view_model.dart';
 import 'package:mathgame/src/ui/magicTriangle/triangle_input_button.dart';
 import 'package:provider/provider.dart';
 

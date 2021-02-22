@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mathgame/src/resources/gameCategoryDataProvider.dart';
-import 'package:mathgame/src/resources/navigation_service.dart';
+import 'package:mathgame/src/core/app_constant.dart';
+import 'package:mathgame/src/service/navigation_service.dart';
 import 'package:provider_architecture/provider_architecture.dart';
 
-import 'package:mathgame/src/provider/dashboardViewModel.dart';
+import 'package:mathgame/src/ui/dashboard/dashboard_view_model.dart';
 
 class MyHomePage extends StatelessWidget {
   final PuzzleType puzzleType;

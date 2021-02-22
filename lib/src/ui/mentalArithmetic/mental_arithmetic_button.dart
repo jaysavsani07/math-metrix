@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/provider/mentalArithmeticProvider.dart';
+import 'package:mathgame/src/ui/mentalArithmetic/mental_arithmetic_view_model.dart';
 import 'package:provider/provider.dart';
 
 class MentalArithmeticButton extends StatelessWidget {

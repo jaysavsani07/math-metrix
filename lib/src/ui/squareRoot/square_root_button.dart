@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/provider/squareRootProvider.dart';
+import 'package:mathgame/src/ui/squareRoot/square_root_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SquareRootButton extends StatelessWidget {

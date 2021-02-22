@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/models/numberPyramid/number_pyramid_model.dart';
-import 'package:mathgame/src/provider/calculatorProvider.dart';
-import 'package:mathgame/src/provider/numberPyramidProvider.dart';
+import 'package:mathgame/src/data/models/number_pyramid.dart';
+import 'package:mathgame/src/ui/calculator/calculator_view_model.dart';
+import 'package:mathgame/src/ui/numberPyramid/number_pyramid_view_model.dart';
 import 'package:provider/provider.dart';
 
 class PyramidNumberButton extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/provider/quickCalculationProvider.dart';
+import 'package:mathgame/src/ui/quickCalculation/quick_calculation_view_model.dart';
 import 'package:provider/provider.dart';
 
 class QuickCalculationButton extends StatelessWidget {

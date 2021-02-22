@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/models/mathPairs/MathPairsRootQandS.dart';
-import 'package:mathgame/src/provider/mathPairsProvider.dart';
+import 'package:mathgame/src/data/models/math_pairs.dart';
+import 'package:mathgame/src/ui/mathPairs/math_pairs_view_model.dart';
 import 'package:provider/provider.dart';
 
 class MathPairsButton extends StatelessWidget {
-  final MathPair mathPairs;
+  final Pair mathPairs;
   final int index;
 
   MathPairsButton(this.mathPairs, this.index);
