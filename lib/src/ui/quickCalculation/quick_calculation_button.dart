@@ -35,8 +35,8 @@ class QuickCalculationButton extends StatelessWidget {
             child: Text(
               text,
               style: text == "CLEAR"
-                  ? Theme.of(context).textTheme.display1
-                  : Theme.of(context).textTheme.display1,
+                  ? Theme.of(context).textTheme.headline1
+                  : Theme.of(context).textTheme.headline1,
             ),
           ),
         ),

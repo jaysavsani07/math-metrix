@@ -19,7 +19,7 @@ class PicturePuzzleButton extends StatelessWidget {
               child: Center(
                 child: Text(
                   picturePuzzleShape.text,
-                  style: Theme.of(context).textTheme.headline,
+                  style: Theme.of(context).textTheme.headline1,
                 ),
               ),
             )

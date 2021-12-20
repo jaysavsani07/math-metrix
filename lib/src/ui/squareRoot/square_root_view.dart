@@ -38,7 +38,7 @@ class SquareRootView extends StatelessWidget {
                                 visible: !squareRootProvider.pause,
                                 child: Text(
                                   squareRootProvider.currentState.question,
-                                  style: Theme.of(context).textTheme.display1,
+                                  style: Theme.of(context).textTheme.headline1,
                                 ),
                               ),
                             )),

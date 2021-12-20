@@ -145,7 +145,7 @@ class _DialogManagerState extends State<DialogManager> {
           color: Colors.grey,
         ),
       ),
-      titleStyle: Theme.of(context).textTheme.headline
+      titleStyle: Theme.of(context).textTheme.headline1
     );
 
     GameInfoDialog dialog =
@@ -179,7 +179,7 @@ class _DialogManagerState extends State<DialogManager> {
                     child: Text(
                       dialog.dec,
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.body1
+                      style: Theme.of(context).textTheme.bodyText1
                     ),
                   ),
                   RaisedButton(

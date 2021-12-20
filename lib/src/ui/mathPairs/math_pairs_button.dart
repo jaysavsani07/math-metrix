@@ -38,7 +38,7 @@ class MathPairsButton extends StatelessWidget {
                 fit: BoxFit.contain,
                 child: Text(
                   mathPairs.text,
-                  style: Theme.of(context).textTheme.headline,
+                  style: Theme.of(context).textTheme.headline1,
                 ),
               ),
             ),

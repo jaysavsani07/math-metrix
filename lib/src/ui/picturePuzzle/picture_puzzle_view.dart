@@ -79,7 +79,7 @@ class PicturePuzzleView extends StatelessWidget {
                                 builder: (context, provider, child) {
                                   return Text(
                                     provider.result,
-                                    style: Theme.of(context).textTheme.display1,
+                                    style: Theme.of(context).textTheme.headline1,
                                   );
                                 },
                               ),

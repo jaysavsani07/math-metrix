@@ -31,7 +31,7 @@ class TriangleInputButton extends StatelessWidget {
             child: Center(
           child: Text(
             input.value,
-            style: Theme.of(context).textTheme.headline,
+            style: Theme.of(context).textTheme.headline1,
           ),
         )),
       ),

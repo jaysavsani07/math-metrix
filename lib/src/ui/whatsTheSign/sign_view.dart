@@ -35,7 +35,7 @@ class SignView extends StatelessWidget {
                               Center(
                                 child: Text(
                                   signProvider.currentState.firstDigit,
-                                  style: Theme.of(context).textTheme.display1,
+                                  style: Theme.of(context).textTheme.headline1,
                                 ),
                               ),
                               Container(
@@ -54,7 +54,7 @@ class SignView extends StatelessWidget {
                                     heightFactor: 1,
                                     child: Text(
                                       signProvider.result,
-                                      style: Theme.of(context).textTheme.headline,
+                                      style: Theme.of(context).textTheme.headline1,
                                     ),
                                   ),
                                 ),
@@ -62,19 +62,19 @@ class SignView extends StatelessWidget {
                               Center(
                                 child: Text(
                                   signProvider.currentState.secondDigit,
-                                  style: Theme.of(context).textTheme.display1,
+                                  style: Theme.of(context).textTheme.headline1,
                                 ),
                               ),
                               Center(
                                 child: Text(
                                   " = ",
-                                  style: Theme.of(context).textTheme.display1,
+                                  style: Theme.of(context).textTheme.headline1,
                                 ),
                               ),
                               Center(
                                 child: Text(
                                   signProvider.currentState.answer,
-                                  style: Theme.of(context).textTheme.display1,
+                                  style: Theme.of(context).textTheme.headline1,
                                 ),
                               ),
                             ],

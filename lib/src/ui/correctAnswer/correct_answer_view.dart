@@ -39,7 +39,7 @@ class CorrectAnswerView extends StatelessWidget {
                                 visible: !correctAnswerProvider.pause,
                                 child: Text(
                                   correctAnswerProvider.currentState.question,
-                                  style: Theme.of(context).textTheme.display1,
+                                  style: Theme.of(context).textTheme.headline1,
                                 ),
                               ),
                             )),

@@ -35,7 +35,7 @@ class MathGridView extends StatelessWidget {
                           Text(
                               mathGridProvider.currentState.currentAnswer
                                   .toString(),
-                              style: Theme.of(context).textTheme.display1)
+                              style: Theme.of(context).textTheme.headline1)
                         ],
                       ),
                     ),

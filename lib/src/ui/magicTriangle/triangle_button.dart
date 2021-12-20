@@ -33,7 +33,7 @@ class TriangleButton extends StatelessWidget {
               magicTriangleProvider.checkResult(index, digit);
             },
             child:
-                Text(digit.value, style: Theme.of(context).textTheme.headline),
+                Text(digit.value, style: Theme.of(context).textTheme.headline1),
           ),
         ),
       ),

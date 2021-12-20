@@ -55,7 +55,7 @@ class _CalculatorViewState extends State<CalculatorView> with WidgetsBindingObse
                             visible: !calculatorProvider.pause,
                             child: Text(
                               calculatorProvider.currentState.question,
-                              style: Theme.of(context).textTheme.headline,
+                              style: Theme.of(context).textTheme.headline1,
                             ),
                           );
                         }),
@@ -76,7 +76,7 @@ class _CalculatorViewState extends State<CalculatorView> with WidgetsBindingObse
                             builder: (context, calculatorProvider, child) {
                               return Text(
                                 calculatorProvider.result,
-                                style: Theme.of(context).textTheme.display1,
+                                style: Theme.of(context).textTheme.headline1,
                               );
                             },
                           ),

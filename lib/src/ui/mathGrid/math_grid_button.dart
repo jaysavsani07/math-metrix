@@ -25,7 +25,7 @@ class MathGridButton extends StatelessWidget {
             mathGridProvider.checkResult(value, gridModel);
           },
           child: Center(
-            child: Text(value.toString(), style: Theme.of(context).textTheme.subhead),
+            child: Text(value.toString(), style: Theme.of(context).textTheme.subtitle2),
           ),
         ),
       ),

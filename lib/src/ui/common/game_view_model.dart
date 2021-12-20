@@ -75,7 +75,7 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
   }
 
   @override
-  void timeOutNew() {
+  void timeOut() {
     showGameOverDialog();
     gameAccess.onGameTimeOut();
   }
@@ -92,7 +92,7 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
     _currentScore = 0;
     currentState = _list[_index];
     gameAccess.onCurrentStateUpdate(currentState);
-    timerViewModel.startTimerNew();
+    timerViewModel.startTimer();
     if (_homeViewModel.isFirstTime(gameCategoryType)) {
       await Future.delayed(Duration(milliseconds: 500));
       pauseGame();
@@ -132,22 +132,22 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
 
   @override
   void restartGame() {
-    timerViewModel.startTimerNew();
+    timerViewModel.startTimer();
   }
 
   @override
   void pauseGame() {
-    timerViewModel.pauseTimerNew();
+    timerViewModel.pauseTimer();
   }
 
   @override
   void resumeGame() {
-    timerViewModel.resumeTimerNew();
+    timerViewModel.resumeTimer();
   }
 
   @override
   void exitGame() {
-    timerViewModel.cancelTimerNew();
+    timerViewModel.cancelTimer();
   }
 
   @override

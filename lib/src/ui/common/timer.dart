@@ -64,9 +64,9 @@ class Timer extends StatelessWidget {
         children: <Widget>[
           Column(
             children: <Widget>[
-              Text("Score", style: Theme.of(context).textTheme.subhead),
+              Text("Score", style: Theme.of(context).textTheme.subtitle2),
               Text(provider.currentScore.toInt().toString(),
-                  style: Theme.of(context).textTheme.headline)
+                  style: Theme.of(context).textTheme.headline1)
             ],
           ),
           /* Visibility(
@@ -87,9 +87,9 @@ class Timer extends StatelessWidget {
             visible:
                 !(type == GameCategoryType.QUICK_CALCULATION) ? true : false,
             child: Column(children: <Widget>[
-              Text("Timer", style: Theme.of(context).textTheme.subhead),
+              Text("Timer", style: Theme.of(context).textTheme.subtitle2),
               Text(provider.time.toString(),
-                  style: Theme.of(context).textTheme.headline),
+                  style: Theme.of(context).textTheme.headline1),
               /* AnimatedSwitcher(
                   duration: Duration(milliseconds: 700),
                   child: provider.time % 2 == 1

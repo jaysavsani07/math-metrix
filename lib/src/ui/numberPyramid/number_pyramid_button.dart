@@ -33,7 +33,7 @@ class PyramidNumberButton extends StatelessWidget {
           child: Center(
             child: Text(
               text,
-              style: Theme.of(context).textTheme.headline,
+              style: Theme.of(context).textTheme.headline1,
             ),
           ),
         ),

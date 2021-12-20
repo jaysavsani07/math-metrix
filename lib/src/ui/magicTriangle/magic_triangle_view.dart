@@ -45,7 +45,7 @@ class MagicTriangleView extends StatelessWidget {
                         Text(
                             magicTriangleProvider.currentState.answer
                                 .toString(),
-                            style: Theme.of(context).textTheme.display1)
+                            style: Theme.of(context).textTheme.headline1)
                       ],
                     ),
                   ),

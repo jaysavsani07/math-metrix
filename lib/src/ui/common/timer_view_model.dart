@@ -3,19 +3,18 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 abstract class TimerViewModel {
-  bool get timeOutNew;
 
-  void startTimerNew();
+  void startTimer();
 
-  void pauseTimerNew();
+  void pauseTimer();
 
-  void resumeTimerNew();
+  void resumeTimer();
 
-  void cancelTimerNew();
+  void cancelTimer();
 }
 
 abstract class TimerAccess {
-  void timeOutNew();
+  void timeOut();
 
   void timeUpdate(int time);
 }
@@ -26,7 +25,6 @@ class TimerViewModelImpl extends TimerViewModel {
 
   TimerAccess timerAccess;
   Stream<int> _timer;
-  bool _timeOutNew;
   StreamSubscription _timeSubscription;
 
   TimerViewModelImpl({@required this.timerAccess, @required this.totalTime});
@@ -71,43 +69,36 @@ class TimerViewModelImpl extends TimerViewModel {
   }
 
   void _handleTimerEnd() {
-    timerAccess.timeOutNew();
-    _timeOutNew = true;
+    timerAccess.timeOut();
     _timeSubscription = null;
   }
 
   @override
-  void startTimerNew() {
-    cancelTimerNew();
+  void startTimer() {
+    cancelTimer();
     _timer = timedCounter(oneSec, totalTime);
-    _timeOutNew = false;
     _timeSubscription = _timer.listen(_onTimeChange);
     _timeSubscription.onDone(_handleTimerEnd);
   }
 
   @override
-  void pauseTimerNew() {
+  void pauseTimer() {
     if (_timeSubscription != null) {
       _timeSubscription.pause();
     }
   }
 
   @override
-  void resumeTimerNew() {
+  void resumeTimer() {
     if (_timeSubscription != null) {
       _timeSubscription.resume();
     }
   }
 
   @override
-  void cancelTimerNew() {
+  void cancelTimer() {
     if (_timeSubscription != null) {
       _timeSubscription.cancel();
     }
-  }
-
-  @override
-  bool get timeOutNew {
-    return _timeOutNew;
   }
 }

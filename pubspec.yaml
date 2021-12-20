@@ -20,14 +20,13 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^0.1.2
-  flutter_svg: ^0.19.1
+  flutter_svg: ^1.0.0
   get_it: ^4.0.1
-  percent_indicator: ^2.1.9+1
+  percent_indicator: ^3.4.0
   provider: ^4.0.5
-  provider_architecture: ^1.0.6
-  rflutter_alert: ^1.1.0
-  shared_preferences: ^0.5.12+4
-  tuple: ^1.0.3
+  rflutter_alert: ^2.0.4
+  shared_preferences: ^2.0.11
+  tuple: ^2.0.0
 
 dev_dependencies:
   flutter_test:

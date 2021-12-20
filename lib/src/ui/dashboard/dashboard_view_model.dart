@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/widgets.dart';
 import 'package:mathgame/src/data/models/score_board.dart';
 import 'package:mathgame/src/core/app_constant.dart';
-import 'package:mathgame/src/core/app_constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../data/models/game_category.dart';
@@ -12,26 +11,21 @@ class DashboardViewModel extends ChangeNotifier {
   int _overallScore = 0;
   int _totalCoin = 0;
   List<GameCategory> _list;
-  SharedPreferences _preferences;
+  final SharedPreferences preferences;
 
   int get overallScore => _overallScore;
 
   int get totalCoin => _totalCoin;
 
   List<GameCategory> get list => _list;
-
-  SharedPreferences get preferences => _preferences;
-
-  Future<void> initialise() async {
-    _preferences = await SharedPreferences.getInstance();
+  
+  DashboardViewModel({@required this.preferences}){
     _overallScore = getOverallScore();
     _totalCoin = getTotalCoin();
-    notifyListeners();
   }
 
-  Future<void> getGameByPuzzleType(PuzzleType puzzleType) async {
+  List<GameCategory> getGameByPuzzleType(PuzzleType puzzleType) {
     _list = List();
-
     switch (puzzleType) {
       case PuzzleType.MATH_PUZZLE:
         list.add(GameCategory(
@@ -112,15 +106,16 @@ class DashboardViewModel extends ChangeNotifier {
             getScoreboard("number_pyramid")));
         break;
     }
+    return _list;
   }
 
   ScoreBoard getScoreboard(String gameCategoryType) {
     return ScoreBoard.fromJson(
-        json.decode(_preferences.getString(gameCategoryType) ?? "{}"));
+        json.decode(preferences.getString(gameCategoryType) ?? "{}"));
   }
 
   void setScoreboard(String gameCategoryType, ScoreBoard scoreboard) {
-    _preferences.setString(gameCategoryType, json.encode(scoreboard.toJson()));
+    preferences.setString(gameCategoryType, json.encode(scoreboard.toJson()));
   }
 
   void updateScoreboard(
@@ -141,21 +136,21 @@ class DashboardViewModel extends ChangeNotifier {
   }
 
   int getOverallScore() {
-    return _preferences.getInt("overall_score") ?? 0;
+    return preferences.getInt("overall_score") ?? 0;
   }
 
   void setOverallScore(int highestScore, int newScore) {
     _overallScore = getOverallScore() - highestScore + newScore;
-    _preferences.setInt("overall_score", _overallScore);
+    preferences.setInt("overall_score", _overallScore);
   }
 
   int getTotalCoin() {
-    return _preferences.getInt("total_coin") ?? 0;
+    return preferences.getInt("total_coin") ?? 0;
   }
 
   void setTotalCoin(int coin) {
     _totalCoin = getTotalCoin() + coin;
-    _preferences.setInt("total_coin", _totalCoin);
+    preferences.setInt("total_coin", _totalCoin);
   }
 
   bool isFirstTime(GameCategoryType gameCategoryType) {

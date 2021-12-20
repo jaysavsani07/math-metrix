@@ -42,7 +42,7 @@ class PyramidNumberBox extends StatelessWidget {
           numPyramidCellModel.isHidden
               ? numPyramidCellModel.text
               : numPyramidCellModel.numberOnCell.toString(),
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.subtitle1,
         ),
       ),
     );
