@@ -3,10 +3,8 @@ import 'package:mathgame/src/ui/magicTriangle/magic_triangle_view_model.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/ui/magicTriangle/triangle_3x3.dart';
 import 'package:mathgame/src/ui/magicTriangle/triangle_4x4.dart';
-import 'package:mathgame/src/ui/magicTriangle/triangle_button.dart';
 import 'package:mathgame/src/ui/magicTriangle/triangle_input_3x3.dart';
 import 'package:mathgame/src/ui/magicTriangle/triangle_input_4x4.dart';
-import 'package:mathgame/src/ui/magicTriangle/triangle_input_button.dart';
 import 'package:mathgame/src/ui/magicTriangle/triangle_painter.dart';
 import 'package:mathgame/src/ui/common/timer.dart';
 import 'package:mathgame/src/core/size_config.dart';
@@ -15,7 +13,7 @@ import 'package:provider/provider.dart';
 class MagicTriangleView extends StatelessWidget {
   final double padding = 20;
   final double radius = 30;
-  double triangleHeight;
+  late double triangleHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +43,7 @@ class MagicTriangleView extends StatelessWidget {
                         Text(
                             magicTriangleProvider.currentState.answer
                                 .toString(),
-                            style: Theme.of(context).textTheme.headline1)
+                            style: Theme.of(context).textTheme.headline2)
                       ],
                     ),
                   ),

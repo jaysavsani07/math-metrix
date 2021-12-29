@@ -5,31 +5,7 @@ import 'package:mathgame/src/ui/calculator/calculator_button.dart';
 import 'package:mathgame/src/ui/common/timer.dart';
 import 'package:provider/provider.dart';
 
-class CalculatorView extends StatefulWidget {
-  @override
-  _CalculatorViewState createState() => _CalculatorViewState();
-}
-
-class _CalculatorViewState extends State<CalculatorView> with WidgetsBindingObserver {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.paused) {
-      print("hello hahu...");
-    }
-  }
-
+class CalculatorView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<CalculatorProvider>(
@@ -55,7 +31,7 @@ class _CalculatorViewState extends State<CalculatorView> with WidgetsBindingObse
                             visible: !calculatorProvider.pause,
                             child: Text(
                               calculatorProvider.currentState.question,
-                              style: Theme.of(context).textTheme.headline1,
+                              style: Theme.of(context).textTheme.headline2,
                             ),
                           );
                         }),
@@ -76,7 +52,7 @@ class _CalculatorViewState extends State<CalculatorView> with WidgetsBindingObse
                             builder: (context, calculatorProvider, child) {
                               return Text(
                                 calculatorProvider.result,
-                                style: Theme.of(context).textTheme.headline1,
+                                style: Theme.of(context).textTheme.headline3,
                               );
                             },
                           ),

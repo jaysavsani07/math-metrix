@@ -2,9 +2,13 @@ class MathGrid {
   int id;
   List<MathGridCellModel> listForSquare;
   List<int> listOfAnswer;
-  int currentAnswer;
+  late int currentAnswer;
 
-  MathGrid(this.id, this.listForSquare, this.listOfAnswer) {
+  MathGrid({
+    required this.id,
+    required this.listForSquare,
+    required this.listOfAnswer,
+  }) {
     currentAnswer = listOfAnswer[0];
   }
 }

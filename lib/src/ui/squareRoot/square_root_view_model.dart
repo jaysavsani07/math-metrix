@@ -10,13 +10,13 @@ import '../common/game_view_model.dart';
 class SquareRootProvider
     with ChangeNotifier
     implements GameAccess<SquareRoot> {
-  GameViewModelImp gameViewModel;
+  late   GameViewModelImp gameViewModel;
 
-  String _result;
+  late   String _result;
 
   String get result => _result;
 
-  int _time;
+  late   int _time;
 
   int get time => _time;
 
@@ -24,14 +24,14 @@ class SquareRootProvider
 
   bool get pause => _pause;
 
-  SquareRoot _currentState;
+  late   SquareRoot _currentState;
 
   SquareRoot get currentState => _currentState;
 
   double _currentScore = 0;
 
   double get currentScore => _currentScore;
-  bool _timeOut;
+  late  bool _timeOut;
 
   SquareRootProvider() {
     gameViewModel = GameViewModelImp<SquareRoot>(

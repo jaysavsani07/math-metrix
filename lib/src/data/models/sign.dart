@@ -4,7 +4,12 @@ class Sign {
   String secondDigit;
   String answer;
 
-  Sign(this.firstDigit, this.sign, this.secondDigit, this.answer);
+  Sign({
+    required this.firstDigit,
+    required this.sign,
+    required this.secondDigit,
+    required this.answer,
+  });
 
   @override
   String toString() {

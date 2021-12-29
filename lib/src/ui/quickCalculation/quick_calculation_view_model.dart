@@ -17,13 +17,13 @@ class QuickCalculationProvider with ChangeNotifier {
   var homeViewModel = GetIt.I<DashboardViewModel>();
   final DialogService _dialogService = GetIt.I<DialogService>();
 
-  List<QuickCalculation> _list;
-  QuickCalculation _currentState;
+  late  List<QuickCalculation> _list;
+  late   QuickCalculation _currentState;
   int _index = 0;
-  int _timeLength;
-  FixedExtentScrollController _scrollController;
-  bool _timeOut;
-  double _time;
+  late   int _timeLength;
+  late  FixedExtentScrollController _scrollController;
+  late  bool _timeOut;
+  late  double _time;
   bool _pause = false;
   double currentScore = 0;
 
@@ -39,7 +39,7 @@ class QuickCalculationProvider with ChangeNotifier {
 
   int get timeLength => _timeLength;
 
-  StreamSubscription timerSubscription;
+  late  StreamSubscription timerSubscription;
 
   QuickCalculation get currentState => _currentState;
 

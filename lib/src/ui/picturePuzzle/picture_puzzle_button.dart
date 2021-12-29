@@ -15,11 +15,11 @@ class PicturePuzzleButton extends StatelessWidget {
     return Stack(children: [
       picturePuzzleShape.isSign
           ? Container(
-              width: picturePuzzleShape.isAnswer ? 60 : 35,
+              width: picturePuzzleShape.isAnswer! ? 60 : 35,
               child: Center(
                 child: Text(
                   picturePuzzleShape.text,
-                  style: Theme.of(context).textTheme.headline1,
+                  style: Theme.of(context).textTheme.headline4,
                 ),
               ),
             )

@@ -11,7 +11,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 class DialogManager extends StatefulWidget {
   final Widget child;
 
-  DialogManager({Key key, this.child}) : super(key: key);
+  DialogManager({Key? key,required this.child}) : super(key: key);
 
   _DialogManagerState createState() => _DialogManagerState();
 }
@@ -145,7 +145,7 @@ class _DialogManagerState extends State<DialogManager> {
           color: Colors.grey,
         ),
       ),
-      titleStyle: Theme.of(context).textTheme.headline1
+      titleStyle: Theme.of(context).textTheme.subtitle2!
     );
 
     GameInfoDialog dialog =

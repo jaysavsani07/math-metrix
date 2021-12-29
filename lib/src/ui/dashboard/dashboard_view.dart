@@ -1,11 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
+import 'package:mathgame/src/core/assets.dart';
+import 'package:mathgame/src/ui/app/theme_provider.dart';
+import 'package:mathgame/src/ui/common/home_button_view.dart';
 import 'package:mathgame/src/ui/dashboard/dashboard_view_model.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/service/navigation_service.dart';
-
-import 'package:mathgame/src/core/size_config.dart';
 import 'package:provider/provider.dart';
 
 class DashboardView extends StatefulWidget {
@@ -15,9 +17,9 @@ class DashboardView extends StatefulWidget {
 
 class _DashboardViewState extends State<DashboardView>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<Offset> _offsetLeftEnter;
-  Animation<Offset> _offsetRightEnter;
+  late AnimationController _controller;
+  late Animation<Offset> _offsetLeftEnter;
+  late Animation<Offset> _offsetRightEnter;
 
   @override
   void initState() {
@@ -46,142 +48,133 @@ class _DashboardViewState extends State<DashboardView>
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
     return Scaffold(
       body: SafeArea(
         top: true,
         bottom: true,
-        child: Container(
-          constraints: BoxConstraints.expand(),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Expanded(
-                  flex: 1,
-                  child: Container(
-                    constraints: BoxConstraints.expand(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Expanded(
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        Expanded(
-                          flex: 1,
-                          child: Container(),
+                        SizedBox(width: 12),
+                        SvgPicture.asset(
+                          AppAssets.icTrophy,
+                          width: 24,
+                          height: 24,
                         ),
-                        Expanded(
-                          flex: 1,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              SvgPicture.asset(
-                                "assets/images/goal.svg",
-                                width: 18,
-                                height: 18,
-                              ),
-                              SizedBox(width: 5),
-                              Consumer<DashboardViewModel>(
-                                builder: (context, model, child) => Text(
-                                    model.overallScore.toString(),
-                                    style:
-                                        Theme.of(context).textTheme.subtitle1),
-                              ),
-                              SizedBox(width: 30),
-                              SvgPicture.asset(
-                                "assets/images/money.svg",
-                                width: 18,
-                                height: 18,
-                              ),
-                              SizedBox(width: 5),
-                              Consumer<DashboardViewModel>(
-                                builder: (context, model, child) => Text(
-                                    model.totalCoin.toString(),
-                                    style:
-                                        Theme.of(context).textTheme.subtitle1),
-                              )
-                            ],
-                          ),
+                        SizedBox(width: 5),
+                        Consumer<DashboardViewModel>(
+                          builder: (context, model, child) => Text(
+                              model.overallScore.toString(),
+                              style: Theme.of(context).textTheme.subtitle1),
+                        ),
+                        SizedBox(width: 16),
+                        SvgPicture.asset(
+                          AppAssets.icCoin,
+                          width: 24,
+                          height: 24,
+                        ),
+                        SizedBox(width: 5),
+                        Consumer<DashboardViewModel>(
+                          builder: (context, model, child) => Text(
+                              model.totalCoin.toString(),
+                              style: Theme.of(context).textTheme.subtitle1),
                         )
                       ],
                     ),
-                  )),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      context.read<ThemeProvider>().changeTheme();
+                    },
+                    borderRadius: BorderRadius.circular(24),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: SvgPicture.asset(
+                        Theme.of(context).brightness == Brightness.light
+                            ? AppAssets.icDarkMode
+                            : AppAssets.icLightMode,
+                        width: 24,
+                        height: 24,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               Expanded(
-                  flex: 2,
-                  child: Container(
-                      constraints: BoxConstraints.expand(),
-                      alignment: Alignment.center,
-                      child: Text("Math Matrix",
-                          style: Theme.of(context).textTheme.headline4))),
+                flex: 2,
+                child: SizedBox(),
+              ),
               Expanded(
                 flex: 7,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    SizedBox(
-                      height: (SizeConfig.screenHeight / 20),
-                    ),
-                    GestureDetector(
-                      onTapDown: (tapDownDetails) {
+                    HomeButtonView(
+                      title: "Math Puzzle",
+                      icon: AppAssets.icMathPuzzle,
+                      startColor: Color(0xff4895ef),
+                      endColor: Color(0xff3f37c9),
+                      position: _offsetLeftEnter,
+                      onTab: () {
                         GetIt.I<NavigationService>().navigateTo(KeyUtil.Home,
                             arguments: PuzzleType.MATH_PUZZLE);
                       },
-                      child: SlideTransition(
-                        position: _offsetLeftEnter,
-                        child: Card(
-                          color: Color(0xFF363636),
-                          elevation: 10,
-                          margin: EdgeInsets.all(10),
-                          child: Container(
-                              alignment: Alignment.center,
-                              width: (SizeConfig.screenWidth / 10) * 6,
-                              margin: EdgeInsets.all(20),
-                              child: Text("Math Puzzle",
-                                  style:
-                                      Theme.of(context).textTheme.headline4)),
-                        ),
-                      ),
                     ),
-                    GestureDetector(
-                      onTapDown: (tapDownDetails) {
+                    SizedBox(height: 24),
+                    HomeButtonView(
+                      title: "Memory Puzzle",
+                      icon: AppAssets.icMemoryPuzzle,
+                      startColor: Color(0xffa812db),
+                      endColor: Color(0xff8124bd),
+                      position: _offsetRightEnter,
+                      onTab: () {
                         GetIt.I<NavigationService>().navigateTo(KeyUtil.Home,
                             arguments: PuzzleType.MEMORY_PUZZLE);
                       },
-                      child: SlideTransition(
-                        position: _offsetRightEnter,
-                        child: Card(
-                          color: Color(0xFF363636),
-                          elevation: 10,
-                          margin: EdgeInsets.all(10),
-                          child: Container(
-                              alignment: Alignment.center,
-                              width: (SizeConfig.screenWidth / 10) * 6,
-                              margin: EdgeInsets.all(20),
-                              child: Text("Memory Puzzle",
-                                  style:
-                                      Theme.of(context).textTheme.headline4)),
-                        ),
-                      ),
                     ),
-                    GestureDetector(
-                      onTapDown: (tapDownDetails) {
+                    SizedBox(height: 24),
+                    HomeButtonView(
+                      title: "Train Your Brain",
+                      icon: AppAssets.icTrainBrain,
+                      startColor: Color(0xffbf1d6b),
+                      endColor: Color(0xffac2a8f),
+                      position: _offsetLeftEnter,
+                      onTab: () {
                         GetIt.I<NavigationService>().navigateTo(KeyUtil.Home,
                             arguments: PuzzleType.BRAIN_PUZZLE);
                       },
-                      child: SlideTransition(
-                        position: _offsetLeftEnter,
-                        child: Card(
-                          color: Color(0xFF363636),
-                          elevation: 10,
-                          margin: EdgeInsets.all(10),
-                          child: Container(
-                              alignment: Alignment.center,
-                              width: (SizeConfig.screenWidth / 10) * 6,
-                              margin: EdgeInsets.all(20),
-                              child: Text("Train Your Brain",
-                                  style:
-                                      Theme.of(context).textTheme.headline4)),
-                        ),
-                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Expanded(
+                      child: Text("Math Matrix by Nividata",
+                          style: Theme.of(context).textTheme.bodyText2),
+                    ),
+                    SizedBox(width: 24),
+                    Expanded(
+                      child: Selector<ThemeProvider, String>(
+                          selector: (p0, p1) => p1.appVersion,
+                          builder: (context, data, child) {
+                            return Text("App version: $data",
+                                textAlign: TextAlign.end,
+                                style: Theme.of(context).textTheme.bodyText2);
+                          }),
                     )
                   ],
                 ),

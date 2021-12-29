@@ -11,7 +11,7 @@ class MyHomePage extends StatelessWidget {
   final PuzzleType puzzleType;
   final String title;
 
-  MyHomePage({Key key, @required this.puzzleType, @required this.title})
+  MyHomePage({Key? key, required this.puzzleType, required this.title})
       : super(key: key);
 
   @override
@@ -59,8 +59,7 @@ class MyHomePage extends StatelessWidget {
                                   child: Container(
                                     margin: EdgeInsets.fromLTRB(40, 5, 40, 5),
                                     child: Card(
-                                      color: Color(0xFF363636),
-                                      elevation: 10,
+                                      elevation: 8,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(5),
                                       ),

@@ -35,7 +35,7 @@ class SignView extends StatelessWidget {
                               Center(
                                 child: Text(
                                   signProvider.currentState.firstDigit,
-                                  style: Theme.of(context).textTheme.headline1,
+                                  style: Theme.of(context).textTheme.headline3,
                                 ),
                               ),
                               Container(
@@ -49,12 +49,12 @@ class SignView extends StatelessWidget {
                                       width: 1),
                                 ),
                                 child: Container(
-                                  width: 25,
+                                  width: 40,
                                   child: Center(
                                     heightFactor: 1,
                                     child: Text(
                                       signProvider.result,
-                                      style: Theme.of(context).textTheme.headline1,
+                                      style: Theme.of(context).textTheme.headline3,
                                     ),
                                   ),
                                 ),
@@ -62,19 +62,19 @@ class SignView extends StatelessWidget {
                               Center(
                                 child: Text(
                                   signProvider.currentState.secondDigit,
-                                  style: Theme.of(context).textTheme.headline1,
+                                  style: Theme.of(context).textTheme.headline3,
                                 ),
                               ),
                               Center(
                                 child: Text(
                                   " = ",
-                                  style: Theme.of(context).textTheme.headline1,
+                                  style: Theme.of(context).textTheme.headline3,
                                 ),
                               ),
                               Center(
                                 child: Text(
                                   signProvider.currentState.answer,
-                                  style: Theme.of(context).textTheme.headline1,
+                                  style: Theme.of(context).textTheme.headline3,
                                 ),
                               ),
                             ],

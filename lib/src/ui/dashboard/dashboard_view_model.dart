@@ -10,7 +10,7 @@ import '../../data/models/game_category.dart';
 class DashboardViewModel extends ChangeNotifier {
   int _overallScore = 0;
   int _totalCoin = 0;
-  List<GameCategory> _list;
+  late  List<GameCategory> _list;
   final SharedPreferences preferences;
 
   int get overallScore => _overallScore;
@@ -19,13 +19,13 @@ class DashboardViewModel extends ChangeNotifier {
 
   List<GameCategory> get list => _list;
   
-  DashboardViewModel({@required this.preferences}){
+  DashboardViewModel({required this.preferences}){
     _overallScore = getOverallScore();
     _totalCoin = getTotalCoin();
   }
 
   List<GameCategory> getGameByPuzzleType(PuzzleType puzzleType) {
-    _list = List();
+    _list = <GameCategory>[];
     switch (puzzleType) {
       case PuzzleType.MATH_PUZZLE:
         list.add(GameCategory(

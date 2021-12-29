@@ -2,16 +2,16 @@ import 'package:mathgame/src/data/models/picture_puzzle.dart';
 import 'package:mathgame/src/utility/math_util.dart';
 
 class PicturePuzzleRepository {
-  static List<int> listHasCode = List();
+  static List<int> listHasCode =<int>[];
 
   static getPicturePuzzleDataList(int level) {
     if (level == 1) {
       listHasCode.clear();
     }
 
-    List<PicturePuzzle> list = List();
+    List<PicturePuzzle> list =<PicturePuzzle>[];
     while (list.length < 5) {
-      List<PicturePuzzleShapeList> puzzleList = List();
+      List<PicturePuzzleShapeList> puzzleList =<PicturePuzzleShapeList>[];
       List<PicturePuzzleData> picturePuzzleDataList =
           getNewShapeMatrix(level, list.length);
       print("\n");
@@ -61,9 +61,9 @@ class PicturePuzzleRepository {
   }
 
   static List<PicturePuzzleData> getNewShapeMatrix(int level, int index) {
-    List<PicturePuzzleData> list = List();
-    List<String> listDigit = List();
-    List<String> listSign = List();
+    List<PicturePuzzleData> list = <PicturePuzzleData>[];
+    List<String> listDigit = <String>[];
+    List<String> listSign = <String>[];
     List<PicturePuzzleShapeType> listShape = [
       PicturePuzzleShapeType.CIRCLE,
       PicturePuzzleShapeType.TRIANGLE,

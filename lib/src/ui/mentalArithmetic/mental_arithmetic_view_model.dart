@@ -17,14 +17,14 @@ class MentalArithmeticProvider with ChangeNotifier {
   var homeViewModel = GetIt.I<DashboardViewModel>();
   final DialogService _dialogService = GetIt.I<DialogService>();
 
-  List<MentalArithmetic> _list;
-  MentalArithmetic _currentState;
-  String _result;
+  late  List<MentalArithmetic> _list;
+  late  MentalArithmetic _currentState;
+  late  String _result;
   int _index = 0;
 
-  bool _timeOut;
-  int _time;
-  bool _localTimeOut;
+  late  bool _timeOut;
+  late  int _time;
+  late  bool _localTimeOut;
   bool _pause = false;
   double currentScore = 0;
 
@@ -36,8 +36,8 @@ class MentalArithmeticProvider with ChangeNotifier {
 
   bool get pause => _pause;
 
-  StreamSubscription timerSubscription;
-  StreamSubscription localTimerSubscription;
+  late   StreamSubscription timerSubscription;
+  late  StreamSubscription localTimerSubscription;
 
   MentalArithmetic get currentState => _currentState;
 

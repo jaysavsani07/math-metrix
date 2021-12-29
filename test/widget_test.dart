@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mathgame/main.dart';
+import 'package:mathgame/src/ui/app/app.dart';
 
 
 void main() {

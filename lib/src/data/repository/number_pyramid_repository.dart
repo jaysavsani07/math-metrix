@@ -5,8 +5,8 @@ import 'package:mathgame/src/utility/math_util.dart';
 import 'package:tuple/tuple.dart';
 
 class NumberPyramidRepository {
-  static List<NumPyramidCellModel> singlePyramidList = new List();
-  static int counter;
+  static List<NumPyramidCellModel> singlePyramidList =<NumPyramidCellModel>[];
+  static late int counter;
   static List<List<int>> hintLists = [
     [0, 6, 9, 10, 17, 20, 26],
     [1, 5, 10, 13, 19, 21, 22, 25],
@@ -39,7 +39,7 @@ class NumberPyramidRepository {
   ];
 
   static List<NumberPyramid> getPyramidDataList(int level) {
-    List<NumberPyramid> pyramidsList = new List();
+    List<NumberPyramid> pyramidsList =<NumberPyramid>[];
 
     for (int i = 0; i < 20; i++) {
       var singlePyramidResult = generateSinglePyramidValues();
@@ -51,7 +51,7 @@ class NumberPyramidRepository {
   }
 
   static Tuple2<List<NumPyramidCellModel>, int> generateSinglePyramidValues() {
-    singlePyramidList = new List();
+    singlePyramidList = <NumPyramidCellModel>[];
     counter = 1;
     int min = 1;
     int max = 8;
@@ -83,7 +83,7 @@ class NumberPyramidRepository {
     if (loopTime == 0) {
       return;
     }
-    List<NumPyramidCellModel> tempList = new List();
+    List<NumPyramidCellModel> tempList = <NumPyramidCellModel>[];
     for (int k = 0; k < list.length - 1; k++) {
       int sum = list[k].numberOnCell + list[k + 1].numberOnCell;
       singlePyramidList.add(NumPyramidCellModel(
@@ -97,7 +97,7 @@ class NumberPyramidRepository {
   }
 
   static List<NumPyramidCellModel> generateBaseLineOfPyramid(int min, int max) {
-    List<NumPyramidCellModel> cellList = new List();
+    List<NumPyramidCellModel> cellList =<NumPyramidCellModel>[];
     cellList.clear();
     for (int i = 0; i < 7; i++) {
       int randomNum = MathUtil.generateRandomAnswer(min, max);

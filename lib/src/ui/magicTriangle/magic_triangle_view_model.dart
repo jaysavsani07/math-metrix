@@ -17,12 +17,12 @@ class MagicTriangleProvider with ChangeNotifier {
   var homeViewModel = GetIt.I<DashboardViewModel>();
   final DialogService _dialogService = GetIt.I<DialogService>();
 
-  List<MagicTriangle> _list;
-  MagicTriangle _currentState;
+  late  List<MagicTriangle> _list;
+  late  MagicTriangle _currentState;
   int _index = 0;
   int selectedTriangleIndex = 0;
-  bool _timeOut;
-  int _time;
+  late  bool _timeOut;
+  late  int _time;
   bool _pause = false;
   double currentScore = 0;
 
@@ -32,7 +32,7 @@ class MagicTriangleProvider with ChangeNotifier {
 
   bool get pause => _pause;
 
-  StreamSubscription timerSubscription;
+  late   StreamSubscription timerSubscription;
 
   MagicTriangle get currentState => _currentState;
 

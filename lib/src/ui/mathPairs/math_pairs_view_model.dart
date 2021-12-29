@@ -17,15 +17,15 @@ class MathPairsProvider with ChangeNotifier {
   var homeViewModel = GetIt.I<DashboardViewModel>();
   final DialogService _dialogService = GetIt.I<DialogService>();
 
-  List<MathPairs> _list;
-  MathPairs _currentState;
+  late  List<MathPairs> _list;
+  late  MathPairs _currentState;
   int _index = 0;
   int first = -1;
   int second = -1;
 
-  bool _lock;
-  bool _timeOut;
-  int _time;
+  late  bool _lock;
+  late   bool _timeOut;
+  late   int _time;
   bool _pause = false;
   double currentScore = 0;
 
@@ -35,7 +35,7 @@ class MathPairsProvider with ChangeNotifier {
 
   bool get pause => _pause;
 
-  StreamSubscription timerSubscription;
+  late StreamSubscription timerSubscription;
 
   MathPairs get currentState => _currentState;
 

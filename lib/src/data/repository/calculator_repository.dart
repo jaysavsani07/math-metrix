@@ -2,14 +2,14 @@ import 'package:mathgame/src/data/models/calculator.dart';
 import 'package:mathgame/src/utility/math_util.dart';
 
 class CalculatorRepository {
-  static List<int> listHasCode = List();
+  static List<int> listHasCode = <int>[];
 
   static getCalculatorDataList(int level) {
     if (level == 1) {
       listHasCode.clear();
     }
 
-    List<Calculator> list = List();
+    List<Calculator> list = <Calculator>[];
 
     while (list.length < 5) {
       MathUtil.generate(level, 5 - list.length)
@@ -17,12 +17,14 @@ class CalculatorRepository {
         Calculator calculatorQandS;
         if (expression.operator2 == null) {
           calculatorQandS = Calculator(
-              "${expression.firstOperand} ${expression.operator1} ${expression.secondOperand}",
-              expression.answer);
+              question:
+                  "${expression.firstOperand} ${expression.operator1} ${expression.secondOperand}",
+              answer: expression.answer);
         } else {
           calculatorQandS = Calculator(
-              "${expression.firstOperand} ${expression.operator1} ${expression.secondOperand} ${expression.operator2} ${expression.thirdOperand}",
-              expression.answer);
+              question:
+                  "${expression.firstOperand} ${expression.operator1} ${expression.secondOperand} ${expression.operator2} ${expression.thirdOperand}",
+              answer: expression.answer);
         }
         if (!listHasCode.contains(calculatorQandS.hashCode)) {
           listHasCode.add(calculatorQandS.hashCode);

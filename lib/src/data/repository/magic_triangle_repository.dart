@@ -16,45 +16,65 @@ class MagicTriangleRepository {
   };
 
   static getTriangleDataProviderList() {
-    List<MagicTriangle> list = List();
+    List<MagicTriangle> list = <MagicTriangle>[];
 
-    list.add(MagicTriangle(getMagicTriangleGrid(correctMagicTriangle['9']),
-        getMagicTriangleInput(6), 9));
+    list.add(
+      MagicTriangle(
+        listGrid: getMagicTriangleGrid(correctMagicTriangle['9']),
+        listTriangle: getMagicTriangleInput(6),
+        answer: 9,
+      ),
+    );
 
-    list.add(MagicTriangle(
-        getMagicTriangleGrid(correctMagicTriangle['10']),
-        getMagicTriangleInput(6),
-        10));
-    list.add(MagicTriangle(
-        getMagicTriangleGrid(correctMagicTriangle['11']),
-        getMagicTriangleInput(6),
-        11));
-    list.add(MagicTriangle(
-        getMagicTriangleGrid(correctMagicTriangle['12']),
-        getMagicTriangleInput(6),
-        12));
-    list.add(MagicTriangle(
-        getMagicTriangleGrid(correctMagicTriangle['18']),
-        getMagicTriangleInput(6),
-        18));
+    list.add(
+      MagicTriangle(
+        listGrid: getMagicTriangleGrid(correctMagicTriangle['10']),
+        listTriangle: getMagicTriangleInput(6),
+        answer: 10,
+      ),
+    );
+    list.add(
+      MagicTriangle(
+        listGrid: getMagicTriangleGrid(correctMagicTriangle['11']),
+        listTriangle: getMagicTriangleInput(6),
+        answer: 11,
+      ),
+    );
+    list.add(
+      MagicTriangle(
+        listGrid: getMagicTriangleGrid(correctMagicTriangle['12']),
+        listTriangle: getMagicTriangleInput(6),
+        answer: 12,
+      ),
+    );
+    list.add(
+      MagicTriangle(
+        listGrid: getMagicTriangleGrid(correctMagicTriangle['18']),
+        listTriangle: getMagicTriangleInput(6),
+        answer: 18,
+      ),
+    );
     list.shuffle();
     return list;
   }
 
   static getNextLevelTriangleDataProviderList() {
-    List<MagicTriangle> list = List();
+    List<MagicTriangle> list = <MagicTriangle>[];
 
-    list.add(MagicTriangle(
-        getMagicTriangleGrid(correctMagicTriangle['20']),
-        getMagicTriangleInput(9),
-        20));
+    list.add(
+      MagicTriangle(
+        listGrid: getMagicTriangleGrid(correctMagicTriangle['20']),
+        listTriangle: getMagicTriangleInput(9),
+        answer: 20,
+      ),
+    );
 
     list.shuffle();
     return list;
   }
 
   static List<MagicTriangleGrid> getMagicTriangleGrid(List<int> list) {
-    List<MagicTriangleGrid> gridList = List<MagicTriangleGrid>();
+    List<MagicTriangleGrid> gridList = <MagicTriangleGrid>[];
     for (int i = 0; i < list.length; i++) {
       gridList.add(MagicTriangleGrid(list[i].toString(), true));
     }
@@ -63,7 +83,7 @@ class MagicTriangleRepository {
   }
 
   static List<MagicTriangleInput> getMagicTriangleInput(int length) {
-    List<MagicTriangleInput> inputList = List<MagicTriangleInput>();
+    List<MagicTriangleInput> inputList = <MagicTriangleInput>[];
     for (int i = 0; i < length; i++) {
       inputList.add(MagicTriangleInput(false, ""));
     }

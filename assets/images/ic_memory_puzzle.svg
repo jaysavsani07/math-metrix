@@ -1,0 +1,7 @@
+<svg id="ic-memory-puzzle" xmlns="http://www.w3.org/2000/svg" width="34" height="34"
+    viewBox="0 0 34 34">
+    <path id="Path_463" data-name="Path 463" d="M0,0H34V34H0Z" fill="none" />
+    <path id="Path_464" data-name="Path 464"
+        d="M22.173,10.16a8.464,8.464,0,0,0-6.007-2.493v8.5L10.16,22.173A8.495,8.495,0,1,0,22.173,10.16ZM16.167,2A14.167,14.167,0,1,0,30.333,16.167,14.172,14.172,0,0,0,16.167,2Zm0,25.5A11.333,11.333,0,1,1,27.5,16.167,11.33,11.33,0,0,1,16.167,27.5Z"
+        transform="translate(0.833 0.833)" fill="#fff" />
+</svg>

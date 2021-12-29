@@ -14,7 +14,6 @@ import 'package:mathgame/src/data/repository/quick_calculation_repository.dart';
 import 'package:mathgame/src/data/repository/square_root_repository.dart';
 import 'package:mathgame/src/data/repository/sign_repository.dart';
 import 'package:mathgame/src/core/coin_constant.dart';
-import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/core/score_constant.dart';
 import 'package:mathgame/src/core/time_constant.dart';
 
@@ -61,15 +60,14 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
   GameCategoryType gameCategoryType;
   final _dialogService = GetIt.I<DialogService>();
   final _homeViewModel = GetIt.I<DashboardViewModel>();
-  TimerViewModelImpl timerViewModel;
+  late TimerViewModelImpl timerViewModel;
 
-  List<T> _list;
-  int _index;
-  double _currentScore;
-  T currentState;
+  late List<T> _list;
+  late int _index;
+  late double _currentScore;
+  late T currentState;
 
-  GameViewModelImp(
-      {@required this.gameAccess, @required this.gameCategoryType}) {
+  GameViewModelImp({required this.gameAccess, required this.gameCategoryType}) {
     timerViewModel =
         TimerViewModelImpl(timerAccess: this, totalTime: getTimeUtil());
   }
@@ -209,38 +207,26 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
     switch (gameCategoryType) {
       case GameCategoryType.CALCULATOR:
         return CalculatorRepository.getCalculatorDataList(level);
-        break;
       case GameCategoryType.SIGN:
         return SignRepository.getSignDataList(level);
-        break;
       case GameCategoryType.SQUARE_ROOT:
         return SquareRootRepository.getSquareDataList(level);
-        break;
       case GameCategoryType.MATH_PAIRS:
         return MathPairsRepository.getMathPairsDataList(level);
-        break;
       case GameCategoryType.CORRECT_ANSWER:
         return CorrectAnswerRepository.getCorrectAnswerDataList(level);
-        break;
       case GameCategoryType.MAGIC_TRIANGLE:
-//        return MagicTriangleDataProvider.getMagicTriangleInput();
-        break;
+        return [];
       case GameCategoryType.MENTAL_ARITHMETIC:
-        return MentalArithmeticRepository.getMentalArithmeticDataList(
-            level);
-        break;
+        return MentalArithmeticRepository.getMentalArithmeticDataList(level);
       case GameCategoryType.QUICK_CALCULATION:
-        return QuickCalculationRepository.getQuickCalculationDataList(
-            level, 5);
-        break;
+        return QuickCalculationRepository.getQuickCalculationDataList(level, 5);
       case GameCategoryType.MATH_MACHINE:
-//        return MathGridDataProvider.generateRandomAnswer();
-        break;
+        return [];
       case GameCategoryType.PICTURE_PUZZLE:
         return PicturePuzzleRepository.getPicturePuzzleDataList(level);
       case GameCategoryType.NUMBER_PYRAMID:
-        // TODO: Handle this case.
-        break;
+        return [];
     }
   }
 
@@ -248,36 +234,26 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
     switch (gameCategoryType) {
       case GameCategoryType.CALCULATOR:
         return ScoreUtil.calculatorScore;
-        break;
       case GameCategoryType.SIGN:
         return ScoreUtil.signScore;
-        break;
       case GameCategoryType.SQUARE_ROOT:
         return ScoreUtil.squareRootScore;
-        break;
       case GameCategoryType.MATH_PAIRS:
         return ScoreUtil.mathMachineScore;
-        break;
       case GameCategoryType.CORRECT_ANSWER:
         return ScoreUtil.correctAnswerScore;
-        break;
       case GameCategoryType.MAGIC_TRIANGLE:
         return ScoreUtil.magicTriangleScore;
-        break;
       case GameCategoryType.MENTAL_ARITHMETIC:
         return ScoreUtil.mentalArithmeticScore;
-        break;
       case GameCategoryType.QUICK_CALCULATION:
         return ScoreUtil.quickCalculationScore;
-        break;
       case GameCategoryType.MATH_MACHINE:
         return ScoreUtil.mathMachineScore;
-        break;
       case GameCategoryType.PICTURE_PUZZLE:
         return ScoreUtil.picturePuzzleScore;
       case GameCategoryType.NUMBER_PYRAMID:
-        // TODO: Handle this case.
-        break;
+        return 0;
     }
   }
 
@@ -285,36 +261,26 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
     switch (gameCategoryType) {
       case GameCategoryType.CALCULATOR:
         return ScoreUtil.calculatorScoreMinus;
-        break;
       case GameCategoryType.SIGN:
         return ScoreUtil.signScoreMinus;
-        break;
       case GameCategoryType.SQUARE_ROOT:
         return ScoreUtil.squareRootScoreMinus;
-        break;
       case GameCategoryType.MATH_PAIRS:
         return ScoreUtil.mathematicalPairsScoreMinus;
-        break;
       case GameCategoryType.CORRECT_ANSWER:
         return ScoreUtil.correctAnswerScoreMinus;
-        break;
       case GameCategoryType.MAGIC_TRIANGLE:
         return ScoreUtil.magicTriangleScore;
-        break;
       case GameCategoryType.MENTAL_ARITHMETIC:
         return ScoreUtil.mentalArithmeticScoreMinus;
-        break;
       case GameCategoryType.QUICK_CALCULATION:
         return ScoreUtil.quickCalculationScoreMinus;
-        break;
       case GameCategoryType.MATH_MACHINE:
         return ScoreUtil.mathMachineScore;
-        break;
       case GameCategoryType.PICTURE_PUZZLE:
         return ScoreUtil.picturePuzzleScore;
       case GameCategoryType.NUMBER_PYRAMID:
-        // TODO: Handle this case.
-        break;
+        return 0;
     }
   }
 
@@ -322,36 +288,26 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
     switch (gameCategoryType) {
       case GameCategoryType.CALCULATOR:
         return CoinUtil.calculatorCoin;
-        break;
       case GameCategoryType.SIGN:
         return CoinUtil.signCoin;
-        break;
       case GameCategoryType.SQUARE_ROOT:
         return CoinUtil.squareRootCoin;
-        break;
       case GameCategoryType.MATH_PAIRS:
         return CoinUtil.mathematicalPairsCoin;
-        break;
       case GameCategoryType.CORRECT_ANSWER:
         return CoinUtil.correctAnswerCoin;
-        break;
       case GameCategoryType.MAGIC_TRIANGLE:
         return CoinUtil.magicTriangleCoin;
-        break;
       case GameCategoryType.MENTAL_ARITHMETIC:
         return CoinUtil.mentalArithmeticCoin;
-        break;
       case GameCategoryType.QUICK_CALCULATION:
         return CoinUtil.quickCalculationCoin;
-        break;
       case GameCategoryType.MATH_MACHINE:
         return CoinUtil.mathMachineCoin;
-        break;
       case GameCategoryType.PICTURE_PUZZLE:
         return CoinUtil.picturePuzzleCoin;
       case GameCategoryType.NUMBER_PYRAMID:
-        // TODO: Handle this case.
-        break;
+        return 0;
     }
   }
 
@@ -359,36 +315,26 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
     switch (gameCategoryType) {
       case GameCategoryType.CALCULATOR:
         return TimeUtil.calculatorTimeOut;
-        break;
       case GameCategoryType.SIGN:
         return TimeUtil.signTimeOut;
-        break;
       case GameCategoryType.SQUARE_ROOT:
         return TimeUtil.squareRootTimeOut;
-        break;
       case GameCategoryType.MATH_PAIRS:
         return TimeUtil.mathematicalPairsTimeOut;
-        break;
       case GameCategoryType.CORRECT_ANSWER:
         return TimeUtil.correctAnswerTimeOut;
-        break;
       case GameCategoryType.MAGIC_TRIANGLE:
         return TimeUtil.magicTriangleTimeOut;
-        break;
       case GameCategoryType.MENTAL_ARITHMETIC:
         return TimeUtil.mentalArithmeticTimeOut;
-        break;
       case GameCategoryType.QUICK_CALCULATION:
         return TimeUtil.quickCalculationTimeOut;
-        break;
       case GameCategoryType.MATH_MACHINE:
         return TimeUtil.mathMachineTimeOut;
-        break;
       case GameCategoryType.PICTURE_PUZZLE:
         return TimeUtil.picturePuzzleTimeOut;
       case GameCategoryType.NUMBER_PYRAMID:
-        // TODO: Handle this case.
-        break;
+        return 0;
     }
   }
 }

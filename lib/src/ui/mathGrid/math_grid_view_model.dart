@@ -16,12 +16,12 @@ class MathGridProvider with ChangeNotifier {
   var homeViewModel = GetIt.I<DashboardViewModel>();
   final DialogService _dialogService = GetIt.I<DialogService>();
 
-  List<MathGrid> _list;
-  MathGrid _currentState;
+  late  List<MathGrid> _list;
+  late  MathGrid _currentState;
   int _index = 0;
   int answerIndex = 0;
-  bool _timeOut;
-  int _time;
+  late  bool _timeOut;
+  late  int _time;
   bool _pause = false;
   double currentScore = 0;
 
@@ -31,7 +31,7 @@ class MathGridProvider with ChangeNotifier {
 
   bool get pause => _pause;
 
-  StreamSubscription timerSubscription;
+  late  StreamSubscription timerSubscription;
 
   MathGrid get currentState => _currentState;
 

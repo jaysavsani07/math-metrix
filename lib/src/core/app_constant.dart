@@ -1,4 +1,6 @@
 class KeyUtil {
+  static const IS_DARK_MODE = "isDarkMode";
+
   static const String Dashboard = 'Dashboard';
   static const String Home = 'Home';
 

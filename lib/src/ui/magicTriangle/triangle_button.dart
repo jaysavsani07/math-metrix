@@ -19,7 +19,6 @@ class TriangleButton extends StatelessWidget {
       maintainAnimation: true,
       maintainState: true,
       child: Card(
-        color: Color(0xFF303030),
         shape: CircleBorder(
           side: BorderSide(color: Colors.white70, width: 2),
         ),
@@ -33,7 +32,7 @@ class TriangleButton extends StatelessWidget {
               magicTriangleProvider.checkResult(index, digit);
             },
             child:
-                Text(digit.value, style: Theme.of(context).textTheme.headline1),
+                Text(digit.value, style: Theme.of(context).textTheme.headline4),
           ),
         ),
       ),

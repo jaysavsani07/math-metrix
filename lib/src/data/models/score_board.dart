@@ -1,9 +1,9 @@
 class ScoreBoard {
   int highestScore;
-  int coin;
-  bool firstTime;
+  late int coin;
+  late bool firstTime;
 
-  ScoreBoard(this.highestScore);
+  ScoreBoard({required  this.highestScore});
 
   ScoreBoard.fromJson(Map<String, dynamic> json)
       : highestScore = json['highestScore'] ?? 0,

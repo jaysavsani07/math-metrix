@@ -35,7 +35,7 @@ class PicturePuzzleAnswerButton extends StatelessWidget {
           child: Center(
             child: Text(
               text,
-              style: Theme.of(context).textTheme.headline1,
+              style: Theme.of(context).textTheme.headline4,
             ),
           ),
         ),

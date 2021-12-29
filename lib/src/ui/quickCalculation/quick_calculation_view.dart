@@ -56,16 +56,16 @@ class QuickCalculationView extends StatelessWidget {
                                       Text(data.question,
                                           style: Theme.of(context)
                                               .textTheme
-                                              .headline1),
+                                              .headline5),
                                       Text(" = ",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .headline1),
+                                              .headline5),
                                       Text(
                                         data.userAnswer,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline1,
+                                            .headline5,
                                       )
                                     ],
                                   );

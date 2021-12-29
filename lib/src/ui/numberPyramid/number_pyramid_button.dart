@@ -31,9 +31,11 @@ class PyramidNumberButton extends StatelessWidget {
           margin: EdgeInsets.all(1),
           constraints: BoxConstraints.expand(),
           child: Center(
-            child: Text(
-              text,
-              style: Theme.of(context).textTheme.headline1,
+            child: FittedBox(
+              child: Text(
+                text,
+                style: Theme.of(context).textTheme.headline4,
+              ),
             ),
           ),
         ),

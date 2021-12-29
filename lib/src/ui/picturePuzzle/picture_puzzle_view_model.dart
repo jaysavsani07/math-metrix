@@ -9,13 +9,13 @@ import 'package:mathgame/src/core/time_constant.dart';
 class PicturePuzzleProvider
     with ChangeNotifier
     implements GameAccess<PicturePuzzle> {
-  GameViewModelImp gameViewModel;
+  late  GameViewModelImp gameViewModel;
 
-  String _result;
+  late  String _result;
 
   String get result => _result;
 
-  int _time;
+  late  int _time;
 
   int get time => _time;
 
@@ -23,14 +23,14 @@ class PicturePuzzleProvider
 
   bool get pause => _pause;
 
-  PicturePuzzle _currentState;
+  late  PicturePuzzle _currentState;
 
   PicturePuzzle get currentState => _currentState;
 
   double _currentScore = 0;
 
   double get currentScore => _currentScore;
-  bool _timeOut;
+  late   bool _timeOut;
 
   PicturePuzzleProvider() {
     gameViewModel = GameViewModelImp<PicturePuzzle>(

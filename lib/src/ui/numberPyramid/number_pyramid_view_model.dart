@@ -19,15 +19,15 @@ class NumberPyramidProvider with ChangeNotifier {
   var homeViewModel = GetIt.I<DashboardViewModel>();
   final DialogService _dialogService = GetIt.I<DialogService>();
 
-  List<NumberPyramid> _list;
-  NumberPyramid _currentState;
+  late  List<NumberPyramid> _list;
+  late   NumberPyramid _currentState;
   int _index = 0;
   int first = -1;
   int second = -1;
 
-  bool _lock;
-  bool _timeOut;
-  int _time;
+  late   bool _lock;
+  late  bool _timeOut;
+  late  int _time;
   bool _pause = false;
   double currentScore = 0;
 
@@ -37,7 +37,7 @@ class NumberPyramidProvider with ChangeNotifier {
 
   bool get pause => _pause;
 
-  StreamSubscription timerSubscription;
+  late  StreamSubscription timerSubscription;
 
   NumberPyramid get currentState => _currentState;
 

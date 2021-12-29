@@ -6,8 +6,14 @@ class CorrectAnswer {
   String fourthAns;
   int answer;
 
-  CorrectAnswer(this.question, this.firstAns, this.secondAns,
-      this.thirdAns, this.fourthAns, this.answer);
+  CorrectAnswer({
+    required  this.question,
+    required this.firstAns,
+    required this.secondAns,
+    required this.thirdAns,
+    required this.fourthAns,
+    required this.answer,
+  });
 
   @override
   String toString() {

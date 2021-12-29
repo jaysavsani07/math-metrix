@@ -2,13 +2,13 @@ import 'package:mathgame/src/data/models/quick_calculation.dart';
 import 'package:mathgame/src/utility/math_util.dart';
 
 class QuickCalculationRepository {
-  static List<int> listHasCode = List();
+  static List<int> listHasCode = <int>[];
 
   static getQuickCalculationDataList(int level, int noItem) {
     if (level == 1) {
       listHasCode.clear();
     }
-    List<QuickCalculation> list = List();
+    List<QuickCalculation> list = <QuickCalculation>[];
 
     while (list.length < noItem) {
       MathUtil.generate(level, noItem - list.length)
@@ -16,12 +16,16 @@ class QuickCalculationRepository {
         QuickCalculation quickCalculationQandS;
         if (expression.operator2 == null) {
           quickCalculationQandS = QuickCalculation(
-              "${expression.firstOperand} ${expression.operator1} ${expression.secondOperand}",
-              expression.answer);
+            question:
+                "${expression.firstOperand} ${expression.operator1} ${expression.secondOperand}",
+            answer: expression.answer,
+          );
         } else {
           quickCalculationQandS = QuickCalculation(
-              "${expression.firstOperand} ${expression.operator1} ${expression.secondOperand} ${expression.operator2} ${expression.thirdOperand}",
-              expression.answer);
+            question:
+                "${expression.firstOperand} ${expression.operator1} ${expression.secondOperand} ${expression.operator2} ${expression.thirdOperand}",
+            answer: expression.answer,
+          );
         }
         if (!listHasCode.contains(quickCalculationQandS.hashCode)) {
           listHasCode.add(quickCalculationQandS.hashCode);

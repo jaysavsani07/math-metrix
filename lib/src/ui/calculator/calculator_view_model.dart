@@ -8,13 +8,13 @@ import 'package:mathgame/src/core/time_constant.dart';
 import '../common/game_view_model.dart';
 
 class CalculatorProvider with ChangeNotifier implements GameAccess<Calculator> {
-  GameViewModelImp gameViewModel;
+  late GameViewModelImp gameViewModel;
 
-  String _result;
+  late String _result;
 
   String get result => _result;
 
-  int _time;
+  late int _time;
 
   int get time => _time;
 
@@ -22,14 +22,14 @@ class CalculatorProvider with ChangeNotifier implements GameAccess<Calculator> {
 
   bool get pause => _pause;
 
-  Calculator _currentState;
+  late Calculator _currentState;
 
   Calculator get currentState => _currentState;
 
   double _currentScore = 0;
 
   double get currentScore => _currentScore;
-  bool _timeOut;
+  late bool _timeOut;
 
   CalculatorProvider() {
     gameViewModel = GameViewModelImp<Calculator>(

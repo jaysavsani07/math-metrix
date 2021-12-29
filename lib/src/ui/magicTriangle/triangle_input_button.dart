@@ -18,7 +18,6 @@ class TriangleInputButton extends StatelessWidget {
         magicTriangleProvider.inputTriangleSelection(index, input);
       },
       child: Card(
-        color: Color(0xFF303030),
         elevation: 4.0,
         shape: CircleBorder(
           side: BorderSide(
@@ -31,7 +30,7 @@ class TriangleInputButton extends StatelessWidget {
             child: Center(
           child: Text(
             input.value,
-            style: Theme.of(context).textTheme.headline1,
+            style: Theme.of(context).textTheme.headline4,
           ),
         )),
       ),

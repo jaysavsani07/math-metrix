@@ -6,5 +6,5 @@ class GameInfoDialog {
   String dec;
 
   GameInfoDialog(
-      {@required this.title, @required this.image, @required this.dec});
+      {required this.title, required this.image, required this.dec});
 }

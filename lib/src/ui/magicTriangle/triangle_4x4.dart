@@ -2,21 +2,17 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/data/models/magic_triangle.dart';
 import 'package:mathgame/src/ui/magicTriangle/magic_triangle_view_model.dart';
 import 'package:mathgame/src/ui/magicTriangle/triangle_input_button.dart';
 import 'package:provider/provider.dart';
 
 class Triangle4x4 extends StatelessWidget {
-  double radius;
-  double padding;
-  double triangleHeight;
-  double triangleWidth;
+  final double radius;
+  final double padding;
+  final double triangleHeight;
+  late double triangleWidth;
 
-  Triangle4x4(this.radius, this.padding, this.triangleHeight) {
-//    radius = 30;
-//    padding=15;
-  }
+  Triangle4x4(this.radius, this.padding, this.triangleHeight);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +38,7 @@ class Triangle4x4 extends StatelessWidget {
         ), // second one
         Positioned(
           top: (triangleHeight - ((radius + padding) * 2)) / 3 + padding,
-          right:(triangleWidth - ((radius + padding) * 2)) / 3 + padding,
+          right: (triangleWidth - ((radius + padding) * 2)) / 3 + padding,
           child: TriangleInputButton(
               magicTriangleProvider.currentState.listTriangle[2], 2),
           height: (radius * 2),
@@ -58,7 +54,7 @@ class Triangle4x4 extends StatelessWidget {
         ), // fourth one
         Positioned(
           bottom: (triangleHeight - ((radius + padding) * 2)) / 3 + padding,
-          right:(triangleWidth - ((radius + padding) * 2)) / 6 + padding,
+          right: (triangleWidth - ((radius + padding) * 2)) / 6 + padding,
           child: TriangleInputButton(
               magicTriangleProvider.currentState.listTriangle[4], 4),
           height: (radius * 2),

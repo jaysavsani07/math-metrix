@@ -9,7 +9,7 @@ class Triangle3x3 extends StatelessWidget {
   final double radius;
   final double padding;
   final double triangleHeight;
-  double triangleWidth;
+ late double triangleWidth;
 
   Triangle3x3(this.radius, this.padding, this.triangleHeight);
 

@@ -1,19 +1,19 @@
 import 'package:flutter/widgets.dart';
 
 class SizeConfig {
-  static MediaQueryData _mediaQueryData;
-  static double screenWidth;
-  static double screenHeight;
-  static double buttonSize;
-  static double resultTextSize;
-  static double expTextSize;
+  static late MediaQueryData _mediaQueryData;
+  static late double screenWidth;
+  static late double screenHeight;
+  static late double buttonSize;
+  static late double resultTextSize;
+  static late double expTextSize;
 
-  static double _safeAreaHorizontal;
-  static double _safeAreaVertical;
-  static double safeBlockHorizontal;
-  static double safeBlockVertical;
-  static double pixelRatio;
-  static double heightWidthFactor;
+  static late double _safeAreaHorizontal;
+  static late double _safeAreaVertical;
+  static late double safeBlockHorizontal;
+  static late double safeBlockVertical;
+  static late double pixelRatio;
+  static late double heightWidthFactor;
 
   void init(BuildContext context) {
     _mediaQueryData = MediaQuery.of(context);

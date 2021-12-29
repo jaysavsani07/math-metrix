@@ -23,11 +23,16 @@ class PicturePuzzleShapeList {
 
 class PicturePuzzleShape {
   bool isSign;
-  bool isAnswer;
-  PicturePuzzleShapeType picturePuzzleShapeType;
+  bool? isAnswer;
+  PicturePuzzleShapeType? picturePuzzleShapeType;
   String text;
 
-  PicturePuzzleShape({this.isSign, this.picturePuzzleShapeType, this.isAnswer,this.text});
+  PicturePuzzleShape({
+    required this.isSign,
+     this.picturePuzzleShapeType,
+     this.isAnswer,
+    required this.text,
+  });
 
   @override
   String toString() {
@@ -55,8 +60,6 @@ class PicturePuzzleData {
   String toString() {
     return 'PicturePuzzleData{picturePuzzleShapeType1: $picturePuzzleShapeType1, sign1: $sign1, picturePuzzleShapeType2: $picturePuzzleShapeType2, sign2: $sign2, picturePuzzleShapeType3: $picturePuzzleShapeType3, text: $text}';
   }
-
-
 }
 
 enum PicturePuzzleShapeType { CIRCLE, SQUARE, TRIANGLE }

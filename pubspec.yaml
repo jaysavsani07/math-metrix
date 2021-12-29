@@ -14,19 +14,21 @@ description: A new Flutter application.
 version: 1.0.2+3
 
 environment:
-  sdk: ">=2.7.2 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+
   cupertino_icons: ^0.1.2
   flutter_svg: ^1.0.0
-  get_it: ^4.0.1
+  get_it: ^7.2.0
   percent_indicator: ^3.4.0
-  provider: ^4.0.5
+  provider: ^6.0.1
   rflutter_alert: ^2.0.4
   shared_preferences: ^2.0.11
   tuple: ^2.0.0
+  package_info: ^2.0.2
 
 dev_dependencies:
   flutter_test:
@@ -44,20 +46,9 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/goal.svg
-    - assets/images/money.svg
-    - assets/calculator-intro.gif
-    - assets/correct-answer.gif
-    - assets/magic-triangle-intro.gif
-    - math-machine-intro.gif
-    - math-pair-intro.gif
-    - mental-arith-intro.gif
-    - quick-calculation-intro.gif
-    - sqroot-intro.gif
-    - whats-the-sign-intro.gif
-    - num-pyramid.gif
-    - picture-puzzle-intro.gif
-  #  - images/a_dot_ham.jpeg
+    - assets/images/
+    - assets/gif/
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see

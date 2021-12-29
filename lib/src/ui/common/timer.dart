@@ -66,7 +66,7 @@ class Timer extends StatelessWidget {
             children: <Widget>[
               Text("Score", style: Theme.of(context).textTheme.subtitle2),
               Text(provider.currentScore.toInt().toString(),
-                  style: Theme.of(context).textTheme.headline1)
+                  style: Theme.of(context).textTheme.subtitle1)
             ],
           ),
           /* Visibility(
@@ -89,7 +89,7 @@ class Timer extends StatelessWidget {
             child: Column(children: <Widget>[
               Text("Timer", style: Theme.of(context).textTheme.subtitle2),
               Text(provider.time.toString(),
-                  style: Theme.of(context).textTheme.headline1),
+                  style: Theme.of(context).textTheme.subtitle1),
               /* AnimatedSwitcher(
                   duration: Duration(milliseconds: 700),
                   child: provider.time % 2 == 1

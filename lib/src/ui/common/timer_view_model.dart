@@ -24,21 +24,21 @@ class TimerViewModelImpl extends TimerViewModel {
   int totalTime;
 
   TimerAccess timerAccess;
-  Stream<int> _timer;
-  StreamSubscription _timeSubscription;
+late  Stream<int> _timer;
+  StreamSubscription? _timeSubscription;
 
-  TimerViewModelImpl({@required this.timerAccess, @required this.totalTime});
+  TimerViewModelImpl({required this.timerAccess,required this.totalTime});
 
   Stream<int> timedCounter(int interval, int maxCount) {
-    StreamController<int> controller;
-    Timer timer;
+  late  StreamController<int> controller;
+    Timer? timer;
     int counter = maxCount;
 
     void tick(_) {
       counter = counter - interval;
       controller.add(counter); // Ask stream to send counter values as event.
       if (counter == 0) {
-        timer.cancel();
+        timer!.cancel();
         controller.close(); // Ask stream to shut down and tell listeners.
       }
     }
@@ -49,7 +49,7 @@ class TimerViewModelImpl extends TimerViewModel {
 
     void stopTimer() {
       if (timer != null) {
-        timer.cancel();
+        timer!.cancel();
         timer = null;
       }
     }
@@ -78,27 +78,27 @@ class TimerViewModelImpl extends TimerViewModel {
     cancelTimer();
     _timer = timedCounter(oneSec, totalTime);
     _timeSubscription = _timer.listen(_onTimeChange);
-    _timeSubscription.onDone(_handleTimerEnd);
+    _timeSubscription!.onDone(_handleTimerEnd);
   }
 
   @override
   void pauseTimer() {
     if (_timeSubscription != null) {
-      _timeSubscription.pause();
+      _timeSubscription!.pause();
     }
   }
 
   @override
   void resumeTimer() {
     if (_timeSubscription != null) {
-      _timeSubscription.resume();
+      _timeSubscription!.resume();
     }
   }
 
   @override
   void cancelTimer() {
     if (_timeSubscription != null) {
-      _timeSubscription.cancel();
+      _timeSubscription!.cancel();
     }
   }
 }

@@ -13,8 +13,8 @@ class MathGridRepository {
   static List<int> listOf1 = List<int>.generate(9, (i) => 1);
 
   static List<MathGridCellModel> listForSquare() {
-    List<int> list = new List();
-    List<MathGridCellModel> listGrid = new List();
+    List<int> list = <int>[];
+    List<MathGridCellModel> listGrid = <MathGridCellModel>[];
     list = listOf9 +
         listOf8 +
         listOf7 +
@@ -40,7 +40,7 @@ class MathGridRepository {
   }
 
   static List<int> listOfAnswer() {
-    List<int> listRandom = new List();
+    List<int> listRandom = <int>[];
     for (int i = 0; i < 100; i++) {
       listRandom.add(generateRandomAnswer());
     }
@@ -48,12 +48,17 @@ class MathGridRepository {
   }
 
   static List<MathGrid> getMathGridData() {
-    List<MathGrid> list = new List();
-    list.add(MathGrid(1, listForSquare(), listOfAnswer()));
-    list.add(MathGrid(2, listForSquare(), listOfAnswer()));
-    list.add(MathGrid(3, listForSquare(), listOfAnswer()));
-    list.add(MathGrid(4, listForSquare(), listOfAnswer()));
-    list.add(MathGrid(5, listForSquare(), listOfAnswer()));
+    List<MathGrid> list = <MathGrid>[];
+    list.add(MathGrid(
+        id: 1, listForSquare: listForSquare(), listOfAnswer: listOfAnswer()));
+    list.add(MathGrid(
+        id: 2, listForSquare: listForSquare(), listOfAnswer: listOfAnswer()));
+    list.add(MathGrid(
+        id: 3, listForSquare: listForSquare(), listOfAnswer: listOfAnswer()));
+    list.add(MathGrid(
+        id: 4, listForSquare: listForSquare(), listOfAnswer: listOfAnswer()));
+    list.add(MathGrid(
+        id: 5, listForSquare: listForSquare(), listOfAnswer: listOfAnswer()));
     return list;
   }
 }

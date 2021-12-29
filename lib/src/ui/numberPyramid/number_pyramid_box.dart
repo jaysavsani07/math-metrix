@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/data/models/number_pyramid.dart';
 import 'package:mathgame/src/ui/numberPyramid/number_pyramid_view_model.dart';
 import 'package:mathgame/src/core/size_config.dart';
@@ -35,7 +36,7 @@ class PyramidNumberBox extends StatelessWidget {
                     : Colors.transparent),
             border: new Border.all(
                 color:
-                    numPyramidCellModel.isActive ? Colors.yellow : Colors.white,
+                    numPyramidCellModel.isActive ? Colors.yellow : Theme.of(context).colorScheme.crossColor,
                 width: numPyramidCellModel.isActive ? 2 : 1,
                 style: BorderStyle.solid)),
         child: Text(

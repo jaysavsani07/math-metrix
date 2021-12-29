@@ -1,9 +1,9 @@
 class QuickCalculation {
   String question;
-  String userAnswer;
-  int answer;
+  late String userAnswer;
+   int answer;
 
-  QuickCalculation(this.question, this.answer) {
+  QuickCalculation({required  this.question,required  this.answer}) {
     this.userAnswer = "";
   }
 

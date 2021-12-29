@@ -1,7 +1,6 @@
 import 'dart:math';
 
 class MathUtil {
-  // ignore: missing_return
   static int evaluate(int x1, String sign, int x3) {
     switch (sign) {
       case "+":
@@ -10,7 +9,7 @@ class MathUtil {
         return x1 - x3;
       case "*":
         return x1 * x3;
-      case "/":
+      default:
         return x1 ~/ x3;
     }
   }
@@ -28,7 +27,7 @@ class MathUtil {
         return 1;
       case "*":
         return 2;
-      case "/":
+      default:
         return 3;
     }
   }
@@ -88,36 +87,45 @@ class MathUtil {
   static Expression getPlusSignExp(int min, int max) {
     var x = MathUtil.generateRandomNumber(min, max, 2);
     return Expression(
-        firstOperand: x[0],
-        operator1: "+",
-        secondOperand: x[1],
-        answer: int.tryParse(x[0]) + int.tryParse(x[1]));
+      firstOperand: x[0],
+      operator1: "+",
+      secondOperand: x[1],
+      answer: int.parse(x[0]) + int.parse(x[1]),
+      thirdOperand: '',
+      operator2: null,
+    );
   }
 
   static Expression getMinusSignExp(int min, int max) {
     var x1 = MathUtil.generateRandomNumber(max ~/ 2, max, 1);
     var x2 = MathUtil.generateRandomNumber(min, max, 1);
-    while (int.tryParse(x2[0]) > int.tryParse(x1[0])) {
+    while (int.parse(x2[0]) > int.parse(x1[0])) {
       x2 = MathUtil.generateRandomNumber(min, max, 1);
     }
     return Expression(
-        firstOperand: x1[0],
-        operator1: "-",
-        secondOperand: x2[0],
-        answer: int.tryParse(x1[0]) - int.tryParse(x2[0]));
+      firstOperand: x1[0],
+      operator1: "-",
+      secondOperand: x2[0],
+      answer: int.parse(x1[0]) - int.parse(x2[0]),
+      thirdOperand: '',
+      operator2: null,
+    );
   }
 
   static Expression getMultiplySignExp(int min, int max) {
     var x = MathUtil.generateRandomNumber(min, max, 2);
 
     return Expression(
-        firstOperand: x[0],
-        operator1: "*",
-        secondOperand: x[1],
-        answer: int.tryParse(x[0]) * int.tryParse(x[1]));
+      firstOperand: x[0],
+      operator1: "*",
+      secondOperand: x[1],
+      answer: int.parse(x[0]) * int.parse(x[1]),
+      thirdOperand: '',
+      operator2: null,
+    );
   }
 
-  static Expression getDivideSignExp(int min, int max) {
+  static Expression? getDivideSignExp(int min, int max) {
     var listTemp = <Map<String, String>>[];
     for (int i = min; i <= max; i++) {
       for (int j = min; j <= max; j++) {
@@ -130,16 +138,19 @@ class MathUtil {
     if (listTemp.length > 0) {
       var x = listTemp[Random().nextInt(listTemp.length)];
       return Expression(
-          firstOperand: x.keys.first,
-          operator1: "/",
-          secondOperand: x.values.first,
-          answer: int.tryParse(x.keys.first) ~/ int.tryParse(x.values.first));
+        firstOperand: x.keys.first,
+        operator1: "/",
+        secondOperand: x.values.first,
+        answer: int.parse(x.keys.first) ~/ int.parse(x.values.first),
+        thirdOperand: '',
+        operator2: null,
+      );
     } else {
       return null;
     }
   }
 
-  static Expression getMixExp(int min, int max) {
+  static Expression? getMixExp(int min, int max) {
     int operand = int.parse(MathUtil.generateRandomNumber(min, max, 1).first);
     var signList = MathUtil.generateRandomSign1(2);
     String firstSign = (MathUtil.getPrecedence(signList[0]) >=
@@ -150,8 +161,8 @@ class MathUtil {
             MathUtil.getPrecedence(signList[1]))
         ? ""
         : signList[1];
-    Expression expression;
-    Expression finalExpression;
+    Expression? expression;
+    Expression? finalExpression;
 
     switch (firstSign != "" ? firstSign : secondSign) {
       case "+":
@@ -267,7 +278,7 @@ class MathUtil {
     return finalExpression;
   }
 
-  static Expression getMentalExp(int level) {
+  static Expression? getMentalExp(int level) {
     int min;
     int max;
     if (level <= 3) {
@@ -282,8 +293,8 @@ class MathUtil {
     }
     int operand = int.parse(MathUtil.generateRandomNumber(min, max, 1).first);
     var signList = MathUtil.generateRandomSign1(2);
-    Expression expression;
-    Expression finalExpression;
+    Expression? expression;
+    Expression? finalExpression;
 
     switch (signList[0]) {
       case "+":
@@ -356,7 +367,7 @@ class MathUtil {
     print("$min $max");
     while (list.length < count) {
       MathUtil.generateRandomSign1(count - list.length).forEach((String sign) {
-        Expression expression;
+        Expression? expression;
         if (level <= 2) {
           switch (sign) {
             case "+":
@@ -421,7 +432,7 @@ class MathUtil {
     print("$min $max");
     while (list.length < count) {
       MathUtil.generateRandomSign1(count - list.length).forEach((String sign) {
-        Expression expression;
+        Expression? expression;
         if (level <= 2) {
           switch (sign) {
             case "+":
@@ -481,20 +492,21 @@ void main() {
 }
 
 class Expression {
-  String firstOperand;
-  String operator1;
-  String secondOperand;
-  String operator2;
-  String thirdOperand;
-  int answer;
+  final String firstOperand;
+  final String operator1;
+  final String secondOperand;
+  final String? operator2;
+  final String thirdOperand;
+  final int answer;
 
-  Expression(
-      {this.firstOperand,
-      this.operator1,
-      this.secondOperand,
-      this.operator2,
-      this.thirdOperand,
-      this.answer});
+  Expression({
+    required this.firstOperand,
+    required this.operator1,
+    required this.secondOperand,
+    required this.operator2,
+    required this.thirdOperand,
+    required this.answer,
+  });
 
   @override
   String toString() {
