@@ -15,14 +15,19 @@ extension CustomColorScheme on ColorScheme {
       ? Colors.black54
       : Colors.white60;
 
-  Color get paiChartColor =>
+  Color get dividerColor =>
       brightness == Brightness.light ?
-      Color(0xFFBDCDE0) :
-      Color(0xFF292D32);
+      Color(0xFFeeeeee) :
+      Color(0xFFeeeeee);
 
-  Color get paiChartShadowLightColor =>
-      brightness == Brightness.light ? Colors.black : Colors.white;
+  Color get iconBgColor =>
+      brightness == Brightness.light ?
+      Color(0xFFF5F5F5) :
+      Color(0xFF000000);
 
-  Color get paiChartShadowDarkColor =>
-      brightness == Brightness.light ? Colors.white : Colors.black;
+  Color get dialogBgColor =>
+      brightness == Brightness.light ? Color(0xffF7F7F7) : Color(0xff212121);
+
+  Color get dialogGifBgColor =>
+      brightness == Brightness.light ? Colors.white : Color(0xff424242);
 }

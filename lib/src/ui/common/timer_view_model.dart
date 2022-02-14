@@ -1,9 +1,7 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 abstract class TimerViewModel {
-
   void startTimer();
 
   void pauseTimer();
@@ -20,31 +18,31 @@ abstract class TimerAccess {
 }
 
 class TimerViewModelImpl extends TimerViewModel {
-  int oneSec = 1;
+  int oneSec = 200;
   int totalTime;
 
   TimerAccess timerAccess;
-late  Stream<int> _timer;
+  late Stream<int> _timer;
   StreamSubscription? _timeSubscription;
 
-  TimerViewModelImpl({required this.timerAccess,required this.totalTime});
+  TimerViewModelImpl({required this.timerAccess, required this.totalTime});
 
   Stream<int> timedCounter(int interval, int maxCount) {
-  late  StreamController<int> controller;
+    late StreamController<int> controller;
     Timer? timer;
-    int counter = maxCount;
+    int counter = maxCount*5;
 
     void tick(_) {
-      counter = counter - interval;
+      counter = counter - 1;
       controller.add(counter); // Ask stream to send counter values as event.
-      if (counter == 0) {
+      if (counter == 0.0) {
         timer!.cancel();
         controller.close(); // Ask stream to shut down and tell listeners.
       }
     }
 
     void startTimer() {
-      timer = Timer.periodic(Duration(seconds: interval), tick);
+      timer = Timer.periodic(Duration(milliseconds:  interval), tick);
     }
 
     void stopTimer() {
@@ -64,7 +62,7 @@ late  Stream<int> _timer;
   }
 
   void _onTimeChange(int newTime) {
-//    print(newTime);
+   // print(newTime);
     timerAccess.timeUpdate(newTime);
   }
 

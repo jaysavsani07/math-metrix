@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:mathgame/src/core/color_scheme.dart';
+import 'package:mathgame/src/data/models/sign.dart';
+import 'package:mathgame/src/ui/common/CommonNumberButton.dart';
+import 'package:mathgame/src/ui/common/common_app_bar.dart';
+import 'package:mathgame/src/ui/common/common_info_text_view.dart';
+import 'package:mathgame/src/ui/common/dialog_listener.dart';
 import 'package:mathgame/src/ui/whatsTheSign/sign_view_model.dart';
 import 'package:mathgame/src/core/app_constant.dart';
-import 'package:mathgame/src/ui/common/timer.dart';
-import 'package:mathgame/src/ui/whatsTheSign/sign_button.dart';
 import 'package:provider/provider.dart';
 
 class SignView extends StatelessWidget {
@@ -10,156 +15,130 @@ class SignView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<SignProvider>(
       create: (_) => SignProvider(),
-      child: WillPopScope(
-        onWillPop: () => Future.value(false),
+      child: SafeArea(
+        top: true,
+        bottom: true,
         child: Scaffold(
-          body: SafeArea(
-            top: true,
-            bottom: true,
-            child:
-                Consumer<SignProvider>(builder: (context, signProvider, child) {
-              return Container(
-                margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
-                constraints: BoxConstraints.expand(),
-                child: Column(
-                  children: <Widget>[
-                    Expanded(flex: 10, child: Timer(GameCategoryType.SIGN)),
-                    Expanded(
-                        flex: 20,
-                        child: Visibility(
-                          visible: !signProvider.pause,
-
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Center(
-                                child: Text(
-                                  signProvider.currentState.firstDigit,
-                                  style: Theme.of(context).textTheme.headline3,
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(3)),
-                                  border: Border.all(
-                                      color: Theme.of(context).primaryColor,
-                                      width: 1),
-                                ),
-                                child: Container(
-                                  width: 40,
-                                  child: Center(
-                                    heightFactor: 1,
-                                    child: Text(
-                                      signProvider.result,
-                                      style: Theme.of(context).textTheme.headline3,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Center(
-                                child: Text(
-                                  signProvider.currentState.secondDigit,
-                                  style: Theme.of(context).textTheme.headline3,
-                                ),
-                              ),
-                              Center(
-                                child: Text(
-                                  " = ",
-                                  style: Theme.of(context).textTheme.headline3,
-                                ),
-                              ),
-                              Center(
-                                child: Text(
-                                  signProvider.currentState.answer,
-                                  style: Theme.of(context).textTheme.headline3,
-                                ),
-                              ),
-                            ],
+          appBar: CommonAppBar<SignProvider>(),
+          body: DialogListener<SignProvider>(
+            gameCategoryType: GameCategoryType.SIGN,
+            child: Container(
+              margin: EdgeInsets.all(24),
+              constraints: BoxConstraints.expand(),
+              child: Column(
+                children: <Widget>[
+                  CommonInfoTextView<SignProvider>(gameCategoryType: GameCategoryType.SIGN),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Selector<SignProvider, Sign>(
+                            selector: (p0, p1) => p1.currentState,
+                            builder: (context, calculatorProvider, child) {
+                              return Text(
+                                calculatorProvider.firstDigit,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle2!
+                                    .copyWith(fontSize: 30),
+                              );
+                            }),
+                        SizedBox(width: 8),
+                        Neumorphic(
+                          style: NeumorphicStyle(
+                            // shape: NeumorphicShape.convex,
+                            boxShape: NeumorphicBoxShape.roundRect(
+                                BorderRadius.circular(18)),
+                            depth: -8,
+                            lightSource: LightSource.topLeft,
+                            color: Theme.of(context).colorScheme.iconBgColor,
                           ),
-                        )),
-                    Expanded(
-                      flex: 60,
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: SizedBox(
-                          height: 300,
-                          width: 500,
                           child: Container(
-                            margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(30)),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Expanded(
-                                  child: Row(
-                                    children: <Widget>[
-                                      SignButton(
-                                          "+",
-                                          BorderRadius.only(
-                                              topLeft: Radius.circular(40))),
-                                      SignButton(
-                                          "-",
-                                          BorderRadius.only(
-                                              topRight: Radius.circular(40)))
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Row(
-                                    children: <Widget>[
-                                      SignButton(
-                                          "*",
-                                          BorderRadius.only(
-                                              bottomLeft: Radius.circular(40))),
-                                      SignButton(
-                                          "/",
-                                          BorderRadius.only(
-                                              bottomRight: Radius.circular(40)))
-                                    ],
-                                  ),
-                                )
-                              ],
+                            height: 30,
+                            width: 30,
+                            alignment: Alignment.center,
+                            margin: const EdgeInsets.only(left: 10,right: 10,bottom: 5,top: 10),
+                            child: Selector<SignProvider, String>(
+                              selector: (p0, p1) => p1.result,
+                              builder: (context, calculatorProvider, child) {
+                                return Text(
+                                  calculatorProvider,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle2!
+                                      .copyWith(
+                                          fontSize: 30,
+                                          color: Color(0xff4895EF)),
+                                );
+                              },
                             ),
                           ),
                         ),
-                      ),
+                        SizedBox(width: 8),
+                        Selector<SignProvider, Sign>(
+                            selector: (p0, p1) => p1.currentState,
+                            builder: (context, calculatorProvider, child) {
+                              return Text(
+                                calculatorProvider.secondDigit,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle2!
+                                    .copyWith(fontSize: 30),
+                              );
+                            }),
+                        SizedBox(width: 8),
+                        Text(
+                          "=",
+                          style: Theme.of(context)
+                              .textTheme
+                              .subtitle2!
+                              .copyWith(fontSize: 30),
+                        ),
+                        SizedBox(width: 8),
+                        Selector<SignProvider, Sign>(
+                            selector: (p0, p1) => p1.currentState,
+                            builder: (context, calculatorProvider, child) {
+                              return Text(
+                                calculatorProvider.answer,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle2!
+                                    .copyWith(fontSize: 30),
+                              );
+                            }),
+                      ],
                     ),
-                    Expanded(
-                        flex: 10,
-                        child: Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              IconButton(
-                                icon: signProvider.pause
-                                    ? Icon(Icons.play_arrow)
-                                    : Icon(Icons.pause),
-                                iconSize: 40,
-                                onPressed: () {
-                                  signProvider.pauseGame();
-                                },
-                              ),
-                              IconButton(
-                                icon: Icon(Icons.info_outline),
-                                iconSize: 40,
-                                onPressed: () {
-                                  signProvider.showInfoDialog();
-                                },
-                              )
-                            ],
-                          ),
-                        )),
-                  ],
-                ),
-              );
-            }),
+                  ),
+                  Builder(builder: (context) {
+                    return GridView(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2),
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      children: [
+                        ...[
+                          "/",
+                          "*",
+                          "+",
+                          "-",
+                        ].map(
+                          (e) {
+                            return CommonNumberButton(
+                              text: e,
+                              onTab: () {
+                                context.read<SignProvider>().checkResult(e);
+                              },
+                              startColor: Color(0xff4895EF),
+                              endColor: Color(0xff3f37c9),
+                            );
+                          },
+                        )
+                      ],
+                    );
+                  }),
+                ],
+              ),
+            ),
           ),
         ),
       ),

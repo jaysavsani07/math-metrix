@@ -9,23 +9,26 @@ class TriangleInput3x3 extends StatelessWidget {
   Widget build(BuildContext context) {
     final magicTriangleProvider = Provider.of<MagicTriangleProvider>(context);
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Column(
           children: <Widget>[
             TriangleButton(magicTriangleProvider.currentState.listGrid[0], 0),
+            SizedBox(height: 24),
             TriangleButton(magicTriangleProvider.currentState.listGrid[1], 1),
           ],
         ),
         Column(
           children: <Widget>[
             TriangleButton(magicTriangleProvider.currentState.listGrid[2], 2),
+            SizedBox(height: 24),
             TriangleButton(magicTriangleProvider.currentState.listGrid[3], 3),
           ],
         ),
         Column(
           children: <Widget>[
             TriangleButton(magicTriangleProvider.currentState.listGrid[4], 4),
+            SizedBox(height: 24),
             TriangleButton(magicTriangleProvider.currentState.listGrid[5], 5),
           ],
         )

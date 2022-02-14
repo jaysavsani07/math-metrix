@@ -10,7 +10,7 @@ class CalculatorButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<CalculatorProvider>(context, listen: false);
+    final provider = Provider.of<CalculatorProvider1>(context, listen: false);
     return Expanded(
       flex: 1,
       child: InkWell(

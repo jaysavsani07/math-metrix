@@ -1,3 +1,5 @@
+import 'package:mathgame/src/core/time_constant.dart';
+
 class KeyUtil {
   static const IS_DARK_MODE = "isDarkMode";
 
@@ -18,6 +20,33 @@ class KeyUtil {
 
   static const String GameOverDialog = "GameOverDialog";
   static const String InfoDialog = "InfoDialog";
+
+  static int getTimeUtil(GameCategoryType gameCategoryType) {
+    switch (gameCategoryType) {
+      case GameCategoryType.CALCULATOR:
+        return TimeUtil.calculatorTimeOut;
+      case GameCategoryType.SIGN:
+        return TimeUtil.signTimeOut;
+      case GameCategoryType.SQUARE_ROOT:
+        return TimeUtil.squareRootTimeOut;
+      case GameCategoryType.MATH_PAIRS:
+        return TimeUtil.mathematicalPairsTimeOut;
+      case GameCategoryType.CORRECT_ANSWER:
+        return TimeUtil.correctAnswerTimeOut;
+      case GameCategoryType.MAGIC_TRIANGLE:
+        return TimeUtil.magicTriangleTimeOut;
+      case GameCategoryType.MENTAL_ARITHMETIC:
+        return TimeUtil.mentalArithmeticTimeOut;
+      case GameCategoryType.QUICK_CALCULATION:
+        return TimeUtil.quickCalculationTimeOut;
+      case GameCategoryType.MATH_MACHINE:
+        return TimeUtil.mathMachineTimeOut;
+      case GameCategoryType.PICTURE_PUZZLE:
+        return TimeUtil.picturePuzzleTimeOut;
+      case GameCategoryType.NUMBER_PYRAMID:
+        return TimeUtil.numPyramidTimeOut;
+    }
+  }
 }
 
 enum GameCategoryType {
@@ -34,3 +63,17 @@ enum GameCategoryType {
   NUMBER_PYRAMID
 }
 enum PuzzleType { MATH_PUZZLE, MEMORY_PUZZLE, BRAIN_PUZZLE }
+
+enum TimerStatus {
+  restart,
+  play,
+  pause,
+}
+
+enum DialogType {
+  non,
+  info,
+  over,
+  pause,
+  exit,
+}

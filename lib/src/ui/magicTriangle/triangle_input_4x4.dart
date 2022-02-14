@@ -9,7 +9,7 @@ class TriangleInput4x4 extends StatelessWidget {
   Widget build(BuildContext context) {
     final magicTriangleProvider = Provider.of<MagicTriangleProvider>(context);
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -21,6 +21,7 @@ class TriangleInput4x4 extends StatelessWidget {
             TriangleButton(magicTriangleProvider.currentState.listGrid[4], 4),
           ],
         ),
+        SizedBox(height: 24),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

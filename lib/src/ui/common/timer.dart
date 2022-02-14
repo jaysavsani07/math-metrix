@@ -24,7 +24,7 @@ class Timer extends StatelessWidget {
     var provider;
     int timeConstant;
     if (type == GameCategoryType.CALCULATOR) {
-      provider = Provider.of<CalculatorProvider>(context);
+      provider = Provider.of<CalculatorProvider1>(context);
       timeConstant = TimeUtil.calculatorTimeOut;
     } else if (type == GameCategoryType.SIGN) {
       provider = Provider.of<SignProvider>(context);

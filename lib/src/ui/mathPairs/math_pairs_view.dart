@@ -1,100 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:mathgame/src/ui/common/common_app_bar.dart';
+import 'package:mathgame/src/ui/common/common_info_text_view.dart';
+import 'package:mathgame/src/ui/common/dialog_listener.dart';
 import 'package:mathgame/src/ui/mathPairs/math_pairs_view_model.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/ui/mathPairs/math_pairs_button.dart';
-import 'package:mathgame/src/ui/common/timer.dart';
 import 'package:provider/provider.dart';
 
 class MathPairsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<MathPairsProvider>(
-      create: (_) => MathPairsProvider(),
-      child: WillPopScope(
-        onWillPop: () => Future.value(false),
+    return SafeArea(
+      top: true,
+      bottom: true,
+      child: ChangeNotifierProvider<MathPairsProvider>(
+        create: (_) => MathPairsProvider(),
         child: Scaffold(
-          body: SafeArea(
-            top: true,
-            bottom: true,
+          appBar: CommonAppBar<MathPairsProvider>(),
+          body: DialogListener<MathPairsProvider>(
+            gameCategoryType: GameCategoryType.MATH_PAIRS,
             child: Container(
-              margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
+              margin: EdgeInsets.all(24),
               constraints: BoxConstraints.expand(),
               child: Column(
                 children: <Widget>[
+                  CommonInfoTextView<MathPairsProvider>(
+                      gameCategoryType: GameCategoryType.MATH_PAIRS),
                   Expanded(
-                      flex: 10,
-                      child: SizedBox(
-                        child: Align(
-                          alignment: Alignment.bottomLeft,
-                          child: Timer(GameCategoryType.MATH_PAIRS),
-                        ),
-                      )),
-                  Expanded(
-                    flex: 5,
-                    child: Container(),
-                  ),
-                  Expanded(
-                    flex: 70,
                     child: Center(
-                      child: AspectRatio(
-                        aspectRatio: 0.7,
-                        child: Consumer<MathPairsProvider>(
-                            builder: (context, mathPairsProvider, child) {
-                          return Visibility(
-                            visible: !mathPairsProvider.pause,
-                            child: GridView.builder(
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 3,
-                                        childAspectRatio: 1.5),
-                                itemCount:
-                                    mathPairsProvider.currentState.list.length,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemBuilder: (BuildContext context, int index) {
-                                  return MathPairsButton(
-                                      mathPairsProvider
-                                          .currentState.list[index],
-                                      index);
-                                }),
-                          );
-                        }),
-                      ),
+                      child: Consumer<MathPairsProvider>(
+                          builder: (context, mathPairsProvider, child) {
+                        return GridView.builder(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 3, childAspectRatio: 1.2),
+                            shrinkWrap: true,
+                            itemCount:
+                                mathPairsProvider.currentState.list.length,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (BuildContext context, int index) {
+                              return MathPairsButton(
+                                mathPairs:
+                                    mathPairsProvider.currentState.list[index],
+                                index: index,
+                                startColor: Color(0xff4895EF),
+                                endColor: Color(0xff3f37c9),
+                              );
+                            });
+                      }),
                     ),
                   ),
-                  Expanded(
-                    flex: 5,
-                    child: Container(),
-                  ),
-                  Expanded(
-                      flex: 10,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Consumer<MathPairsProvider>(
-                              builder: (context, provider, child) {
-                            return IconButton(
-                              icon: provider.pause
-                                  ? Icon(Icons.play_arrow)
-                                  : Icon(Icons.pause),
-                              iconSize: 40,
-                              onPressed: () {
-                                provider.pauseTimer();
-                              },
-                            );
-                          }),
-                          Consumer<MathPairsProvider>(
-                              builder: (context, provider, child) {
-                            return IconButton(
-                              icon: Icon(Icons.info_outline),
-                              iconSize: 40,
-                              onPressed: () {
-                                provider.showInfoDialog();
-                              },
-                            );
-                          })
-                        ],
-                      )),
                 ],
               ),
             ),

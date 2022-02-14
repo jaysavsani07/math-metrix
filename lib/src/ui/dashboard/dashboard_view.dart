@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/core/assets.dart';
+import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/ui/app/theme_provider.dart';
-import 'package:mathgame/src/ui/common/home_button_view.dart';
+import 'package:mathgame/src/ui/common/dashboard_button_view.dart';
 import 'package:mathgame/src/ui/dashboard/dashboard_view_model.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/service/navigation_service.dart';
@@ -118,10 +120,10 @@ class _DashboardViewState extends State<DashboardView>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    HomeButtonView(
+                    DashboardButtonView(
                       title: "Math Puzzle",
                       icon: AppAssets.icMathPuzzle,
-                      startColor: Color(0xff4895ef),
+                      startColor: Color(0xff4895EF),
                       endColor: Color(0xff3f37c9),
                       position: _offsetLeftEnter,
                       onTab: () {
@@ -130,11 +132,11 @@ class _DashboardViewState extends State<DashboardView>
                       },
                     ),
                     SizedBox(height: 24),
-                    HomeButtonView(
+                    DashboardButtonView(
                       title: "Memory Puzzle",
                       icon: AppAssets.icMemoryPuzzle,
-                      startColor: Color(0xffa812db),
-                      endColor: Color(0xff8124bd),
+                      startColor: Color(0xff9f2beb),
+                      endColor: Color(0xff560bad),
                       position: _offsetRightEnter,
                       onTab: () {
                         GetIt.I<NavigationService>().navigateTo(KeyUtil.Home,
@@ -142,11 +144,11 @@ class _DashboardViewState extends State<DashboardView>
                       },
                     ),
                     SizedBox(height: 24),
-                    HomeButtonView(
+                    DashboardButtonView(
                       title: "Train Your Brain",
                       icon: AppAssets.icTrainBrain,
-                      startColor: Color(0xffbf1d6b),
-                      endColor: Color(0xffac2a8f),
+                      startColor: Color(0xfff72585),
+                      endColor: Color(0xffb5179e),
                       position: _offsetLeftEnter,
                       onTab: () {
                         GetIt.I<NavigationService>().navigateTo(KeyUtil.Home,
@@ -164,7 +166,10 @@ class _DashboardViewState extends State<DashboardView>
                   children: <Widget>[
                     Expanded(
                       child: Text("Math Matrix by Nividata",
-                          style: Theme.of(context).textTheme.bodyText2),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText2!
+                              .copyWith(fontWeight: FontWeight.normal)),
                     ),
                     SizedBox(width: 24),
                     Expanded(
@@ -173,7 +178,14 @@ class _DashboardViewState extends State<DashboardView>
                           builder: (context, data, child) {
                             return Text("App version: $data",
                                 textAlign: TextAlign.end,
-                                style: Theme.of(context).textTheme.bodyText2);
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2!
+                                    .copyWith(
+                                        fontWeight: FontWeight.normal,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .crossLightColor));
                           }),
                     )
                   ],

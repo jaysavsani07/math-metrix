@@ -2,16 +2,16 @@ import 'package:mathgame/src/data/models/picture_puzzle.dart';
 import 'package:mathgame/src/utility/math_util.dart';
 
 class PicturePuzzleRepository {
-  static List<int> listHasCode =<int>[];
+  static List<int> listHasCode = <int>[];
 
   static getPicturePuzzleDataList(int level) {
     if (level == 1) {
       listHasCode.clear();
     }
 
-    List<PicturePuzzle> list =<PicturePuzzle>[];
+    List<PicturePuzzle> list = <PicturePuzzle>[];
     while (list.length < 5) {
-      List<PicturePuzzleShapeList> puzzleList =<PicturePuzzleShapeList>[];
+      List<PicturePuzzleShapeList> puzzleList = <PicturePuzzleShapeList>[];
       List<PicturePuzzleData> picturePuzzleDataList =
           getNewShapeMatrix(level, list.length);
       print("\n");
@@ -21,28 +21,40 @@ class PicturePuzzleRepository {
           .forEach((int i, PicturePuzzleData picturePuzzleData) {
         puzzleList.add(PicturePuzzleShapeList([
           PicturePuzzleShape(
-              isSign: false,
-              picturePuzzleShapeType: picturePuzzleData.picturePuzzleShapeType1,
-              text: ""),
+            picturePuzzleShapeType: picturePuzzleData.picturePuzzleShapeType1,
+            text: "",
+            type: PicturePuzzleQuestionItemType.shape,
+          ),
           PicturePuzzleShape(
-              isSign: true, isAnswer: false, text: picturePuzzleData.sign1),
+            text: picturePuzzleData.sign1,
+            type: PicturePuzzleQuestionItemType.sign,
+          ),
           PicturePuzzleShape(
-              isSign: false,
-              picturePuzzleShapeType: picturePuzzleData.picturePuzzleShapeType2,
-              text: ""),
+            picturePuzzleShapeType: picturePuzzleData.picturePuzzleShapeType2,
+            text: "",
+            type: PicturePuzzleQuestionItemType.shape,
+          ),
           PicturePuzzleShape(
-              isSign: true, isAnswer: false, text: picturePuzzleData.sign2),
+            text: picturePuzzleData.sign2,
+            type: PicturePuzzleQuestionItemType.sign,
+          ),
           PicturePuzzleShape(
-              isSign: false,
-              picturePuzzleShapeType: picturePuzzleData.picturePuzzleShapeType3,
-              text: ""),
-          PicturePuzzleShape(isSign: true, isAnswer: false, text: "="),
+            picturePuzzleShapeType: picturePuzzleData.picturePuzzleShapeType3,
+            text: "",
+            type: PicturePuzzleQuestionItemType.shape,
+          ),
           PicturePuzzleShape(
-              isSign: true,
-              isAnswer: true,
-              text: i == picturePuzzleDataList.length - 1
-                  ? "?"
-                  : picturePuzzleData.text)
+            text: "=",
+            type: PicturePuzzleQuestionItemType.sign,
+          ),
+          PicturePuzzleShape(
+            text: i == picturePuzzleDataList.length - 1
+                ? "?"
+                : picturePuzzleData.text,
+            type: i == picturePuzzleDataList.length - 1
+                ? PicturePuzzleQuestionItemType.answer
+                : PicturePuzzleQuestionItemType.hint,
+          )
         ]));
       });
 

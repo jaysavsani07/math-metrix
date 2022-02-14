@@ -33,9 +33,9 @@ class CalculatorRepository {
       });
     }
 
-    list.forEach((Calculator q) {
-      print("${q.toString()}");
-    });
+    // list.forEach((Calculator q) {
+    //   print("${q.toString()}");
+    // });
     return list;
   }
 }

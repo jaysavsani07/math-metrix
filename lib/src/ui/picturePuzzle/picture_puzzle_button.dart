@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:mathgame/src/data/models/picture_puzzle.dart';
 import 'package:mathgame/src/ui/picturePuzzle/circle_shape.dart';
+import 'package:mathgame/src/ui/picturePuzzle/picture_puzzle_answer_button.dart';
 import 'package:mathgame/src/ui/picturePuzzle/square_shape.dart';
-
 import 'triangle_shape.dart';
 
 class PicturePuzzleButton extends StatelessWidget {
@@ -12,27 +14,40 @@ class PicturePuzzleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      picturePuzzleShape.isSign
-          ? Container(
-              width: picturePuzzleShape.isAnswer! ? 60 : 35,
-              child: Center(
-                child: Text(
-                  picturePuzzleShape.text,
-                  style: Theme.of(context).textTheme.headline4,
-                ),
-              ),
-            )
-          : CustomPaint(
-              painter: picturePuzzleShape.picturePuzzleShapeType ==
-                      PicturePuzzleShapeType.CIRCLE
-                  ? CircleShape(Theme.of(context).accentColor, 2)
-                  : (picturePuzzleShape.picturePuzzleShapeType ==
-                          PicturePuzzleShapeType.TRIANGLE
-                      ? TriangleShape(Theme.of(context).accentColor, 2)
-                      : SquareShape(Theme.of(context).accentColor, 2)),
-              size: Size(40, 40),
-            ),
-    ]);
+    switch (picturePuzzleShape.type) {
+      case PicturePuzzleQuestionItemType.shape:
+        return CustomPaint(
+          painter: picturePuzzleShape.picturePuzzleShapeType ==
+                  PicturePuzzleShapeType.CIRCLE
+              ? CircleShape(Color(0xff4895EF), 1)
+              : (picturePuzzleShape.picturePuzzleShapeType ==
+                      PicturePuzzleShapeType.TRIANGLE
+                  ? TriangleShape(Color(0xff4895EF), 1)
+                  : SquareShape(Color(0xff4895EF), 1)),
+          size: Size(40, 40),
+        );
+      case PicturePuzzleQuestionItemType.sign:
+        return Container(
+          width: 35,
+          alignment: Alignment.center,
+          child: Text(
+            picturePuzzleShape.text,
+            style:
+                Theme.of(context).textTheme.subtitle1!.copyWith(fontSize: 24),
+          ),
+        );
+      case PicturePuzzleQuestionItemType.hint:
+        return Container(
+          width: 60,
+          alignment: Alignment.center,
+          child: Text(
+            picturePuzzleShape.text,
+            style:
+                Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 24),
+          ),
+        );
+      case PicturePuzzleQuestionItemType.answer:
+        return PicturePuzzleAnswerButton(picturePuzzleShape);
+    }
   }
 }

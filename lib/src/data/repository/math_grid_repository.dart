@@ -12,7 +12,10 @@ class MathGridRepository {
   static List<int> listOf2 = List<int>.generate(9, (i) => 2);
   static List<int> listOf1 = List<int>.generate(9, (i) => 1);
 
-  static List<MathGridCellModel> listForSquare() {
+  static MathGrid listForSquare() {
+    int sum = 0;
+    int answer = generateRandomAnswer();
+    List<int> listAnswer = <int>[];
     List<int> list = <int>[];
     List<MathGridCellModel> listGrid = <MathGridCellModel>[];
     list = listOf9 +
@@ -27,8 +30,17 @@ class MathGridRepository {
     list.shuffle();
     for (int i = 0; i < list.length; i++) {
       listGrid.add(MathGridCellModel(i, list[i], false, false));
+      sum = sum + list[i];
     }
-    return listGrid;
+
+    while (sum > answer) {
+      listAnswer.add(answer);
+      sum = sum - answer;
+      answer = generateRandomAnswer();
+    }
+    listAnswer.add(sum);
+
+    return MathGrid(listForSquare: listGrid, listOfAnswer: listAnswer);
   }
 
   static int generateRandomAnswer() {
@@ -39,26 +51,20 @@ class MathGridRepository {
     return result;
   }
 
-  static List<int> listOfAnswer() {
-    List<int> listRandom = <int>[];
-    for (int i = 0; i < 100; i++) {
-      listRandom.add(generateRandomAnswer());
-    }
-    return listRandom;
-  }
-
-  static List<MathGrid> getMathGridData() {
+  static getMathGridData(int level) {
     List<MathGrid> list = <MathGrid>[];
-    list.add(MathGrid(
-        id: 1, listForSquare: listForSquare(), listOfAnswer: listOfAnswer()));
-    list.add(MathGrid(
-        id: 2, listForSquare: listForSquare(), listOfAnswer: listOfAnswer()));
-    list.add(MathGrid(
-        id: 3, listForSquare: listForSquare(), listOfAnswer: listOfAnswer()));
-    list.add(MathGrid(
-        id: 4, listForSquare: listForSquare(), listOfAnswer: listOfAnswer()));
-    list.add(MathGrid(
-        id: 5, listForSquare: listForSquare(), listOfAnswer: listOfAnswer()));
+    list.add(listForSquare());
+    list.add(listForSquare());
+    list.add(listForSquare());
+    list.add(listForSquare());
+    list.add(listForSquare());
     return list;
   }
+}
+
+void main() {
+  // for (int i = 1; i <= 7; i++) {
+  print("**************");
+  print(MathGridRepository.getMathGridData(1));
+  // }
 }

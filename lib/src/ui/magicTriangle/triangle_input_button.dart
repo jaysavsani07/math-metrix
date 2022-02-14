@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/data/models/magic_triangle.dart';
 import 'package:mathgame/src/ui/magicTriangle/magic_triangle_view_model.dart';
 import 'package:provider/provider.dart';
@@ -11,28 +13,42 @@ class TriangleInputButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final magicTriangleProvider = Provider.of<MagicTriangleProvider>(context);
     return InkWell(
       customBorder: CircleBorder(),
       onTap: () {
-        magicTriangleProvider.inputTriangleSelection(index, input);
+        context
+            .read<MagicTriangleProvider>()
+            .inputTriangleSelection(index, input);
       },
-      child: Card(
-        elevation: 4.0,
-        shape: CircleBorder(
-          side: BorderSide(
-              color: input.value.isNotEmpty
-                  ? Theme.of(context).primaryColor
-                  : (input.isActive ? Colors.yellow : Colors.grey),
-              width: 3),
+      child: Neumorphic(
+        style: NeumorphicStyle(
+          boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
+          depth: -8,
+          lightSource: LightSource.topLeft,
+          color: Theme.of(context).colorScheme.iconBgColor,
         ),
         child: Container(
-            child: Center(
-          child: Text(
-            input.value,
-            style: Theme.of(context).textTheme.headline4,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(24)),
+            border:
+                input.isActive ? Border.all(color: Color(0xff4895EF)) : null,
+            gradient: input.value.isNotEmpty
+                ? LinearGradient(
+                    colors: [Color(0xff4895EF), Color(0xff3f37c9)],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  )
+                : null,
           ),
-        )),
+          alignment: Alignment.center,
+          child: Text(
+            input.value.toString(),
+            style: Theme.of(context)
+                .textTheme
+                .subtitle2!
+                .copyWith(fontSize: 30, color: Colors.white),
+          ),
+        ),
       ),
     );
   }

@@ -8,7 +8,8 @@ class GameCategory {
   GameCategoryType gameCategoryType;
   String routePath;
   ScoreBoard scoreboard;
+  String icon;
 
   GameCategory(this.id, this.name, this.key, this.gameCategoryType,
-      this.routePath, this.scoreboard);
+      this.routePath, this.scoreboard, this.icon);
 }

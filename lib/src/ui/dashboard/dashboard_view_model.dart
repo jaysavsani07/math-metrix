@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
+import 'package:mathgame/src/core/assets.dart';
 import 'package:mathgame/src/data/models/score_board.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,7 +11,7 @@ import '../../data/models/game_category.dart';
 class DashboardViewModel extends ChangeNotifier {
   int _overallScore = 0;
   int _totalCoin = 0;
-  late  List<GameCategory> _list;
+  late List<GameCategory> _list;
   final SharedPreferences preferences;
 
   int get overallScore => _overallScore;
@@ -18,8 +19,8 @@ class DashboardViewModel extends ChangeNotifier {
   int get totalCoin => _totalCoin;
 
   List<GameCategory> get list => _list;
-  
-  DashboardViewModel({required this.preferences}){
+
+  DashboardViewModel({required this.preferences}) {
     _overallScore = getOverallScore();
     _totalCoin = getTotalCoin();
   }
@@ -29,81 +30,108 @@ class DashboardViewModel extends ChangeNotifier {
     switch (puzzleType) {
       case PuzzleType.MATH_PUZZLE:
         list.add(GameCategory(
-            1,
-            "Calculator",
-            "calculator",
-            GameCategoryType.CALCULATOR,
-            KeyUtil.Calculator,
-            getScoreboard("calculator")));
-        list.add(GameCategory(2, "Guess the sign?", "sign",
-            GameCategoryType.SIGN, KeyUtil.Sign, getScoreboard("sign")));
+          1,
+          "Calculator",
+          "calculator",
+          GameCategoryType.CALCULATOR,
+          KeyUtil.Calculator,
+          getScoreboard("calculator"),
+          AppAssets.icCalculator,
+        ));
         list.add(GameCategory(
-            5,
-            "Correct answer",
-            "correct_answer",
-            GameCategoryType.CORRECT_ANSWER,
-            KeyUtil.CorrectAnswer,
-            getScoreboard("correct_answer")));
+          2,
+          "Guess the sign?",
+          "sign",
+          GameCategoryType.SIGN,
+          KeyUtil.Sign,
+          getScoreboard("sign"),
+          AppAssets.icGuessTheSign
+        ));
         list.add(GameCategory(
-            8,
-            "Quick calculation",
-            "quick_calclation",
-            GameCategoryType.QUICK_CALCULATION,
-            KeyUtil.QuickCalculation,
-            getScoreboard("quick_calclation")));
+          5,
+          "Correct answer",
+          "correct_answer",
+          GameCategoryType.CORRECT_ANSWER,
+          KeyUtil.CorrectAnswer,
+          getScoreboard("correct_answer"),
+          AppAssets.icCorrectAnswer,
+        ));
+        list.add(GameCategory(
+          8,
+          "Quick calculation",
+          "quick_calclation",
+          GameCategoryType.QUICK_CALCULATION,
+          KeyUtil.QuickCalculation,
+          getScoreboard("quick_calclation"),
+          AppAssets.icQuickCalculation,
+        ));
         break;
       case PuzzleType.MEMORY_PUZZLE:
         list.add(GameCategory(
-            7,
-            "Mental arithmetic",
-            "mental_arithmatic",
-            GameCategoryType.MENTAL_ARITHMETIC,
-            KeyUtil.MentalArithmetic,
-            getScoreboard("mental_arithmatic")));
+          7,
+          "Mental arithmetic",
+          "mental_arithmatic",
+          GameCategoryType.MENTAL_ARITHMETIC,
+          KeyUtil.MentalArithmetic,
+          getScoreboard("mental_arithmatic"),
+          AppAssets.icCalculator,
+        ));
         list.add(GameCategory(
-            3,
-            "Square root",
-            "square_root",
-            GameCategoryType.SQUARE_ROOT,
-            KeyUtil.SquareRoot,
-            getScoreboard("square_root")));
+          3,
+          "Square root",
+          "square_root",
+          GameCategoryType.SQUARE_ROOT,
+          KeyUtil.SquareRoot,
+          getScoreboard("square_root"),
+          AppAssets.icCalculator,
+        ));
         list.add(GameCategory(
-            9,
-            "Math Grid",
-            "math_machine",
-            GameCategoryType.MATH_MACHINE,
-            KeyUtil.MathMachine,
-            getScoreboard("math_machine")));
+          9,
+          "Math Grid",
+          "math_machine",
+          GameCategoryType.MATH_MACHINE,
+          KeyUtil.MathMachine,
+          getScoreboard("math_machine"),
+          AppAssets.icCalculator,
+        ));
         list.add(GameCategory(
-            4,
-            "Mathematical pairs",
-            "math_pairs",
-            GameCategoryType.MATH_PAIRS,
-            KeyUtil.MathematicalPairs,
-            getScoreboard("math_pairs")));
+          4,
+          "Mathematical pairs",
+          "math_pairs",
+          GameCategoryType.MATH_PAIRS,
+          KeyUtil.MathematicalPairs,
+          getScoreboard("math_pairs"),
+          AppAssets.icCalculator,
+        ));
         break;
       case PuzzleType.BRAIN_PUZZLE:
         list.add(GameCategory(
-            6,
-            "Magic triangle",
-            "magic_tringle",
-            GameCategoryType.MAGIC_TRIANGLE,
-            KeyUtil.MagicTriangle,
-            getScoreboard("magic_tringle")));
+          6,
+          "Magic triangle",
+          "magic_tringle",
+          GameCategoryType.MAGIC_TRIANGLE,
+          KeyUtil.MagicTriangle,
+          getScoreboard("magic_tringle"),
+          AppAssets.icCalculator,
+        ));
         list.add(GameCategory(
-            10,
-            "Picture Puzzle",
-            "picture_puzzle",
-            GameCategoryType.PICTURE_PUZZLE,
-            KeyUtil.PicturePuzzle,
-            getScoreboard("picture_puzzle")));
+          10,
+          "Picture Puzzle",
+          "picture_puzzle",
+          GameCategoryType.PICTURE_PUZZLE,
+          KeyUtil.PicturePuzzle,
+          getScoreboard("picture_puzzle"),
+          AppAssets.icCalculator,
+        ));
         list.add(GameCategory(
-            11,
-            "Number Pyramid",
-            "number_pyramid",
-            GameCategoryType.NUMBER_PYRAMID,
-            KeyUtil.NumberPyramid,
-            getScoreboard("number_pyramid")));
+          11,
+          "Number Pyramid",
+          "number_pyramid",
+          GameCategoryType.NUMBER_PYRAMID,
+          KeyUtil.NumberPyramid,
+          getScoreboard("number_pyramid"),
+          AppAssets.icCalculator,
+        ));
         break;
     }
     return _list;

@@ -1,8 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/ui/calculator/calculator_view_model.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:mathgame/src/core/app_constant.dart';
-import 'package:mathgame/src/ui/calculator/calculator_button.dart';
-import 'package:mathgame/src/ui/common/timer.dart';
+import 'package:mathgame/src/core/color_scheme.dart';
+import 'package:mathgame/src/ui/calculator/calculator_provider.dart';
+import 'package:mathgame/src/ui/common/CommonBackButton.dart';
+import 'package:mathgame/src/ui/common/CommonClearButton.dart';
+import 'package:mathgame/src/ui/common/CommonNumberButton.dart';
+import 'package:mathgame/src/ui/common/common_app_bar.dart';
+import 'package:mathgame/src/ui/common/common_info_text_view.dart';
+import 'package:mathgame/src/ui/common/dialog_listener.dart';
 import 'package:provider/provider.dart';
 
 class CalculatorView extends StatelessWidget {
@@ -10,158 +17,114 @@ class CalculatorView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<CalculatorProvider>(
       create: (_) => CalculatorProvider(),
-      child: WillPopScope(
-        onWillPop: () => Future.value(false),
+      child: SafeArea(
+        top: true,
+        bottom: true,
         child: Scaffold(
-          body: SafeArea(
-            top: true,
-            bottom: true,
+          appBar: CommonAppBar<CalculatorProvider>(),
+          body: DialogListener<CalculatorProvider>(
+            gameCategoryType: GameCategoryType.CALCULATOR,
             child: Container(
-              margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
+              margin: EdgeInsets.all(24),
               constraints: BoxConstraints.expand(),
               child: Column(
                 children: <Widget>[
-                  Expanded(flex: 10, child: Timer(GameCategoryType.CALCULATOR)),
+                  CommonInfoTextView<CalculatorProvider>( gameCategoryType: GameCategoryType.CALCULATOR),
                   Expanded(
-                      flex: 10,
-                      child: Center(
-                        child: Consumer<CalculatorProvider>(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Consumer<CalculatorProvider>(
                             builder: (context, calculatorProvider, child) {
-                          return Visibility(
-                            visible: !calculatorProvider.pause,
-                            child: Text(
-                              calculatorProvider.currentState.question,
-                              style: Theme.of(context).textTheme.headline2,
-                            ),
+                          return Text(
+                            calculatorProvider.currentState.question,
+                            style: Theme.of(context)
+                                .textTheme
+                                .subtitle2!
+                                .copyWith(fontSize: 30),
                           );
                         }),
-                      )),
-                  Expanded(
-                      flex: 15,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          border:
-                              Border.all(color: Theme.of(context).accentColor),
-                        ),
-                        margin: EdgeInsets.fromLTRB(5, 10, 5, 20),
-                        constraints: BoxConstraints.expand(),
-                        child: Center(
-                          child: Consumer<CalculatorProvider>(
-                            builder: (context, calculatorProvider, child) {
-                              return Text(
-                                calculatorProvider.result,
-                                style: Theme.of(context).textTheme.headline3,
-                              );
-                            },
+                        SizedBox(height: 14),
+                        Neumorphic(
+                          style: NeumorphicStyle(
+                            // shape: NeumorphicShape.convex,
+                            boxShape: NeumorphicBoxShape.roundRect(
+                                BorderRadius.circular(18)),
+                            depth: -8,
+                            lightSource: LightSource.topLeft,
+                            color: Theme.of(context).colorScheme.iconBgColor,
+                          ),
+                          child: Container(
+                            width: double.infinity,
+                            alignment: Alignment.center,
+                            margin: const EdgeInsets.all(10),
+                            child: Consumer<CalculatorProvider>(
+                              builder: (context, calculatorProvider, child) {
+                                return Text(
+                                  calculatorProvider.result,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle2!
+                                      .copyWith(
+                                          fontSize: 30,
+                                          color: Color(0xff4895EF)),
+                                );
+                              },
+                            ),
                           ),
                         ),
-                      )),
-                  Expanded(
-                    flex: 55,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: SizedBox(
-                        height: 600,
-                        width: 400,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(30)),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Expanded(
-                                child: Row(
-                                  children: <Widget>[
-                                    CalculatorButton(
-                                        "7",
-                                        BorderRadius.only(
-                                            topLeft: Radius.circular(40))),
-                                    CalculatorButton(
-                                        "8", BorderRadius.all(Radius.zero)),
-                                    CalculatorButton(
-                                        "9",
-                                        BorderRadius.only(
-                                            topRight: Radius.circular(40)))
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Row(
-                                  children: <Widget>[
-                                    CalculatorButton(
-                                        "4", BorderRadius.all(Radius.zero)),
-                                    CalculatorButton(
-                                        "5", BorderRadius.all(Radius.zero)),
-                                    CalculatorButton(
-                                        "6", BorderRadius.all(Radius.zero))
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Row(
-                                  children: <Widget>[
-                                    CalculatorButton(
-                                        "1", BorderRadius.all(Radius.zero)),
-                                    CalculatorButton(
-                                        "2", BorderRadius.all(Radius.zero)),
-                                    CalculatorButton(
-                                        "3", BorderRadius.all(Radius.zero))
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Row(
-                                  children: <Widget>[
-                                    CalculatorButton(
-                                        "0",
-                                        BorderRadius.only(
-                                            bottomLeft: Radius.circular(40))),
-                                    CalculatorButton(
-                                        "CLEAR",
-                                        BorderRadius.only(
-                                            bottomRight: Radius.circular(40)))
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      ],
                     ),
                   ),
-                  Expanded(
-                      flex: 10,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Consumer<CalculatorProvider>(
-                              builder: (context, calculatorProvider, child) {
-                            return IconButton(
-                              icon: calculatorProvider.pause
-                                  ? Icon(Icons.play_arrow)
-                                  : Icon(Icons.pause),
-                              iconSize: 40,
-                              onPressed: () {
-                                calculatorProvider.pauseGame();
-                              },
-                            );
-                          }),
-                          Consumer<CalculatorProvider>(
-                              builder: (context, provider, child) {
-                            return IconButton(
-                              icon: Icon(Icons.info_outline),
-                              iconSize: 40,
-                              onPressed: () {
-                                provider.showInfoDialog();
-                              },
-                            );
-                          })
-                        ],
-                      ))
+                  Builder(builder: (context) {
+                    return GridView(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3),
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      children: [
+                        ...[
+                          "7",
+                          "8",
+                          "9",
+                          "4",
+                          "5",
+                          "6",
+                          "1",
+                          "2",
+                          "3",
+                          "Clear",
+                          "0",
+                          "Back"
+                        ].map(
+                          (e) {
+                            if (e == "Clear") {
+                              return CommonClearButton(onTab: () {
+                                context
+                                    .read<CalculatorProvider>()
+                                    .clearResult();
+                              });
+                            } else if (e == "Back") {
+                              return CommonBackButton(onTab: () {
+                                context.read<CalculatorProvider>().backPress();
+                              });
+                            } else {
+                              return CommonNumberButton(
+                                text: e,
+                                onTab: () {
+                                  context
+                                      .read<CalculatorProvider>()
+                                      .checkResult(e);
+                                },
+                                startColor: Color(0xff4895EF),
+                                endColor: Color(0xff3f37c9),
+                              );
+                            }
+                          },
+                        )
+                      ],
+                    );
+                  }),
                 ],
               ),
             ),
