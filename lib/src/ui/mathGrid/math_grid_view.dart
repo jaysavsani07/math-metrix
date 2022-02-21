@@ -6,15 +6,20 @@ import 'package:mathgame/src/ui/mathGrid/math_grid_view_model.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/ui/mathGrid/math_grid_button.dart';
 import 'package:provider/provider.dart';
+import 'package:vsync_provider/vsync_provider.dart';
 
 class MathGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: true,
-      bottom: true,
-      child: ChangeNotifierProvider<MathGridProvider>(
-        create: (_) => MathGridProvider(),
+    return MultiProvider(
+      providers: [
+        const VsyncProvider(),
+        ChangeNotifierProvider<MathGridProvider>(
+            create: (context) => MathGridProvider(vsync: VsyncProvider.of(context)))
+      ],
+      child: SafeArea(
+        top: true,
+        bottom: true,
         child: Scaffold(
           appBar: CommonAppBar<MathGridProvider>(),
           body: DialogListener<MathGridProvider>(

@@ -10,6 +10,7 @@ import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/core/size_config.dart';
 import 'package:mathgame/src/ui/common/common_text_button.dart';
 import 'package:provider/provider.dart';
+import 'package:vsync_provider/vsync_provider.dart';
 
 import 'number_pyramid_box.dart';
 
@@ -17,11 +18,16 @@ class NumberPyramidView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return SafeArea(
-      top: true,
-      bottom: true,
-      child: ChangeNotifierProvider<NumberPyramidProvider>(
-        create: (_) => NumberPyramidProvider(),
+    return MultiProvider(
+      providers: [
+        const VsyncProvider(),
+        ChangeNotifierProvider<NumberPyramidProvider>(
+            create: (context) =>
+                NumberPyramidProvider(vsync: VsyncProvider.of(context)))
+      ],
+      child: SafeArea(
+        top: true,
+        bottom: true,
         child: Scaffold(
             appBar: CommonAppBar<NumberPyramidProvider>(),
             body: DialogListener<NumberPyramidProvider>(

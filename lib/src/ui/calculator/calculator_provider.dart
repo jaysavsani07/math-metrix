@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:mathgame/src/data/models/calculator.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/ui/common/game_provider.dart';
@@ -8,7 +9,8 @@ class CalculatorProvider extends GameProvider<Calculator> {
 
   String get result => _result;
 
-  CalculatorProvider() : super(gameCategoryType: GameCategoryType.CALCULATOR) {
+  CalculatorProvider({required TickerProvider vsync})
+      : super(vsync: vsync,gameCategoryType: GameCategoryType.CALCULATOR) {
     _result = "";
     startGame();
   }

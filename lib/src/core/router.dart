@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/core/app_constant.dart';
@@ -16,7 +14,6 @@ import 'package:mathgame/src/ui/numberPyramid/number_pyramid_view.dart';
 import 'package:mathgame/src/ui/quickCalculation/quick_calculation_view.dart';
 import 'package:mathgame/src/ui/squareRoot/square_root_view.dart';
 import 'package:mathgame/src/ui/whatsTheSign/sign_view.dart';
-import 'package:mathgame/src/core/app_constant.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {

@@ -7,7 +7,10 @@ class ComplexTimer implements Timer {
   final Duration _originalDuration;
   void Function(ComplexTimer)? _onTimeout;
   int _tick = 0;
-  ComplexTimer(Duration duration) : _originalDuration = duration, _zone = Zone.current {
+
+  ComplexTimer(Duration duration)
+      : _originalDuration = duration,
+        _zone = Zone.current {
     // _startTimer();
   }
 
@@ -52,7 +55,9 @@ class ComplexTimer implements Timer {
   void reset() {
     var timer = _timer;
     if (timer == null) return; // is expired.
-    _activeTimer..stop()..reset();
+    _activeTimer
+      ..stop()
+      ..reset();
     if (timer.isActive) {
       timer.cancel();
       _startTimer();
@@ -65,7 +70,9 @@ class ComplexTimer implements Timer {
   /// Works whether the timer is active, paused or expired.
   void restart() {
     _timer?.cancel();
-    _activeTimer..stop()..reset();
+    _activeTimer
+      ..stop()
+      ..reset();
     _startTimer();
   }
 
@@ -81,8 +88,8 @@ class ComplexTimer implements Timer {
     var elapsed = _activeTimer.elapsedMilliseconds;
     var duration = _originalDuration;
     if (elapsed > 0) {
-      duration = Duration(
-          milliseconds: _originalDuration.inMilliseconds - elapsed);
+      duration =
+          Duration(milliseconds: _originalDuration.inMilliseconds - elapsed);
     }
     _timer = _zone.createTimer(duration, _onTick);
     _activeTimer.start();
@@ -90,7 +97,9 @@ class ComplexTimer implements Timer {
 
   void _expireTimer() {
     _timer = null;
-    _activeTimer..stop()..reset();
+    _activeTimer
+      ..stop()
+      ..reset();
   }
 
   void _pauseTimer() {
@@ -106,4 +115,12 @@ class ComplexTimer implements Timer {
       _zone.runUnary(callback, this);
     }
   }
+}
+
+void main() {
+  var timer = ComplexTimer(Duration(milliseconds: 2000));
+  timer.onTimeout = (x) {
+    print(x.tick);
+  };
+  timer._startTimer();
 }

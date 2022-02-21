@@ -4,10 +4,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/core/assets.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
-import 'package:mathgame/src/ui/common/common_linear_percent_indicator.dart';
 import 'package:mathgame/src/ui/common/game_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
+import 'common_linear_percent_indicator3.dart';
 
 class CommonAppBar<T extends GameProvider> extends StatelessWidget
     implements PreferredSizeWidget {
@@ -27,21 +26,12 @@ class CommonAppBar<T extends GameProvider> extends StatelessWidget
           child: Stack(
             alignment: Alignment.bottomCenter,
             children: [
-              Selector<T, Tuple2<TimerStatus,int>>(
-                selector: (p0, p1) => Tuple2(p1.timerStatus, p1.totalTime),
-                builder: (context, tuple2, child) {
-                  return CommonLinearPercentIndicator(
-                    lineHeight: 24,
-                    timerStatus: tuple2.item1,
-                    linearGradient: LinearGradient(colors: [
-                      Color(0xff4895EF),
-                      Color(0xff3f37c9),
-                    ]),
-                    linearStrokeCap: LinearStrokeCap.butt,
-                    padding: const EdgeInsets.all(0),
-                    animationDuration: tuple2.item2*1000,
-                  );
-                },
+              CommonLinearPercentIndicator3<T>(
+                lineHeight: 24,
+                linearGradient: LinearGradient(colors: [
+                  Color(0xff4895EF),
+                  Color(0xff3f37c9),
+                ]),
               ),
               Container(
                 padding: const EdgeInsets.only(

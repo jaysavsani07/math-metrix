@@ -9,12 +9,17 @@ import 'package:mathgame/src/ui/common/dialog_listener.dart';
 import 'package:mathgame/src/ui/whatsTheSign/sign_view_model.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:provider/provider.dart';
+import 'package:vsync_provider/vsync_provider.dart';
 
 class SignView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<SignProvider>(
-      create: (_) => SignProvider(),
+    return MultiProvider(
+      providers: [
+        const VsyncProvider(),
+        ChangeNotifierProvider<SignProvider>(
+            create: (context) => SignProvider(vsync: VsyncProvider.of(context)))
+      ],
       child: SafeArea(
         top: true,
         bottom: true,
@@ -27,7 +32,8 @@ class SignView extends StatelessWidget {
               constraints: BoxConstraints.expand(),
               child: Column(
                 children: <Widget>[
-                  CommonInfoTextView<SignProvider>(gameCategoryType: GameCategoryType.SIGN),
+                  CommonInfoTextView<SignProvider>(
+                      gameCategoryType: GameCategoryType.SIGN),
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -57,7 +63,8 @@ class SignView extends StatelessWidget {
                             height: 30,
                             width: 30,
                             alignment: Alignment.center,
-                            margin: const EdgeInsets.only(left: 10,right: 10,bottom: 5,top: 10),
+                            margin: const EdgeInsets.only(
+                                left: 10, right: 10, bottom: 5, top: 10),
                             child: Selector<SignProvider, String>(
                               selector: (p0, p1) => p1.result,
                               builder: (context, calculatorProvider, child) {

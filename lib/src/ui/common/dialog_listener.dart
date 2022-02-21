@@ -26,8 +26,6 @@ class DialogListener<T extends GameProvider> extends StatelessWidget {
       selector: (p0, p1) => p1.dialogType,
       // shouldRebuild: (previous, next) => previous != next,
       builder: (context, dialogType, child1) {
-        print("********");
-        print(dialogType);
         WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
           switch (dialogType) {
             case DialogType.over:
@@ -42,7 +40,7 @@ class DialogListener<T extends GameProvider> extends StatelessWidget {
                 barrierDismissible: false,
               ).then((value) {
                 if (value != null && value) {
-                  context.read<T>().startGame();
+                  context.read<T>().restart();
                 } else {
                   Navigator.pop(context);
                 }
@@ -65,7 +63,7 @@ class DialogListener<T extends GameProvider> extends StatelessWidget {
                 isScrollControlled: true,
               ).then((value) {
                 if (value != null && value) {
-                  context.read<T>().startTimer();
+                  context.read<T>().restart();
                 } else {
                   Navigator.pop(context);
                 }

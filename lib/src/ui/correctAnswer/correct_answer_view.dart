@@ -7,12 +7,18 @@ import 'package:mathgame/src/ui/common/dialog_listener.dart';
 import 'package:mathgame/src/ui/correctAnswer/correct_answer_view_model.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:provider/provider.dart';
+import 'package:vsync_provider/vsync_provider.dart';
 
 class CorrectAnswerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<CorrectAnswerProvider>(
-      create: (_) => CorrectAnswerProvider(),
+    return MultiProvider(
+      providers: [
+        const VsyncProvider(),
+        ChangeNotifierProvider<CorrectAnswerProvider>(
+            create: (context) =>
+                CorrectAnswerProvider(vsync: VsyncProvider.of(context)))
+      ],
       child: SafeArea(
         top: true,
         bottom: true,

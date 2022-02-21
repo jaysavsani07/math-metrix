@@ -6,15 +6,21 @@ import 'package:mathgame/src/ui/mathPairs/math_pairs_view_model.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/ui/mathPairs/math_pairs_button.dart';
 import 'package:provider/provider.dart';
+import 'package:vsync_provider/vsync_provider.dart';
 
 class MathPairsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: true,
-      bottom: true,
-      child: ChangeNotifierProvider<MathPairsProvider>(
-        create: (_) => MathPairsProvider(),
+    return MultiProvider(
+      providers: [
+        const VsyncProvider(),
+        ChangeNotifierProvider<MathPairsProvider>(
+            create: (context) =>
+                MathPairsProvider(vsync: VsyncProvider.of(context)))
+      ],
+      child: SafeArea(
+        top: true,
+        bottom: true,
         child: Scaffold(
           appBar: CommonAppBar<MathPairsProvider>(),
           body: DialogListener<MathPairsProvider>(

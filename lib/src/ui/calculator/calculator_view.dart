@@ -11,12 +11,19 @@ import 'package:mathgame/src/ui/common/common_app_bar.dart';
 import 'package:mathgame/src/ui/common/common_info_text_view.dart';
 import 'package:mathgame/src/ui/common/dialog_listener.dart';
 import 'package:provider/provider.dart';
+import 'package:vsync_provider/vsync_provider.dart';
 
 class CalculatorView extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<CalculatorProvider>(
-      create: (_) => CalculatorProvider(),
+    return MultiProvider(
+      providers: [
+        const VsyncProvider(),
+        ChangeNotifierProvider<CalculatorProvider>(
+            create: (context) =>
+                CalculatorProvider(vsync: VsyncProvider.of(context)))
+      ],
       child: SafeArea(
         top: true,
         bottom: true,
@@ -29,21 +36,22 @@ class CalculatorView extends StatelessWidget {
               constraints: BoxConstraints.expand(),
               child: Column(
                 children: <Widget>[
-                  CommonInfoTextView<CalculatorProvider>( gameCategoryType: GameCategoryType.CALCULATOR),
+                  CommonInfoTextView<CalculatorProvider>(
+                      gameCategoryType: GameCategoryType.CALCULATOR),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Consumer<CalculatorProvider>(
                             builder: (context, calculatorProvider, child) {
-                          return Text(
-                            calculatorProvider.currentState.question,
-                            style: Theme.of(context)
-                                .textTheme
-                                .subtitle2!
-                                .copyWith(fontSize: 30),
-                          );
-                        }),
+                              return Text(
+                                calculatorProvider.currentState.question,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle2!
+                                    .copyWith(fontSize: 30),
+                              );
+                            }),
                         SizedBox(height: 14),
                         Neumorphic(
                           style: NeumorphicStyle(
@@ -66,8 +74,8 @@ class CalculatorView extends StatelessWidget {
                                       .textTheme
                                       .subtitle2!
                                       .copyWith(
-                                          fontSize: 30,
-                                          color: Color(0xff4895EF)),
+                                      fontSize: 30,
+                                      color: Color(0xff4895EF)),
                                 );
                               },
                             ),
@@ -97,7 +105,7 @@ class CalculatorView extends StatelessWidget {
                           "0",
                           "Back"
                         ].map(
-                          (e) {
+                              (e) {
                             if (e == "Clear") {
                               return CommonClearButton(onTab: () {
                                 context

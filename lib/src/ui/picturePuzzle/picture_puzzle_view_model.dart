@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:mathgame/src/data/models/picture_puzzle.dart';
 import 'package:mathgame/src/ui/common/game_provider.dart';
 import 'package:mathgame/src/core/app_constant.dart';
@@ -8,8 +9,8 @@ class PicturePuzzleProvider extends GameProvider<PicturePuzzle> {
 
   String get result => _result;
 
-  PicturePuzzleProvider()
-      : super(gameCategoryType: GameCategoryType.PICTURE_PUZZLE) {
+  PicturePuzzleProvider({required TickerProvider vsync})
+      : super(vsync: vsync,gameCategoryType: GameCategoryType.PICTURE_PUZZLE) {
     _result = "";
     startGame();
   }

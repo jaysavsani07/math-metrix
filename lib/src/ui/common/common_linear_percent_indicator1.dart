@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mathgame/src/core/app_constant.dart';
 
 enum LinearStrokeCap { butt, round, roundAll }
 
 // ignore: must_be_immutable
-class CommonLinearPercentIndicator extends StatelessWidget {
+class CommonLinearPercentIndicator1 extends StatefulWidget {
   ///Height of the line
   final double lineHeight;
-  final Animation<double> percent;
 
   ///Color of the background of the Line , default = transparent
   final Color fillColor;
@@ -59,11 +59,12 @@ class CommonLinearPercentIndicator extends StatelessWidget {
   /// Callback called when the animation ends (only if `animation` is true)
   final VoidCallback? onAnimationEnd;
 
-  CommonLinearPercentIndicator({
+  final TimerStatus timerStatus;
+
+  CommonLinearPercentIndicator1({
     Key? key,
     this.fillColor = Colors.transparent,
     this.lineHeight = 5.0,
-    required this.percent,
     Color? backgroundColor,
     this.linearGradientBackgroundColor,
     this.linearGradient,
@@ -78,6 +79,7 @@ class CommonLinearPercentIndicator extends StatelessWidget {
     this.curve = Curves.linear,
     this.restartAnimation = false,
     this.onAnimationEnd,
+    required this.timerStatus,
   }) : super(key: key) {
     if (linearGradient != null && progressColor != null) {
       throw ArgumentError(
@@ -93,27 +95,94 @@ class CommonLinearPercentIndicator extends StatelessWidget {
   }
 
   @override
+  _CommonLinearPercentIndicator1State createState() =>
+      _CommonLinearPercentIndicator1State();
+}
+
+class _CommonLinearPercentIndicator1State
+    extends State<CommonLinearPercentIndicator1>
+    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+  AnimationController? _animationController;
+  Animation? _animation;
+  double _percent = 0.0;
+  final _containerKey = GlobalKey();
+
+  @override
+  void dispose() {
+    _animationController?.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    _animationController = AnimationController(
+        vsync: this,
+        duration: Duration(milliseconds: widget.animationDuration));
+    _animation = Tween(begin: 1.0, end: 0.0).animate(
+      CurvedAnimation(parent: _animationController!, curve: widget.curve),
+    )..addListener(() {
+        setState(() {
+          _percent = _animation!.value;
+        });
+        if (widget.restartAnimation && _percent == 1.0) {
+          _animationController!.repeat(min: 0, max: 1.0);
+        }
+      });
+    _animationController!.addStatusListener((status) {
+      if (widget.onAnimationEnd != null &&
+          status == AnimationStatus.completed) {
+        widget.onAnimationEnd!();
+      }
+    });
+    // if (widget.gameStatus == GameStatus.play) {
+    _animationController!.forward();
+    // }
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(CommonLinearPercentIndicator1 oldWidget) {
+    if (oldWidget.timerStatus != widget.timerStatus) {
+      if (widget.timerStatus == TimerStatus.pause) {
+        _animationController!.stop();
+      } else if (widget.timerStatus == TimerStatus.play) {
+        _animationController!.forward();
+      } else if (widget.timerStatus == TimerStatus.restart) {
+        _animationController!.forward(from: 1.0);
+        _animation = Tween(begin: 1.0, end: 0.0).animate(
+          CurvedAnimation(parent: _animationController!, curve: widget.curve),
+        );
+          _animationController!.forward(from: 0.0);
+      }
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Material(
       color: Colors.transparent,
       child: Container(
-        color: fillColor,
+        color: widget.fillColor,
         child: Container(
           width: double.infinity,
-          height: lineHeight,
-          padding: padding,
+          height: widget.lineHeight,
+          padding: widget.padding,
           child: CustomPaint(
+            key: _containerKey,
             painter: LinearPainter(
               isRTL: false,
-              progress: percent,
-              progressColor: progressColor,
-              linearGradient: linearGradient,
-              backgroundColor: backgroundColor,
-              linearGradientBackgroundColor: linearGradientBackgroundColor,
-              linearStrokeCap: linearStrokeCap,
-              lineWidth: lineHeight,
-              maskFilter: maskFilter,
-              clipLinearGradient: clipLinearGradient,
+              progress: _percent,
+              progressColor: widget.progressColor,
+              linearGradient: widget.linearGradient,
+              backgroundColor: widget.backgroundColor,
+              linearGradientBackgroundColor:
+                  widget.linearGradientBackgroundColor,
+              linearStrokeCap: widget.linearStrokeCap,
+              lineWidth: widget.lineHeight,
+              maskFilter: widget.maskFilter,
+              clipLinearGradient: widget.clipLinearGradient,
             ),
             child: Container(),
           ),
@@ -121,13 +190,16 @@ class CommonLinearPercentIndicator extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => widget.addAutomaticKeepAlive;
 }
 
 class LinearPainter extends CustomPainter {
   final Paint _paintBackground = new Paint();
   final Paint _paintLine = new Paint();
   final double lineWidth;
-  final Animation<double> progress;
+  final double progress;
   final bool isRTL;
   final Color progressColor;
   final Color backgroundColor;
@@ -186,13 +258,13 @@ class LinearPainter extends CustomPainter {
     }
 
     if (isRTL) {
-      final xProgress = size.width - size.width * progress.value;
+      final xProgress = size.width - size.width * progress;
       if (linearGradient != null) {
         _paintLine.shader = _createGradientShaderRightToLeft(size, xProgress);
       }
       canvas.drawLine(end, Offset(xProgress, size.height / 2), _paintLine);
     } else {
-      final xProgress = size.width * progress.value;
+      final xProgress = size.width * progress;
       if (linearGradient != null) {
         _paintLine.shader = _createGradientShaderLeftToRight(size, xProgress);
       }
@@ -224,16 +296,7 @@ class LinearPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(LinearPainter oldDelegate) {
-    return oldDelegate.progress.value != progress.value;
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
   }
-
-  @override
-  bool? hitTest(Offset position) => null;
-
-  @override
-  bool shouldRebuildSemantics(CustomPainter oldDelegate) => false;
-
-  @override
-  SemanticsBuilderCallback? get semanticsBuilder => null;
 }

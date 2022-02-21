@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:mathgame/src/data/models/math_pairs.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/ui/common/game_provider.dart';
@@ -8,7 +9,7 @@ class MathPairsProvider extends GameProvider<MathPairs> {
   int first = -1;
   int second = -1;
 
-  MathPairsProvider() : super(gameCategoryType: GameCategoryType.MATH_PAIRS) {
+  MathPairsProvider({required TickerProvider vsync}) : super(vsync: vsync,gameCategoryType: GameCategoryType.MATH_PAIRS) {
     startGame();
   }
 

@@ -10,6 +10,7 @@ import 'package:mathgame/src/ui/magicTriangle/triangle_input_3x3.dart';
 import 'package:mathgame/src/ui/magicTriangle/triangle_input_4x4.dart';
 import 'package:mathgame/src/ui/magicTriangle/triangle_painter.dart';
 import 'package:provider/provider.dart';
+import 'package:vsync_provider/vsync_provider.dart';
 
 class MagicTriangleView extends StatelessWidget {
   final double padding = 0;
@@ -17,11 +18,16 @@ class MagicTriangleView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: true,
-      bottom: true,
-      child: ChangeNotifierProvider<MagicTriangleProvider>(
-        create: (_) => MagicTriangleProvider(),
+    return MultiProvider(
+      providers: [
+        const VsyncProvider(),
+        ChangeNotifierProvider<MagicTriangleProvider>(
+            create: (context) =>
+                MagicTriangleProvider(vsync: VsyncProvider.of(context)))
+      ],
+      child: SafeArea(
+        top: true,
+        bottom: true,
         child: Scaffold(
           appBar: CommonAppBar<MagicTriangleProvider>(),
           body: DialogListener<MagicTriangleProvider>(

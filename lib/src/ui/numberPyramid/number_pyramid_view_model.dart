@@ -1,12 +1,13 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:mathgame/src/data/models/number_pyramid.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 
 import 'package:mathgame/src/ui/common/game_provider.dart';
 
 class NumberPyramidProvider extends GameProvider<NumberPyramid> {
-  NumberPyramidProvider()
-      : super(gameCategoryType: GameCategoryType.NUMBER_PYRAMID) {
+  NumberPyramidProvider({required TickerProvider vsync})
+      : super(vsync: vsync,gameCategoryType: GameCategoryType.NUMBER_PYRAMID) {
     startGame();
   }
 

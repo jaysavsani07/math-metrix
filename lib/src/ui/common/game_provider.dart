@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'dart:async';
 
@@ -22,19 +23,19 @@ class GameProvider<T> extends TimeProvider {
   final GameCategoryType gameCategoryType;
   final _homeViewModel = GetIt.I<DashboardViewModel>();
 
-  late List<T> _list;
-  late int _index;
+  late List<T> list;
+  late int index;
   late double currentScore;
   late T currentState;
 
-  GameProvider({required this.gameCategoryType})
-      : super(totalTime: KeyUtil.getTimeUtil(gameCategoryType));
+  GameProvider({required TickerProvider vsync, required this.gameCategoryType})
+      : super(vsync: vsync, totalTime: KeyUtil.getTimeUtil(gameCategoryType));
 
   void startGame() async {
-    _list = getList(1);
-    _index = 0;
+    list = getList(1);
+    index = 0;
     currentScore = 0;
-    currentState = _list[_index];
+    currentState = list[index];
     if (_homeViewModel.isFirstTime(gameCategoryType)) {
       await Future.delayed(Duration(milliseconds: 100));
       showInfoDialog();
@@ -44,15 +45,18 @@ class GameProvider<T> extends TimeProvider {
   }
 
   void loadNewDataIfRequired() {
-    if (_list.length - 1 == _index) {
+    if (gameCategoryType == GameCategoryType.QUICK_CALCULATION &&
+        list.length - 2 == index) {
+      list.addAll(getList(index ~/ 5 + 1));
+    } else if (list.length - 1 == index) {
       if (gameCategoryType == GameCategoryType.SQUARE_ROOT)
-        _list.addAll(getList(_index ~/ 5 + 2));
+        list.addAll(getList(index ~/ 5 + 2));
       else
-        _list.addAll(getList(_index ~/ 5 + 1));
+        list.addAll(getList(index ~/ 5 + 1));
     }
-    _index = _index + 1;
+    index = index + 1;
     currentScore = currentScore + getScoreUtil();
-    currentState = _list[_index];
+    currentState = list[index];
   }
 
   void wrongAnswer() {

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:mathgame/src/data/models/sign.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/ui/common/game_provider.dart';
@@ -9,7 +10,8 @@ class SignProvider extends GameProvider<Sign> {
 
   String get result => _result;
 
-  SignProvider() : super(gameCategoryType: GameCategoryType.SIGN) {
+  SignProvider({required TickerProvider vsync})
+      : super(vsync: vsync, gameCategoryType: GameCategoryType.SIGN) {
     _result = "";
     startGame();
   }

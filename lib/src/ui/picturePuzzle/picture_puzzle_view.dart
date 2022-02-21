@@ -12,15 +12,21 @@ import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/ui/picturePuzzle/picture_puzzle_button.dart';
 import 'package:mathgame/src/ui/common/common_text_button.dart';
 import 'package:provider/provider.dart';
+import 'package:vsync_provider/vsync_provider.dart';
 
 class PicturePuzzleView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: true,
-      bottom: true,
-      child: ChangeNotifierProvider<PicturePuzzleProvider>(
-        create: (_) => PicturePuzzleProvider(),
+    return MultiProvider(
+      providers: [
+        const VsyncProvider(),
+        ChangeNotifierProvider<PicturePuzzleProvider>(
+            create: (context) =>
+                PicturePuzzleProvider(vsync: VsyncProvider.of(context)))
+      ],
+      child: SafeArea(
+        top: true,
+        bottom: true,
         child: Scaffold(
           appBar: CommonAppBar<PicturePuzzleProvider>(),
           body: DialogListener<PicturePuzzleProvider>(
@@ -53,70 +59,70 @@ class PicturePuzzleView extends StatelessWidget {
                           );
                         }),
                   ),
-                  Builder(
-                    builder: (context) {
-                      return GridView(
-                        gridDelegate: SliverQuiltedGridDelegate(
-                          crossAxisCount: 10,
-                          pattern: [
-                            QuiltedGridTile(2, 2),
-                            QuiltedGridTile(2, 2),
-                            QuiltedGridTile(2, 2),
-                            QuiltedGridTile(2, 2),
-                            QuiltedGridTile(2, 2),
-                            QuiltedGridTile(2, 2),
-                            QuiltedGridTile(2, 2),
-                            QuiltedGridTile(2, 2),
-                            QuiltedGridTile(2, 2),
-                            QuiltedGridTile(2, 2),
-                            QuiltedGridTile(2, 5),
-                            QuiltedGridTile(2, 5),
-                          ],
-                        ),
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        children: [
-                          ...[
-                            "5",
-                            "6",
-                            "7",
-                            "8",
-                            "9",
-                            "0",
-                            "1",
-                            "2",
-                            "3",
-                            "4",
-                            "Clear",
-                            "Back"
-                          ].map(
-                            (e) {
-                              if (e == "Clear") {
-                                return CommonClearButton(onTab: () {
+                  Builder(builder: (context) {
+                    return GridView(
+                      gridDelegate: SliverQuiltedGridDelegate(
+                        crossAxisCount: 10,
+                        pattern: [
+                          QuiltedGridTile(2, 2),
+                          QuiltedGridTile(2, 2),
+                          QuiltedGridTile(2, 2),
+                          QuiltedGridTile(2, 2),
+                          QuiltedGridTile(2, 2),
+                          QuiltedGridTile(2, 2),
+                          QuiltedGridTile(2, 2),
+                          QuiltedGridTile(2, 2),
+                          QuiltedGridTile(2, 2),
+                          QuiltedGridTile(2, 2),
+                          QuiltedGridTile(2, 5),
+                          QuiltedGridTile(2, 5),
+                        ],
+                      ),
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      children: [
+                        ...[
+                          "5",
+                          "6",
+                          "7",
+                          "8",
+                          "9",
+                          "0",
+                          "1",
+                          "2",
+                          "3",
+                          "4",
+                          "Clear",
+                          "Back"
+                        ].map(
+                          (e) {
+                            if (e == "Clear") {
+                              return CommonClearButton(onTab: () {
+                                context
+                                    .read<PicturePuzzleProvider>()
+                                    .clearResult();
+                              });
+                            } else if (e == "Back") {
+                              return CommonBackButton(onTab: () {
+                                context
+                                    .read<PicturePuzzleProvider>()
+                                    .backPress();
+                              });
+                            } else {
+                              return CommonTextButton(
+                                text: e,
+                                onTab: () {
                                   context
                                       .read<PicturePuzzleProvider>()
-                                      .clearResult();
-                                });
-                              } else if (e == "Back") {
-                                return CommonBackButton(onTab: () {
-                                  context.read<PicturePuzzleProvider>().backPress();
-                                });
-                              } else {
-                                return CommonTextButton(
-                                  text: e,
-                                  onTab: () {
-                                    context
-                                        .read<PicturePuzzleProvider>()
-                                        .checkGameResult(e);
-                                  },
-                                );
-                              }
-                            },
-                          )
-                        ],
-                      );
-                    }
-                  ),
+                                      .checkGameResult(e);
+                                },
+                              );
+                            }
+                          },
+                        )
+                      ],
+                    );
+                  }),
                 ],
               ),
             ),

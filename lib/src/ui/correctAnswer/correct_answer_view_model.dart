@@ -13,8 +13,8 @@ class CorrectAnswerProvider extends GameProvider<CorrectAnswer> {
 
   String get result => _result;
 
-  CorrectAnswerProvider()
-      : super(gameCategoryType: GameCategoryType.CORRECT_ANSWER) {
+  CorrectAnswerProvider({required TickerProvider vsync})
+      : super(vsync: vsync,gameCategoryType: GameCategoryType.CORRECT_ANSWER) {
     _result = "";
     startGame();
   }

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:mathgame/src/data/models/math_grid.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/ui/common/game_provider.dart';
@@ -6,7 +7,7 @@ import 'package:mathgame/src/ui/common/game_provider.dart';
 class MathGridProvider extends GameProvider<MathGrid> {
   int answerIndex = 0;
 
-  MathGridProvider() : super(gameCategoryType: GameCategoryType.MATH_MACHINE) {
+  MathGridProvider({required TickerProvider vsync}) : super(vsync: vsync,gameCategoryType: GameCategoryType.MATH_MACHINE) {
     startGame();
   }
 

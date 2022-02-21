@@ -16,7 +16,7 @@ class QuickCalculationButton extends StatelessWidget {
       child: InkWell(
         onTap: () {
           if (text == "CLEAR") {
-            provider.clear();
+            provider.clearResult();
           } else {
             provider.checkResult(text);
           }
