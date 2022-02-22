@@ -90,7 +90,7 @@ class TimeProvider with ChangeNotifier {
     _animationController.value = 1.0;
   }
 
-  void restart() {
+  void restartTimer() {
     _animationController.reverse(from: 1.0);
     timerStatus = TimerStatus.play;
     dialogType = DialogType.non;

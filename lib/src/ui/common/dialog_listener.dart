@@ -40,7 +40,7 @@ class DialogListener<T extends GameProvider> extends StatelessWidget {
                 barrierDismissible: false,
               ).then((value) {
                 if (value != null && value) {
-                  context.read<T>().restart();
+                  context.read<T>().restartTimer();
                 } else {
                   Navigator.pop(context);
                 }
@@ -63,7 +63,7 @@ class DialogListener<T extends GameProvider> extends StatelessWidget {
                 isScrollControlled: true,
               ).then((value) {
                 if (value != null && value) {
-                  context.read<T>().restart();
+                  context.read<T>().restartTimer();
                 } else {
                   Navigator.pop(context);
                 }

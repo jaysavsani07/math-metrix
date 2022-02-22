@@ -25,7 +25,7 @@ class CalculatorProvider extends GameProvider<Calculator> {
         loadNewDataIfRequired();
         _result = "";
         if (timerStatus != TimerStatus.pause) {
-          startTimer();
+          restartTimer();
         }
         notifyListeners();
       } else if (_result.length == currentState.answer.toString().length) {

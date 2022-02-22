@@ -25,7 +25,7 @@ class SignProvider extends GameProvider<Sign> {
         loadNewDataIfRequired();
         _result = "";
         if (timerStatus != TimerStatus.pause) {
-          startTimer();
+          restartTimer();
         }
         notifyListeners();
       } else {
