@@ -32,7 +32,7 @@ class _QuickCalculationQuestionViewState
     super.initState();
 
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 750),
       vsync: this,
     )..forward();
     _animation = Tween<AlignmentGeometry>(
@@ -47,12 +47,12 @@ class _QuickCalculationQuestionViewState
 
     _textStyleAnimation = TextStyleTween(
       begin: TextStyle(
-        fontSize: 20.0,
-        fontWeight: FontWeight.normal,
+        fontSize: 16.0,
+        fontWeight: FontWeight.w200,
       ),
       end: TextStyle(
         fontSize: 30.0,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w700,
       ),
     ).animate(CurvedAnimation(
       parent: _controller,
@@ -65,8 +65,8 @@ class _QuickCalculationQuestionViewState
     ).animate(CurvedAnimation(
       parent: _controller,
       curve: Interval(
-        0.6,
-        1.0,
+        0.0,
+        0.3,
         curve: Curves.easeIn,
       ),
     ));
@@ -114,7 +114,7 @@ class _QuickCalculationQuestionViewState
           child: FadeTransition(
             opacity: _opacityAnimationOut,
             child: Text(
-              widget.previousCurrentState?.question??"",
+              widget.previousCurrentState?.question ?? "",
               style:
                   Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 30),
             ),
@@ -127,11 +127,17 @@ class _QuickCalculationQuestionViewState
             child: Text(
               widget.nextCurrentState.question,
               style:
-                  Theme.of(context).textTheme.caption!.copyWith(fontSize: 20),
+                  Theme.of(context).textTheme.caption!.copyWith(fontSize: 16),
             ),
           ),
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }

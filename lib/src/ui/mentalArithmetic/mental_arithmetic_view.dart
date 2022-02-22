@@ -1,180 +1,136 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:mathgame/src/core/color_scheme.dart';
+import 'package:mathgame/src/data/models/mental_arithmetic.dart';
+import 'package:mathgame/src/ui/common/CommonBackButton.dart';
+import 'package:mathgame/src/ui/common/CommonClearButton.dart';
+import 'package:mathgame/src/ui/common/CommonNumberButton.dart';
+import 'package:mathgame/src/ui/common/common_app_bar.dart';
+import 'package:mathgame/src/ui/common/common_info_text_view.dart';
+import 'package:mathgame/src/ui/common/dialog_listener.dart';
+import 'package:mathgame/src/ui/mentalArithmetic/mental_arithmetic_question_view.dart';
 import 'package:mathgame/src/ui/mentalArithmetic/mental_arithmetic_view_model.dart';
 import 'package:mathgame/src/core/app_constant.dart';
-import 'package:mathgame/src/ui/common/timer.dart';
 import 'package:provider/provider.dart';
-
-import 'mental_arithmetic_button.dart';
+import 'package:vsync_provider/vsync_provider.dart';
 
 class MentalArithmeticView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<MentalArithmeticProvider>(
-      create: (_) => MentalArithmeticProvider(),
-      child: WillPopScope(
-        onWillPop: () => Future.value(false),
+    return MultiProvider(
+      providers: [
+        const VsyncProvider(),
+        ChangeNotifierProvider<MentalArithmeticProvider>(
+            create: (context) =>
+                MentalArithmeticProvider(vsync: VsyncProvider.of(context)))
+      ],
+      child: SafeArea(
+        bottom: true,
+        top: true,
         child: Scaffold(
-          body: SafeArea(
-            bottom: true,
-            top: true,
+          appBar: CommonAppBar<MentalArithmeticProvider>(),
+          body: DialogListener<MentalArithmeticProvider>(
+            gameCategoryType: GameCategoryType.MENTAL_ARITHMETIC,
             child: Container(
-              margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
+              margin: EdgeInsets.all(24),
               constraints: BoxConstraints.expand(),
               child: Column(
                 children: <Widget>[
+                  CommonInfoTextView<MentalArithmeticProvider>(
+                      gameCategoryType: GameCategoryType.MENTAL_ARITHMETIC),
                   Expanded(
-                      flex: 10,
-                      child: Timer(GameCategoryType.MENTAL_ARITHMETIC)),
-                  Consumer<MentalArithmeticProvider>(
-                      builder: (context, provider, child) {
-                    return Expanded(
-                        flex: 10,
-                        child: Center(
-                          child: Text(
-                            provider.currentState.currentQuestion,
-                            style: Theme.of(context).textTheme.headline3,
-                          ),
-                        ));
-                  }),
-                  Expanded(
-                      flex: 15,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          border:
-                              Border.all(color: Theme.of(context).accentColor),
-                        ),
-                        margin: EdgeInsets.fromLTRB(5, 10, 5, 20),
-                        constraints: BoxConstraints.expand(),
-                        child: Center(
-                          child: Consumer<MentalArithmeticProvider>(
-                            builder: (context, provider, child) {
-                              return provider.timeOut
-                                  ? RaisedButton(
-                                      child: Text("Over"),
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                    )
-                                  : Text(
-                                      provider.result,
-                                      style: TextStyle(
-                                          fontSize: 45,
-                                          fontWeight: FontWeight.w700),
-                                    );
-                            },
-                          ),
-                        ),
-                      )),
-                  Expanded(
-                    flex: 55,
-                    child: Align(
+                    child: Selector<MentalArithmeticProvider, MentalArithmetic>(
+                      selector: (p0, p1) => p1.currentState,
+                      builder: (context, currentState, child) {
+                        return MentalArithmeticQuestionView(
+                          currentState: currentState,
+                        );
+                      },
+                    ),
+                  ),
+                  Neumorphic(
+                    margin: const EdgeInsets.only(left: 10, right: 10),
+                    style: NeumorphicStyle(
+                      // shape: NeumorphicShape.convex,
+                      boxShape: NeumorphicBoxShape.roundRect(
+                          BorderRadius.circular(18)),
+                      depth: -8,
+                      lightSource: LightSource.topLeft,
+                      color: Theme.of(context).colorScheme.iconBgColor,
+                    ),
+                    child: Container(
+                      width: 80,
+                      height: 40,
                       alignment: Alignment.center,
-                      child: SizedBox(
-                        height: 600,
-                        width: 400,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(30)),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Expanded(
-                                child: Row(
-                                  children: <Widget>[
-                                    MentalArithmeticButton(
-                                        "7",
-                                        BorderRadius.only(
-                                            topLeft: Radius.circular(40))),
-                                    MentalArithmeticButton(
-                                        "8", BorderRadius.all(Radius.zero)),
-                                    MentalArithmeticButton(
-                                        "9",
-                                        BorderRadius.only(
-                                            topRight: Radius.circular(40)))
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Row(
-                                  children: <Widget>[
-                                    MentalArithmeticButton(
-                                        "4", BorderRadius.all(Radius.zero)),
-                                    MentalArithmeticButton(
-                                        "5", BorderRadius.all(Radius.zero)),
-                                    MentalArithmeticButton(
-                                        "6", BorderRadius.all(Radius.zero))
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Row(
-                                  children: <Widget>[
-                                    MentalArithmeticButton(
-                                        "1", BorderRadius.all(Radius.zero)),
-                                    MentalArithmeticButton(
-                                        "2", BorderRadius.all(Radius.zero)),
-                                    MentalArithmeticButton(
-                                        "3", BorderRadius.all(Radius.zero))
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Row(
-                                  children: <Widget>[
-                                    MentalArithmeticButton(
-                                        "0",
-                                        BorderRadius.only(
-                                            bottomLeft: Radius.circular(40))),
-                                    MentalArithmeticButton(
-                                        "-",
-                                        BorderRadius.only(
-                                            bottomLeft: Radius.zero)),
-                                    MentalArithmeticButton(
-                                        "CLEAR",
-                                        BorderRadius.only(
-                                            bottomRight: Radius.circular(40)))
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                      child: Selector<MentalArithmeticProvider, String>(
+                        selector: (p0, p1) => p1.result,
+                        builder: (context, result, child) {
+                          return Text(result,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle2!
+                                  .copyWith(
+                                      fontSize: 24,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .crossColor));
+                        },
                       ),
                     ),
                   ),
-                  Expanded(
-                      flex: 10,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Consumer<MentalArithmeticProvider>(
-                              builder: (context, provider, child) {
-                            return IconButton(
-                              icon: provider.pause
-                                  ? Icon(Icons.play_arrow)
-                                  : Icon(Icons.pause),
-                              iconSize: 40,
-                              onPressed: () {
-                                provider.pauseTimer();
-                              },
-                            );
-                          }),
-                          Consumer<MentalArithmeticProvider>(
-                              builder: (context, provider, child) {
-                            return IconButton(
-                              icon: Icon(Icons.info_outline),
-                              iconSize: 40,
-                              onPressed: () {
-                                provider.showInfoDialog();
-                              },
-                            );
-                          })
-                        ],
-                      )),
+                  SizedBox(height: 24),
+                  Builder(builder: (context) {
+                    return GridView(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3),
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      children: [
+                        ...[
+                          "7",
+                          "8",
+                          "9",
+                          "4",
+                          "5",
+                          "6",
+                          "1",
+                          "2",
+                          "3",
+                          "-",
+                          "0",
+                          "Back"
+                        ].map(
+                          (e) {
+                            /*   if (e == "-") {
+                              return CommonClearButton(onTab: () {
+                                context
+                                    .read<MentalArithmeticProvider>()
+                                    .checkResult(e);
+                              });
+                            } else*/
+                            if (e == "Back") {
+                              return CommonBackButton(onTab: () {
+                                context
+                                    .read<MentalArithmeticProvider>()
+                                    .backPress();
+                              });
+                            } else {
+                              return CommonNumberButton(
+                                text: e,
+                                onTab: () {
+                                  context
+                                      .read<MentalArithmeticProvider>()
+                                      .checkResult(e);
+                                },
+                                startColor: Color(0xff4895EF),
+                                endColor: Color(0xff3f37c9),
+                              );
+                            }
+                          },
+                        )
+                      ],
+                    );
+                  }),
                 ],
               ),
             ),
