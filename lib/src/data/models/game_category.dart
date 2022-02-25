@@ -10,6 +10,13 @@ class GameCategory {
   ScoreBoard scoreboard;
   String icon;
 
-  GameCategory(this.id, this.name, this.key, this.gameCategoryType,
-      this.routePath, this.scoreboard, this.icon);
+  GameCategory(
+    this.id,
+    this.name,
+    this.key,
+    this.gameCategoryType,
+    this.routePath,
+    this.scoreboard,
+    this.icon,
+  );
 }

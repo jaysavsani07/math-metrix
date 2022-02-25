@@ -3,15 +3,20 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mathgame/src/core/assets.dart';
+import 'package:mathgame/src/core/app_assets.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/extension/math_extension.dart';
+import 'package:tuple/tuple.dart';
 
 class HomeSliverPersistentHeaderDelegate
     extends SliverPersistentHeaderDelegate {
   final String title;
+  final Tuple2<Color, Color> colorTuple;
 
-  HomeSliverPersistentHeaderDelegate({required this.title});
+  HomeSliverPersistentHeaderDelegate({
+    required this.title,
+    required this.colorTuple,
+  });
 
   double scrollAnimationValue(double shrinkOffset) {
     double maxScrollAllowed = maxExtent - minExtent;
@@ -51,8 +56,6 @@ class HomeSliverPersistentHeaderDelegate
     final double textSize =
         shrinkOffset.toTextSize(maxExtent, minExtent, 24, 28);
 
-    print(shrinkOffset.toElevation(100, minExtent, 100, 4));
-    // print(shrinkOffset);
     return PhysicalModel(
       color: Theme.of(context).colorScheme.baseColor,
       elevation: elevation,
@@ -79,13 +82,19 @@ class HomeSliverPersistentHeaderDelegate
                 color: Theme.of(context).colorScheme.crossColor,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(16))),
-                child: SizedBox(
-                  height: 38,
-                  width: 38,
-                  child: Icon(
-                    Icons.arrow_back_ios_new_rounded,
-                    color: Theme.of(context).colorScheme.baseColor,
-                    size: 20,
+                child: InkWell(
+                  borderRadius: BorderRadius.all(Radius.circular(16)),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: SizedBox(
+                    height: 38,
+                    width: 38,
+                    child: Icon(
+                      Icons.arrow_back_ios_new_rounded,
+                      color: Theme.of(context).colorScheme.baseColor,
+                      size: 20,
+                    ),
                   ),
                 ),
               ),

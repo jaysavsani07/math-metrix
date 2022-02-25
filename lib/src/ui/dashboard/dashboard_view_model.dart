@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
-import 'package:mathgame/src/core/assets.dart';
+import 'package:mathgame/src/core/app_assets.dart';
 import 'package:mathgame/src/data/models/score_board.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -74,7 +74,7 @@ class DashboardViewModel extends ChangeNotifier {
           GameCategoryType.MENTAL_ARITHMETIC,
           KeyUtil.MentalArithmetic,
           getScoreboard("mental_arithmatic"),
-          AppAssets.icCalculator,
+          AppAssets.icMentalArithmetic,
         ));
         list.add(GameCategory(
           3,
@@ -83,7 +83,7 @@ class DashboardViewModel extends ChangeNotifier {
           GameCategoryType.SQUARE_ROOT,
           KeyUtil.SquareRoot,
           getScoreboard("square_root"),
-          AppAssets.icCalculator,
+          AppAssets.icSquareRoot,
         ));
         list.add(GameCategory(
           9,
@@ -92,7 +92,7 @@ class DashboardViewModel extends ChangeNotifier {
           GameCategoryType.MATH_MACHINE,
           KeyUtil.MathMachine,
           getScoreboard("math_machine"),
-          AppAssets.icCalculator,
+          AppAssets.icMathGrid,
         ));
         list.add(GameCategory(
           4,
@@ -101,7 +101,7 @@ class DashboardViewModel extends ChangeNotifier {
           GameCategoryType.MATH_PAIRS,
           KeyUtil.MathematicalPairs,
           getScoreboard("math_pairs"),
-          AppAssets.icCalculator,
+          AppAssets.icMathematicalPairs,
         ));
         break;
       case PuzzleType.BRAIN_PUZZLE:
@@ -112,7 +112,7 @@ class DashboardViewModel extends ChangeNotifier {
           GameCategoryType.MAGIC_TRIANGLE,
           KeyUtil.MagicTriangle,
           getScoreboard("magic_tringle"),
-          AppAssets.icCalculator,
+          AppAssets.icMagicTriangle,
         ));
         list.add(GameCategory(
           10,
@@ -121,7 +121,7 @@ class DashboardViewModel extends ChangeNotifier {
           GameCategoryType.PICTURE_PUZZLE,
           KeyUtil.PicturePuzzle,
           getScoreboard("picture_puzzle"),
-          AppAssets.icCalculator,
+          AppAssets.icPicturePuzzle,
         ));
         list.add(GameCategory(
           11,
@@ -130,7 +130,7 @@ class DashboardViewModel extends ChangeNotifier {
           GameCategoryType.NUMBER_PYRAMID,
           KeyUtil.NumberPyramid,
           getScoreboard("number_pyramid"),
-          AppAssets.icCalculator,
+          AppAssets.icNumbePyramid,
         ));
         break;
     }
@@ -161,6 +161,7 @@ class DashboardViewModel extends ChangeNotifier {
         setScoreboard(gameCategory.key, gameCategory.scoreboard);
       }
     });
+    notifyListeners();
   }
 
   int getOverallScore() {

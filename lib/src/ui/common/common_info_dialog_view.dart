@@ -33,13 +33,14 @@ class CommonInfoDialogView extends StatelessWidget {
                     .copyWith(fontSize: 18),
               ),
               Card(
-                color: Theme.of(context).colorScheme.iconBgColor,
+                color: Theme.of(context).colorScheme.iconCardBgColor,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(16))),
                 child: InkWell(
                   onTap: () {
                     Navigator.pop(context);
                   },
+                  borderRadius: BorderRadius.all(Radius.circular(16)),
                   child: SizedBox(
                     height: 38,
                     width: 38,
@@ -59,8 +60,7 @@ class CommonInfoDialogView extends StatelessWidget {
             width: double.infinity,
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.dialogGifBgColor,
-              borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(24), topLeft: Radius.circular(24)),
+              borderRadius: BorderRadius.all(Radius.circular(24)),
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(24)),
@@ -132,16 +132,16 @@ class CommonInfoDialogView extends StatelessWidget {
             ],
           ),
           SizedBox(height: 24),
-          InkWell(
-            onTap: () {
-              Navigator.pop(context, true);
-            },
-            child: Card(
-              // margin: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              elevation: 8,
+          Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            elevation: 8,
+            child: InkWell(
+              onTap: () {
+                Navigator.pop(context, true);
+              },
+              borderRadius: BorderRadius.all(Radius.circular(16)),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: Container(

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:mathgame/src/core/color_scheme.dart';
 
 class CommonClearButton extends StatelessWidget {
   final Function onTab;
@@ -14,27 +15,31 @@ class CommonClearButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        onTab();
-      },
-      child: Card(
-        // margin: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
-        elevation: 8,
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(24),
+      ),
+      color: Theme.of(context).colorScheme.cardBgColor,
+      elevation: 8,
+      child: InkWell(
+        onTap: () {
+          onTab();
+        },
+        borderRadius: BorderRadius.circular(24),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(24),
           child: Container(
-              alignment: Alignment.center,
-              color: Color(0xffF5F5F5),
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Text("Clear",
-                  style: Theme.of(context)
-                      .textTheme
-                      .subtitle1!
-                      .copyWith(fontSize: 14, color: Colors.black))),
+            alignment: Alignment.center,
+            color: Theme.of(context).colorScheme.cardBgColor,
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Text(
+              "Clear",
+              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                    fontSize: 14,
+                    color: Theme.of(context).colorScheme.crossColor,
+                  ),
+            ),
+          ),
         ),
       ),
     );

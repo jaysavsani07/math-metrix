@@ -4,18 +4,21 @@ import 'package:mathgame/src/data/models/number_pyramid.dart';
 import 'package:mathgame/src/ui/numberPyramid/number_pyramid_view_model.dart';
 import 'package:mathgame/src/core/size_config.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
 class PyramidNumberBox extends StatelessWidget {
   final NumPyramidCellModel numPyramidCellModel;
   final bool isLeftRadius;
   final bool isRightRadius;
   final double height;
+  final Tuple2<Color, Color> colorTuple;
 
   PyramidNumberBox({
     required this.numPyramidCellModel,
     this.isLeftRadius = false,
     this.isRightRadius = false,
-    required   this.height,
+    required this.height,
+    required this.colorTuple,
   });
 
   @override
@@ -40,14 +43,14 @@ class PyramidNumberBox extends StatelessWidget {
                   : Colors.transparent),
           gradient: numPyramidCellModel.isHint
               ? LinearGradient(
-                  colors: [Color(0xff4895EF), Color(0xff3f37c9)],
+                  colors: [colorTuple.item1, colorTuple.item2],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 )
               : null,
           border: Border.all(
             color: numPyramidCellModel.isActive
-                ? Color(0xff4895EF)
+                ? colorTuple.item1
                 : Theme.of(context).colorScheme.dividerColor,
             width: 1,
           ),
@@ -62,7 +65,7 @@ class PyramidNumberBox extends StatelessWidget {
               : numPyramidCellModel.numberOnCell.toString(),
           style: Theme.of(context).textTheme.subtitle2!.copyWith(
               color: numPyramidCellModel.isHint
-                  ? Theme.of(context).colorScheme.baseColor
+                  ?  Colors.white
                   : Theme.of(context).colorScheme.crossColor),
         ),
       ),

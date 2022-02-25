@@ -5,18 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:mathgame/src/ui/magicTriangle/magic_triangle_view_model.dart';
 import 'package:mathgame/src/ui/magicTriangle/triangle_input_button.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
 class Triangle4x4 extends StatelessWidget {
   final double radius;
   final double padding;
   final double triangleHeight;
   final double triangleWidth;
+  final Tuple2<Color, Color> colorTuple;
 
   Triangle4x4({
     required this.radius,
     required this.padding,
     required this.triangleHeight,
     required this.triangleWidth,
+    required this.colorTuple,
   });
 
   @override
@@ -31,7 +34,10 @@ class Triangle4x4 extends StatelessWidget {
             top: padding,
             left: triangleWidth / 2 - radius,
             child: TriangleInputButton(
-                magicTriangleProvider.currentState.listTriangle[0], 0),
+              input: magicTriangleProvider.currentState.listTriangle[0],
+              index: 0,
+              colorTuple: colorTuple,
+            ),
             height: (radius * 2),
             width: (radius * 2),
           ), // first
@@ -39,7 +45,10 @@ class Triangle4x4 extends StatelessWidget {
             top: (triangleHeight - ((radius + padding) * 2)) / 3 + padding,
             left: (triangleWidth - ((radius + padding) * 2)) / 3 + padding,
             child: TriangleInputButton(
-                magicTriangleProvider.currentState.listTriangle[1], 1),
+              input: magicTriangleProvider.currentState.listTriangle[1],
+              index: 1,
+              colorTuple: colorTuple,
+            ),
             height: (radius * 2),
             width: (radius * 2),
           ), // second one
@@ -47,7 +56,10 @@ class Triangle4x4 extends StatelessWidget {
             top: (triangleHeight - ((radius + padding) * 2)) / 3 + padding,
             right: (triangleWidth - ((radius + padding) * 2)) / 3 + padding,
             child: TriangleInputButton(
-                magicTriangleProvider.currentState.listTriangle[2], 2),
+              input: magicTriangleProvider.currentState.listTriangle[2],
+              index: 2,
+              colorTuple: colorTuple,
+            ),
             height: (radius * 2),
             width: (radius * 2),
           ), // third
@@ -55,7 +67,10 @@ class Triangle4x4 extends StatelessWidget {
             bottom: (triangleHeight - ((radius + padding) * 2)) / 3 + padding,
             left: (triangleWidth - ((radius + padding) * 2)) / 6 + padding,
             child: TriangleInputButton(
-                magicTriangleProvider.currentState.listTriangle[3], 3),
+              input: magicTriangleProvider.currentState.listTriangle[3],
+              index: 3,
+              colorTuple: colorTuple,
+            ),
             height: (radius * 2),
             width: (radius * 2),
           ), // fourth one
@@ -63,7 +78,10 @@ class Triangle4x4 extends StatelessWidget {
             bottom: (triangleHeight - ((radius + padding) * 2)) / 3 + padding,
             right: (triangleWidth - ((radius + padding) * 2)) / 6 + padding,
             child: TriangleInputButton(
-                magicTriangleProvider.currentState.listTriangle[4], 4),
+              input: magicTriangleProvider.currentState.listTriangle[4],
+              index: 4,
+              colorTuple: colorTuple,
+            ),
             height: (radius * 2),
             width: (radius * 2),
           ), // fifth
@@ -71,7 +89,10 @@ class Triangle4x4 extends StatelessWidget {
             bottom: padding,
             left: padding,
             child: TriangleInputButton(
-                magicTriangleProvider.currentState.listTriangle[5], 5),
+              input: magicTriangleProvider.currentState.listTriangle[5],
+              index: 5,
+              colorTuple: colorTuple,
+            ),
             height: (radius * 2),
             width: (radius * 2),
           ), // fourth
@@ -79,7 +100,10 @@ class Triangle4x4 extends StatelessWidget {
             bottom: padding,
             left: (triangleWidth - ((radius + padding) * 2)) / 3 + padding,
             child: TriangleInputButton(
-                magicTriangleProvider.currentState.listTriangle[6], 6),
+              input: magicTriangleProvider.currentState.listTriangle[6],
+              index: 6,
+              colorTuple: colorTuple,
+            ),
             height: (radius * 2),
             width: (radius * 2),
           ), // sixth
@@ -87,7 +111,10 @@ class Triangle4x4 extends StatelessWidget {
             bottom: padding,
             right: (triangleWidth - ((radius + padding) * 2)) / 3 + padding,
             child: TriangleInputButton(
-                magicTriangleProvider.currentState.listTriangle[7], 7),
+              input: magicTriangleProvider.currentState.listTriangle[7],
+              index: 7,
+              colorTuple: colorTuple,
+            ),
             height: (radius * 2),
             width: (radius * 2),
           ), // seventh
@@ -95,7 +122,10 @@ class Triangle4x4 extends StatelessWidget {
             bottom: padding,
             right: padding,
             child: TriangleInputButton(
-                magicTriangleProvider.currentState.listTriangle[8], 8),
+              input: magicTriangleProvider.currentState.listTriangle[8],
+              index: 8,
+              colorTuple: colorTuple,
+            ),
             height: (radius * 2),
             width: (radius * 2),
           ), //ninth

@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mathgame/src/core/app_constant.dart';
-import 'package:mathgame/src/core/assets.dart';
+import 'package:mathgame/src/core/app_assets.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/ui/common/game_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 import 'common_linear_percent_indicator3.dart';
 
 class CommonAppBar<T extends GameProvider> extends StatelessWidget
     implements PreferredSizeWidget {
-  const CommonAppBar({Key? key}) : super(key: key);
+  final Tuple2<Color, Color> colorTuple;
+
+  const CommonAppBar({
+    Key? key,
+    required this.colorTuple,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return PhysicalModel(
-        color: Theme.of(context).colorScheme.baseColor,
+        color: Theme.of(context).colorScheme.toolbarCollapsedColor,
         elevation: 4,
         borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(18), bottomRight: Radius.circular(18)),
@@ -28,17 +33,20 @@ class CommonAppBar<T extends GameProvider> extends StatelessWidget
             children: [
               CommonLinearPercentIndicator3<T>(
                 lineHeight: 24,
-                linearGradient: LinearGradient(colors: [
-                  Color(0xff4895EF),
-                  Color(0xff3f37c9),
-                ]),
+                backgroundColor: Color(0xffeeeeee),
+                linearGradient: LinearGradient(
+                  colors: [
+                    colorTuple.item1,
+                    colorTuple.item2,
+                  ],
+                ),
               ),
               Container(
                 padding: const EdgeInsets.only(
                     left: 20, top: 7, bottom: 9, right: 20),
                 margin: const EdgeInsets.only(bottom: 4),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.baseColor,
+                  color: Theme.of(context).colorScheme.toolbarCollapsedColor,
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(18),
                       bottomRight: Radius.circular(18)),
@@ -51,6 +59,7 @@ class CommonAppBar<T extends GameProvider> extends StatelessWidget
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(16))),
                       child: InkWell(
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
                         onTap: () {
                           // Navigator.pop(context);
                           context.read<T>().showExitDialog();
@@ -85,11 +94,12 @@ class CommonAppBar<T extends GameProvider> extends StatelessWidget
                     ),
                     Consumer<T>(builder: (context, provider, child) {
                       return Card(
-                        color: Theme.of(context).colorScheme.iconBgColor,
+                        color: Theme.of(context).colorScheme.iconCardBgColor,
                         shape: RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(16))),
                         child: InkWell(
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
                           onTap: () {
                             provider.pauseResumeGame();
                           },

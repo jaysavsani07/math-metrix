@@ -31,10 +31,11 @@ class CommonGamePauseDialogView extends StatelessWidget {
                   Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 18),
             ),
             Card(
-              color: Theme.of(context).colorScheme.iconBgColor,
+              color: Theme.of(context).colorScheme.iconCardBgColor,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(16))),
               child: InkWell(
+                borderRadius: BorderRadius.all(Radius.circular(16)),
                 onTap: () {
                   Navigator.pop(context);
                 },
@@ -60,15 +61,16 @@ class CommonGamePauseDialogView extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: InkWell(
-                onTap: () {
-                  Navigator.pop(context, true);
-                },
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  elevation: 8,
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                elevation: 8,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pop(context, true);
+                  },
+                  borderRadius: BorderRadius.all(Radius.circular(16)),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
                     child: Container(
@@ -91,16 +93,16 @@ class CommonGamePauseDialogView extends StatelessWidget {
               ),
             ),
             SizedBox(width: 8),
-            InkWell(
-              onTap: () {
-                Navigator.pop(context, false);
-              },
-              child: Card(
-                // margin: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                elevation: 8,
+            Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              elevation: 8,
+              child: InkWell(
+                onTap: () {
+                  Navigator.pop(context, false);
+                },
+                borderRadius: BorderRadius.all(Radius.circular(16)),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),
                   child: Container(

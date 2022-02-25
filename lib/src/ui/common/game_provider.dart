@@ -40,8 +40,9 @@ class GameProvider<T> extends TimeProvider {
       await Future.delayed(Duration(milliseconds: 100));
       showInfoDialog();
     } else {
-      startTimer();
+      restartTimer();
     }
+    notifyListeners();
   }
 
   void loadNewDataIfRequired() {
@@ -94,6 +95,20 @@ class GameProvider<T> extends TimeProvider {
     pauseTimer();
     dialogType = DialogType.exit;
     notifyListeners();
+  }
+
+  void updateScore() {
+    _homeViewModel.updateScoreboard(
+        gameCategoryType, currentScore, index * getCoinUtil());
+  }
+
+  void gotItFromInfoDialog() {
+    if (_homeViewModel.isFirstTime(gameCategoryType)) {
+      _homeViewModel.setFirstTime(gameCategoryType);
+      restartTimer();
+    } else {
+      pauseResumeGame();
+    }
   }
 
   List<T> getList(int level) {

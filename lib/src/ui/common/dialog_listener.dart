@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
@@ -10,7 +9,7 @@ import 'package:mathgame/src/ui/common/common_info_dialog_view.dart';
 import 'package:mathgame/src/ui/common/game_provider.dart';
 import 'package:provider/provider.dart';
 
-class DialogListener<T extends GameProvider> extends StatelessWidget {
+class DialogListener<T extends GameProvider> extends StatefulWidget {
   final Widget child;
   final GameCategoryType gameCategoryType;
 
@@ -21,100 +20,119 @@ class DialogListener<T extends GameProvider> extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Selector<T, DialogType>(
-      selector: (p0, p1) => p1.dialogType,
-      // shouldRebuild: (previous, next) => previous != next,
-      builder: (context, dialogType, child1) {
-        WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-          switch (dialogType) {
-            case DialogType.over:
-              showDialog<bool>(
-                context: context,
-                builder: (newContext) => CommonAlertDialog(
-                  child: CommonGameOverDialogView(
-                    gameCategoryType: gameCategoryType,
-                    score: context.read<T>().currentScore,
-                  ),
-                ),
-                barrierDismissible: false,
-              ).then((value) {
-                if (value != null && value) {
-                  context.read<T>().restartTimer();
-                } else {
-                  Navigator.pop(context);
-                }
-              });
-              break;
-            case DialogType.info:
-              showModalBottomSheet(
-                context: context,
-                builder: (context) => CommonInfoDialogView(
-                  gameCategoryType: gameCategoryType,
-                ),
-                backgroundColor: Theme.of(context).colorScheme.dialogBgColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(24),
-                      topRight: Radius.circular(24)),
-                ),
-                isDismissible: false,
-                enableDrag: false,
-                isScrollControlled: true,
-              ).then((value) {
-                if (value != null && value) {
-                  context.read<T>().restartTimer();
-                } else {
-                  Navigator.pop(context);
-                }
-              });
-              break;
-            case DialogType.pause:
-              showDialog<bool>(
-                context: context,
-                builder: (newContext) => CommonAlertDialog(
-                  child: CommonGamePauseDialogView(
-                    gameCategoryType: gameCategoryType,
-                    score: context.read<T>().currentScore,
-                  ),
-                ),
-                barrierDismissible: false,
-              ).then((value) {
-                if (value != null) {
-                  if (value) {
-                    context.read<T>().pauseResumeGame();
-                  } else {
-                    context.read<T>().startGame();
-                  }
-                } else {
-                  Navigator.pop(context);
-                }
-              });
-              break;
-            case DialogType.exit:
-              showDialog<bool>(
-                context: context,
-                builder: (newContext) => CommonAlertDialog(
-                  child: CommonGameExitDialogView(
-                    score: context.read<T>().currentScore,
-                  ),
-                ),
-                barrierDismissible: false,
-              ).then((value) {
-                if (value != null && value) {
-                  Navigator.pop(context);
-                } else {
-                  context.read<T>().pauseResumeGame();
-                }
-              });
-              break;
-            case DialogType.non:
-              break;
+  State<DialogListener<T>> createState() => _DialogListenerState<T>();
+}
+
+class _DialogListenerState<T extends GameProvider>
+    extends State<DialogListener<T>> {
+  late final T provider;
+
+  @override
+  void initState() {
+    provider = context.read<T>();
+    provider.addListener(addListener);
+    super.initState();
+  }
+
+  void addListener() {
+    switch (provider.dialogType) {
+      case DialogType.over:
+        showDialog<bool>(
+          context: context,
+          builder: (newContext) => CommonAlertDialog(
+            child: CommonGameOverDialogView(
+              gameCategoryType: widget.gameCategoryType,
+              score: context.read<T>().currentScore,
+            ),
+          ),
+          barrierDismissible: false,
+        ).then((value) {
+          if (value != null && value) {
+            context.read<T>().restartTimer();
+          } else {
+            Navigator.pop(context);
           }
         });
-        return child1!;
-      },
-      child: child,
-    );
+        break;
+      case DialogType.info:
+        showModalBottomSheet(
+          context: context,
+          builder: (context) => CommonInfoDialogView(
+            gameCategoryType: widget.gameCategoryType,
+          ),
+          backgroundColor: Theme.of(context).colorScheme.infoDialogBgColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(24), topRight: Radius.circular(24)),
+          ),
+          isDismissible: false,
+          enableDrag: false,
+          isScrollControlled: true,
+        ).then((value) {
+          if (value != null && value) {
+            context.read<T>().gotItFromInfoDialog();
+          } else {
+            context.read<T>().updateScore();
+            Navigator.pop(context);
+          }
+        });
+        break;
+      case DialogType.pause:
+        showDialog<bool>(
+          context: context,
+          builder: (newContext) => CommonAlertDialog(
+            child: CommonGamePauseDialogView(
+              gameCategoryType: widget.gameCategoryType,
+              score: context.read<T>().currentScore,
+            ),
+          ),
+          barrierDismissible: false,
+        ).then((value) {
+          if (value != null) {
+            if (value) {
+              context.read<T>().pauseResumeGame();
+            } else {
+              context.read<T>().updateScore();
+              context.read<T>().startGame();
+            }
+          } else {
+            context.read<T>().updateScore();
+            Navigator.pop(context);
+          }
+        });
+        break;
+      case DialogType.exit:
+        showDialog<bool>(
+          context: context,
+          builder: (newContext) => CommonAlertDialog(
+            child: CommonGameExitDialogView(
+              score: context.read<T>().currentScore,
+            ),
+          ),
+          barrierDismissible: false,
+        ).then((value) {
+          if (value != null && value) {
+            context.read<T>().updateScore();
+            Navigator.pop(context);
+          } else {
+            context.read<T>().pauseResumeGame();
+          }
+        });
+        break;
+      case DialogType.non:
+        break;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    print("its rebuild");
+    return widget.child;
+  }
+
+  @override
+  void dispose() {
+    provider.removeListener(addListener);
+    super.dispose();
   }
 }

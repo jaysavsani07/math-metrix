@@ -9,8 +9,12 @@ import 'triangle_shape.dart';
 
 class PicturePuzzleButton extends StatelessWidget {
   final PicturePuzzleShape picturePuzzleShape;
+  final Color shapeColor;
 
-  PicturePuzzleButton(this.picturePuzzleShape);
+  PicturePuzzleButton({
+    required this.picturePuzzleShape,
+    required this.shapeColor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,27 +23,27 @@ class PicturePuzzleButton extends StatelessWidget {
         return CustomPaint(
           painter: picturePuzzleShape.picturePuzzleShapeType ==
                   PicturePuzzleShapeType.CIRCLE
-              ? CircleShape(Color(0xff4895EF), 1)
+              ? CircleShape(shapeColor, 1)
               : (picturePuzzleShape.picturePuzzleShapeType ==
                       PicturePuzzleShapeType.TRIANGLE
-                  ? TriangleShape(Color(0xff4895EF), 1)
-                  : SquareShape(Color(0xff4895EF), 1)),
-          size: Size(40, 40),
+                  ? TriangleShape(shapeColor, 1)
+                  : SquareShape(shapeColor, 1)),
+          size: Size(38, 38),
         );
       case PicturePuzzleQuestionItemType.sign:
         return Container(
-          width: 35,
           alignment: Alignment.center,
+          width: 38,
           child: Text(
             picturePuzzleShape.text,
             style:
-                Theme.of(context).textTheme.subtitle1!.copyWith(fontSize: 24),
+                Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 30),
           ),
         );
       case PicturePuzzleQuestionItemType.hint:
         return Container(
-          width: 60,
           alignment: Alignment.center,
+          width: 56,
           child: Text(
             picturePuzzleShape.text,
             style:

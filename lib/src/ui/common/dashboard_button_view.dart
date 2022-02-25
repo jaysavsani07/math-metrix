@@ -1,25 +1,24 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mathgame/src/core/assets.dart';
+import 'package:mathgame/src/core/app_assets.dart';
+import 'package:tuple/tuple.dart';
 
 class DashboardButtonView extends StatelessWidget {
   final Function onTab;
   final Animation<Offset> position;
   final String title;
   final String icon;
-  final Color startColor;
-  final Color endColor;
+  final Tuple2<Color, Color> colorTuple;
+  final double opacity;
 
   const DashboardButtonView({
     Key? key,
     required this.title,
     required this.icon,
-    required this.startColor,
-    required this.endColor,
+    required this.colorTuple,
     required this.position,
     required this.onTab,
+    required this.opacity,
   }) : super(key: key);
 
   @override
@@ -43,7 +42,7 @@ class DashboardButtonView extends StatelessWidget {
                 height: 116,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [startColor, endColor],
+                    colors: [colorTuple.item1, colorTuple.item2],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                   ),
@@ -57,7 +56,7 @@ class DashboardButtonView extends StatelessWidget {
                           ..translate(0.0, -27.0),
                         child: SvgPicture.asset(
                           icon,
-                          color: Colors.white.withOpacity(0.05),
+                          color: Colors.white.withOpacity(opacity),
                         ),
                       ),
                     ),
@@ -85,7 +84,10 @@ class DashboardButtonView extends StatelessWidget {
                     ),
                     Align(
                       alignment: Alignment.bottomCenter,
-                      child: SvgPicture.asset(AppAssets.icButtonShape),
+                      child: Transform(
+                        transform: Matrix4.identity()..translate(0.0, 2),
+                        child: SvgPicture.asset(AppAssets.icButtonShape),
+                      ),
                     ),
                   ],
                 )),

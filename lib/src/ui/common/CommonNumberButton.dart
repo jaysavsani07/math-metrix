@@ -1,35 +1,34 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:tuple/tuple.dart';
 
 class CommonNumberButton extends StatelessWidget {
   final Function onTab;
   final String text;
   final double height;
-  final Color startColor;
-  final Color endColor;
+  final Tuple2<Color, Color> colorTuple;
 
   const CommonNumberButton({
     Key? key,
     required this.text,
-    required this.startColor,
-    required this.endColor,
     required this.onTab,
     this.height = 112,
+    required this.colorTuple,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        onTab();
-      },
-      child: Card(
-        // margin: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
-        elevation: 8,
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(24),
+      ),
+      elevation: 8,
+      child: InkWell(
+        onTap: () {
+          onTab();
+        },
+        borderRadius: BorderRadius.circular(24),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(24),
           child: Container(
@@ -37,7 +36,7 @@ class CommonNumberButton extends StatelessWidget {
               // height: height,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [startColor, endColor],
+                  colors: [colorTuple.item1, colorTuple.item2],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),

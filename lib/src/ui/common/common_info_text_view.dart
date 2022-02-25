@@ -20,21 +20,26 @@ class CommonInfoTextView<T extends GameProvider> extends StatelessWidget {
       onTap: () {
         context.read<T>().showInfoDialog();
       },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(DialogInfoUtil.getInfoDialogData(gameCategoryType).title.toUpperCase(),
-              style: Theme.of(context)
-                  .textTheme
-                  .caption!
-                  .copyWith(fontWeight: FontWeight.bold)),
-          SizedBox(width: 4),
-          Icon(
-            Icons.info,
-            size: 13,
-            color: Theme.of(context).textTheme.caption!.color,
-          ),
-        ],
+      borderRadius: BorderRadius.all(Radius.circular(8)),
+      child: Padding(
+        padding: const EdgeInsets.all(4),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(DialogInfoUtil.getInfoDialogData(gameCategoryType).title.toUpperCase(),
+                style: Theme.of(context)
+                    .textTheme
+                    .caption!
+                    .copyWith(fontWeight: FontWeight.bold)),
+            SizedBox(width: 4),
+            Icon(
+              Icons.info,
+              size: 13,
+              color: Theme.of(context).textTheme.caption!.color,
+            ),
+          ],
+        ),
       ),
     );
   }

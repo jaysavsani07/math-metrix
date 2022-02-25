@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mathgame/src/core/assets.dart';
+import 'package:mathgame/src/core/app_assets.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
+import 'package:tuple/tuple.dart';
 
 class HomeButtonView extends StatelessWidget {
   final Function onTab;
@@ -11,8 +12,8 @@ class HomeButtonView extends StatelessWidget {
   final String icon;
   final int score;
   final int coin;
-  final Color startColor;
-  final Color endColor;
+  final Tuple2<Color, Color> colorTuple;
+  final double opacity;
 
   const HomeButtonView({
     Key? key,
@@ -20,9 +21,9 @@ class HomeButtonView extends StatelessWidget {
     required this.icon,
     required this.score,
     required this.coin,
-    required this.startColor,
-    required this.endColor,
+    required this.colorTuple,
     required this.onTab,
+    required this.opacity,
   }) : super(key: key);
 
   @override
@@ -44,7 +45,7 @@ class HomeButtonView extends StatelessWidget {
               height: 150,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [startColor, endColor],
+                  colors: [colorTuple.item1, colorTuple.item2],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
@@ -58,7 +59,7 @@ class HomeButtonView extends StatelessWidget {
                         ..translate(-17.0, -27.0),
                       child: SvgPicture.asset(
                         icon,
-                        color: Colors.white.withOpacity(0.05),
+                        color: Colors.white.withOpacity(opacity),
                       ),
                     ),
                   ),
@@ -164,15 +165,16 @@ class HomeButtonView extends StatelessWidget {
                                 ),
                               ),
                               Expanded(
-                                  child: Align(
-                                alignment: Alignment.centerRight,
-                                child: SvgPicture.asset(
-                                  AppAssets.icPlayCircleFilled,
-                                  color: Colors.white,
-                                  height: 39,
-                                  width: 39,
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: SvgPicture.asset(
+                                    AppAssets.icPlayCircleFilled,
+                                    color: Colors.white,
+                                    height: 39,
+                                    width: 39,
+                                  ),
                                 ),
-                              ))
+                              )
                             ],
                           )
                         ],
@@ -181,7 +183,10 @@ class HomeButtonView extends StatelessWidget {
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
-                    child: SvgPicture.asset(AppAssets.icButtonShape),
+                    child: Transform(
+                      transform: Matrix4.identity()..translate(0.0, 2),
+                      child: SvgPicture.asset(AppAssets.icButtonShape),
+                    ),
                   ),
                 ],
               )),

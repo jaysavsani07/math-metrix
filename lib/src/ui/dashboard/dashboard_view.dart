@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mathgame/src/core/assets.dart';
+import 'package:mathgame/src/core/app_assets.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/ui/app/theme_provider.dart';
 import 'package:mathgame/src/ui/common/dashboard_button_view.dart';
@@ -11,6 +9,7 @@ import 'package:mathgame/src/ui/dashboard/dashboard_view_model.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/service/navigation_service.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
 class DashboardView extends StatefulWidget {
   @override
@@ -123,36 +122,53 @@ class _DashboardViewState extends State<DashboardView>
                     DashboardButtonView(
                       title: "Math Puzzle",
                       icon: AppAssets.icMathPuzzle,
-                      startColor: Color(0xff4895EF),
-                      endColor: Color(0xff3f37c9),
+                      colorTuple: Tuple2(Color(0xff4895EF), Color(0xff3f37c9)),
                       position: _offsetLeftEnter,
+                      opacity: 0.07,
                       onTab: () {
                         GetIt.I<NavigationService>().navigateTo(KeyUtil.Home,
-                            arguments: PuzzleType.MATH_PUZZLE);
+                            arguments: Tuple4(
+                              PuzzleType.MATH_PUZZLE,
+                              "Math Puzzle",
+                              0.07,
+                              Tuple2(Color(0xff4895EF), Color(0xff3f37c9)),
+                            ));
                       },
                     ),
                     SizedBox(height: 24),
                     DashboardButtonView(
                       title: "Memory Puzzle",
                       icon: AppAssets.icMemoryPuzzle,
-                      startColor: Color(0xff9f2beb),
-                      endColor: Color(0xff560bad),
+                      colorTuple: Tuple2(Color(0xff9f2beb), Color(0xff560bad)),
                       position: _offsetRightEnter,
+                      opacity: 0.07,
                       onTab: () {
-                        GetIt.I<NavigationService>().navigateTo(KeyUtil.Home,
-                            arguments: PuzzleType.MEMORY_PUZZLE);
+                        GetIt.I<NavigationService>().navigateTo(
+                          KeyUtil.Home,
+                          arguments: Tuple4(
+                              PuzzleType.MEMORY_PUZZLE,
+                              "Memory Puzzle",
+                              0.07,
+                              Tuple2(Color(0xff9f2beb), Color(0xff560bad))),
+                        );
                       },
                     ),
                     SizedBox(height: 24),
                     DashboardButtonView(
                       title: "Train Your Brain",
                       icon: AppAssets.icTrainBrain,
-                      startColor: Color(0xfff72585),
-                      endColor: Color(0xffb5179e),
+                      colorTuple: Tuple2(Color(0xfff72585), Color(0xffb5179e)),
                       position: _offsetLeftEnter,
+                      opacity: 0.12,
                       onTab: () {
-                        GetIt.I<NavigationService>().navigateTo(KeyUtil.Home,
-                            arguments: PuzzleType.BRAIN_PUZZLE);
+                        GetIt.I<NavigationService>().navigateTo(
+                          KeyUtil.Home,
+                          arguments: Tuple4(
+                              PuzzleType.BRAIN_PUZZLE,
+                              "Train Your Brain",
+                              0.12,
+                              Tuple2(Color(0xfff72585), Color(0xffb5179e))),
+                        );
                       },
                     ),
                   ],

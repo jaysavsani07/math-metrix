@@ -2,39 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/data/models/magic_triangle.dart';
+import 'package:mathgame/src/ui/common/CommonNeumorphicView.dart';
 import 'package:mathgame/src/ui/magicTriangle/magic_triangle_view_model.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
 class TriangleInputButton extends StatelessWidget {
   final MagicTriangleInput input;
   final int index;
+  final Tuple2<Color, Color> colorTuple;
 
-  TriangleInputButton(this.input, this.index);
+  TriangleInputButton({
+    required this.input,
+    required this.index,
+    required this.colorTuple,
+  });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      customBorder: CircleBorder(),
+      borderRadius: BorderRadius.all(Radius.circular(24)),
       onTap: () {
         context
             .read<MagicTriangleProvider>()
             .inputTriangleSelection(index, input);
       },
-      child: Neumorphic(
-        style: NeumorphicStyle(
-          boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
-          depth: -8,
-          lightSource: LightSource.topLeft,
-          color: Theme.of(context).colorScheme.iconBgColor,
-        ),
+      child: CommonNeumorphicView(
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(24)),
-            border:
-                input.isActive ? Border.all(color: Color(0xff4895EF)) : null,
+            border: input.isActive ? Border.all(color: colorTuple.item1) : null,
             gradient: input.value.isNotEmpty
                 ? LinearGradient(
-                    colors: [Color(0xff4895EF), Color(0xff3f37c9)],
+                    colors: [colorTuple.item1, colorTuple.item2],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                   )

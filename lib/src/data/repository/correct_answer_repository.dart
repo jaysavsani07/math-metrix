@@ -40,8 +40,21 @@ class CorrectAnswerRepository {
         CorrectAnswer correctAnswerQandS;
         if (expression.operator2 == null) {
           correctAnswerQandS = CorrectAnswer(
-              question:
-                  "${((list.length % 2 == 0) ? "?" : expression.firstOperand)} ${expression.operator1} ${((list.length % 2 == 0) ? expression.secondOperand : "?")} = ${expression.answer}",
+              question: Question(
+                firstOperand: Operand(
+                    value: expression.firstOperand,
+                    isQuestionMark: list.length % 2 == 0),
+                firstOperator: expression.operator1,
+                secondOperand: Operand(
+                  value: expression.secondOperand,
+                  isQuestionMark: list.length % 2 == 1,
+                ),
+                secondOperator: null,
+                thirdOperand: null,
+                answer: expression.answer,
+              ),
+              // question:
+              //     "${((list.length % 2 == 0) ? "?" : expression.firstOperand)} ${expression.operator1} ${((list.length % 2 == 0) ? expression.secondOperand : "?")} = ${expression.answer}",
               firstAns: x[0].toString(),
               secondAns: x[1].toString(),
               thirdAns: x[2].toString(),
@@ -51,8 +64,24 @@ class CorrectAnswerRepository {
                   : int.parse(expression.secondOperand));
         } else {
           correctAnswerQandS = CorrectAnswer(
-              question:
-                  "${((list.length % 3 == 0) ? "?" : expression.firstOperand)} ${expression.operator1} ${((list.length % 3 == 1) ? "?" : expression.secondOperand)} ${expression.operator2} ${((list.length % 3 == 2) ? "?" : expression.thirdOperand)} = ${expression.answer}",
+              question: Question(
+                firstOperand: Operand(
+                    value: expression.firstOperand,
+                    isQuestionMark: list.length % 3 == 0),
+                firstOperator: expression.operator1,
+                secondOperand: Operand(
+                  value: expression.secondOperand,
+                  isQuestionMark: list.length % 3 == 1,
+                ),
+                secondOperator: expression.operator2,
+                thirdOperand: Operand(
+                  value: expression.thirdOperand,
+                  isQuestionMark: list.length % 3 == 2,
+                ),
+                answer: expression.answer,
+              ),
+              // question:
+              //     "${((list.length % 3 == 0) ? "?" : expression.firstOperand)} ${expression.operator1} ${((list.length % 3 == 1) ? "?" : expression.secondOperand)} ${expression.operator2} ${((list.length % 3 == 2) ? "?" : expression.thirdOperand)} = ${expression.answer}",
               firstAns: x[0].toString(),
               secondAns: x[1].toString(),
               thirdAns: x[2].toString(),

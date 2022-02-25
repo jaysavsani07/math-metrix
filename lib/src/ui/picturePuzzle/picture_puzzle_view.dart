@@ -12,9 +12,18 @@ import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/ui/picturePuzzle/picture_puzzle_button.dart';
 import 'package:mathgame/src/ui/common/common_text_button.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 import 'package:vsync_provider/vsync_provider.dart';
+import 'package:collection/collection.dart';
 
 class PicturePuzzleView extends StatelessWidget {
+  final Tuple2<Color, Color> colorTuple;
+
+  const PicturePuzzleView({
+    Key? key,
+    required this.colorTuple,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -24,106 +33,115 @@ class PicturePuzzleView extends StatelessWidget {
             create: (context) =>
                 PicturePuzzleProvider(vsync: VsyncProvider.of(context)))
       ],
-      child: SafeArea(
-        top: true,
-        bottom: true,
-        child: Scaffold(
-          appBar: CommonAppBar<PicturePuzzleProvider>(),
-          body: DialogListener<PicturePuzzleProvider>(
-            gameCategoryType: GameCategoryType.PICTURE_PUZZLE,
-            child: Container(
-              margin: EdgeInsets.all(24),
-              constraints: BoxConstraints.expand(),
-              child: Column(
-                children: <Widget>[
-                  CommonInfoTextView<PicturePuzzleProvider>(
-                      gameCategoryType: GameCategoryType.PICTURE_PUZZLE),
-                  Expanded(
-                    child: Selector<PicturePuzzleProvider, PicturePuzzle>(
-                        selector: (p0, p1) => p1.currentState,
-                        builder: (context, provider, child) {
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: provider.list.map((list) {
-                              return Padding(
-                                padding: const EdgeInsets.all(6),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: list.shapeList.map((subList) {
-                                    return PicturePuzzleButton(subList);
-                                  }).toList(),
-                                ),
-                              );
-                            }).toList(),
-                          );
-                        }),
-                  ),
-                  Builder(builder: (context) {
-                    return GridView(
-                      gridDelegate: SliverQuiltedGridDelegate(
-                        crossAxisCount: 10,
-                        pattern: [
-                          QuiltedGridTile(2, 2),
-                          QuiltedGridTile(2, 2),
-                          QuiltedGridTile(2, 2),
-                          QuiltedGridTile(2, 2),
-                          QuiltedGridTile(2, 2),
-                          QuiltedGridTile(2, 2),
-                          QuiltedGridTile(2, 2),
-                          QuiltedGridTile(2, 2),
-                          QuiltedGridTile(2, 2),
-                          QuiltedGridTile(2, 2),
-                          QuiltedGridTile(2, 5),
-                          QuiltedGridTile(2, 5),
-                        ],
-                      ),
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      children: [
-                        ...[
-                          "5",
-                          "6",
-                          "7",
-                          "8",
-                          "9",
-                          "0",
-                          "1",
-                          "2",
-                          "3",
-                          "4",
-                          "Clear",
-                          "Back"
-                        ].map(
-                          (e) {
-                            if (e == "Clear") {
-                              return CommonClearButton(onTab: () {
-                                context
-                                    .read<PicturePuzzleProvider>()
-                                    .clearResult();
-                              });
-                            } else if (e == "Back") {
-                              return CommonBackButton(onTab: () {
-                                context
-                                    .read<PicturePuzzleProvider>()
-                                    .backPress();
-                              });
-                            } else {
-                              return CommonTextButton(
-                                text: e,
-                                onTab: () {
+      child: WillPopScope(
+        onWillPop: () => Future.value(false),
+        child: SafeArea(
+          top: true,
+          bottom: true,
+          child: Scaffold(
+            appBar: CommonAppBar<PicturePuzzleProvider>(colorTuple: colorTuple),
+            body: DialogListener<PicturePuzzleProvider>(
+              gameCategoryType: GameCategoryType.PICTURE_PUZZLE,
+              child: Container(
+                margin: EdgeInsets.only(top: 24, left: 24, right: 24),
+                constraints: BoxConstraints.expand(),
+                child: Column(
+                  children: <Widget>[
+                    CommonInfoTextView<PicturePuzzleProvider>(
+                        gameCategoryType: GameCategoryType.PICTURE_PUZZLE),
+                    Expanded(
+                      child: Selector<PicturePuzzleProvider, PicturePuzzle>(
+                          selector: (p0, p1) => p1.currentState,
+                          builder: (context, provider, child) {
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: provider.list.mapIndexed((index, list) {
+                                return Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: index == 3 ? 6 : 12),
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: list.shapeList.map((subList) {
+                                      return PicturePuzzleButton(
+                                        picturePuzzleShape: subList,
+                                        shapeColor: colorTuple.item1,
+                                      );
+                                    }).toList(),
+                                  ),
+                                );
+                              }).toList(),
+                            );
+                          }),
+                    ),
+                    Builder(builder: (context) {
+                      return GridView(
+                        gridDelegate: SliverQuiltedGridDelegate(
+                          crossAxisCount: 10,
+                          pattern: [
+                            QuiltedGridTile(2, 2),
+                            QuiltedGridTile(2, 2),
+                            QuiltedGridTile(2, 2),
+                            QuiltedGridTile(2, 2),
+                            QuiltedGridTile(2, 2),
+                            QuiltedGridTile(2, 2),
+                            QuiltedGridTile(2, 2),
+                            QuiltedGridTile(2, 2),
+                            QuiltedGridTile(2, 2),
+                            QuiltedGridTile(2, 2),
+                            QuiltedGridTile(2, 5),
+                            QuiltedGridTile(2, 5),
+                          ],
+                        ),
+                        padding: const EdgeInsets.only(bottom: 24),
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        children: [
+                          ...[
+                            "5",
+                            "6",
+                            "7",
+                            "8",
+                            "9",
+                            "0",
+                            "1",
+                            "2",
+                            "3",
+                            "4",
+                            "Clear",
+                            "Back"
+                          ].map(
+                            (e) {
+                              if (e == "Clear") {
+                                return CommonClearButton(onTab: () {
                                   context
                                       .read<PicturePuzzleProvider>()
-                                      .checkGameResult(e);
-                                },
-                              );
-                            }
-                          },
-                        )
-                      ],
-                    );
-                  }),
-                ],
+                                      .clearResult();
+                                });
+                              } else if (e == "Back") {
+                                return CommonBackButton(onTab: () {
+                                  context
+                                      .read<PicturePuzzleProvider>()
+                                      .backPress();
+                                });
+                              } else {
+                                return CommonTextButton(
+                                  text: e,
+                                  colorTuple: colorTuple,
+                                  onTab: () {
+                                    context
+                                        .read<PicturePuzzleProvider>()
+                                        .checkGameResult(e);
+                                  },
+                                );
+                              }
+                            },
+                          )
+                        ],
+                      );
+                    }),
+                  ],
+                ),
               ),
             ),
           ),

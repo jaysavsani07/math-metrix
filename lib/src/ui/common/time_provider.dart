@@ -52,13 +52,14 @@ class TimeProvider with ChangeNotifier {
       vsync: vsync,
       value: 1.0,
       duration: Duration(seconds: totalTime),
-    )
-      ..addStatusListener((status) {
-        dialogType = DialogType.over;
-        timerStatus = TimerStatus.pause;
-        notifyListeners();
-      })
-     ;
+    )..addStatusListener((status) {
+        if (status == AnimationStatus.dismissed) {
+          print(status);
+          dialogType = DialogType.over;
+          timerStatus = TimerStatus.pause;
+          notifyListeners();
+        }
+      });
   }
 
   final int totalTime;

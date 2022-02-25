@@ -1,21 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/data/models/magic_triangle.dart';
 import 'package:mathgame/src/ui/magicTriangle/magic_triangle_view_model.dart';
 import 'package:mathgame/src/ui/magicTriangle/triangle_input_button.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
 class Triangle3x3 extends StatelessWidget {
   final double radius;
   final double padding;
   final double triangleHeight;
   final double triangleWidth;
+  final Tuple2<Color, Color> colorTuple;
 
   Triangle3x3({
     required this.radius,
     required this.padding,
     required this.triangleHeight,
     required this.triangleWidth,
+    required this.colorTuple,
   });
 
   @override
@@ -30,7 +32,10 @@ class Triangle3x3 extends StatelessWidget {
             top: padding,
             left: triangleWidth / 2 - radius,
             child: TriangleInputButton(
-                magicTriangleProvider.currentState.listTriangle[0], 0),
+              input: magicTriangleProvider.currentState.listTriangle[0],
+              index: 0,
+              colorTuple: colorTuple,
+            ),
             height: (radius * 2),
             width: (radius * 2),
           ), // first
@@ -38,7 +43,10 @@ class Triangle3x3 extends StatelessWidget {
             top: triangleHeight / 2 - radius,
             left: (triangleWidth - ((radius + padding) * 2)) / 4 + padding,
             child: TriangleInputButton(
-                magicTriangleProvider.currentState.listTriangle[1], 1),
+              input: magicTriangleProvider.currentState.listTriangle[1],
+              index: 1,
+              colorTuple: colorTuple,
+            ),
             height: (radius * 2),
             width: (radius * 2),
           ), // second one
@@ -46,7 +54,10 @@ class Triangle3x3 extends StatelessWidget {
             top: triangleHeight / 2 - radius,
             right: (triangleWidth - ((radius + padding) * 2)) / 4 + padding,
             child: TriangleInputButton(
-                magicTriangleProvider.currentState.listTriangle[2], 2),
+              input: magicTriangleProvider.currentState.listTriangle[2],
+              index: 2,
+              colorTuple: colorTuple,
+            ),
             height: (radius * 2),
             width: (radius * 2),
           ), // third
@@ -54,7 +65,10 @@ class Triangle3x3 extends StatelessWidget {
             bottom: padding,
             left: padding,
             child: TriangleInputButton(
-                magicTriangleProvider.currentState.listTriangle[3], 3),
+              input: magicTriangleProvider.currentState.listTriangle[3],
+              index: 3,
+              colorTuple: colorTuple,
+            ),
             height: (radius * 2),
             width: (radius * 2),
           ), // fourth
@@ -62,7 +76,10 @@ class Triangle3x3 extends StatelessWidget {
             bottom: padding,
             left: triangleWidth / 2 - radius,
             child: TriangleInputButton(
-                magicTriangleProvider.currentState.listTriangle[4], 4),
+              input: magicTriangleProvider.currentState.listTriangle[4],
+              index: 4,
+              colorTuple: colorTuple,
+            ),
             height: (radius * 2),
             width: (radius * 2),
           ), // fifth
@@ -70,7 +87,10 @@ class Triangle3x3 extends StatelessWidget {
             bottom: padding,
             right: padding,
             child: TriangleInputButton(
-                magicTriangleProvider.currentState.listTriangle[5], 5),
+              input: magicTriangleProvider.currentState.listTriangle[5],
+              index: 5,
+              colorTuple: colorTuple,
+            ),
             height: (radius * 2),
             width: (radius * 2),
           ),

@@ -3,40 +3,42 @@ import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/data/models/math_pairs.dart';
 import 'package:mathgame/src/ui/mathPairs/math_pairs_view_model.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
 class MathPairsButton extends StatelessWidget {
   final Pair mathPairs;
   final int index;
-  final Color startColor;
-  final Color endColor;
+  final Tuple2<Color, Color> colorTuple;
 
   MathPairsButton({
     required this.mathPairs,
     required this.index,
-    required this.startColor,
-    required this.endColor,
+    required this.colorTuple,
   });
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        context.read<MathPairsProvider>().checkResult(mathPairs, index);
-      },
-      child: Visibility(
-        visible: mathPairs.isVisible,
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24),
-          ),
-          elevation: 8,
+    return Visibility(
+      visible: mathPairs.isVisible,
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        elevation: 8,
+        child: InkWell(
+          onTap: () {
+            context.read<MathPairsProvider>().checkResult(mathPairs, index);
+          },
+          borderRadius: BorderRadius.all(Radius.circular(24)),
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(24)),
-              border: mathPairs.isActive ? null : Border.all(color: startColor),
+              border: mathPairs.isActive
+                  ? null
+                  : Border.all(color: colorTuple.item1),
               gradient: mathPairs.isActive
                   ? LinearGradient(
-                      colors: [startColor, endColor],
+                      colors: [colorTuple.item1, colorTuple.item2],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                     )
@@ -51,7 +53,7 @@ class MathPairsButton extends StatelessWidget {
                     fontSize: 24,
                     color: mathPairs.isActive
                         ? Theme.of(context).colorScheme.baseColor
-                        : Color(0xff4895EF)),
+                        : colorTuple.item1),
               ),
             ),
           ),
