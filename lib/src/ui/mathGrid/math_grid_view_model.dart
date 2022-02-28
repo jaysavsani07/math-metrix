@@ -7,7 +7,8 @@ import 'package:mathgame/src/ui/common/game_provider.dart';
 class MathGridProvider extends GameProvider<MathGrid> {
   int answerIndex = 0;
 
-  MathGridProvider({required TickerProvider vsync}) : super(vsync: vsync,gameCategoryType: GameCategoryType.MATH_MACHINE) {
+  MathGridProvider({required TickerProvider vsync})
+      : super(vsync: vsync, gameCategoryType: GameCategoryType.MATH_MACHINE) {
     startGame();
   }
 
@@ -40,7 +41,9 @@ class MathGridProvider extends GameProvider<MathGrid> {
         listOfIndex[i].isRemoved = true;
       }
       answerIndex = answerIndex + 1;
-      if (answerIndex == currentState.listOfAnswer.length) {
+      if (currentState.listForSquare
+          .where((element) => !element.isRemoved)
+          .isEmpty) {
         await Future.delayed(Duration(milliseconds: 300));
         loadNewDataIfRequired();
         answerIndex = 0;
@@ -49,7 +52,7 @@ class MathGridProvider extends GameProvider<MathGrid> {
         }
         notifyListeners();
       } else {
-        currentState.currentAnswer = currentState.listOfAnswer[answerIndex];
+        currentState.currentAnswer = currentState.getNewAnswer();
       }
     }
   }

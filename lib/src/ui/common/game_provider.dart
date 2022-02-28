@@ -41,8 +41,8 @@ class GameProvider<T> extends TimeProvider {
       showInfoDialog();
     } else {
       restartTimer();
+      notifyListeners();
     }
-    notifyListeners();
   }
 
   void loadNewDataIfRequired() {

@@ -14,8 +14,6 @@ class MathGridRepository {
 
   static MathGrid listForSquare() {
     int sum = 0;
-    int answer = generateRandomAnswer();
-    List<int> listAnswer = <int>[];
     List<int> list = <int>[];
     List<MathGridCellModel> listGrid = <MathGridCellModel>[];
     list = listOf9 +
@@ -32,15 +30,7 @@ class MathGridRepository {
       listGrid.add(MathGridCellModel(i, list[i], false, false));
       sum = sum + list[i];
     }
-
-    while (sum > answer) {
-      listAnswer.add(answer);
-      sum = sum - answer;
-      answer = generateRandomAnswer();
-    }
-    listAnswer.add(sum);
-
-    return MathGrid(listForSquare: listGrid, listOfAnswer: listAnswer);
+    return MathGrid(listForSquare: listGrid);
   }
 
   static int generateRandomAnswer() {

@@ -35,6 +35,7 @@ class _DialogListenerState<T extends GameProvider>
   }
 
   void addListener() {
+    print(provider.dialogType);
     switch (provider.dialogType) {
       case DialogType.over:
         showDialog<bool>(
