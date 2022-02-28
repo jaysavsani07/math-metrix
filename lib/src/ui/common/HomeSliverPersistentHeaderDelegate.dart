@@ -67,6 +67,11 @@ class HomeSliverPersistentHeaderDelegate
         width: MediaQuery.of(context).size.width,
         child: Stack(
           children: <Widget>[
+            // Icon(Icons.extension),
+            Icon(
+              Icons.extension_outlined,
+              size: 100,
+            ),
             Positioned(
               bottom: 66,
               right: 0,

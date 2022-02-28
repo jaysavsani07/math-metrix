@@ -64,6 +64,23 @@ class DashboardViewModel extends ChangeNotifier {
           KeyUtil.QuickCalculation,
           getScoreboard("quick_calclation"),
           AppAssets.icQuickCalculation,
+        )); list.add(GameCategory(
+          5,
+          "Correct answer",
+          "correct_answer",
+          GameCategoryType.CORRECT_ANSWER,
+          KeyUtil.CorrectAnswer,
+          getScoreboard("correct_answer"),
+          AppAssets.icCorrectAnswer,
+        ));
+        list.add(GameCategory(
+          8,
+          "Quick calculation",
+          "quick_calclation",
+          GameCategoryType.QUICK_CALCULATION,
+          KeyUtil.QuickCalculation,
+          getScoreboard("quick_calclation"),
+          AppAssets.icQuickCalculation,
         ));
         break;
       case PuzzleType.MEMORY_PUZZLE:
