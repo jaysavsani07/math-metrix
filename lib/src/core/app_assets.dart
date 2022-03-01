@@ -11,8 +11,11 @@ class AppAssets {
 
 
   static const String icTrainBrain = "assets/images/ic_train_brain.svg";
+  static const String icTrainBrainOutline = "assets/images/ic_train_brain_outline.svg";
   static const String icMemoryPuzzle = "assets/images/ic_memory_puzzle.svg";
+  static const String icMemoryPuzzleOutline = "assets/images/ic_memory_puzzle_outline.svg";
   static const String icMathPuzzle = "assets/images/ic_math_puzzle.svg";
+  static const String icMathPuzzleOutline = "assets/images/ic_math_puzzle_outline.svg";
 
   static const String icButtonShape = "assets/images/ic_button_shape.svg";
   static const String icPlayCircleFilled =

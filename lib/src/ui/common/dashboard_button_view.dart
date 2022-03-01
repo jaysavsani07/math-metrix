@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mathgame/src/core/app_assets.dart';
-import 'package:tuple/tuple.dart';
+import 'package:mathgame/src/data/models/dashboard.dart';
 
 class DashboardButtonView extends StatelessWidget {
   final Function onTab;
   final Animation<Offset> position;
-  final String title;
-  final String icon;
-  final Tuple2<Color, Color> colorTuple;
-  final double opacity;
+  final Dashboard dashboard;
 
   const DashboardButtonView({
     Key? key,
-    required this.title,
-    required this.icon,
-    required this.colorTuple,
     required this.position,
     required this.onTab,
-    required this.opacity,
+    required this.dashboard,
   }) : super(key: key);
 
   @override
@@ -42,7 +36,10 @@ class DashboardButtonView extends StatelessWidget {
                 height: 116,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [colorTuple.item1, colorTuple.item2],
+                    colors: [
+                      dashboard.colorTuple.item1,
+                      dashboard.colorTuple.item2
+                    ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                   ),
@@ -55,8 +52,8 @@ class DashboardButtonView extends StatelessWidget {
                         transform: Matrix4.identity().scaled(5.0)
                           ..translate(0.0, -27.0),
                         child: SvgPicture.asset(
-                          icon,
-                          color: Colors.white.withOpacity(opacity),
+                          dashboard.icon,
+                          color: Colors.white.withOpacity(dashboard.opacity),
                         ),
                       ),
                     ),
@@ -66,12 +63,12 @@ class DashboardButtonView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SvgPicture.asset(
-                            icon,
+                            dashboard.icon,
                             width: 28,
                             height: 28,
                           ),
                           SizedBox(width: 12),
-                          Text(title,
+                          Text(dashboard.title,
                               style: Theme.of(context)
                                   .textTheme
                                   .subtitle2!

@@ -24,7 +24,7 @@ class CorrectAnswerProvider extends GameProvider<CorrectAnswer> {
         loadNewDataIfRequired();
         _result = "";
         if (timerStatus != TimerStatus.pause) {
-          startTimer();
+          restartTimer();
         }
         notifyListeners();
       } else {

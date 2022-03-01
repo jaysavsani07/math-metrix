@@ -63,12 +63,13 @@ class GameProvider<T> extends TimeProvider {
   void wrongAnswer() {
     if (currentScore > 0) {
       currentScore = currentScore + getScoreMinusUtil();
+      notifyListeners();
     } else if (currentScore == 0 &&
         (gameCategoryType == GameCategoryType.SQUARE_ROOT ||
             gameCategoryType == GameCategoryType.CORRECT_ANSWER ||
             gameCategoryType == GameCategoryType.SIGN)) {
       dialogType = DialogType.over;
-      timerStatus = TimerStatus.pause;
+      pauseTimer();
       notifyListeners();
     }
   }

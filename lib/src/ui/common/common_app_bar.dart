@@ -108,8 +108,8 @@ class CommonAppBar<T extends GameProvider> extends StatelessWidget
                             width: 38,
                             child: Icon(
                               provider.timerStatus == TimerStatus.pause
-                                  ? Icons.pause
-                                  : Icons.play_arrow,
+                                  ? Icons.play_arrow
+                                  : Icons.pause,
                               color: Theme.of(context).colorScheme.crossColor,
                               size: 20,
                             ),

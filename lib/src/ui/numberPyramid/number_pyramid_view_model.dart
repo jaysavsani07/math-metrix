@@ -84,7 +84,7 @@ class NumberPyramidProvider extends GameProvider<NumberPyramid> {
       await Future.delayed(Duration(milliseconds: 300));
       loadNewDataIfRequired();
       if (timerStatus != TimerStatus.pause) {
-        startTimer();
+        restartTimer();
       }
       notifyListeners();
     }

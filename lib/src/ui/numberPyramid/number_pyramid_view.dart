@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:mathgame/src/ui/common/CommonBackButton.dart';
+import 'package:mathgame/src/ui/common/CommonClearButton.dart';
 import 'package:mathgame/src/ui/common/common_app_bar.dart';
 import 'package:mathgame/src/ui/common/common_info_text_view.dart';
 import 'package:mathgame/src/ui/common/dialog_listener.dart';
@@ -38,7 +39,8 @@ class NumberPyramidView extends StatelessWidget {
           top: true,
           bottom: true,
           child: Scaffold(
-              appBar: CommonAppBar<NumberPyramidProvider>(colorTuple: colorTuple),
+              appBar:
+                  CommonAppBar<NumberPyramidProvider>(colorTuple: colorTuple),
               body: DialogListener<NumberPyramidProvider>(
                 gameCategoryType: GameCategoryType.NUMBER_PYRAMID,
                 child: Container(
@@ -51,8 +53,8 @@ class NumberPyramidView extends StatelessWidget {
                       Expanded(
                         child: LayoutBuilder(builder: (context, constraints) {
                           return Center(
-                            child: Consumer<NumberPyramidProvider>(
-                                builder: (context, numberPyramidProvider, child) {
+                            child: Consumer<NumberPyramidProvider>(builder:
+                                (context, numberPyramidProvider, child) {
                               return Column(
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -69,15 +71,17 @@ class NumberPyramidView extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[26],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[26],
                                         isLeftRadius: true,
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
                                       ),
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[25],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[25],
                                         isRightRadius: true,
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
@@ -88,21 +92,24 @@ class NumberPyramidView extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[24],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[24],
                                         isLeftRadius: true,
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
                                       ),
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[23],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[23],
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
                                       ),
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[22],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[22],
                                         isRightRadius: true,
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
@@ -113,27 +120,31 @@ class NumberPyramidView extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[21],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[21],
                                         isLeftRadius: true,
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
                                       ),
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[20],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[20],
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
                                       ),
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[19],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[19],
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
                                       ),
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[18],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[18],
                                         isRightRadius: true,
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
@@ -144,33 +155,38 @@ class NumberPyramidView extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[17],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[17],
                                         isLeftRadius: true,
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
                                       ),
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[16],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[16],
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
                                       ),
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[15],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[15],
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
                                       ),
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[14],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[14],
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
                                       ),
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[13],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[13],
                                         isRightRadius: true,
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
@@ -181,39 +197,45 @@ class NumberPyramidView extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[12],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[12],
                                         isLeftRadius: true,
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
                                       ),
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[11],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[11],
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
                                       ),
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[10],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[10],
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
                                       ),
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[9],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[9],
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
                                       ),
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[8],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[8],
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
                                       ),
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[7],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[7],
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
                                         isRightRadius: true,
@@ -224,45 +246,52 @@ class NumberPyramidView extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[6],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[6],
                                         isLeftRadius: true,
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
                                       ),
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[5],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[5],
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
                                       ),
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[4],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[4],
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
                                       ),
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[3],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[3],
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
                                       ),
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[2],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[2],
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
                                       ),
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[1],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[1],
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
                                       ),
                                       PyramidNumberBox(
-                                        numPyramidCellModel: numberPyramidProvider
-                                            .currentState.list[0],
+                                        numPyramidCellModel:
+                                            numberPyramidProvider
+                                                .currentState.list[0],
                                         isRightRadius: true,
                                         height: constraints.maxWidth,
                                         colorTuple: colorTuple,
@@ -278,7 +307,7 @@ class NumberPyramidView extends StatelessWidget {
                       Builder(builder: (context) {
                         return GridView(
                           gridDelegate: SliverQuiltedGridDelegate(
-                            crossAxisCount: 8,
+                            crossAxisCount: 10,
                             pattern: [
                               QuiltedGridTile(2, 2),
                               QuiltedGridTile(2, 2),
@@ -290,8 +319,8 @@ class NumberPyramidView extends StatelessWidget {
                               QuiltedGridTile(2, 2),
                               QuiltedGridTile(2, 2),
                               QuiltedGridTile(2, 2),
-                              QuiltedGridTile(2, 2),
-                              QuiltedGridTile(2, 2),
+                              QuiltedGridTile(2, 5),
+                              QuiltedGridTile(2, 5),
                             ],
                           ),
                           padding: const EdgeInsets.only(bottom: 24),
@@ -299,16 +328,16 @@ class NumberPyramidView extends StatelessWidget {
                           physics: NeverScrollableScrollPhysics(),
                           children: [
                             ...[
+                              "5",
                               "6",
                               "7",
                               "8",
                               "9",
+                              "0",
+                              "1",
                               "2",
                               "3",
                               "4",
-                              "5",
-                              "0",
-                              "1",
                               "Done",
                               "Back",
                             ].map(
@@ -319,6 +348,14 @@ class NumberPyramidView extends StatelessWidget {
                                         .read<NumberPyramidProvider>()
                                         .pyramidBoxInputValue(e);
                                   });
+                                } else if (e == "Done") {
+                                  return CommonClearButton(
+                                      text: "Done",
+                                      onTab: () {
+                                        context
+                                            .read<NumberPyramidProvider>()
+                                            .pyramidBoxInputValue(e);
+                                      });
                                 } else {
                                   return CommonTextButton(
                                     text: e,

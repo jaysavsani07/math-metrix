@@ -60,7 +60,8 @@ class PicturePuzzleView extends StatelessWidget {
                                   padding: EdgeInsets.symmetric(
                                       vertical: index == 3 ? 6 : 12),
                                   child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: list.shapeList.map((subList) {
                                       return PicturePuzzleButton(
@@ -113,11 +114,13 @@ class PicturePuzzleView extends StatelessWidget {
                           ].map(
                             (e) {
                               if (e == "Clear") {
-                                return CommonClearButton(onTab: () {
-                                  context
-                                      .read<PicturePuzzleProvider>()
-                                      .clearResult();
-                                });
+                                return CommonClearButton(
+                                    text: "Clear",
+                                    onTab: () {
+                                      context
+                                          .read<PicturePuzzleProvider>()
+                                          .clearResult();
+                                    });
                               } else if (e == "Back") {
                                 return CommonBackButton(onTab: () {
                                   context

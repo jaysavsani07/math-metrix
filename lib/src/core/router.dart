@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/core/app_constant.dart';
+import 'package:mathgame/src/data/models/dashboard.dart';
 import 'package:mathgame/src/ui/calculator/calculator_view.dart';
 import 'package:mathgame/src/ui/correctAnswer/correct_answer_view.dart';
 import 'package:mathgame/src/ui/dashboard/dashboard_view.dart';
@@ -17,18 +18,12 @@ import 'package:tuple/tuple.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
-    case KeyUtil.Dashboard:
+    case KeyUtil.dashboard:
       return MaterialPageRoute(builder: (context) => DashboardView());
     case KeyUtil.Home:
-      var tuple4 = settings.arguments
-          as Tuple4<PuzzleType, String, double, Tuple2<Color, Color>>;
+      var dashboard = settings.arguments as Dashboard;
       return MaterialPageRoute(
-          builder: (context) => HomeView(
-                puzzleType: tuple4.item1,
-                colorTuple: tuple4.item4,
-                opacity: tuple4.item3,
-                title: tuple4.item2,
-              ));
+          builder: (context) => HomeView(dashboard: dashboard));
     case KeyUtil.Calculator:
       var tuple2 = settings.arguments as Tuple2<Color, Color>;
       return MaterialPageRoute(

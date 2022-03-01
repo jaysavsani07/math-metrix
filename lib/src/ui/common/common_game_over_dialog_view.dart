@@ -53,7 +53,7 @@ class CommonGameOverDialogView extends StatelessWidget {
                             end: Alignment.bottomCenter,
                           ),
                         ),
-                        child: Text("START",
+                        child: Text("RESTART",
                             style: Theme.of(context)
                                 .textTheme
                                 .subtitle1!

@@ -35,7 +35,7 @@ class _QuickCalculationQuestionViewState
       vsync: this,
     )..forward();
     _animation = Tween<AlignmentGeometry>(
-      begin: Alignment.centerLeft,
+      begin: Alignment.topLeft,
       end: Alignment.centerRight,
     ).animate(
       CurvedAnimation(
@@ -94,7 +94,6 @@ class _QuickCalculationQuestionViewState
   @override
   Widget build(BuildContext context) {
     return Stack(
-      alignment: Alignment.center,
       children: [
         AnimatedBuilder(
           animation: _animation,
@@ -120,7 +119,7 @@ class _QuickCalculationQuestionViewState
           ),
         ),
         Align(
-          alignment: Alignment.centerLeft,
+          alignment: Alignment.topLeft,
           child: FadeTransition(
             opacity: _opacityAnimationIn,
             child: Text(

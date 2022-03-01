@@ -12,7 +12,8 @@ class SquareRootProvider extends GameProvider<SquareRoot> {
   }
 
   Future<void> checkResult(String answer) async {
-    if (int.parse(answer) == currentState.answer) {
+    if (int.parse(answer) == currentState.answer &&
+        timerStatus != TimerStatus.pause) {
       await Future.delayed(Duration(milliseconds: 300));
       loadNewDataIfRequired();
       if (timerStatus != TimerStatus.pause) {

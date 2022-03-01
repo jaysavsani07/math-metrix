@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
             ),
             navigatorKey: GetIt.I<NavigationService>().navigatorKey,
             onGenerateRoute: generateRoute,
-            initialRoute: KeyUtil.Dashboard,
+            initialRoute: KeyUtil.dashboard,
             // home: DashboardView(),
           );
         });

@@ -49,7 +49,7 @@ class _DialogListenerState<T extends GameProvider>
           barrierDismissible: false,
         ).then((value) {
           if (value != null && value) {
-            context.read<T>().restartTimer();
+            context.read<T>().startGame();
           } else {
             Navigator.pop(context);
           }

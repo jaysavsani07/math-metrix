@@ -48,7 +48,7 @@ class MathGridProvider extends GameProvider<MathGrid> {
         loadNewDataIfRequired();
         answerIndex = 0;
         if (timerStatus != TimerStatus.pause) {
-          startTimer();
+          restartTimer();
         }
         notifyListeners();
       } else {

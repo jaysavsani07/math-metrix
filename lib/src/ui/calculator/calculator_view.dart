@@ -69,7 +69,8 @@ class CalculatorView extends StatelessWidget {
                                       .textTheme
                                       .subtitle2!
                                       .copyWith(
-                                          fontSize: 30, color: colorTuple.item1),
+                                          fontSize: 30,
+                                          color: colorTuple.item1),
                                 );
                               },
                             ),
@@ -101,14 +102,18 @@ class CalculatorView extends StatelessWidget {
                           ].map(
                             (e) {
                               if (e == "Clear") {
-                                return CommonClearButton(onTab: () {
-                                  context
-                                      .read<CalculatorProvider>()
-                                      .clearResult();
-                                });
+                                return CommonClearButton(
+                                    text: "Clear",
+                                    onTab: () {
+                                      context
+                                          .read<CalculatorProvider>()
+                                          .clearResult();
+                                    });
                               } else if (e == "Back") {
                                 return CommonBackButton(onTab: () {
-                                  context.read<CalculatorProvider>().backPress();
+                                  context
+                                      .read<CalculatorProvider>()
+                                      .backPress();
                                 });
                               } else {
                                 return CommonNumberButton(

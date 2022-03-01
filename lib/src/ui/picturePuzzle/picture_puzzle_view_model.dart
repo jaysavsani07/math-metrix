@@ -25,7 +25,7 @@ class PicturePuzzleProvider extends GameProvider<PicturePuzzle> {
         loadNewDataIfRequired();
         _result = "";
         if (timerStatus != TimerStatus.pause) {
-          startTimer();
+          restartTimer();
         }
         notifyListeners();
       } else if (_result.length == currentState.answer.toString().length) {

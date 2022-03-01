@@ -53,7 +53,7 @@ class MagicTriangleProvider extends GameProvider<MagicTriangle> {
           selectedTriangleIndex = 0;
 
           if (timerStatus != TimerStatus.pause) {
-            startTimer();
+            restartTimer();
           }
           notifyListeners();
         }

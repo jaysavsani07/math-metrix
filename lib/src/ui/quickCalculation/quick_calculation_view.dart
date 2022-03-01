@@ -64,21 +64,24 @@ class QuickCalculationView extends StatelessWidget {
                           Row(
                             children: [
                               Expanded(
-                                child: Selector<
-                                    QuickCalculationProvider,
-                                    Tuple3<QuickCalculation, QuickCalculation,
-                                        QuickCalculation?>>(
-                                  selector: (p0, p1) => Tuple3(
-                                      p1.currentState,
-                                      p1.nextCurrentState,
-                                      p1.previousCurrentState),
-                                  builder: (context, tuple3, child) {
-                                    return QuickCalculationQuestionView(
-                                      currentState: tuple3.item1,
-                                      nextCurrentState: tuple3.item2,
-                                      previousCurrentState: tuple3.item3,
-                                    );
-                                  },
+                                child: SizedBox(
+                                  height: 72,
+                                  child: Selector<
+                                      QuickCalculationProvider,
+                                      Tuple3<QuickCalculation, QuickCalculation,
+                                          QuickCalculation?>>(
+                                    selector: (p0, p1) => Tuple3(
+                                        p1.currentState,
+                                        p1.nextCurrentState,
+                                        p1.previousCurrentState),
+                                    builder: (context, tuple3, child) {
+                                      return QuickCalculationQuestionView(
+                                        currentState: tuple3.item1,
+                                        nextCurrentState: tuple3.item2,
+                                        previousCurrentState: tuple3.item3,
+                                      );
+                                    },
+                                  ),
                                 ),
                               ),
                               SizedBox(width: 6),
@@ -91,19 +94,20 @@ class QuickCalculationView extends StatelessWidget {
                               ),
                               SizedBox(width: 6),
                               CommonNeumorphicView(
-                                child: Selector<QuickCalculationProvider, String>(
-                                    selector: (p0, p1) => p1.result,
-                                    builder: (context, result, child) {
-                                      return Text(result,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .subtitle2!
-                                              .copyWith(
-                                                  fontSize: 24,
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .crossColor));
-                                    }),
+                                child:
+                                    Selector<QuickCalculationProvider, String>(
+                                        selector: (p0, p1) => p1.result,
+                                        builder: (context, result, child) {
+                                          return Text(result,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .subtitle2!
+                                                  .copyWith(
+                                                      fontSize: 24,
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .crossColor));
+                                        }),
                               ),
                               SizedBox(width: 60),
                             ],
@@ -135,11 +139,13 @@ class QuickCalculationView extends StatelessWidget {
                           ].map(
                             (e) {
                               if (e == "Clear") {
-                                return CommonClearButton(onTab: () {
-                                  context
-                                      .read<QuickCalculationProvider>()
-                                      .clearResult();
-                                });
+                                return CommonClearButton(
+                                    text: "Clear",
+                                    onTab: () {
+                                      context
+                                          .read<QuickCalculationProvider>()
+                                          .clearResult();
+                                    });
                               } else if (e == "Back") {
                                 return CommonBackButton(onTab: () {
                                   context

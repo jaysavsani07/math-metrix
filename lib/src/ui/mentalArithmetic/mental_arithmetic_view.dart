@@ -2,6 +2,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/data/models/mental_arithmetic.dart';
 import 'package:mathgame/src/ui/common/CommonBackButton.dart';
+import 'package:mathgame/src/ui/common/CommonClearButton.dart';
 import 'package:mathgame/src/ui/common/CommonNeumorphicView.dart';
 import 'package:mathgame/src/ui/common/CommonNumberButton.dart';
 import 'package:mathgame/src/ui/common/common_app_bar.dart';
@@ -49,7 +50,8 @@ class MentalArithmeticView extends StatelessWidget {
                     CommonInfoTextView<MentalArithmeticProvider>(
                         gameCategoryType: GameCategoryType.MENTAL_ARITHMETIC),
                     Expanded(
-                      child: Selector<MentalArithmeticProvider, MentalArithmetic>(
+                      child:
+                          Selector<MentalArithmeticProvider, MentalArithmetic>(
                         selector: (p0, p1) => p1.currentState,
                         builder: (context, currentState, child) {
                           return MentalArithmeticQuestionView(
@@ -104,6 +106,14 @@ class MentalArithmeticView extends StatelessWidget {
                                       .read<MentalArithmeticProvider>()
                                       .backPress();
                                 });
+                              } else if (e == "-") {
+                                return CommonClearButton(
+                                    text: e,
+                                    onTab: () {
+                                      context
+                                          .read<MentalArithmeticProvider>()
+                                          .checkResult(e);
+                                    });
                               } else {
                                 return CommonNumberButton(
                                   text: e,

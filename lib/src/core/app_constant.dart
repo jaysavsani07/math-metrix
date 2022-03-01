@@ -1,9 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:mathgame/src/core/time_constant.dart';
+import 'package:mathgame/src/data/models/dashboard.dart';
+import 'package:tuple/tuple.dart';
+
+import 'app_assets.dart';
 
 class KeyUtil {
   static const IS_DARK_MODE = "isDarkMode";
 
-  static const String Dashboard = 'Dashboard';
+  static const String dashboard = 'Dashboard';
   static const String Home = 'Home';
 
   static const String Calculator = 'Calculator';
@@ -20,6 +25,37 @@ class KeyUtil {
 
   static const String GameOverDialog = "GameOverDialog";
   static const String InfoDialog = "InfoDialog";
+
+  static List<Dashboard> dashboardItems = [
+    Dashboard(
+      puzzleType: PuzzleType.MATH_PUZZLE,
+      colorTuple: Tuple2(Color(0xff4895EF), Color(0xff3f37c9)),
+      opacity: 0.07,
+      icon: AppAssets.icMathPuzzle,
+      outlineIcon: AppAssets.icMathPuzzleOutline,
+      subtitle: "Each game with simple calculation with different approach.",
+      title: "Math Puzzle",
+    ),
+    Dashboard(
+      puzzleType: PuzzleType.MEMORY_PUZZLE,
+      colorTuple: Tuple2(Color(0xff9f2beb), Color(0xff560bad)),
+      opacity: 0.07,
+      icon: AppAssets.icMemoryPuzzle,
+      outlineIcon: AppAssets.icMemoryPuzzleOutline,
+      subtitle: "Memorise numbers & signs before applying calculation to them.",
+      title: "Memory Puzzle",
+    ),
+    Dashboard(
+      puzzleType: PuzzleType.BRAIN_PUZZLE,
+      colorTuple: Tuple2(Color(0xfff72585), Color(0xffb5179e)),
+      opacity: 0.12,
+      icon: AppAssets.icTrainBrain,
+      outlineIcon: AppAssets.icTrainBrainOutline,
+      subtitle:
+          "Enhance logical thinking, concentration and core cognitive skills.",
+      title: "Train Your Brain",
+    ),
+  ];
 
   static int getTimeUtil(GameCategoryType gameCategoryType) {
     switch (gameCategoryType) {

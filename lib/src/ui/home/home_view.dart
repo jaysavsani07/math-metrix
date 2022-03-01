@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
+import 'package:mathgame/src/data/models/dashboard.dart';
 import 'package:mathgame/src/service/navigation_service.dart';
 import 'package:mathgame/src/ui/common/home_button_view.dart';
 import 'package:mathgame/src/ui/dashboard/dashboard_view_model.dart';
-
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
 
 class HomeView extends StatefulWidget {
-  final PuzzleType puzzleType;
-  final String title;
-  final Tuple2<Color, Color> colorTuple;
-  final double opacity;
+  final Dashboard dashboard;
 
   HomeView({
     Key? key,
-    required this.puzzleType,
-    required this.title,
-    required this.colorTuple,
-    required this.opacity,
+    required this.dashboard,
   }) : super(key: key);
 
   @override
@@ -31,6 +24,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   late AnimationController animationController;
   late Animation bgColorTween;
   late Animation<double> elevationTween;
+  late Animation<double> subtitleVisibilityTween;
   late Animation<double> radiusTween;
   late Animation<double> heightTween;
   late Animation<TextStyle> textStyleTween;
@@ -65,6 +59,16 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
         ),
       ),
     );
+    subtitleVisibilityTween = Tween(begin: 1.0, end: 0.0).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: Interval(
+          0.0,
+          0.5,
+          curve: Curves.easeIn,
+        ),
+      ),
+    );
     radiusTween = Tween(begin: 0.0, end: 18.0).animate(
       CurvedAnimation(
         parent: animationController,
@@ -89,11 +93,11 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     outlineImageBottomPositionTween =
         Tween(begin: 56.0, end: 56.0).animate(animationController);
     outlineImageRightPositionTween =
-        Tween(begin: -50.0, end: -150.0).animate(animationController);
+        Tween(begin: -40.0, end: -150.0).animate(animationController);
     fillImageBottomPositionTween =
-        Tween(begin: 80.0, end: 136.0).animate(animationController);
+        Tween(begin: 54.0, end: 136.0).animate(animationController);
     fillImageRightPositionTween =
-        Tween(begin: -86.0, end: -240.0).animate(animationController);
+        Tween(begin: -54.0, end: -240.0).animate(animationController);
 
     super.initState();
   }
@@ -124,92 +128,127 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                 ListView(
                   padding: const EdgeInsets.only(top: 183),
                   children: Provider.of<DashboardViewModel>(context)
-                      .getGameByPuzzleType(widget.puzzleType)
+                      .getGameByPuzzleType(widget.dashboard.puzzleType)
                       .map((e) => HomeButtonView(
                           title: e.name,
                           icon: e.icon,
                           score: e.scoreboard.highestScore,
                           coin: e.scoreboard.coin,
-                          colorTuple: widget.colorTuple,
-                          opacity: widget.opacity,
+                          colorTuple: widget.dashboard.colorTuple,
+                          opacity: widget.dashboard.opacity,
                           onTab: () {
                             GetIt.I<NavigationService>().navigateTo(e.routePath,
-                                arguments: widget.colorTuple);
+                                arguments: widget.dashboard.colorTuple);
                           }))
                       .toList(),
                 ),
-                AnimatedBuilder(
-                  animation: animationController,
-                  builder: (context, child) => PhysicalModel(
-                    color: Theme.of(context).brightness == Brightness.light
-                        ? Theme.of(context).colorScheme.baseColor
-                        : bgColorTween.value,
-                    elevation: elevationTween.value,
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(radiusTween.value),
-                        bottomRight: Radius.circular(radiusTween.value)),
-                    child: Container(
-                      width: double.infinity,
-                      height: heightTween.value,
-                      child: Stack(
-                        children: <Widget>[
-                          Positioned(
-                            bottom: fillImageBottomPositionTween.value,
-                            right: fillImageRightPositionTween.value,
-                            child: Icon(
-                              Icons.extension,
-                              color: Color(0xffECF0FC),
-                              size: 183,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: AnimatedBuilder(
+                    animation: animationController,
+                    builder: (context, child) => PhysicalModel(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Theme.of(context).colorScheme.baseColor
+                          : bgColorTween.value,
+                      elevation: elevationTween.value,
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(radiusTween.value),
+                          bottomRight: Radius.circular(radiusTween.value)),
+                      child: Container(
+                        height: heightTween.value,
+                        child: Stack(
+                          children: <Widget>[
+                            Positioned(
+                              bottom: fillImageBottomPositionTween.value,
+                              right: fillImageRightPositionTween.value,
+                              child: SvgPicture.asset(
+                                widget.dashboard.icon,
+                                height: 200,
+                                width: 200,
+                                color: widget.dashboard.colorTuple.item1
+                                    .withOpacity(0.08),
+                              ),
                             ),
-                          ),
-                          Positioned(
-                            bottom: outlineImageBottomPositionTween.value,
-                            right: outlineImageRightPositionTween.value,
-                            child: Icon(
-                              Icons.extension_outlined,
-                              color: Color(0xffB8BBED),
-                              size: 183,
+                            Positioned(
+                              bottom: outlineImageBottomPositionTween.value,
+                              right: outlineImageRightPositionTween.value,
+                              child: SvgPicture.asset(
+                                widget.dashboard.outlineIcon,
+                                height: 175,
+                                width: 175,
+                                // color: widget.dashboard.colorTuple.item1,
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20, top: 7),
-                            child: Card(
-                              color: Theme.of(context).colorScheme.crossColor,
-                              shape: RoundedRectangleBorder(
+                            Padding(
+                              padding: const EdgeInsets.only(left: 20, top: 7),
+                              child: Card(
+                                color: Theme.of(context).colorScheme.crossColor,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(16))),
+                                child: InkWell(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(16))),
-                              child: InkWell(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(16)),
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                child: SizedBox(
-                                  height: 38,
-                                  width: 38,
-                                  child: Icon(
-                                    Icons.arrow_back_ios_new_rounded,
-                                    color:
-                                        Theme.of(context).colorScheme.baseColor,
-                                    size: 20,
+                                      BorderRadius.all(Radius.circular(16)),
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: SizedBox(
+                                    height: 38,
+                                    width: 38,
+                                    child: Icon(
+                                      Icons.arrow_back_ios_new_rounded,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .baseColor,
+                                      size: 20,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          Positioned(
-                            bottom: 0.0,
-                            left: 62 * animationController.value,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(bottom: 10, left: 20),
-                              child: Text(
-                                widget.title,
-                                style: textStyleTween.value,
+                            Positioned(
+                              bottom: 0.0,
+                              left: 62 * animationController.value,
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    bottom: 10, left: 20, right: 20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      widget.dashboard.title,
+                                      style: textStyleTween.value,
+                                    ),
+                                    SizeTransition(
+                                      sizeFactor: subtitleVisibilityTween,
+                                      child: Opacity(
+                                        opacity: subtitleVisibilityTween.value,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(top: 8),
+                                          child: SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width -
+                                                62,
+                                            child: Text(
+                                              widget.dashboard.subtitle,
+                                              maxLines: 2,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .caption!
+                                                  .copyWith(fontSize: 14),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),

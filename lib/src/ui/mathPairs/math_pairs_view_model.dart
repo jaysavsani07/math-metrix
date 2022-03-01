@@ -31,7 +31,7 @@ class MathPairsProvider extends GameProvider<MathPairs> {
               await Future.delayed(Duration(milliseconds: 300));
               loadNewDataIfRequired();
               if (timerStatus != TimerStatus.pause) {
-                startTimer();
+                restartTimer();
               }
               notifyListeners();
             }
