@@ -28,7 +28,7 @@ class TriangleButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
         ),
-        elevation: 8,
+        elevation: 2,
         child: InkWell(
           onTap: () {
             context.read<MagicTriangleProvider>().checkResult(index, digit);

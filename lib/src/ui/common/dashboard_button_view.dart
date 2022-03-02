@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mathgame/src/core/app_assets.dart';
 import 'package:mathgame/src/data/models/dashboard.dart';
+import 'package:mathgame/src/ui/common/common_tab_animation_view.dart';
 
 class DashboardButtonView extends StatelessWidget {
   final Function onTab;
@@ -17,18 +18,17 @@ class DashboardButtonView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        onTab();
-      },
+    return CommonTabAnimationView(
+      onTab: onTab,
+      isDelayed: true,
       child: SlideTransition(
         position: position,
         child: Card(
-          margin: EdgeInsets.symmetric(horizontal: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24),
           ),
-          elevation: 8,
+          elevation: 2,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(24),
             child: Container(

@@ -101,6 +101,7 @@ class CorrectAnswerView extends StatelessWidget {
                                           .checkResult(e);
                                     },
                                     colorTuple: colorTuple,
+                                    fontSize: 48,
                                   );
                                 },
                               )

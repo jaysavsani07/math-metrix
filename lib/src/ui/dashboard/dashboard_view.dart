@@ -8,6 +8,7 @@ import 'package:mathgame/src/ui/common/dashboard_button_view.dart';
 import 'package:mathgame/src/ui/dashboard/dashboard_view_model.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/service/navigation_service.dart';
+import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 
 class DashboardView extends StatefulWidget {
@@ -59,36 +60,56 @@ class _DashboardViewState extends State<DashboardView>
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(width: 12),
-                        SvgPicture.asset(
-                          AppAssets.icTrophy,
-                          width: 24,
-                          height: 24,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(width: 12),
+                      Container(
+                        decoration: BoxDecoration(
+                            color:
+                                Theme.of(context).colorScheme.infoDialogBgColor,
+                            borderRadius: BorderRadius.circular(18)),
+                        padding: const EdgeInsets.all(12.0),
+                        child: Row(
+                          children: [
+                            SvgPicture.asset(
+                              AppAssets.icTrophy,
+                              width: 24,
+                              height: 24,
+                            ),
+                            SizedBox(width: 5),
+                            Consumer<DashboardViewModel>(
+                              builder: (context, model, child) => Text(
+                                  model.overallScore.toString(),
+                                  style: Theme.of(context).textTheme.subtitle1),
+                            ),
+                          ],
                         ),
-                        SizedBox(width: 5),
-                        Consumer<DashboardViewModel>(
-                          builder: (context, model, child) => Text(
-                              model.overallScore.toString(),
-                              style: Theme.of(context).textTheme.subtitle1),
+                      ),
+                      SizedBox(width: 8),
+                      Container(
+                        decoration: BoxDecoration(
+                            color:
+                                Theme.of(context).colorScheme.infoDialogBgColor,
+                            borderRadius: BorderRadius.circular(18)),
+                        padding: const EdgeInsets.all(12.0),
+                        child: Row(
+                          children: [
+                            SvgPicture.asset(
+                              AppAssets.icCoin,
+                              width: 24,
+                              height: 24,
+                            ),
+                            SizedBox(width: 5),
+                            Consumer<DashboardViewModel>(
+                              builder: (context, model, child) => Text(
+                                  model.totalCoin.toString(),
+                                  style: Theme.of(context).textTheme.subtitle1),
+                            )
+                          ],
                         ),
-                        SizedBox(width: 16),
-                        SvgPicture.asset(
-                          AppAssets.icCoin,
-                          width: 24,
-                          height: 24,
-                        ),
-                        SizedBox(width: 5),
-                        Consumer<DashboardViewModel>(
-                          builder: (context, model, child) => Text(
-                              model.totalCoin.toString(),
-                              style: Theme.of(context).textTheme.subtitle1),
-                        )
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                   InkWell(
                     onTap: () {
@@ -108,53 +129,68 @@ class _DashboardViewState extends State<DashboardView>
                   ),
                 ],
               ),
+              SizedBox(height: 24),
               Expanded(
-                flex: 2,
-                child: SizedBox(),
-              ),
-              Expanded(
-                flex: 7,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    DashboardButtonView(
-                      dashboard: KeyUtil.dashboardItems[0],
-                      position: _offsetLeftEnter,
-                      onTab: () {
-                        GetIt.I<NavigationService>().navigateTo(
-                          KeyUtil.Home,
-                          arguments: KeyUtil.dashboardItems[0],
-                        );
-                      },
-                    ),
-                    SizedBox(height: 24),
-                    DashboardButtonView(
-                      dashboard: KeyUtil.dashboardItems[1],
-                      position: _offsetRightEnter,
-                      onTab: () {
-                        GetIt.I<NavigationService>().navigateTo(
-                          KeyUtil.Home,
-                          arguments: KeyUtil.dashboardItems[1],
-                        );
-                      },
-                    ),
-                    SizedBox(height: 24),
-                    DashboardButtonView(
-                      dashboard: KeyUtil.dashboardItems[2],
-                      position: _offsetLeftEnter,
-                      onTab: () {
-                        GetIt.I<NavigationService>().navigateTo(
-                          KeyUtil.Home,
-                          arguments: KeyUtil.dashboardItems[2],
-                        );
-                      },
-                    ),
-                  ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(height: 36),
+                      Text(
+                        "Math Matrix",
+                        style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 12),
+                      Text(
+                        "Math Train Your Brain, Improve Your Math Skill",
+                        style: Theme.of(context).textTheme.caption,
+                      ),
+                      SizedBox(height: 36),
+                      DashboardButtonView(
+                        dashboard: KeyUtil.dashboardItems[0],
+                        position: _offsetLeftEnter,
+                        onTab: () {
+                          GetIt.I<NavigationService>().navigateTo(
+                            KeyUtil.Home,
+                            arguments: KeyUtil.dashboardItems[0],
+                          );
+                        },
+                      ),
+                      SizedBox(height: 20),
+                      DashboardButtonView(
+                        dashboard: KeyUtil.dashboardItems[1],
+                        position: _offsetRightEnter,
+                        onTab: () {
+                          GetIt.I<NavigationService>().navigateTo(
+                            KeyUtil.Home,
+                            arguments: KeyUtil.dashboardItems[1],
+                          );
+                        },
+                      ),
+                      SizedBox(height: 20),
+                      DashboardButtonView(
+                        dashboard: KeyUtil.dashboardItems[2],
+                        position: _offsetLeftEnter,
+                        onTab: () {
+                          GetIt.I<NavigationService>().navigateTo(
+                            KeyUtil.Home,
+                            arguments: KeyUtil.dashboardItems[2],
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              Padding(
+              SizedBox(height: 24),
+              Container(
+                decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.infoDialogBgColor,
+                    borderRadius: BorderRadius.circular(18)),
                 padding: const EdgeInsets.all(12.0),
+                margin: const EdgeInsets.symmetric(horizontal: 12),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -166,23 +202,19 @@ class _DashboardViewState extends State<DashboardView>
                               .bodyText2!
                               .copyWith(fontWeight: FontWeight.normal)),
                     ),
-                    SizedBox(width: 24),
-                    Expanded(
-                      child: Selector<ThemeProvider, String>(
-                          selector: (p0, p1) => p1.appVersion,
-                          builder: (context, data, child) {
-                            return Text("App version: $data",
-                                textAlign: TextAlign.end,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText2!
-                                    .copyWith(
-                                        fontWeight: FontWeight.normal,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .crossLightColor));
-                          }),
-                    )
+                    SizedBox(width: 12),
+                    FutureBuilder<PackageInfo>(
+                      future: PackageInfo.fromPlatform(),
+                      builder: (context, snapshot) => Text("v${snapshot.data?.version}",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText2!
+                              .copyWith(
+                                  fontWeight: FontWeight.normal,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .crossLightColor)),
+                    ),
                   ],
                 ),
               ),

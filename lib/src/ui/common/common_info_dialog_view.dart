@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
@@ -18,7 +17,7 @@ class CommonInfoDialogView extends StatelessWidget {
     GameInfoDialog gameInfoDialog =
         DialogInfoUtil.getInfoDialogData(gameCategoryType);
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 24),
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -33,6 +32,7 @@ class CommonInfoDialogView extends StatelessWidget {
                     .copyWith(fontSize: 18),
               ),
               Card(
+                elevation: 2,
                 color: Theme.of(context).colorScheme.iconCardBgColor,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -134,19 +134,19 @@ class CommonInfoDialogView extends StatelessWidget {
           SizedBox(height: 24),
           Card(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(12),
             ),
-            elevation: 8,
+            elevation: 2,
             child: InkWell(
               onTap: () {
                 Navigator.pop(context, true);
               },
-              borderRadius: BorderRadius.all(Radius.circular(16)),
+              borderRadius: BorderRadius.all(Radius.circular(12)),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(12),
                 child: Container(
                     alignment: Alignment.center,
-                    height: 52,
+                    height: 44,
                     width: 164,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(

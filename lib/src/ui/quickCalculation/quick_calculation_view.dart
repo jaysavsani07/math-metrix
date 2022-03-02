@@ -104,9 +104,7 @@ class QuickCalculationView extends StatelessWidget {
                                                   .subtitle2!
                                                   .copyWith(
                                                       fontSize: 24,
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .crossColor));
+                                                      color: colorTuple.item1));
                                         }),
                               ),
                               SizedBox(width: 60),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
+import 'package:mathgame/src/ui/common/common_tab_animation_view.dart';
 import 'package:tuple/tuple.dart';
 
 class CommonTextButton extends StatelessWidget {
@@ -15,16 +16,13 @@ class CommonTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(24),
-      ),
-      elevation: 8,
-      child: InkWell(
-        onTap: () {
-          onTab();
-        },
-        borderRadius: BorderRadius.circular(24),
+    return CommonTabAnimationView(
+      onTab: onTab,
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        elevation: 2,
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(24)),

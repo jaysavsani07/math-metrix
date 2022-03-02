@@ -126,7 +126,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
             child: Stack(
               children: [
                 ListView(
-                  padding: const EdgeInsets.only(top: 183),
+                  padding: const EdgeInsets.only(top: 200, bottom: 200),
                   children: Provider.of<DashboardViewModel>(context)
                       .getGameByPuzzleType(widget.dashboard.puzzleType)
                       .map((e) => HomeButtonView(
@@ -225,7 +225,8 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                       child: Opacity(
                                         opacity: subtitleVisibilityTween.value,
                                         child: Padding(
-                                          padding: const EdgeInsets.only(top: 8),
+                                          padding:
+                                              const EdgeInsets.only(top: 8),
                                           child: SizedBox(
                                             width: MediaQuery.of(context)
                                                     .size

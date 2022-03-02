@@ -94,6 +94,7 @@ class SquareRootView extends StatelessWidget {
                                         .checkResult(e);
                                   },
                                   colorTuple: colorTuple,
+                                  fontSize: 48,
                                 );
                               },
                             )

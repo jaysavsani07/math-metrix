@@ -61,6 +61,7 @@ class CalculatorView extends StatelessWidget {
                           }),
                           SizedBox(height: 14),
                           CommonNeumorphicView(
+                            isLarge: true,
                             child: Consumer<CalculatorProvider>(
                               builder: (context, calculatorProvider, child) {
                                 return Text(

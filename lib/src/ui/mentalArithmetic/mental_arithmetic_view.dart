@@ -1,5 +1,4 @@
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/data/models/mental_arithmetic.dart';
 import 'package:mathgame/src/ui/common/CommonBackButton.dart';
 import 'package:mathgame/src/ui/common/CommonClearButton.dart';
@@ -70,9 +69,7 @@ class MentalArithmeticView extends StatelessWidget {
                                   .subtitle2!
                                   .copyWith(
                                       fontSize: 24,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .crossColor));
+                                      color: colorTuple.item1));
                         },
                       ),
                     ),

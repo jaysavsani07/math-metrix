@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/core/app_assets.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
+import 'package:mathgame/src/ui/common/common_score_view.dart';
 import 'package:mathgame/src/ui/common/game_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
@@ -83,13 +84,15 @@ class CommonAppBar<T extends GameProvider> extends StatelessWidget
                           height: 28,
                         ),
                         SizedBox(width: 7),
-                        Consumer<T>(builder: (context, provider, child) {
-                          return Text(provider.currentScore.toInt().toString(),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .subtitle2!
-                                  .copyWith(fontSize: 24));
-                        })
+                        SizedBox(
+                          height: 28,
+                          child:  Selector<T, double>(
+                              selector: (p0, p1) => p1.currentScore,
+                              builder: (context, currentScore, child) {
+                                return CommonScoreView(
+                                    score: currentScore.toInt());
+                              }),
+                        ),
                       ],
                     ),
                     Consumer<T>(builder: (context, provider, child) {

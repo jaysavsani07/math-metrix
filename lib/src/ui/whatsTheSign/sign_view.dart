@@ -132,6 +132,7 @@ class SignView extends StatelessWidget {
                                   context.read<SignProvider>().checkResult(e);
                                 },
                                 colorTuple: colorTuple,
+                                fontSize: 48,
                               );
                             },
                           )

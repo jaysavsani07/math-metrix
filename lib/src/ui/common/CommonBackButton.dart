@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
+import 'package:mathgame/src/ui/common/common_tab_animation_view.dart';
 
 class CommonBackButton extends StatelessWidget {
   final Function onTab;
@@ -15,17 +16,14 @@ class CommonBackButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(24),
-      ),
-      color: Theme.of(context).colorScheme.cardBgColor,
-      elevation: 8,
-      child: InkWell(
-        onTap: () {
-          onTab();
-        },
-        borderRadius: BorderRadius.circular(24),
+    return CommonTabAnimationView(
+      onTab: onTab,
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        color: Theme.of(context).colorScheme.cardBgColor,
+        elevation: 2,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(24),
           child: Container(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/ui/common/common_app_bar.dart';
 import 'package:mathgame/src/ui/common/common_info_text_view.dart';
 import 'package:mathgame/src/ui/common/dialog_listener.dart';
@@ -73,7 +74,9 @@ class MagicTriangleView extends StatelessWidget {
                           children: <Widget>[
                             CustomPaint(
                               painter: TrianglePainter(
-                                color: Color(0xffeeeeee),
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .triangleLineColor,
                                 radius: radius,
                                 padding: padding,
                               ),

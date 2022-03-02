@@ -6,6 +6,7 @@ class CommonNumberButton extends StatelessWidget {
   final Function onTab;
   final String text;
   final double height;
+  final double fontSize;
   final Tuple2<Color, Color> colorTuple;
 
   const CommonNumberButton({
@@ -13,6 +14,7 @@ class CommonNumberButton extends StatelessWidget {
     required this.text,
     required this.onTab,
     this.height = 112,
+    this.fontSize = 24,
     required this.colorTuple,
   }) : super(key: key);
 
@@ -24,7 +26,7 @@ class CommonNumberButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
         ),
-        elevation: 8,
+        elevation: 2,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(24),
           child: Container(
@@ -42,6 +44,7 @@ class CommonNumberButton extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerRight,
                     child: LayoutBuilder(builder: (context, constraints) {
+                      print(constraints.maxHeight);
                       return Transform.translate(
                         offset: Offset(-constraints.maxHeight / 3.5, 0),
                         child: Transform.scale(
@@ -68,7 +71,8 @@ class CommonNumberButton extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .subtitle1!
-                              .copyWith(fontSize: 24, color: Colors.white)),
+                              .copyWith(
+                                  fontSize: fontSize, color: Colors.white)),
                     ),
                   ),
                 ],

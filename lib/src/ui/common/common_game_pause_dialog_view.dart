@@ -25,12 +25,18 @@ class CommonGamePauseDialogView extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              gameInfoDialog.title,
-              style:
-                  Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 18),
+            Padding(
+              padding: const EdgeInsets.only(left: 4),
+              child: Text(
+                gameInfoDialog.title,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1!
+                    .copyWith(fontSize: 18),
+              ),
             ),
             Card(
+              elevation: 0,
               color: Theme.of(context).colorScheme.iconCardBgColor,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -62,19 +68,19 @@ class CommonGamePauseDialogView extends StatelessWidget {
           children: [
             Expanded(
               child: Card(
+                elevation: 2,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                elevation: 8,
                 child: InkWell(
                   onTap: () {
                     Navigator.pop(context, true);
                   },
-                  borderRadius: BorderRadius.all(Radius.circular(16)),
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(12),
                     child: Container(
-                        height: 52,
+                        height: 44,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
@@ -92,23 +98,23 @@ class CommonGamePauseDialogView extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: 8),
+            SizedBox(width: 6),
             Card(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(12),
               ),
-              elevation: 8,
+              elevation: 2,
               child: InkWell(
                 onTap: () {
                   Navigator.pop(context, false);
                 },
-                borderRadius: BorderRadius.all(Radius.circular(16)),
+                borderRadius: BorderRadius.all(Radius.circular(12)),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(12),
                   child: Container(
                     alignment: Alignment.center,
-                    height: 52,
-                    width: 52,
+                    height: 44,
+                    width: 44,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [Color(0xffF48C06), Color(0xffD00000)],

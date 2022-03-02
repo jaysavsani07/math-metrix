@@ -6,11 +6,16 @@ import 'package:mathgame/src/data/models/picture_puzzle.dart';
 import 'package:mathgame/src/ui/common/CommonNeumorphicView.dart';
 import 'package:mathgame/src/ui/picturePuzzle/picture_puzzle_view_model.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
 class PicturePuzzleAnswerButton extends StatelessWidget {
   final PicturePuzzleShape picturePuzzleShape;
+  final Tuple2<Color, Color> colorTuple;
 
-  PicturePuzzleAnswerButton(this.picturePuzzleShape);
+  PicturePuzzleAnswerButton({
+    required this.picturePuzzleShape,
+    required this.colorTuple,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,7 @@ class PicturePuzzleAnswerButton extends StatelessWidget {
                 fontSize: 24,
                 color: value == ""
                     ? Theme.of(context).colorScheme.crossLightColor
-                    : Theme.of(context).colorScheme.crossColor,
+                    : colorTuple.item1,
               ),
         ),
       ),

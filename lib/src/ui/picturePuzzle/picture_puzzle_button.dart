@@ -5,15 +5,18 @@ import 'package:mathgame/src/data/models/picture_puzzle.dart';
 import 'package:mathgame/src/ui/picturePuzzle/circle_shape.dart';
 import 'package:mathgame/src/ui/picturePuzzle/picture_puzzle_answer_button.dart';
 import 'package:mathgame/src/ui/picturePuzzle/square_shape.dart';
+import 'package:tuple/tuple.dart';
 import 'triangle_shape.dart';
 
 class PicturePuzzleButton extends StatelessWidget {
   final PicturePuzzleShape picturePuzzleShape;
   final Color shapeColor;
+  final Tuple2<Color, Color> colorTuple;
 
   PicturePuzzleButton({
     required this.picturePuzzleShape,
     required this.shapeColor,
+    required this.colorTuple,
   });
 
   @override
@@ -51,7 +54,10 @@ class PicturePuzzleButton extends StatelessWidget {
           ),
         );
       case PicturePuzzleQuestionItemType.answer:
-        return PicturePuzzleAnswerButton(picturePuzzleShape);
+        return PicturePuzzleAnswerButton(
+          picturePuzzleShape: picturePuzzleShape,
+          colorTuple: colorTuple,
+        );
     }
   }
 }

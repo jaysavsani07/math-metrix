@@ -24,7 +24,7 @@ class MathPairsButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
         ),
-        elevation: 8,
+        elevation: 2,
         child: InkWell(
           onTap: () {
             context.read<MathPairsProvider>().checkResult(mathPairs, index);

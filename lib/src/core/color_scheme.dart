@@ -36,4 +36,7 @@ extension CustomColorScheme on ColorScheme {
 
   Color get dialogGifBgColor =>
       brightness == Brightness.light ? Colors.white : Color(0xff424242);
+
+  Color get triangleLineColor =>
+      brightness == Brightness.light ? Color(0xffeeeeee) : Color(0xff424242);
 }

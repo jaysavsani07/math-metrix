@@ -7,7 +7,6 @@ import 'package:mathgame/src/core/router.dart';
 import 'package:mathgame/src/service/navigation_service.dart';
 import 'package:mathgame/src/ui/app/theme_provider.dart';
 import 'package:mathgame/src/ui/common/dialog_manager.dart';
-import 'package:mathgame/src/ui/dashboard/dashboard_view.dart';
 import 'package:provider/provider.dart';
 
 class MyApp extends StatelessWidget {

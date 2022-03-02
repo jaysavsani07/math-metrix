@@ -51,7 +51,7 @@ class PyramidNumberBox extends StatelessWidget {
           border: Border.all(
             color: numPyramidCellModel.isActive
                 ? colorTuple.item1
-                : Theme.of(context).colorScheme.dividerColor,
+                : Theme.of(context).colorScheme.triangleLineColor,
             width: 1,
           ),
           borderRadius: BorderRadius.only(
@@ -66,7 +66,7 @@ class PyramidNumberBox extends StatelessWidget {
           style: Theme.of(context).textTheme.subtitle2!.copyWith(
               color: numPyramidCellModel.isHint
                   ?  Colors.white
-                  : Theme.of(context).colorScheme.crossColor),
+                  : colorTuple.item1),
         ),
       ),
     );

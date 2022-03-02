@@ -35,9 +35,10 @@ class AppAssets {
 
   static const String icMagicTriangle = "assets/images/ic_magic_triangle.svg";
   static const String icPicturePuzzle = "assets/images/ic_picture_puzzle.svg";
-  static const String icNumbePyramid = "assets/images/ic_number_pyramid.svg";
+  static const String icNumberPyramid = "assets/images/ic_number_pyramid.svg";
 
-  static const String bgButton = "assets/images/bg_button.svg";
-  static const String bgButton1 = "assets/images/bg_button_1.png";
+  static const String bgLargeButton = "assets/images/bg_large_button.png";
+  static const String bgLargeDarkButton = "assets/images/bg_large_button_dark.png";
   static const String bgSmallButton = "assets/images/bg_small_button.png";
+  static const String bgSmallDarkButton = "assets/images/bg_small_button_dark.png";
 }

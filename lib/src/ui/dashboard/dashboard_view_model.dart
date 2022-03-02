@@ -130,7 +130,7 @@ class DashboardViewModel extends ChangeNotifier {
           GameCategoryType.NUMBER_PYRAMID,
           KeyUtil.NumberPyramid,
           getScoreboard("number_pyramid"),
-          AppAssets.icNumbePyramid,
+          AppAssets.icNumberPyramid,
         ));
         break;
     }

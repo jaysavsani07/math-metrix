@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class CommonTabAnimationView extends StatefulWidget {
   final Function onTab;
   final Widget child;
+  final bool isDelayed;
 
   const CommonTabAnimationView({
     Key? key,
     required this.child,
     required this.onTab,
+    this.isDelayed = false,
   }) : super(key: key);
 
   @override
@@ -23,7 +25,7 @@ class _CommonTabAnimationViewState extends State<CommonTabAnimationView>
     _controller = AnimationController(
       vsync: this,
       duration: Duration(
-        milliseconds: 200,
+        milliseconds: 100,
       ),
       lowerBound: 0.0,
       upperBound: 0.1,
@@ -41,14 +43,14 @@ class _CommonTabAnimationViewState extends State<CommonTabAnimationView>
 
   @override
   Widget build(BuildContext context) {
+    print(1 - _controller.value);
     return Transform.scale(
       scale: 1 - _controller.value,
       child: GestureDetector(
-        onTapDown: (_) {
-          _controller.forward();
-        },
-        onTapUp: (_) {
-          _controller.reverse();
+        onTap: () async {
+          _controller.forward().then((value) => _controller.reverse());
+          if (widget.isDelayed)
+            await Future.delayed(Duration(milliseconds: 195));
           widget.onTab();
         },
         child: widget.child,

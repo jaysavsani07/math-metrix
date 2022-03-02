@@ -67,6 +67,7 @@ class PicturePuzzleView extends StatelessWidget {
                                       return PicturePuzzleButton(
                                         picturePuzzleShape: subList,
                                         shapeColor: colorTuple.item1,
+                                        colorTuple: colorTuple,
                                       );
                                     }).toList(),
                                   ),

@@ -4,6 +4,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mathgame/src/core/app_assets.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
+import 'package:mathgame/src/ui/common/common_tab_animation_view.dart';
 import 'package:tuple/tuple.dart';
 
 class HomeButtonView extends StatelessWidget {
@@ -28,16 +29,15 @@ class HomeButtonView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        onTab();
-      },
+    return CommonTabAnimationView(
+      onTab: onTab,
+      isDelayed: true,
       child: Card(
-        margin: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        margin: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
         ),
-        elevation: 8,
+        elevation: 2,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(24),
           child: Container(
