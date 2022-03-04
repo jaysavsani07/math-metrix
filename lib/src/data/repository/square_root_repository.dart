@@ -35,7 +35,6 @@ class SquareRootRepository {
         if (!listHasCode.contains(squareRootQandS.hashCode)) {
           listHasCode.add(squareRootQandS.hashCode);
           list.add(squareRootQandS);
-          print("$x1    ${x1 * x1} ${operandList.toString()}");
         }
       });
     }
@@ -45,7 +44,6 @@ class SquareRootRepository {
 
 void main() {
   for (int i = 1; i < 5; i++) {
-    print("**********$i***********${SquareRootRepository.listHasCode.length}");
     SquareRootRepository.getSquareDataList(i);
   }
 }

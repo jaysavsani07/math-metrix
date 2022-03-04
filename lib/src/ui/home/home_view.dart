@@ -105,7 +105,6 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   bool _scrollListener(ScrollNotification scrollInfo) {
     if (scrollInfo.metrics.axis == Axis.vertical &&
         scrollInfo.metrics.pixels <= 127) {
-      print(scrollInfo.metrics.pixels / 127);
       animationController.animateTo(scrollInfo.metrics.pixels / 127);
       return true;
     } else {
@@ -126,7 +125,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
             child: Stack(
               children: [
                 ListView(
-                  padding: const EdgeInsets.only(top: 200, bottom: 200),
+                  padding: const EdgeInsets.only(top: 200, bottom: 100),
                   children: Provider.of<DashboardViewModel>(context)
                       .getGameByPuzzleType(widget.dashboard.puzzleType)
                       .map((e) => HomeButtonView(

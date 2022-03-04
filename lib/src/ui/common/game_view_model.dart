@@ -101,7 +101,6 @@ class GameViewModelImp<T> extends GameViewModel implements TimerAccess {
   @override
   void loadNewDataIfRequired() {
     if (_list.length - 1 == _index) {
-      print(_index ~/ 5 + 2);
       if (gameCategoryType == GameCategoryType.SQUARE_ROOT)
         _list.addAll(getList(_index ~/ 5 + 2));
       else

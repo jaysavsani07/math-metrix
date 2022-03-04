@@ -1,5 +1,4 @@
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/data/models/quick_calculation.dart';
 import 'package:mathgame/src/ui/common/CommonBackButton.dart';
 import 'package:mathgame/src/ui/common/CommonClearButton.dart';
@@ -7,6 +6,7 @@ import 'package:mathgame/src/ui/common/CommonNeumorphicView.dart';
 import 'package:mathgame/src/ui/common/CommonNumberButton.dart';
 import 'package:mathgame/src/ui/common/common_app_bar.dart';
 import 'package:mathgame/src/ui/common/common_info_text_view.dart';
+import 'package:mathgame/src/ui/common/common_wrong_answer_animation_view.dart';
 import 'package:mathgame/src/ui/common/dialog_listener.dart';
 import 'package:mathgame/src/ui/quickCalculation/quick_calculation_question_view.dart';
 import 'package:mathgame/src/ui/quickCalculation/quick_calculation_view_model.dart';
@@ -93,19 +93,31 @@ class QuickCalculationView extends StatelessWidget {
                                     .copyWith(fontSize: 30),
                               ),
                               SizedBox(width: 6),
-                              CommonNeumorphicView(
-                                child:
-                                    Selector<QuickCalculationProvider, String>(
-                                        selector: (p0, p1) => p1.result,
-                                        builder: (context, result, child) {
-                                          return Text(result,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle2!
-                                                  .copyWith(
-                                                      fontSize: 24,
-                                                      color: colorTuple.item1));
-                                        }),
+                              Selector<QuickCalculationProvider,
+                                  Tuple2<double, double>>(
+                                selector: (p0, p1) =>
+                                    Tuple2(p1.currentScore, p1.oldScore),
+                                builder: (context, tuple2, child) {
+                                  return CommonWrongAnswerAnimationView(
+                                    currentScore: tuple2.item1.toInt(),
+                                    oldScore: tuple2.item2.toInt(),
+                                    child: child!,
+                                  );
+                                },
+                                child: CommonNeumorphicView(
+                                  child: Selector<QuickCalculationProvider,
+                                          String>(
+                                      selector: (p0, p1) => p1.result,
+                                      builder: (context, result, child) {
+                                        return Text(result,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .subtitle2!
+                                                .copyWith(
+                                                    fontSize: 24,
+                                                    color: colorTuple.item1));
+                                      }),
+                                ),
                               ),
                               SizedBox(width: 60),
                             ],

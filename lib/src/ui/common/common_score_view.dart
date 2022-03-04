@@ -1,44 +1,89 @@
 import 'package:flutter/material.dart';
 
 class CommonScoreView extends StatefulWidget {
-  final int score;
+  final int currentScore;
+  final int oldScore;
 
   const CommonScoreView({
     Key? key,
-    required this.score,
+    required this.currentScore,
+    required this.oldScore,
   }) : super(key: key);
 
   @override
-  _CommonScoreViewState createState() => _CommonScoreViewState();
+  State<CommonScoreView> createState() => _CommonScoreViewState();
 }
 
 class _CommonScoreViewState extends State<CommonScoreView>
     with TickerProviderStateMixin {
   late AnimationController _controller;
-  late Animation<AlignmentGeometry> _animation;
+  late final Animation<Offset> inAnimation;
+  late final Animation<Offset> outAnimation;
+  late final Animation<double> _opacityAnimationOut;
+  late final Animation<double> _opacityAnimationIn;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 750),
+      duration: const Duration(milliseconds: 300),
       vsync: this,
-    )..forward();
-    _animation = Tween<AlignmentGeometry>(
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter,
-    ).animate(
-      CurvedAnimation(
-        parent: _controller,
+    );
+
+    inAnimation = Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset(0.0, 0.0))
+        .animate(CurvedAnimation(
+      parent: _controller,
+      curve: Interval(
+        0.0,
+        1.0,
         curve: Curves.easeIn,
       ),
-    );
+    ));
+
+    outAnimation =
+        Tween<Offset>(begin: Offset(0.0, 0.0), end: Offset(0.0, -1.0))
+            .animate(CurvedAnimation(
+      parent: _controller,
+      curve: Interval(
+        0.0,
+        1.0,
+        curve: Curves.easeIn,
+      ),
+    ));
+
+    _opacityAnimationOut = Tween<double>(
+      begin: 1.0,
+      end: 0.0,
+    ).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Interval(
+        0.4,
+        0.8,
+        curve: Curves.easeIn,
+      ),
+    ));
+
+    _opacityAnimationIn = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Interval(
+        0.4,
+        0.8,
+        curve: Curves.easeOut,
+      ),
+    ));
   }
 
   @override
   void didUpdateWidget(CommonScoreView oldWidget) {
-    if (oldWidget.score != widget.score) {
-      _controller.forward(from: 0.0);
+    if (oldWidget.currentScore != widget.currentScore) {
+      if (oldWidget.currentScore < widget.currentScore) {
+        _controller.forward(from: 0.0);
+      } else {
+        _controller.reverse(from: 1.0);
+      }
     }
     super.didUpdateWidget(oldWidget);
   }
@@ -46,22 +91,36 @@ class _CommonScoreViewState extends State<CommonScoreView>
   @override
   Widget build(BuildContext context) {
     return Stack(
+      alignment: Alignment.center,
       children: [
-        AnimatedBuilder(
-          animation: _animation,
-          builder: (context, child) {
-            return Align(
-              alignment: _animation.value,
-              child: Text(
-                widget.score.toString(),
-                style: Theme.of(context)
-                    .textTheme
-                    .subtitle2!
-                    .copyWith(fontSize: 24),
-              ),
-            );
-          },
+        SlideTransition(
+          child: FadeTransition(
+            opacity: _opacityAnimationIn,
+            child: Text(
+              widget.oldScore < widget.currentScore
+                  ? widget.currentScore.toString()
+                  : widget.oldScore.toString(),
+              // key: ValueKey<int>(widget.score),
+              style:
+                  Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 24),
+            ),
+          ),
+          position: inAnimation,
         ),
+        SlideTransition(
+          child: FadeTransition(
+            opacity: _opacityAnimationOut,
+            child: Text(
+              widget.oldScore > widget.currentScore
+                  ? widget.currentScore.toString()
+                  : widget.oldScore.toString(),
+              // key: ValueKey<int>(widget.score),
+              style:
+                  Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 24),
+            ),
+          ),
+          position: outAnimation,
+        )
       ],
     );
   }
@@ -72,3 +131,135 @@ class _CommonScoreViewState extends State<CommonScoreView>
     super.dispose();
   }
 }
+
+// import 'package:flutter/material.dart';
+//
+// class CommonScoreView1 extends StatefulWidget {
+//   final int currentScore;
+//   final int oldScore;
+//
+//   const CommonScoreView1({
+//     Key? key,
+//     required this.currentScore,
+//     required this.oldScore,
+//   }) : super(key: key);
+//
+//   @override
+//   State<CommonScoreView1> createState() => _CommonScoreView1State();
+// }
+//
+// class _CommonScoreView1State extends State<CommonScoreView1>
+//     with TickerProviderStateMixin {
+//   late AnimationController _controller;
+//   late final Animation<Offset> inAnimation;
+//   late final Animation<Offset> outAnimation;
+//   late final Animation<double> _opacityAnimationOut;
+//   late final Animation<double> _opacityAnimationIn;
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     _controller = AnimationController(
+//       duration: const Duration(milliseconds: 500),
+//       vsync: this,
+//     );
+//
+//     inAnimation = Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset(0.0, 0.0))
+//         .animate(CurvedAnimation(
+//       parent: _controller,
+//       curve: Interval(
+//         0.0,
+//         1.0,
+//         curve: Curves.easeIn,
+//       ),
+//     ));
+//
+//     outAnimation =
+//         Tween<Offset>(begin: Offset(0.0, 0.0), end: Offset(0.0, -1.0))
+//             .animate(CurvedAnimation(
+//           parent: _controller,
+//           curve: Interval(
+//             0.0,
+//             1.0,
+//             curve: Curves.easeIn,
+//           ),
+//         ));
+//
+//     _opacityAnimationOut = Tween<double>(
+//       begin: 1.0,
+//       end: 0.0,
+//     ).animate(CurvedAnimation(
+//       parent: _controller,
+//       curve: Interval(
+//         0.4,
+//         0.8,
+//         curve: Curves.easeIn,
+//       ),
+//     ));
+//
+//     _opacityAnimationIn = Tween<double>(
+//       begin: 0.0,
+//       end: 1.0,
+//     ).animate(CurvedAnimation(
+//       parent: _controller,
+//       curve: Interval(
+//         0.4,
+//         0.8,
+//         curve: Curves.easeOut,
+//       ),
+//     ));
+//   }
+//
+//   @override
+//   void didUpdateWidget(CommonScoreView1 oldWidget) {
+//     print("ok ${widget.currentScore} ${widget.oldScore}");
+//     if (oldWidget.currentScore != widget.currentScore &&
+//         oldWidget.oldScore != widget.oldScore) {
+//       if (widget.currentScore > widget.currentScore) {
+//         _controller.reverse(from: 1.0);
+//       } else {
+//         _controller.forward(from: 0.0);
+//       }
+//     }
+//     super.didUpdateWidget(oldWidget);
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Stack(
+//       alignment: Alignment.center,
+//       children: [
+//         SlideTransition(
+//           child: FadeTransition(
+//             opacity: _opacityAnimationIn,
+//             child: Text(
+//               widget.currentScore.toString(),
+//               // key: ValueKey<int>(widget.score),
+//               style:
+//               Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 24),
+//             ),
+//           ),
+//           position: inAnimation,
+//         ),
+//         SlideTransition(
+//           child: FadeTransition(
+//             opacity: _opacityAnimationOut,
+//             child: Text(
+//               widget.oldScore.toString(),
+//               // key: ValueKey<int>(widget.score),
+//               style:
+//               Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 24),
+//             ),
+//           ),
+//           position: outAnimation,
+//         )
+//       ],
+//     );
+//   }
+//
+//   @override
+//   void dispose() {
+//     _controller.dispose();
+//     super.dispose();
+//   }
+// }

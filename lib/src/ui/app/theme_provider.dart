@@ -12,12 +12,10 @@ class ThemeProvider extends ChangeNotifier {
   }
 
   void changeTheme() async {
-    print(themeMode);
     if (themeMode == ThemeMode.light)
       themeMode = ThemeMode.dark;
     else
       themeMode = ThemeMode.light;
-    print(themeMode);
     notifyListeners();
     await sharedPreferences.setInt(KeyUtil.IS_DARK_MODE, themeMode.index);
   }

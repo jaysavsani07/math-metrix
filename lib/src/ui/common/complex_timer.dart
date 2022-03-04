@@ -120,7 +120,6 @@ class ComplexTimer implements Timer {
 void main() {
   var timer = ComplexTimer(Duration(milliseconds: 2000));
   timer.onTimeout = (x) {
-    print(x.tick);
   };
   timer._startTimer();
 }

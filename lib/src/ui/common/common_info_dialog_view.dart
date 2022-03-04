@@ -21,38 +21,12 @@ class CommonInfoDialogView extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                gameInfoDialog.title,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1!
-                    .copyWith(fontSize: 18),
-              ),
-              Card(
-                elevation: 2,
-                color: Theme.of(context).colorScheme.iconCardBgColor,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(16))),
-                child: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  borderRadius: BorderRadius.all(Radius.circular(16)),
-                  child: SizedBox(
-                    height: 38,
-                    width: 38,
-                    child: Icon(
-                      Icons.close,
-                      color: Theme.of(context).colorScheme.crossColor,
-                      size: 20,
-                    ),
-                  ),
-                ),
-              )
-            ],
+          Text(
+            gameInfoDialog.title,
+            style: Theme.of(context)
+                .textTheme
+                .bodyText1!
+                .copyWith(fontSize: 18),
           ),
           SizedBox(height: 24),
           Container(
@@ -139,7 +113,7 @@ class CommonInfoDialogView extends StatelessWidget {
             elevation: 2,
             child: InkWell(
               onTap: () {
-                Navigator.pop(context, true);
+                Navigator.pop(context);
               },
               borderRadius: BorderRadius.all(Radius.circular(12)),
               child: ClipRRect(

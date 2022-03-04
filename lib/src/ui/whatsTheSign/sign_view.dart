@@ -5,6 +5,7 @@ import 'package:mathgame/src/ui/common/CommonNeumorphicView.dart';
 import 'package:mathgame/src/ui/common/CommonNumberButton.dart';
 import 'package:mathgame/src/ui/common/common_app_bar.dart';
 import 'package:mathgame/src/ui/common/common_info_text_view.dart';
+import 'package:mathgame/src/ui/common/common_wrong_answer_animation_view.dart';
 import 'package:mathgame/src/ui/common/dialog_listener.dart';
 import 'package:mathgame/src/ui/whatsTheSign/sign_view_model.dart';
 import 'package:mathgame/src/core/app_constant.dart';
@@ -60,20 +61,31 @@ class SignView extends StatelessWidget {
                                 );
                               }),
                           SizedBox(width: 14),
-                          CommonNeumorphicView(
-                            child: Selector<SignProvider, String>(
-                              selector: (p0, p1) => p1.result,
-                              builder: (context, result, child) {
-                                return Text(
-                                  result,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle2!
-                                      .copyWith(
-                                          fontSize: 30,
-                                          color: colorTuple.item1),
-                                );
-                              },
+                          Selector<SignProvider, Tuple2<double, double>>(
+                            selector: (p0, p1) =>
+                                Tuple2(p1.currentScore, p1.oldScore),
+                            builder: (context, tuple2, child) {
+                              return CommonWrongAnswerAnimationView(
+                                currentScore: tuple2.item1.toInt(),
+                                oldScore: tuple2.item2.toInt(),
+                                child: child!,
+                              );
+                            },
+                            child:  CommonNeumorphicView(
+                              child: Selector<SignProvider, String>(
+                                selector: (p0, p1) => p1.result,
+                                builder: (context, result, child) {
+                                  return Text(
+                                    result,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .subtitle2!
+                                        .copyWith(
+                                        fontSize: 30,
+                                        color: colorTuple.item1),
+                                  );
+                                },
+                              ),
                             ),
                           ),
                           SizedBox(width: 14),

@@ -14,7 +14,6 @@ class PicturePuzzleRepository {
       List<PicturePuzzleShapeList> puzzleList = <PicturePuzzleShapeList>[];
       List<PicturePuzzleData> picturePuzzleDataList =
           getNewShapeMatrix(level, list.length);
-      print("\n");
 
       picturePuzzleDataList
           .asMap()
@@ -61,14 +60,6 @@ class PicturePuzzleRepository {
       list.add(PicturePuzzle(
           puzzleList, int.parse(picturePuzzleDataList.last.text)));
     }
-
-    list.forEach((list1) {
-      list1.list.forEach((list) {
-        print(
-            "${list.shapeList[0].picturePuzzleShapeType} ${list.shapeList[2].picturePuzzleShapeType} ${list.shapeList[4].picturePuzzleShapeType} ${list1.answer}");
-      });
-    });
-    print("\n");
     return list;
   }
 
@@ -151,11 +142,6 @@ class PicturePuzzleRepository {
       list.add(getRowLast(listShape[0], listSign[0], listShape[1], listSign[1],
           listShape[2], listDigit[0], listDigit[1], listDigit[2]));
     }
-//    list.forEach((list) {
-//      print(
-//          "${list.picturePuzzleShapeType1} ${list.sign1} ${list.picturePuzzleShapeType2} ${list.sign2} ${list.picturePuzzleShapeType3}");
-//    });
-//    print("\n");
     return list;
   }
 
@@ -164,8 +150,6 @@ class PicturePuzzleRepository {
       String sign1,
       String sign2,
       String op1) {
-    print(
-        "$op1 $sign1 $op1 $sign2 $op1 ${getResult(op1, sign1, op1, sign2, op1)}");
     return PicturePuzzleData(
         picturePuzzleShapeType1,
         sign1,
@@ -184,11 +168,8 @@ class PicturePuzzleRepository {
       String op2,
       String op3) {
     if ((sign1 == "-" && sign2 == "+") || sign1 == "+" && sign2 == "-") {
-//      print("dakha 6e aama");
       sign1 = "*";
     }
-    print(
-        "$op1 $sign1 $op2 $sign2 $op2 ${getResult(op1, sign1, op2, sign2, op2)}");
     return PicturePuzzleData(
         picturePuzzleShapeType1,
         sign1,
@@ -207,11 +188,9 @@ class PicturePuzzleRepository {
       String op2,
       String op3) {
     if ((sign1 == "-" && sign2 == "+") || sign1 == "+" && sign2 == "-") {
-//      print("dakha 6e aama");
       sign2 = "*";
     }
-    print(
-        "$op2 $sign1 $op3 $sign2 $op3 ${getResult(op2, sign1, op3, sign2, op3)}");
+
     return PicturePuzzleData(
         picturePuzzleShapeType2,
         sign1,
@@ -230,8 +209,6 @@ class PicturePuzzleRepository {
       String op1,
       String op2,
       String op3) {
-    print(
-        "$op1 ${sign1 == "-" ? "+" : sign1} $op2 ${sign2 == "-" ? "+" : sign2} $op3 ${getResult(op1, sign1 == "-" ? "+" : sign1, op2, sign2 == "-" ? "+" : sign2, op3)}");
     return PicturePuzzleData(
         picturePuzzleShapeType1,
         sign1 == "-" ? "+" : sign1,
@@ -255,5 +232,4 @@ void main() {
     PicturePuzzleRepository.getPicturePuzzleDataList(j);
 //    }
   }
-//  print(PicturePuzzleQandSDataProvider.getShapeMatrix());
 }

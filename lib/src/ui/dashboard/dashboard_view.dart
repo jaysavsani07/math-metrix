@@ -140,12 +140,12 @@ class _DashboardViewState extends State<DashboardView>
                       Text(
                         "Math Matrix",
                         style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                            fontSize: 24, fontWeight: FontWeight.bold),
+                            fontSize: 28, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 12),
                       Text(
-                        "Math Train Your Brain, Improve Your Math Skill",
-                        style: Theme.of(context).textTheme.caption,
+                        "Train Your Brain, Improve Your Math Skill",
+                        style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 14),
                       ),
                       SizedBox(height: 36),
                       DashboardButtonView(

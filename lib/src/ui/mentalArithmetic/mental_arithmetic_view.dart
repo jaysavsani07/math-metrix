@@ -6,6 +6,7 @@ import 'package:mathgame/src/ui/common/CommonNeumorphicView.dart';
 import 'package:mathgame/src/ui/common/CommonNumberButton.dart';
 import 'package:mathgame/src/ui/common/common_app_bar.dart';
 import 'package:mathgame/src/ui/common/common_info_text_view.dart';
+import 'package:mathgame/src/ui/common/common_wrong_answer_animation_view.dart';
 import 'package:mathgame/src/ui/common/dialog_listener.dart';
 import 'package:mathgame/src/ui/mentalArithmetic/mental_arithmetic_question_view.dart';
 import 'package:mathgame/src/ui/mentalArithmetic/mental_arithmetic_view_model.dart';
@@ -51,26 +52,36 @@ class MentalArithmeticView extends StatelessWidget {
                     Expanded(
                       child:
                           Selector<MentalArithmeticProvider, MentalArithmetic>(
-                        selector: (p0, p1) => p1.currentState,
-                        builder: (context, currentState, child) {
-                          return MentalArithmeticQuestionView(
-                            currentState: currentState,
-                          );
-                        },
-                      ),
+                              selector: (p0, p1) => p1.currentState,
+                              builder: (context, currentState, child) {
+                                return MentalArithmeticQuestionView(
+                                  currentState: currentState,
+                                );
+                              }),
                     ),
-                    CommonNeumorphicView(
-                      child: Selector<MentalArithmeticProvider, String>(
-                        selector: (p0, p1) => p1.result,
-                        builder: (context, result, child) {
-                          return Text(result,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .subtitle2!
-                                  .copyWith(
-                                      fontSize: 24,
-                                      color: colorTuple.item1));
-                        },
+                    Selector<MentalArithmeticProvider, Tuple2<double, double>>(
+                      selector: (p0, p1) =>
+                          Tuple2(p1.currentScore, p1.oldScore),
+                      builder: (context, tuple2, child) {
+                        return CommonWrongAnswerAnimationView(
+                          currentScore: tuple2.item1.toInt(),
+                          oldScore: tuple2.item2.toInt(),
+                          child: child!,
+                        );
+                      },
+                      child:  CommonNeumorphicView(
+                        isLarge: true,
+                        child: Selector<MentalArithmeticProvider, String>(
+                          selector: (p0, p1) => p1.result,
+                          builder: (context, result, child) {
+                            return Text(result,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle2!
+                                    .copyWith(
+                                    fontSize: 24, color: colorTuple.item1));
+                          },
+                        ),
                       ),
                     ),
                     SizedBox(height: 24),

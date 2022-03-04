@@ -11,7 +11,6 @@ class MathPairsRepository {
 
     int i = 0;
     int totalPairs = level <= 2 ? 12 : 18;
-    print("level $level   total pairs $totalPairs");
 
     List<Pair> list = <Pair>[];
 

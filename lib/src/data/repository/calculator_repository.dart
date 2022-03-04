@@ -32,10 +32,6 @@ class CalculatorRepository {
         }
       });
     }
-
-    // list.forEach((Calculator q) {
-    //   print("${q.toString()}");
-    // });
     return list;
   }
 }
@@ -43,6 +39,5 @@ class CalculatorRepository {
 void main() {
   for (int i = 1; i <= 7; i++) {
     CalculatorRepository.getCalculatorDataList(i);
-    print("**************");
   }
 }

@@ -364,7 +364,6 @@ class MathUtil {
     var list = <Expression>[];
     int min = level == 1 ? 1 : (5 * level) - 5; //1 5 10 15 20 25
     int max = level == 1 ? 10 : (10 * level); //10 20 30 40 50 60
-    print("$min $max");
     while (list.length < count) {
       MathUtil.generateRandomSign1(count - list.length).forEach((String sign) {
         Expression? expression;
@@ -419,9 +418,6 @@ class MathUtil {
         }
       });
     }
-    list.forEach((Expression q) {
-      print("${q.toString()}");
-    });
     return list;
   }
 
@@ -429,7 +425,6 @@ class MathUtil {
     var list = <Expression>[];
     int min = level == 1 ? 1 : (5 * level) - 5; //1 5 10 15 20 25
     int max = level == 1 ? 10 : (10 * level); //10 20 30 40 50 60
-    print("$min $max");
     while (list.length < count) {
       MathUtil.generateRandomSign1(count - list.length).forEach((String sign) {
         Expression? expression;
@@ -475,20 +470,12 @@ class MathUtil {
         }
       });
     }
-    list.forEach((Expression q) {
-//      print("${q.toString()}");
-    });
     return list;
   }
 }
 
 void main() {
-  for (int i = 1; i < 15; i++) {
-//    MathUtil.getMixExp(1, 10);
-    print("******$i*********");
-    print("${MathUtil.getMentalExp(1)}");
-//  print("${MathUtil.generateRandomSign1(5)}");
-  }
+
 }
 
 class Expression {

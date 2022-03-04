@@ -44,10 +44,6 @@ class SignRepository {
         }
       });
     }
-
-    list.forEach((Sign q) {
-      print("${q.toString()}");
-    });
     return list;
   }
 }
@@ -55,6 +51,5 @@ class SignRepository {
 void main() {
   for (int i = 1; i <= 5; i++) {
     SignRepository.getSignDataList(i);
-    print("**************");
   }
 }

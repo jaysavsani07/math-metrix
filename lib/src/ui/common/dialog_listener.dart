@@ -35,7 +35,6 @@ class _DialogListenerState<T extends GameProvider>
   }
 
   void addListener() {
-    print(provider.dialogType);
     switch (provider.dialogType) {
       case DialogType.over:
         showDialog<bool>(
@@ -70,12 +69,12 @@ class _DialogListenerState<T extends GameProvider>
           enableDrag: false,
           isScrollControlled: true,
         ).then((value) {
-          if (value != null && value) {
+          // if (value != null && value) {
             context.read<T>().gotItFromInfoDialog();
-          } else {
-            context.read<T>().updateScore();
-            Navigator.pop(context);
-          }
+          // } else {
+          //   context.read<T>().updateScore();
+          //   Navigator.pop(context);
+          // }
         });
         break;
       case DialogType.pause:
@@ -127,7 +126,6 @@ class _DialogListenerState<T extends GameProvider>
 
   @override
   Widget build(BuildContext context) {
-    print("its rebuild");
     return widget.child;
   }
 

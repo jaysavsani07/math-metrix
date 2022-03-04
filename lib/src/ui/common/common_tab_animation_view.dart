@@ -43,7 +43,6 @@ class _CommonTabAnimationViewState extends State<CommonTabAnimationView>
 
   @override
   Widget build(BuildContext context) {
-    print(1 - _controller.value);
     return Transform.scale(
       scale: 1 - _controller.value,
       child: GestureDetector(

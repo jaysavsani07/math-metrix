@@ -99,9 +99,6 @@ class CorrectAnswerRepository {
       });
     }
 
-    list.forEach((CorrectAnswer q) {
-      print("${q.toString()}");
-    });
     return list;
   }
 }

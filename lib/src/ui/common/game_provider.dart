@@ -26,6 +26,7 @@ class GameProvider<T> extends TimeProvider {
   late List<T> list;
   late int index;
   late double currentScore;
+  late double oldScore;
   late T currentState;
 
   GameProvider({required TickerProvider vsync, required this.gameCategoryType})
@@ -35,6 +36,7 @@ class GameProvider<T> extends TimeProvider {
     list = getList(1);
     index = 0;
     currentScore = 0;
+    oldScore = 0;
     currentState = list[index];
     if (_homeViewModel.isFirstTime(gameCategoryType)) {
       await Future.delayed(Duration(milliseconds: 100));
@@ -56,12 +58,14 @@ class GameProvider<T> extends TimeProvider {
         list.addAll(getList(index ~/ 5 + 1));
     }
     index = index + 1;
+    oldScore = currentScore;
     currentScore = currentScore + getScoreUtil();
     currentState = list[index];
   }
 
   void wrongAnswer() {
     if (currentScore > 0) {
+      oldScore = currentScore;
       currentScore = currentScore + getScoreMinusUtil();
       notifyListeners();
     } else if (currentScore == 0 &&
@@ -162,7 +166,7 @@ class GameProvider<T> extends TimeProvider {
       case GameCategoryType.PICTURE_PUZZLE:
         return ScoreUtil.picturePuzzleScore;
       case GameCategoryType.NUMBER_PYRAMID:
-        return 0;
+        return ScoreUtil.numberPyramidScore;
     }
   }
 
@@ -179,17 +183,17 @@ class GameProvider<T> extends TimeProvider {
       case GameCategoryType.CORRECT_ANSWER:
         return ScoreUtil.correctAnswerScoreMinus;
       case GameCategoryType.MAGIC_TRIANGLE:
-        return ScoreUtil.magicTriangleScore;
+        return ScoreUtil.magicTriangleScoreMinus;
       case GameCategoryType.MENTAL_ARITHMETIC:
         return ScoreUtil.mentalArithmeticScoreMinus;
       case GameCategoryType.QUICK_CALCULATION:
         return ScoreUtil.quickCalculationScoreMinus;
       case GameCategoryType.MATH_MACHINE:
-        return ScoreUtil.mathMachineScore;
+        return ScoreUtil.mathMachineScoreMinus;
       case GameCategoryType.PICTURE_PUZZLE:
-        return ScoreUtil.picturePuzzleScore;
+        return ScoreUtil.picturePuzzleScoreMinus;
       case GameCategoryType.NUMBER_PYRAMID:
-        return 0;
+        return ScoreUtil.numberPyramidScoreMinus;
     }
   }
 
@@ -216,7 +220,7 @@ class GameProvider<T> extends TimeProvider {
       case GameCategoryType.PICTURE_PUZZLE:
         return CoinUtil.picturePuzzleCoin;
       case GameCategoryType.NUMBER_PYRAMID:
-        return 0;
+        return CoinUtil.numberPyramidCoin;
     }
   }
 }

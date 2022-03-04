@@ -34,9 +34,6 @@ class QuickCalculationRepository {
       });
     }
 
-    list.forEach((QuickCalculation q) {
-      print("${q.toString()}");
-    });
     return list;
   }
 }
@@ -44,6 +41,5 @@ class QuickCalculationRepository {
 void main() {
   for (int i = 1; i <= 5; i++) {
     QuickCalculationRepository.getQuickCalculationDataList(i, 1);
-    print("**************");
   }
 }

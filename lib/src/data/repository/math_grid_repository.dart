@@ -53,8 +53,4 @@ class MathGridRepository {
 }
 
 void main() {
-  // for (int i = 1; i <= 7; i++) {
-  print("**************");
-  print(MathGridRepository.getMathGridData(1));
-  // }
 }

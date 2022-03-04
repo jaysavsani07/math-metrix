@@ -44,7 +44,6 @@ class CommonNumberButton extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerRight,
                     child: LayoutBuilder(builder: (context, constraints) {
-                      print(constraints.maxHeight);
                       return Transform.translate(
                         offset: Offset(-constraints.maxHeight / 3.5, 0),
                         child: Transform.scale(

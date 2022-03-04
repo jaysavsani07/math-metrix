@@ -27,7 +27,6 @@ class MentalArithmeticRepository {
         if (!listHasCode.contains(mentalArithmeticQandS.hashCode)) {
           listHasCode.add(mentalArithmeticQandS.hashCode);
           list.add(mentalArithmeticQandS);
-          print(mentalArithmeticQandS);
         }
       }
     }
@@ -37,7 +36,6 @@ class MentalArithmeticRepository {
 
 void main() {
   for (int i = 1; i < 10; i++) {
-    print("**********$i***********");
     MentalArithmeticRepository.getMentalArithmeticDataList(i);
   }
 }

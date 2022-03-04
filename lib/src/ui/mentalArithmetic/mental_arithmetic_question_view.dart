@@ -33,11 +33,9 @@ class _MentalArithmeticQuestionViewState
       vsync: this,
     )
       ..addStatusListener((status) {
-        print(status);
         if (status == AnimationStatus.completed) {
           if (index < 3) {
             index++;
-            print(index);
             _controller.forward(from: 0);
           }
         }

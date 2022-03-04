@@ -84,13 +84,25 @@ class CommonAppBar<T extends GameProvider> extends StatelessWidget
                           height: 28,
                         ),
                         SizedBox(width: 7),
+                        // SizedBox(
+                        //   height: 28,
+                        //   child:  Selector<T, double>(
+                        //       selector: (p0, p1) => p1.currentScore,
+                        //       builder: (context, currentScore, child) {
+                        //         return CommonScoreView1(
+                        //             currentScore: currentScore.toInt());
+                        //       }),
+                        // ),
                         SizedBox(
                           height: 28,
-                          child:  Selector<T, double>(
-                              selector: (p0, p1) => p1.currentScore,
-                              builder: (context, currentScore, child) {
+                          child: Selector<T, Tuple2<double, double>>(
+                              selector: (p0, p1) =>
+                                  Tuple2(p1.currentScore, p1.oldScore),
+                              builder: (context, tuple2, child) {
                                 return CommonScoreView(
-                                    score: currentScore.toInt());
+                                  currentScore: tuple2.item1.toInt(),
+                                  oldScore: tuple2.item2.toInt(),
+                                );
                               }),
                         ),
                       ],

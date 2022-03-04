@@ -62,7 +62,6 @@ class TimerViewModelImpl extends TimerViewModel {
   }
 
   void _onTimeChange(int newTime) {
-   // print(newTime);
     timerAccess.timeUpdate(newTime);
   }
 
