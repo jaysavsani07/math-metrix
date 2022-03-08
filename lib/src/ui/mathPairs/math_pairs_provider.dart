@@ -2,8 +2,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:mathgame/src/data/models/math_pairs.dart';
 import 'package:mathgame/src/core/app_constant.dart';
-import 'package:mathgame/src/ui/common/game_provider.dart';
-import 'package:mathgame/src/core/score_constant.dart';
+import 'package:mathgame/src/ui/app/game_provider.dart';
 
 class MathPairsProvider extends GameProvider<MathPairs> {
   int first = -1;
@@ -29,7 +28,7 @@ class MathPairsProvider extends GameProvider<MathPairs> {
             currentState.availableItem = currentState.availableItem - 2;
             first = -1;
             oldScore = currentScore;
-            currentScore = currentScore + ScoreUtil.mathematicalPairsScore;
+            currentScore = currentScore + KeyUtil.mathematicalPairsScore;
             notifyListeners();
             if (currentState.availableItem == 0) {
               await Future.delayed(Duration(milliseconds: 300));

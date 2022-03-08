@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mathgame/src/ui/common/common_app_bar.dart';
 import 'package:mathgame/src/ui/common/common_info_text_view.dart';
 import 'package:mathgame/src/ui/common/dialog_listener.dart';
-import 'package:mathgame/src/ui/mathGrid/math_grid_view_model.dart';
+import 'package:mathgame/src/ui/mathGrid/math_grid_provider.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/ui/mathGrid/math_grid_button.dart';
 import 'package:provider/provider.dart';
@@ -34,14 +34,14 @@ class MathGridView extends StatelessWidget {
           child: Scaffold(
             appBar: CommonAppBar<MathGridProvider>(colorTuple: colorTuple),
             body: DialogListener<MathGridProvider>(
-              gameCategoryType: GameCategoryType.MATH_MACHINE,
+              gameCategoryType: GameCategoryType.MATH_GRID,
               child: Container(
                 margin: EdgeInsets.all(24),
                 constraints: BoxConstraints.expand(),
                 child: Column(
                   children: <Widget>[
                     CommonInfoTextView<MathGridProvider>(
-                        gameCategoryType: GameCategoryType.MATH_MACHINE),
+                        gameCategoryType: GameCategoryType.MATH_GRID),
                     Expanded(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,

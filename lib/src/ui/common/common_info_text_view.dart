@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/utility/dialog_info_util.dart';
 import 'package:provider/provider.dart';
-
-import 'game_provider.dart';
+import '../app/game_provider.dart';
 
 class CommonInfoTextView<T extends GameProvider> extends StatelessWidget {
   final GameCategoryType gameCategoryType;
@@ -27,7 +25,10 @@ class CommonInfoTextView<T extends GameProvider> extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(DialogInfoUtil.getInfoDialogData(gameCategoryType).title.toUpperCase(),
+            Text(
+                DialogInfoUtil.getInfoDialogData(gameCategoryType)
+                    .title
+                    .toUpperCase(),
                 style: Theme.of(context)
                     .textTheme
                     .caption!

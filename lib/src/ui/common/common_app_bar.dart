@@ -4,7 +4,7 @@ import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/core/app_assets.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/ui/common/common_score_view.dart';
-import 'package:mathgame/src/ui/common/game_provider.dart';
+import 'package:mathgame/src/ui/app/game_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 import 'common_linear_percent_indicator3.dart';
@@ -32,7 +32,7 @@ class CommonAppBar<T extends GameProvider> extends StatelessWidget
           child: Stack(
             alignment: Alignment.bottomCenter,
             children: [
-              CommonLinearPercentIndicator3<T>(
+              CommonLinearPercentIndicator<T>(
                 lineHeight: 24,
                 backgroundColor: Color(0xffeeeeee),
                 linearGradient: LinearGradient(

@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'dart:async';
-
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/data/repository/magic_triangle_repository.dart';
 import 'package:mathgame/src/data/repository/math_grid_repository.dart';
 import 'package:mathgame/src/data/repository/number_pyramid_repository.dart';
-import 'package:mathgame/src/ui/common/time_provider.dart';
-import 'package:mathgame/src/ui/dashboard/dashboard_view_model.dart';
+import 'package:mathgame/src/ui/app/time_provider.dart';
+import 'package:mathgame/src/ui/dashboard/dashboard_provider.dart';
 import 'package:mathgame/src/data/repository/calculator_repository.dart';
 import 'package:mathgame/src/data/repository/correct_answer_repository.dart';
 import 'package:mathgame/src/data/repository/math_pairs_repository.dart';
@@ -16,12 +15,10 @@ import 'package:mathgame/src/data/repository/picture_puzzle_repository.dart';
 import 'package:mathgame/src/data/repository/quick_calculation_repository.dart';
 import 'package:mathgame/src/data/repository/square_root_repository.dart';
 import 'package:mathgame/src/data/repository/sign_repository.dart';
-import 'package:mathgame/src/core/coin_constant.dart';
-import 'package:mathgame/src/core/score_constant.dart';
 
 class GameProvider<T> extends TimeProvider {
   final GameCategoryType gameCategoryType;
-  final _homeViewModel = GetIt.I<DashboardViewModel>();
+  final _homeViewModel = GetIt.I<DashboardProvider>();
 
   late List<T> list;
   late int index;
@@ -62,19 +59,19 @@ class GameProvider<T> extends TimeProvider {
     result = "";
     index = index + 1;
     oldScore = currentScore;
-    currentScore = currentScore + getScoreUtil();
+    currentScore = currentScore + KeyUtil.getScoreUtil(gameCategoryType);
     currentState = list[index];
   }
 
   void wrongAnswer() {
     if (currentScore > 0) {
       oldScore = currentScore;
-      currentScore = currentScore + getScoreMinusUtil();
+      currentScore = currentScore + KeyUtil.getScoreMinusUtil(gameCategoryType);
       notifyListeners();
     } else if (currentScore == 0 &&
         (gameCategoryType == GameCategoryType.SQUARE_ROOT ||
             gameCategoryType == GameCategoryType.CORRECT_ANSWER ||
-            gameCategoryType == GameCategoryType.SIGN)) {
+            gameCategoryType == GameCategoryType.GUESS_SIGN)) {
       dialogType = DialogType.over;
       pauseTimer();
       notifyListeners();
@@ -106,8 +103,8 @@ class GameProvider<T> extends TimeProvider {
   }
 
   void updateScore() {
-    _homeViewModel.updateScoreboard(
-        gameCategoryType, currentScore, index * getCoinUtil());
+    _homeViewModel.updateScoreboard(gameCategoryType, currentScore,
+        index * KeyUtil.getCoinUtil(gameCategoryType));
   }
 
   void gotItFromInfoDialog() {
@@ -123,7 +120,7 @@ class GameProvider<T> extends TimeProvider {
     switch (gameCategoryType) {
       case GameCategoryType.CALCULATOR:
         return CalculatorRepository.getCalculatorDataList(level);
-      case GameCategoryType.SIGN:
+      case GameCategoryType.GUESS_SIGN:
         return SignRepository.getSignDataList(level);
       case GameCategoryType.SQUARE_ROOT:
         return SquareRootRepository.getSquareDataList(level);
@@ -137,93 +134,12 @@ class GameProvider<T> extends TimeProvider {
         return MentalArithmeticRepository.getMentalArithmeticDataList(level);
       case GameCategoryType.QUICK_CALCULATION:
         return QuickCalculationRepository.getQuickCalculationDataList(level, 5);
-      case GameCategoryType.MATH_MACHINE:
+      case GameCategoryType.MATH_GRID:
         return MathGridRepository.getMathGridData(level);
       case GameCategoryType.PICTURE_PUZZLE:
         return PicturePuzzleRepository.getPicturePuzzleDataList(level);
       case GameCategoryType.NUMBER_PYRAMID:
         return NumberPyramidRepository.getPyramidDataList(level);
-    }
-  }
-
-  double getScoreUtil() {
-    switch (gameCategoryType) {
-      case GameCategoryType.CALCULATOR:
-        return ScoreUtil.calculatorScore;
-      case GameCategoryType.SIGN:
-        return ScoreUtil.signScore;
-      case GameCategoryType.SQUARE_ROOT:
-        return ScoreUtil.squareRootScore;
-      case GameCategoryType.MATH_PAIRS:
-        return ScoreUtil.mathMachineScore;
-      case GameCategoryType.CORRECT_ANSWER:
-        return ScoreUtil.correctAnswerScore;
-      case GameCategoryType.MAGIC_TRIANGLE:
-        return ScoreUtil.magicTriangleScore;
-      case GameCategoryType.MENTAL_ARITHMETIC:
-        return ScoreUtil.mentalArithmeticScore;
-      case GameCategoryType.QUICK_CALCULATION:
-        return ScoreUtil.quickCalculationScore;
-      case GameCategoryType.MATH_MACHINE:
-        return ScoreUtil.mathMachineScore;
-      case GameCategoryType.PICTURE_PUZZLE:
-        return ScoreUtil.picturePuzzleScore;
-      case GameCategoryType.NUMBER_PYRAMID:
-        return ScoreUtil.numberPyramidScore;
-    }
-  }
-
-  double getScoreMinusUtil() {
-    switch (gameCategoryType) {
-      case GameCategoryType.CALCULATOR:
-        return ScoreUtil.calculatorScoreMinus;
-      case GameCategoryType.SIGN:
-        return ScoreUtil.signScoreMinus;
-      case GameCategoryType.SQUARE_ROOT:
-        return ScoreUtil.squareRootScoreMinus;
-      case GameCategoryType.MATH_PAIRS:
-        return ScoreUtil.mathematicalPairsScoreMinus;
-      case GameCategoryType.CORRECT_ANSWER:
-        return ScoreUtil.correctAnswerScoreMinus;
-      case GameCategoryType.MAGIC_TRIANGLE:
-        return ScoreUtil.magicTriangleScoreMinus;
-      case GameCategoryType.MENTAL_ARITHMETIC:
-        return ScoreUtil.mentalArithmeticScoreMinus;
-      case GameCategoryType.QUICK_CALCULATION:
-        return ScoreUtil.quickCalculationScoreMinus;
-      case GameCategoryType.MATH_MACHINE:
-        return ScoreUtil.mathMachineScoreMinus;
-      case GameCategoryType.PICTURE_PUZZLE:
-        return ScoreUtil.picturePuzzleScoreMinus;
-      case GameCategoryType.NUMBER_PYRAMID:
-        return ScoreUtil.numberPyramidScoreMinus;
-    }
-  }
-
-  double getCoinUtil() {
-    switch (gameCategoryType) {
-      case GameCategoryType.CALCULATOR:
-        return CoinUtil.calculatorCoin;
-      case GameCategoryType.SIGN:
-        return CoinUtil.signCoin;
-      case GameCategoryType.SQUARE_ROOT:
-        return CoinUtil.squareRootCoin;
-      case GameCategoryType.MATH_PAIRS:
-        return CoinUtil.mathematicalPairsCoin;
-      case GameCategoryType.CORRECT_ANSWER:
-        return CoinUtil.correctAnswerCoin;
-      case GameCategoryType.MAGIC_TRIANGLE:
-        return CoinUtil.magicTriangleCoin;
-      case GameCategoryType.MENTAL_ARITHMETIC:
-        return CoinUtil.mentalArithmeticCoin;
-      case GameCategoryType.QUICK_CALCULATION:
-        return CoinUtil.quickCalculationCoin;
-      case GameCategoryType.MATH_MACHINE:
-        return CoinUtil.mathMachineCoin;
-      case GameCategoryType.PICTURE_PUZZLE:
-        return CoinUtil.picturePuzzleCoin;
-      case GameCategoryType.NUMBER_PYRAMID:
-        return CoinUtil.numberPyramidCoin;
     }
   }
 }

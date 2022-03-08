@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mathgame/src/core/app_assets.dart';
 import 'package:mathgame/src/data/models/square_root.dart';
-import 'package:mathgame/src/ui/common/CommonNumberButton.dart';
+import 'package:mathgame/src/ui/common/common_number_button.dart';
 import 'package:mathgame/src/ui/common/common_app_bar.dart';
 import 'package:mathgame/src/ui/common/common_info_text_view.dart';
 import 'package:mathgame/src/ui/common/dialog_listener.dart';
-import 'package:mathgame/src/ui/squareRoot/square_root_view_model.dart';
+import 'package:mathgame/src/ui/squareRoot/square_root_provider.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';

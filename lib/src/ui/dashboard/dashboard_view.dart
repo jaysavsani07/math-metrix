@@ -4,7 +4,7 @@ import 'package:mathgame/src/core/app_assets.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/ui/app/theme_provider.dart';
 import 'package:mathgame/src/ui/common/dashboard_button_view.dart';
-import 'package:mathgame/src/ui/dashboard/dashboard_view_model.dart';
+import 'package:mathgame/src/ui/dashboard/dashboard_provider.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
@@ -76,7 +76,7 @@ class _DashboardViewState extends State<DashboardView>
                               height: 24,
                             ),
                             SizedBox(width: 5),
-                            Consumer<DashboardViewModel>(
+                            Consumer<DashboardProvider>(
                               builder: (context, model, child) => Text(
                                   model.overallScore.toString(),
                                   style: Theme.of(context).textTheme.subtitle1),
@@ -99,7 +99,7 @@ class _DashboardViewState extends State<DashboardView>
                               height: 24,
                             ),
                             SizedBox(width: 5),
-                            Consumer<DashboardViewModel>(
+                            Consumer<DashboardProvider>(
                               builder: (context, model, child) => Text(
                                   model.totalCoin.toString(),
                                   style: Theme.of(context).textTheme.subtitle1),
@@ -155,7 +155,7 @@ class _DashboardViewState extends State<DashboardView>
                         onTab: () {
                           Navigator.pushNamedAndRemoveUntil(
                             context,
-                            KeyUtil.Home,
+                            KeyUtil.home,
                             ModalRoute.withName(KeyUtil.dashboard),
                             arguments: KeyUtil.dashboardItems[0],
                           );
@@ -168,7 +168,7 @@ class _DashboardViewState extends State<DashboardView>
                         onTab: () {
                           Navigator.pushNamedAndRemoveUntil(
                             context,
-                            KeyUtil.Home,
+                            KeyUtil.home,
                             ModalRoute.withName(KeyUtil.dashboard),
                             arguments: KeyUtil.dashboardItems[1],
                           );
@@ -181,7 +181,7 @@ class _DashboardViewState extends State<DashboardView>
                         onTab: () {
                           Navigator.pushNamedAndRemoveUntil(
                             context,
-                            KeyUtil.Home,
+                            KeyUtil.home,
                             ModalRoute.withName(KeyUtil.dashboard),
                             arguments: KeyUtil.dashboardItems[2],
                           );

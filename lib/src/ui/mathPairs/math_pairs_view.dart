@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mathgame/src/ui/common/common_app_bar.dart';
 import 'package:mathgame/src/ui/common/common_info_text_view.dart';
 import 'package:mathgame/src/ui/common/dialog_listener.dart';
-import 'package:mathgame/src/ui/mathPairs/math_pairs_view_model.dart';
+import 'package:mathgame/src/ui/mathPairs/math_pairs_provider.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/ui/mathPairs/math_pairs_button.dart';
 import 'package:provider/provider.dart';

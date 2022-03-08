@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:mathgame/src/data/models/magic_triangle.dart';
 import 'package:mathgame/src/core/app_constant.dart';
-import 'package:mathgame/src/ui/common/game_provider.dart';
+import 'package:mathgame/src/ui/app/game_provider.dart';
 
 class MagicTriangleProvider extends GameProvider<MagicTriangle> {
   int selectedTriangleIndex = 0;

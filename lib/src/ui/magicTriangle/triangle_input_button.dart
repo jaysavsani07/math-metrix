@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/data/models/magic_triangle.dart';
-import 'package:mathgame/src/ui/common/CommonNeumorphicView.dart';
-import 'package:mathgame/src/ui/magicTriangle/magic_triangle_view_model.dart';
+import 'package:mathgame/src/ui/common/common_neumorphic_view.dart';
+import 'package:mathgame/src/ui/magicTriangle/magic_triangle_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 

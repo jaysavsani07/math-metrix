@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/data/models/math_grid.dart';
 import 'package:provider/provider.dart';
-import 'package:mathgame/src/ui/mathGrid/math_grid_view_model.dart';
+import 'package:mathgame/src/ui/mathGrid/math_grid_provider.dart';
 import 'package:tuple/tuple.dart';
 
 class MathGridButton extends StatelessWidget {

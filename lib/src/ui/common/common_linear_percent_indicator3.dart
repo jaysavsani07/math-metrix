@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/core/app_constant.dart';
 import 'package:provider/provider.dart';
+import '../app/game_provider.dart';
 
-import 'game_provider.dart';
-
-class CommonLinearPercentIndicator3<T extends GameProvider>
+class CommonLinearPercentIndicator<T extends GameProvider>
     extends StatelessWidget {
   final double lineHeight;
   final LinearGradient linearGradient;
   final Color backgroundColor;
 
-  CommonLinearPercentIndicator3({
+  CommonLinearPercentIndicator({
     this.lineHeight = 5.0,
     required this.linearGradient,
     this.backgroundColor = Colors.black12,

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/core/app_theme.dart';
-import 'package:mathgame/src/core/router.dart';
-import 'package:mathgame/src/service/navigation_service.dart';
+import 'package:mathgame/src/core/app_routes.dart';
 import 'package:mathgame/src/ui/app/theme_provider.dart';
-import 'package:mathgame/src/ui/common/dialog_manager.dart';
 import 'package:provider/provider.dart';
 
 class MyApp extends StatelessWidget {

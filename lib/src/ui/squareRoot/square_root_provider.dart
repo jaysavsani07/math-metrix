@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:mathgame/src/data/models/square_root.dart';
 import 'package:mathgame/src/core/app_constant.dart';
-import 'package:mathgame/src/ui/common/game_provider.dart';
+import 'package:mathgame/src/ui/app/game_provider.dart';
 
 class SquareRootProvider extends GameProvider<SquareRoot> {
   SquareRootProvider({required TickerProvider vsync})

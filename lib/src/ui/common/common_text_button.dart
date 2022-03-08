@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/ui/common/common_tab_animation_view.dart';
 import 'package:tuple/tuple.dart';
 

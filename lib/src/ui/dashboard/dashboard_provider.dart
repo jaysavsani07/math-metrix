@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../data/models/game_category.dart';
 
-class DashboardViewModel extends ChangeNotifier {
+class DashboardProvider extends ChangeNotifier {
   int _overallScore = 0;
   int _totalCoin = 0;
   late List<GameCategory> _list;
@@ -20,7 +20,7 @@ class DashboardViewModel extends ChangeNotifier {
 
   List<GameCategory> get list => _list;
 
-  DashboardViewModel({required this.preferences}) {
+  DashboardProvider({required this.preferences}) {
     _overallScore = getOverallScore();
     _totalCoin = getTotalCoin();
   }
@@ -34,7 +34,7 @@ class DashboardViewModel extends ChangeNotifier {
           "Calculator",
           "calculator",
           GameCategoryType.CALCULATOR,
-          KeyUtil.Calculator,
+          KeyUtil.calculator,
           getScoreboard("calculator"),
           AppAssets.icCalculator,
         ));
@@ -42,8 +42,8 @@ class DashboardViewModel extends ChangeNotifier {
           2,
           "Guess the sign?",
           "sign",
-          GameCategoryType.SIGN,
-          KeyUtil.Sign,
+          GameCategoryType.GUESS_SIGN,
+          KeyUtil.guessSign,
           getScoreboard("sign"),
           AppAssets.icGuessTheSign
         ));
@@ -52,7 +52,7 @@ class DashboardViewModel extends ChangeNotifier {
           "Correct answer",
           "correct_answer",
           GameCategoryType.CORRECT_ANSWER,
-          KeyUtil.CorrectAnswer,
+          KeyUtil.correctAnswer,
           getScoreboard("correct_answer"),
           AppAssets.icCorrectAnswer,
         ));
@@ -61,7 +61,7 @@ class DashboardViewModel extends ChangeNotifier {
           "Quick calculation",
           "quick_calclation",
           GameCategoryType.QUICK_CALCULATION,
-          KeyUtil.QuickCalculation,
+          KeyUtil.quickCalculation,
           getScoreboard("quick_calclation"),
           AppAssets.icQuickCalculation,
         ));
@@ -72,7 +72,7 @@ class DashboardViewModel extends ChangeNotifier {
           "Mental arithmetic",
           "mental_arithmatic",
           GameCategoryType.MENTAL_ARITHMETIC,
-          KeyUtil.MentalArithmetic,
+          KeyUtil.mentalArithmetic,
           getScoreboard("mental_arithmatic"),
           AppAssets.icMentalArithmetic,
         ));
@@ -81,7 +81,7 @@ class DashboardViewModel extends ChangeNotifier {
           "Square root",
           "square_root",
           GameCategoryType.SQUARE_ROOT,
-          KeyUtil.SquareRoot,
+          KeyUtil.squareRoot,
           getScoreboard("square_root"),
           AppAssets.icSquareRoot,
         ));
@@ -89,8 +89,8 @@ class DashboardViewModel extends ChangeNotifier {
           9,
           "Math Grid",
           "math_machine",
-          GameCategoryType.MATH_MACHINE,
-          KeyUtil.MathMachine,
+          GameCategoryType.MATH_GRID,
+          KeyUtil.mathGrid,
           getScoreboard("math_machine"),
           AppAssets.icMathGrid,
         ));
@@ -99,7 +99,7 @@ class DashboardViewModel extends ChangeNotifier {
           "Mathematical pairs",
           "math_pairs",
           GameCategoryType.MATH_PAIRS,
-          KeyUtil.MathematicalPairs,
+          KeyUtil.mathPairs,
           getScoreboard("math_pairs"),
           AppAssets.icMathematicalPairs,
         ));
@@ -110,7 +110,7 @@ class DashboardViewModel extends ChangeNotifier {
           "Magic triangle",
           "magic_tringle",
           GameCategoryType.MAGIC_TRIANGLE,
-          KeyUtil.MagicTriangle,
+          KeyUtil.magicTriangle,
           getScoreboard("magic_tringle"),
           AppAssets.icMagicTriangle,
         ));
@@ -119,7 +119,7 @@ class DashboardViewModel extends ChangeNotifier {
           "Picture Puzzle",
           "picture_puzzle",
           GameCategoryType.PICTURE_PUZZLE,
-          KeyUtil.PicturePuzzle,
+          KeyUtil.picturePuzzle,
           getScoreboard("picture_puzzle"),
           AppAssets.icPicturePuzzle,
         ));
@@ -128,7 +128,7 @@ class DashboardViewModel extends ChangeNotifier {
           "Number Pyramid",
           "number_pyramid",
           GameCategoryType.NUMBER_PYRAMID,
-          KeyUtil.NumberPyramid,
+          KeyUtil.numberPyramid,
           getScoreboard("number_pyramid"),
           AppAssets.icNumberPyramid,
         ));

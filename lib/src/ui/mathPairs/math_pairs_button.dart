@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/data/models/math_pairs.dart';
-import 'package:mathgame/src/ui/mathPairs/math_pairs_view_model.dart';
+import 'package:mathgame/src/ui/mathPairs/math_pairs_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 

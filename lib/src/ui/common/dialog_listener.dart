@@ -6,7 +6,7 @@ import 'package:mathgame/src/ui/common/common_game_exit_dialog_view.dart';
 import 'package:mathgame/src/ui/common/common_game_over_dialog_view.dart';
 import 'package:mathgame/src/ui/common/common_game_pause_dialog_view.dart';
 import 'package:mathgame/src/ui/common/common_info_dialog_view.dart';
-import 'package:mathgame/src/ui/common/game_provider.dart';
+import 'package:mathgame/src/ui/app/game_provider.dart';
 import 'package:provider/provider.dart';
 
 class DialogListener<T extends GameProvider> extends StatefulWidget {

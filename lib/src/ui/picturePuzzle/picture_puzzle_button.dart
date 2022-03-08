@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:mathgame/src/data/models/picture_puzzle.dart';
 import 'package:mathgame/src/ui/picturePuzzle/circle_shape.dart';
 import 'package:mathgame/src/ui/picturePuzzle/picture_puzzle_answer_button.dart';

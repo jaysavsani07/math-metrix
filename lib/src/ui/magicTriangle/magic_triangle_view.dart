@@ -3,7 +3,7 @@ import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/ui/common/common_app_bar.dart';
 import 'package:mathgame/src/ui/common/common_info_text_view.dart';
 import 'package:mathgame/src/ui/common/dialog_listener.dart';
-import 'package:mathgame/src/ui/magicTriangle/magic_triangle_view_model.dart';
+import 'package:mathgame/src/ui/magicTriangle/magic_triangle_provider.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/ui/magicTriangle/triangle_3x3.dart';
 import 'package:mathgame/src/ui/magicTriangle/triangle_4x4.dart';

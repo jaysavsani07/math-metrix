@@ -13,44 +13,44 @@ import 'package:mathgame/src/ui/picturePuzzle/picture_puzzle_view.dart';
 import 'package:mathgame/src/ui/numberPyramid/number_pyramid_view.dart';
 import 'package:mathgame/src/ui/quickCalculation/quick_calculation_view.dart';
 import 'package:mathgame/src/ui/squareRoot/square_root_view.dart';
-import 'package:mathgame/src/ui/whatsTheSign/sign_view.dart';
+import 'package:mathgame/src/ui/guessTheSign/guess_sign_view.dart';
 import 'package:tuple/tuple.dart';
 
 var appRoutes = {
   KeyUtil.dashboard: (context) => DashboardView(),
-  KeyUtil.Home: (context) => HomeView(
+  KeyUtil.home: (context) => HomeView(
       dashboard: ModalRoute.of(context)?.settings.arguments as Dashboard),
-  KeyUtil.Calculator: (context) => CalculatorView(
+  KeyUtil.calculator: (context) => CalculatorView(
       colorTuple:
           ModalRoute.of(context)?.settings.arguments as Tuple2<Color, Color>),
-  KeyUtil.Sign: (context) => SignView(
+  KeyUtil.guessSign: (context) => GuessSignView(
       colorTuple:
           ModalRoute.of(context)?.settings.arguments as Tuple2<Color, Color>),
-  KeyUtil.CorrectAnswer: (context) => CorrectAnswerView(
+  KeyUtil.correctAnswer: (context) => CorrectAnswerView(
       colorTuple:
           ModalRoute.of(context)?.settings.arguments as Tuple2<Color, Color>),
-  KeyUtil.QuickCalculation: (context) => QuickCalculationView(
+  KeyUtil.quickCalculation: (context) => QuickCalculationView(
       colorTuple:
           ModalRoute.of(context)?.settings.arguments as Tuple2<Color, Color>),
-  KeyUtil.MentalArithmetic: (context) => MentalArithmeticView(
+  KeyUtil.mentalArithmetic: (context) => MentalArithmeticView(
       colorTuple:
           ModalRoute.of(context)?.settings.arguments as Tuple2<Color, Color>),
-  KeyUtil.SquareRoot: (context) => SquareRootView(
+  KeyUtil.squareRoot: (context) => SquareRootView(
       colorTuple:
           ModalRoute.of(context)?.settings.arguments as Tuple2<Color, Color>),
-  KeyUtil.MathematicalPairs: (context) => MathPairsView(
+  KeyUtil.mathPairs: (context) => MathPairsView(
       colorTuple:
           ModalRoute.of(context)?.settings.arguments as Tuple2<Color, Color>),
-  KeyUtil.MagicTriangle: (context) => MagicTriangleView(
+  KeyUtil.magicTriangle: (context) => MagicTriangleView(
       colorTuple:
           ModalRoute.of(context)?.settings.arguments as Tuple2<Color, Color>),
-  KeyUtil.MathMachine: (context) => MathGridView(
+  KeyUtil.mathGrid: (context) => MathGridView(
       colorTuple:
           ModalRoute.of(context)?.settings.arguments as Tuple2<Color, Color>),
-  KeyUtil.PicturePuzzle: (context) => PicturePuzzleView(
+  KeyUtil.picturePuzzle: (context) => PicturePuzzleView(
       colorTuple:
           ModalRoute.of(context)?.settings.arguments as Tuple2<Color, Color>),
-  KeyUtil.NumberPyramid: (context) => NumberPyramidView(
+  KeyUtil.numberPyramid: (context) => NumberPyramidView(
       colorTuple:
           ModalRoute.of(context)?.settings.arguments as Tuple2<Color, Color>),
 };

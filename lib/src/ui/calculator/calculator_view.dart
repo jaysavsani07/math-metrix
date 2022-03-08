@@ -1,10 +1,10 @@
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter/material.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/ui/calculator/calculator_provider.dart';
-import 'package:mathgame/src/ui/common/CommonBackButton.dart';
-import 'package:mathgame/src/ui/common/CommonClearButton.dart';
-import 'package:mathgame/src/ui/common/CommonNeumorphicView.dart';
-import 'package:mathgame/src/ui/common/CommonNumberButton.dart';
+import 'package:mathgame/src/ui/common/common_back_button.dart';
+import 'package:mathgame/src/ui/common/common_clear_button.dart';
+import 'package:mathgame/src/ui/common/common_neumorphic_view.dart';
+import 'package:mathgame/src/ui/common/common_number_button.dart';
 import 'package:mathgame/src/ui/common/common_app_bar.dart';
 import 'package:mathgame/src/ui/common/common_info_text_view.dart';
 import 'package:mathgame/src/ui/common/common_wrong_answer_animation_view.dart';

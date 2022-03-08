@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/data/models/correct_answer.dart';
-import 'package:mathgame/src/ui/common/CommonNumberButton.dart';
+import 'package:mathgame/src/ui/common/common_number_button.dart';
 import 'package:mathgame/src/ui/common/common_app_bar.dart';
 import 'package:mathgame/src/ui/common/common_info_text_view.dart';
 import 'package:mathgame/src/ui/common/common_wrong_answer_animation_view.dart';
 import 'package:mathgame/src/ui/common/dialog_listener.dart';
 import 'package:mathgame/src/ui/correctAnswer/correct_answer_question_view.dart';
-import 'package:mathgame/src/ui/correctAnswer/correct_answer_view_model.dart';
+import 'package:mathgame/src/ui/correctAnswer/correct_answer_provider.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 import 'package:vsync_provider/vsync_provider.dart';
-import '../common/CommonNeumorphicView.dart';
+import '../common/common_neumorphic_view.dart';
 
 class CorrectAnswerView extends StatelessWidget {
   final Tuple2<Color, Color> colorTuple;

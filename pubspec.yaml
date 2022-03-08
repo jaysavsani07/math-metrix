@@ -22,17 +22,14 @@ dependencies:
 
   cupertino_icons: ^1.0.4
   flutter_svg: ^1.0.0
+
   get_it: ^7.2.0
-  percent_indicator: ^3.4.0
   vsync_provider: ^0.5.0
   provider: ^6.0.1
-  rflutter_alert: ^2.0.4
   shared_preferences: ^2.0.11
+
   tuple: ^2.0.0
   package_info: ^2.0.2
-  flutter_neumorphic: ^3.2.0
-  flutter_staggered_grid_view: ^0.6.1
-  number_slide_animation: ^0.2.1
 
 dev_dependencies:
   flutter_test:

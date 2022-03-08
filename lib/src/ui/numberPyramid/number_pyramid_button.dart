@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/data/models/number_pyramid.dart';
-import 'package:mathgame/src/ui/numberPyramid/number_pyramid_view_model.dart';
-import 'package:mathgame/src/core/size_config.dart';
+import 'package:mathgame/src/ui/numberPyramid/number_pyramid_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
-class PyramidNumberBox extends StatelessWidget {
+class PyramidNumberButton extends StatelessWidget {
   final NumPyramidCellModel numPyramidCellModel;
   final bool isLeftRadius;
   final bool isRightRadius;
   final double height;
   final Tuple2<Color, Color> colorTuple;
 
-  PyramidNumberBox({
+  PyramidNumberButton({
     required this.numPyramidCellModel,
     this.isLeftRadius = false,
     this.isRightRadius = false,
@@ -23,7 +22,6 @@ class PyramidNumberBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
     final numberProvider = Provider.of<NumberPyramidProvider>(context);
     return InkWell(
       onTap: () {

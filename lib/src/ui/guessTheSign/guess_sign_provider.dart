@@ -1,22 +1,22 @@
 import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
-import 'package:mathgame/src/data/models/correct_answer.dart';
+import 'package:mathgame/src/data/models/sign.dart';
 import 'package:mathgame/src/core/app_constant.dart';
-import 'package:mathgame/src/ui/common/game_provider.dart';
+import 'package:mathgame/src/ui/app/game_provider.dart';
 
-class CorrectAnswerProvider extends GameProvider<CorrectAnswer> {
-  late String result;
+class GuessSignProvider extends GameProvider<Sign> {
 
-  CorrectAnswerProvider({required TickerProvider vsync})
-      : super(vsync: vsync, gameCategoryType: GameCategoryType.CORRECT_ANSWER) {
+  GuessSignProvider({required TickerProvider vsync})
+      : super(vsync: vsync, gameCategoryType: GameCategoryType.GUESS_SIGN) {
     startGame();
   }
 
-  Future<void> checkResult(String answer) async {
+  void checkResult(String answer) async {
     if (timerStatus != TimerStatus.pause) {
       result = answer;
       notifyListeners();
-      if (int.parse(result) == currentState.answer) {
+      if (result == currentState.sign) {
         await Future.delayed(Duration(milliseconds: 300));
         loadNewDataIfRequired();
         if (timerStatus != TimerStatus.pause) {

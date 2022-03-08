@@ -4,7 +4,7 @@ import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/data/models/dashboard.dart';
 import 'package:mathgame/src/ui/common/home_button_view.dart';
-import 'package:mathgame/src/ui/dashboard/dashboard_view_model.dart';
+import 'package:mathgame/src/ui/dashboard/dashboard_provider.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatefulWidget {
@@ -126,7 +126,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
               children: [
                 ListView(
                   padding: const EdgeInsets.only(top: 200, bottom: 100),
-                  children: Provider.of<DashboardViewModel>(context)
+                  children: Provider.of<DashboardProvider>(context)
                       .getGameByPuzzleType(widget.dashboard.puzzleType)
                       .map((e) => HomeButtonView(
                           title: e.name,
@@ -139,7 +139,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                             Navigator.pushNamedAndRemoveUntil(
                               context,
                               e.routePath,
-                              ModalRoute.withName(KeyUtil.Home),
+                              ModalRoute.withName(KeyUtil.home),
                               arguments: widget.dashboard.colorTuple,
                             );
                           }))

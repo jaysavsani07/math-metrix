@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:mathgame/src/data/models/picture_puzzle.dart';
-import 'package:mathgame/src/ui/common/CommonBackButton.dart';
-import 'package:mathgame/src/ui/common/CommonClearButton.dart';
+import 'package:mathgame/src/ui/common/common_back_button.dart';
+import 'package:mathgame/src/ui/common/common_clear_button.dart';
 import 'package:mathgame/src/ui/common/common_app_bar.dart';
 import 'package:mathgame/src/ui/common/common_info_text_view.dart';
 import 'package:mathgame/src/ui/common/dialog_listener.dart';
-import 'package:mathgame/src/ui/picturePuzzle/picture_puzzle_view_model.dart';
+import 'package:mathgame/src/ui/picturePuzzle/picture_puzzle_provider.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/ui/picturePuzzle/picture_puzzle_button.dart';
 import 'package:mathgame/src/ui/common/common_text_button.dart';

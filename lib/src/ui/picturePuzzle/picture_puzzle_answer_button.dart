@@ -1,11 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/data/models/picture_puzzle.dart';
-import 'package:mathgame/src/ui/common/CommonNeumorphicView.dart';
+import 'package:mathgame/src/ui/common/common_neumorphic_view.dart';
 import 'package:mathgame/src/ui/common/common_wrong_answer_animation_view.dart';
-import 'package:mathgame/src/ui/picturePuzzle/picture_puzzle_view_model.dart';
+import 'package:mathgame/src/ui/picturePuzzle/picture_puzzle_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
