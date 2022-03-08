@@ -10,7 +10,7 @@ class AppTheme {
       cardColor: Colors.white,
       textTheme: base.textTheme.copyWith(
         caption: base.textTheme.caption!.copyWith(
-          color: Color(0xff9E9E9E),
+          color: Color(0xff757575),
         ),
       ),
     );

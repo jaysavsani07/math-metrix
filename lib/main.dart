@@ -4,7 +4,6 @@ import 'package:mathgame/src/ui/app/app.dart';
 import 'package:mathgame/src/ui/app/theme_provider.dart';
 import 'package:mathgame/src/ui/dashboard/dashboard_view_model.dart';
 import 'package:mathgame/src/service/dialog_service.dart';
-import 'package:mathgame/src/service/navigation_service.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,7 +23,6 @@ Future<void> main() async {
 }
 
 setupServiceLocator(SharedPreferences sharedPreferences) {
-  GetIt.I.registerLazySingleton(() => NavigationService());
   GetIt.I.registerSingleton<DashboardViewModel>(DashboardViewModel(preferences: sharedPreferences));
   GetIt.I.registerLazySingleton(() => DialogService());
 }

@@ -28,11 +28,13 @@ class GameProvider<T> extends TimeProvider {
   late double currentScore;
   late double oldScore;
   late T currentState;
+  late String result;
 
   GameProvider({required TickerProvider vsync, required this.gameCategoryType})
       : super(vsync: vsync, totalTime: KeyUtil.getTimeUtil(gameCategoryType));
 
   void startGame() async {
+    result = "";
     list = getList(1);
     index = 0;
     currentScore = 0;
@@ -57,6 +59,7 @@ class GameProvider<T> extends TimeProvider {
       else
         list.addAll(getList(index ~/ 5 + 1));
     }
+    result = "";
     index = index + 1;
     oldScore = currentScore;
     currentScore = currentScore + getScoreUtil();

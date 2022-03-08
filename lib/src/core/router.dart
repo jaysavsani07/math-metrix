@@ -16,65 +16,41 @@ import 'package:mathgame/src/ui/squareRoot/square_root_view.dart';
 import 'package:mathgame/src/ui/whatsTheSign/sign_view.dart';
 import 'package:tuple/tuple.dart';
 
-Route<dynamic> generateRoute(RouteSettings settings) {
-  switch (settings.name) {
-    case KeyUtil.dashboard:
-      return MaterialPageRoute(builder: (context) => DashboardView());
-    case KeyUtil.Home:
-      var dashboard = settings.arguments as Dashboard;
-      return MaterialPageRoute(
-          builder: (context) => HomeView(dashboard: dashboard));
-    case KeyUtil.Calculator:
-      var tuple2 = settings.arguments as Tuple2<Color, Color>;
-      return MaterialPageRoute(
-          builder: (context) => CalculatorView(colorTuple: tuple2));
-    case KeyUtil.Sign:
-      var tuple2 = settings.arguments as Tuple2<Color, Color>;
-      return MaterialPageRoute(
-          builder: (context) => SignView(colorTuple: tuple2));
-    case KeyUtil.CorrectAnswer:
-      var tuple2 = settings.arguments as Tuple2<Color, Color>;
-      return MaterialPageRoute(
-          builder: (context) => CorrectAnswerView(colorTuple: tuple2));
-    case KeyUtil.QuickCalculation:
-      var tuple2 = settings.arguments as Tuple2<Color, Color>;
-      return MaterialPageRoute(
-          builder: (context) => QuickCalculationView(colorTuple: tuple2));
-    case KeyUtil.MentalArithmetic:
-      var tuple2 = settings.arguments as Tuple2<Color, Color>;
-      return MaterialPageRoute(
-          builder: (context) => MentalArithmeticView(colorTuple: tuple2));
-    case KeyUtil.SquareRoot:
-      var tuple2 = settings.arguments as Tuple2<Color, Color>;
-      return MaterialPageRoute(
-          builder: (context) => SquareRootView(colorTuple: tuple2));
-    case KeyUtil.MathematicalPairs:
-      var tuple2 = settings.arguments as Tuple2<Color, Color>;
-      return MaterialPageRoute(
-          builder: (context) => MathPairsView(colorTuple: tuple2));
-    case KeyUtil.MagicTriangle:
-      var tuple2 = settings.arguments as Tuple2<Color, Color>;
-      return MaterialPageRoute(
-          builder: (context) => MagicTriangleView(colorTuple: tuple2));
-    case KeyUtil.MathMachine:
-      var tuple2 = settings.arguments as Tuple2<Color, Color>;
-      return MaterialPageRoute(
-          builder: (context) => MathGridView(colorTuple: tuple2));
-    case KeyUtil.PicturePuzzle:
-      var tuple2 = settings.arguments as Tuple2<Color, Color>;
-      return MaterialPageRoute(
-          builder: (context) => PicturePuzzleView(colorTuple: tuple2));
-    case KeyUtil.NumberPyramid:
-      var tuple2 = settings.arguments as Tuple2<Color, Color>;
-      return MaterialPageRoute(
-          builder: (context) => NumberPyramidView(colorTuple: tuple2));
-    default:
-      return MaterialPageRoute(
-        builder: (context) => Scaffold(
-          body: Center(
-            child: Text('No path for ${settings.name}'),
-          ),
-        ),
-      );
-  }
-}
+var appRoutes = {
+  KeyUtil.dashboard: (context) => DashboardView(),
+  KeyUtil.Home: (context) => HomeView(
+      dashboard: ModalRoute.of(context)?.settings.arguments as Dashboard),
+  KeyUtil.Calculator: (context) => CalculatorView(
+      colorTuple:
+          ModalRoute.of(context)?.settings.arguments as Tuple2<Color, Color>),
+  KeyUtil.Sign: (context) => SignView(
+      colorTuple:
+          ModalRoute.of(context)?.settings.arguments as Tuple2<Color, Color>),
+  KeyUtil.CorrectAnswer: (context) => CorrectAnswerView(
+      colorTuple:
+          ModalRoute.of(context)?.settings.arguments as Tuple2<Color, Color>),
+  KeyUtil.QuickCalculation: (context) => QuickCalculationView(
+      colorTuple:
+          ModalRoute.of(context)?.settings.arguments as Tuple2<Color, Color>),
+  KeyUtil.MentalArithmetic: (context) => MentalArithmeticView(
+      colorTuple:
+          ModalRoute.of(context)?.settings.arguments as Tuple2<Color, Color>),
+  KeyUtil.SquareRoot: (context) => SquareRootView(
+      colorTuple:
+          ModalRoute.of(context)?.settings.arguments as Tuple2<Color, Color>),
+  KeyUtil.MathematicalPairs: (context) => MathPairsView(
+      colorTuple:
+          ModalRoute.of(context)?.settings.arguments as Tuple2<Color, Color>),
+  KeyUtil.MagicTriangle: (context) => MagicTriangleView(
+      colorTuple:
+          ModalRoute.of(context)?.settings.arguments as Tuple2<Color, Color>),
+  KeyUtil.MathMachine: (context) => MathGridView(
+      colorTuple:
+          ModalRoute.of(context)?.settings.arguments as Tuple2<Color, Color>),
+  KeyUtil.PicturePuzzle: (context) => PicturePuzzleView(
+      colorTuple:
+          ModalRoute.of(context)?.settings.arguments as Tuple2<Color, Color>),
+  KeyUtil.NumberPyramid: (context) => NumberPyramidView(
+      colorTuple:
+          ModalRoute.of(context)?.settings.arguments as Tuple2<Color, Color>),
+};

@@ -8,13 +8,16 @@ import 'package:mathgame/src/core/score_constant.dart';
 class MathPairsProvider extends GameProvider<MathPairs> {
   int first = -1;
   int second = -1;
+  bool lock = false;
 
-  MathPairsProvider({required TickerProvider vsync}) : super(vsync: vsync,gameCategoryType: GameCategoryType.MATH_PAIRS) {
+  MathPairsProvider({required TickerProvider vsync})
+      : super(vsync: vsync, gameCategoryType: GameCategoryType.MATH_PAIRS) {
     startGame();
   }
 
   Future<void> checkResult(Pair mathPair, int index) async {
-    if (timerStatus != TimerStatus.pause) {
+    if (timerStatus != TimerStatus.pause && !lock) {
+      lock = true;
       if (!currentState.list[index].isActive) {
         currentState.list[index].isActive = true;
         notifyListeners();
@@ -25,6 +28,7 @@ class MathPairsProvider extends GameProvider<MathPairs> {
             currentState.list[index].isVisible = false;
             currentState.availableItem = currentState.availableItem - 2;
             first = -1;
+            oldScore = currentScore;
             currentScore = currentScore + ScoreUtil.mathematicalPairsScore;
             notifyListeners();
             if (currentState.availableItem == 0) {
@@ -45,10 +49,12 @@ class MathPairsProvider extends GameProvider<MathPairs> {
         } else {
           first = index;
         }
+        lock = false;
       } else {
         first = -1;
         currentState.list[index].isActive = false;
         notifyListeners();
+        lock = false;
       }
     }
   }

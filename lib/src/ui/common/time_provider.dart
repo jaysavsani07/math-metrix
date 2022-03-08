@@ -53,7 +53,8 @@ class TimeProvider with ChangeNotifier {
       value: 1.0,
       duration: Duration(seconds: totalTime),
     )..addStatusListener((status) {
-        if (status == AnimationStatus.dismissed) {
+        if (status == AnimationStatus.dismissed &&
+            dialogType == DialogType.non) {
           dialogType = DialogType.over;
           timerStatus = TimerStatus.pause;
           notifyListeners();

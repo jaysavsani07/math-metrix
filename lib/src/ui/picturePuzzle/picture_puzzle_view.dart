@@ -78,39 +78,26 @@ class PicturePuzzleView extends StatelessWidget {
                     ),
                     Builder(builder: (context) {
                       return GridView(
-                        gridDelegate: SliverQuiltedGridDelegate(
-                          crossAxisCount: 10,
-                          pattern: [
-                            QuiltedGridTile(2, 2),
-                            QuiltedGridTile(2, 2),
-                            QuiltedGridTile(2, 2),
-                            QuiltedGridTile(2, 2),
-                            QuiltedGridTile(2, 2),
-                            QuiltedGridTile(2, 2),
-                            QuiltedGridTile(2, 2),
-                            QuiltedGridTile(2, 2),
-                            QuiltedGridTile(2, 2),
-                            QuiltedGridTile(2, 2),
-                            QuiltedGridTile(2, 5),
-                            QuiltedGridTile(2, 5),
-                          ],
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          childAspectRatio: 1.3,
                         ),
                         padding: const EdgeInsets.only(bottom: 24),
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
                         children: [
                           ...[
-                            "5",
-                            "6",
                             "7",
                             "8",
                             "9",
-                            "0",
+                            "4",
+                            "5",
+                            "6",
                             "1",
                             "2",
                             "3",
-                            "4",
                             "Clear",
+                            "0",
                             "Back"
                           ].map(
                             (e) {

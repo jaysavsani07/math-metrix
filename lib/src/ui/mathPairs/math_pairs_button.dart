@@ -20,7 +20,7 @@ class MathPairsButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedOpacity(
       opacity: mathPairs.isVisible ? 1 : 0,
-      duration: Duration(milliseconds: 500),
+      duration: Duration(milliseconds: 300),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),

@@ -21,23 +21,16 @@ class MyApp extends StatelessWidget {
 
     return Consumer<ThemeProvider>(
         builder: (context, ThemeProvider provider, child) {
-          return MaterialApp(
-            title: 'Math Matrix',
-            debugShowCheckedModeBanner: false,
-            theme: AppTheme.theme,
-            darkTheme: AppTheme.darkTheme,
-            themeMode: provider.themeMode,
-            builder: (context, widget) => Navigator(
-              onGenerateRoute: (settings) => MaterialPageRoute(
-                  builder: (context) => DialogManager(
-                    child: widget!,
-                  )),
-            ),
-            navigatorKey: GetIt.I<NavigationService>().navigatorKey,
-            onGenerateRoute: generateRoute,
-            initialRoute: KeyUtil.dashboard,
-            // home: DashboardView(),
-          );
-        });
+      return MaterialApp(
+        title: 'Math Matrix',
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.theme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: provider.themeMode,
+        initialRoute: KeyUtil.dashboard,
+        routes: appRoutes,
+        // home: DashboardView(),
+      );
+    });
   }
 }

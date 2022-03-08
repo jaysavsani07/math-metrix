@@ -48,8 +48,10 @@ class _DialogListenerState<T extends GameProvider>
           barrierDismissible: false,
         ).then((value) {
           if (value != null && value) {
+            context.read<T>().updateScore();
             context.read<T>().startGame();
           } else {
+            context.read<T>().updateScore();
             Navigator.pop(context);
           }
         });
@@ -69,12 +71,7 @@ class _DialogListenerState<T extends GameProvider>
           enableDrag: false,
           isScrollControlled: true,
         ).then((value) {
-          // if (value != null && value) {
             context.read<T>().gotItFromInfoDialog();
-          // } else {
-          //   context.read<T>().updateScore();
-          //   Navigator.pop(context);
-          // }
         });
         break;
       case DialogType.pause:

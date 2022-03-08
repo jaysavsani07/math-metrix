@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mathgame/src/core/app_assets.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/ui/app/theme_provider.dart';
 import 'package:mathgame/src/ui/common/dashboard_button_view.dart';
 import 'package:mathgame/src/ui/dashboard/dashboard_view_model.dart';
 import 'package:mathgame/src/core/app_constant.dart';
-import 'package:mathgame/src/service/navigation_service.dart';
 import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 
@@ -145,15 +143,20 @@ class _DashboardViewState extends State<DashboardView>
                       SizedBox(height: 12),
                       Text(
                         "Train Your Brain, Improve Your Math Skill",
-                        style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 14),
+                        style: Theme.of(context)
+                            .textTheme
+                            .caption!
+                            .copyWith(fontSize: 14),
                       ),
                       SizedBox(height: 36),
                       DashboardButtonView(
                         dashboard: KeyUtil.dashboardItems[0],
                         position: _offsetLeftEnter,
                         onTab: () {
-                          GetIt.I<NavigationService>().navigateTo(
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
                             KeyUtil.Home,
+                            ModalRoute.withName(KeyUtil.dashboard),
                             arguments: KeyUtil.dashboardItems[0],
                           );
                         },
@@ -163,8 +166,10 @@ class _DashboardViewState extends State<DashboardView>
                         dashboard: KeyUtil.dashboardItems[1],
                         position: _offsetRightEnter,
                         onTab: () {
-                          GetIt.I<NavigationService>().navigateTo(
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
                             KeyUtil.Home,
+                            ModalRoute.withName(KeyUtil.dashboard),
                             arguments: KeyUtil.dashboardItems[1],
                           );
                         },
@@ -174,8 +179,10 @@ class _DashboardViewState extends State<DashboardView>
                         dashboard: KeyUtil.dashboardItems[2],
                         position: _offsetLeftEnter,
                         onTab: () {
-                          GetIt.I<NavigationService>().navigateTo(
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
                             KeyUtil.Home,
+                            ModalRoute.withName(KeyUtil.dashboard),
                             arguments: KeyUtil.dashboardItems[2],
                           );
                         },
@@ -205,15 +212,12 @@ class _DashboardViewState extends State<DashboardView>
                     SizedBox(width: 12),
                     FutureBuilder<PackageInfo>(
                       future: PackageInfo.fromPlatform(),
-                      builder: (context, snapshot) => Text("v${snapshot.data?.version}",
+                      builder: (context, snapshot) => Text(
+                          "v${snapshot.data?.version}",
                           style: Theme.of(context)
                               .textTheme
-                              .bodyText2!
-                              .copyWith(
-                                  fontWeight: FontWeight.normal,
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .crossLightColor)),
+                              .caption!
+                              .copyWith(fontSize: 14)),
                     ),
                   ],
                 ),

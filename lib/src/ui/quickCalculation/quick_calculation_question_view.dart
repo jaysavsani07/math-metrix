@@ -31,7 +31,7 @@ class _QuickCalculationQuestionViewState
     super.initState();
 
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 750),
+      duration: const Duration(milliseconds: 500),
       vsync: this,
     )..forward();
     _animation = Tween<AlignmentGeometry>(

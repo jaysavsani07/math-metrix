@@ -13,7 +13,7 @@ class Sign {
 
   @override
   String toString() {
-    return 'SignQandS{firstDigit: $firstDigit, sign: $sign, secondDigit: $secondDigit, answer: $answer}';
+    return 'SignQandS{firstDigit: $firstDigit, sign: $sign, secondDigit: $secondDigit, answer: $answer} \n';
   }
 
   @override

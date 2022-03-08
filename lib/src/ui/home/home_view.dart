@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get_it/get_it.dart';
+import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/data/models/dashboard.dart';
-import 'package:mathgame/src/service/navigation_service.dart';
 import 'package:mathgame/src/ui/common/home_button_view.dart';
 import 'package:mathgame/src/ui/dashboard/dashboard_view_model.dart';
 import 'package:provider/provider.dart';
@@ -108,6 +107,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
       animationController.animateTo(scrollInfo.metrics.pixels / 127);
       return true;
     } else {
+      animationController.animateTo(1.0);
       return false;
     }
   }
@@ -136,8 +136,12 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                           colorTuple: widget.dashboard.colorTuple,
                           opacity: widget.dashboard.opacity,
                           onTab: () {
-                            GetIt.I<NavigationService>().navigateTo(e.routePath,
-                                arguments: widget.dashboard.colorTuple);
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              e.routePath,
+                              ModalRoute.withName(KeyUtil.Home),
+                              arguments: widget.dashboard.colorTuple,
+                            );
                           }))
                       .toList(),
                 ),
