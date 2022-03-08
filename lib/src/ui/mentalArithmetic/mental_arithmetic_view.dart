@@ -117,6 +117,7 @@ class MentalArithmeticView extends StatelessWidget {
                               } else if (e == "-") {
                                 return CommonClearButton(
                                     text: e,
+                                    fontSize: 40,
                                     onTab: () {
                                       context
                                           .read<MentalArithmeticProvider>()

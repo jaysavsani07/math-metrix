@@ -6,12 +6,14 @@ class CommonClearButton extends StatelessWidget {
   final Function onTab;
   final double height;
   final String text;
+  final double fontSize;
 
   const CommonClearButton({
     Key? key,
     required this.onTab,
     required this.text,
     this.height = 112,
+    this.fontSize = 14,
   }) : super(key: key);
 
   @override
@@ -33,7 +35,7 @@ class CommonClearButton extends StatelessWidget {
             child: Text(
               text,
               style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                    fontSize: 14,
+                    fontSize: fontSize,
                     color: Theme.of(context).colorScheme.crossColor,
                   ),
             ),
