@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mathgame/src/core/app_assets.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/ui/app/theme_provider.dart';
-import 'package:mathgame/src/ui/common/dashboard_button_view.dart';
+import 'package:mathgame/src/ui/dashboard/dashboard_button_view.dart';
 import 'package:mathgame/src/ui/dashboard/dashboard_provider.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:package_info/package_info.dart';
@@ -19,10 +19,12 @@ class _DashboardViewState extends State<DashboardView>
   late AnimationController _controller;
   late Animation<Offset> _offsetLeftEnter;
   late Animation<Offset> _offsetRightEnter;
+  late bool isHomePageOpen;
 
   @override
   void initState() {
     super.initState();
+    isHomePageOpen = false;
     _controller = AnimationController(
       duration: Duration(milliseconds: 700),
       vsync: this,
@@ -47,11 +49,11 @@ class _DashboardViewState extends State<DashboardView>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        top: true,
-        bottom: true,
-        child: Padding(
+    return SafeArea(
+      top: true,
+      bottom: true,
+      child: Scaffold(
+        body: Padding(
           padding: const EdgeInsets.all(12),
           child: Column(
             children: <Widget>[
@@ -81,29 +83,6 @@ class _DashboardViewState extends State<DashboardView>
                                   model.overallScore.toString(),
                                   style: Theme.of(context).textTheme.subtitle1),
                             ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(width: 8),
-                      Container(
-                        decoration: BoxDecoration(
-                            color:
-                                Theme.of(context).colorScheme.infoDialogBgColor,
-                            borderRadius: BorderRadius.circular(18)),
-                        padding: const EdgeInsets.all(12.0),
-                        child: Row(
-                          children: [
-                            SvgPicture.asset(
-                              AppAssets.icCoin,
-                              width: 24,
-                              height: 24,
-                            ),
-                            SizedBox(width: 5),
-                            Consumer<DashboardProvider>(
-                              builder: (context, model, child) => Text(
-                                  model.totalCoin.toString(),
-                                  style: Theme.of(context).textTheme.subtitle1),
-                            )
                           ],
                         ),
                       ),

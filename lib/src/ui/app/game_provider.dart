@@ -103,13 +103,15 @@ class GameProvider<T> extends TimeProvider {
   }
 
   void updateScore() {
-    _homeViewModel.updateScoreboard(gameCategoryType, currentScore,
-        index * KeyUtil.getCoinUtil(gameCategoryType));
+    _homeViewModel.updateScoreboard(gameCategoryType, currentScore);
   }
 
   void gotItFromInfoDialog() {
     if (_homeViewModel.isFirstTime(gameCategoryType)) {
       _homeViewModel.setFirstTime(gameCategoryType);
+      if (gameCategoryType == GameCategoryType.MENTAL_ARITHMETIC) {
+        startGame();
+      }
       restartTimer();
     } else {
       pauseResumeGame();

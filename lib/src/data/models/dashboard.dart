@@ -10,6 +10,8 @@ class Dashboard {
   final PuzzleType puzzleType;
   final double opacity;
   final Tuple2<Color, Color> colorTuple;
+  Color fillIconColor;
+  Color outlineIconColor;
 
   Dashboard({
     required this.puzzleType,
@@ -19,5 +21,7 @@ class Dashboard {
     required this.outlineIcon,
     required this.subtitle,
     required this.title,
+    required this.fillIconColor,
+    required this.outlineIconColor,
   });
 }

@@ -60,6 +60,8 @@ class KeyUtil {
       outlineIcon: AppAssets.icMathPuzzleOutline,
       subtitle: "Each game with simple calculation with different approach.",
       title: "Math Puzzle",
+      fillIconColor: Color(0xff4895ef),
+      outlineIconColor: Color(0xff436add),
     ),
     Dashboard(
       puzzleType: PuzzleType.MEMORY_PUZZLE,
@@ -69,6 +71,8 @@ class KeyUtil {
       outlineIcon: AppAssets.icMemoryPuzzleOutline,
       subtitle: "Memorise numbers & signs before applying calculation to them.",
       title: "Memory Puzzle",
+      fillIconColor: Color(0xff9f2beb),
+      outlineIconColor: Color(0xff560BAD),
     ),
     Dashboard(
       puzzleType: PuzzleType.BRAIN_PUZZLE,
@@ -79,6 +83,8 @@ class KeyUtil {
       subtitle:
           "Enhance logical thinking, concentration and core cognitive skills.",
       title: "Train Your Brain",
+      fillIconColor: Color(0xfff72585),
+      outlineIconColor: Color(0xffB5179E),
     ),
   ];
 
@@ -220,7 +226,6 @@ class KeyUtil {
   static double quickCalculationScore = 1;
   static double quickCalculationScoreMinus = -1;
 
-
   static double mentalArithmeticScore = 2;
   static double mentalArithmeticScoreMinus = -1;
 
@@ -232,7 +237,6 @@ class KeyUtil {
 
   static double mathGridScore = 5;
   static double mathGridScoreMinus = 0;
-
 
   static double magicTriangleScore = 5;
   static double magicTriangleScoreMinus = 0;

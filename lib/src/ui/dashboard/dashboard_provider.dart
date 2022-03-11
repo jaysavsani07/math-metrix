@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mathgame/src/core/app_assets.dart';
 import 'package:mathgame/src/data/models/score_board.dart';
@@ -10,19 +11,16 @@ import '../../data/models/game_category.dart';
 
 class DashboardProvider extends ChangeNotifier {
   int _overallScore = 0;
-  int _totalCoin = 0;
   late List<GameCategory> _list;
   final SharedPreferences preferences;
 
   int get overallScore => _overallScore;
 
-  int get totalCoin => _totalCoin;
 
   List<GameCategory> get list => _list;
 
   DashboardProvider({required this.preferences}) {
     _overallScore = getOverallScore();
-    _totalCoin = getTotalCoin();
   }
 
   List<GameCategory> getGameByPuzzleType(PuzzleType puzzleType) {
@@ -39,14 +37,13 @@ class DashboardProvider extends ChangeNotifier {
           AppAssets.icCalculator,
         ));
         list.add(GameCategory(
-          2,
-          "Guess the sign?",
-          "sign",
-          GameCategoryType.GUESS_SIGN,
-          KeyUtil.guessSign,
-          getScoreboard("sign"),
-          AppAssets.icGuessTheSign
-        ));
+            2,
+            "Guess the sign?",
+            "sign",
+            GameCategoryType.GUESS_SIGN,
+            KeyUtil.guessSign,
+            getScoreboard("sign"),
+            AppAssets.icGuessTheSign));
         list.add(GameCategory(
           5,
           "Correct answer",
@@ -147,12 +144,9 @@ class DashboardProvider extends ChangeNotifier {
   }
 
   void updateScoreboard(
-      GameCategoryType gameCategoryType, double newScore, double coin) {
+      GameCategoryType gameCategoryType, double newScore) {
     list.forEach((gameCategory) {
       if (gameCategory.gameCategoryType == gameCategoryType) {
-        gameCategory.scoreboard.coin =
-            gameCategory.scoreboard.coin + coin.toInt();
-        setTotalCoin(coin.toInt());
         if (gameCategory.scoreboard.highestScore < newScore.toInt()) {
           setOverallScore(
               gameCategory.scoreboard.highestScore, newScore.toInt());
@@ -171,15 +165,6 @@ class DashboardProvider extends ChangeNotifier {
   void setOverallScore(int highestScore, int newScore) {
     _overallScore = getOverallScore() - highestScore + newScore;
     preferences.setInt("overall_score", _overallScore);
-  }
-
-  int getTotalCoin() {
-    return preferences.getInt("total_coin") ?? 0;
-  }
-
-  void setTotalCoin(int coin) {
-    _totalCoin = getTotalCoin() + coin;
-    preferences.setInt("total_coin", _totalCoin);
   }
 
   bool isFirstTime(GameCategoryType gameCategoryType) {

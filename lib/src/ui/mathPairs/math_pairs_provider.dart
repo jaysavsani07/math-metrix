@@ -7,7 +7,6 @@ import 'package:mathgame/src/ui/app/game_provider.dart';
 class MathPairsProvider extends GameProvider<MathPairs> {
   int first = -1;
   int second = -1;
-  bool lock = false;
 
   MathPairsProvider({required TickerProvider vsync})
       : super(vsync: vsync, gameCategoryType: GameCategoryType.MATH_PAIRS) {
@@ -15,12 +14,10 @@ class MathPairsProvider extends GameProvider<MathPairs> {
   }
 
   Future<void> checkResult(Pair mathPair, int index) async {
-    if (timerStatus != TimerStatus.pause && !lock) {
-      lock = true;
+    if (timerStatus != TimerStatus.pause) {
       if (!currentState.list[index].isActive) {
         currentState.list[index].isActive = true;
         notifyListeners();
-        await Future.delayed(Duration(milliseconds: 300));
         if (first != -1) {
           if (currentState.list[first].uid == currentState.list[index].uid) {
             currentState.list[first].isVisible = false;
@@ -48,12 +45,10 @@ class MathPairsProvider extends GameProvider<MathPairs> {
         } else {
           first = index;
         }
-        lock = false;
       } else {
         first = -1;
         currentState.list[index].isActive = false;
         notifyListeners();
-        lock = false;
       }
     }
   }

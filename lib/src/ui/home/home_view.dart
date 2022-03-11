@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/data/models/dashboard.dart';
-import 'package:mathgame/src/ui/common/home_button_view.dart';
+import 'package:mathgame/src/ui/home/home_button_view.dart';
 import 'package:mathgame/src/ui/dashboard/dashboard_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -31,9 +31,11 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   late Animation<double> fillImageBottomPositionTween;
   late Animation<double> outlineImageRightPositionTween;
   late Animation<double> fillImageRightPositionTween;
+  late bool isGamePageOpen;
 
   @override
   void initState() {
+    isGamePageOpen = false;
     animationController =
         AnimationController(vsync: this, duration: Duration(seconds: 0));
     bgColorTween =
@@ -125,23 +127,32 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
             child: Stack(
               children: [
                 ListView(
-                  padding: const EdgeInsets.only(top: 200, bottom: 100),
+                  padding: EdgeInsets.only(
+                    top: 200,
+                    bottom:
+                        widget.dashboard.puzzleType == PuzzleType.BRAIN_PUZZLE
+                            ? MediaQuery.of(context).size.height / 3
+                            : MediaQuery.of(context).size.height / 4,
+                  ),
                   children: Provider.of<DashboardProvider>(context)
                       .getGameByPuzzleType(widget.dashboard.puzzleType)
                       .map((e) => HomeButtonView(
                           title: e.name,
                           icon: e.icon,
                           score: e.scoreboard.highestScore,
-                          coin: e.scoreboard.coin,
                           colorTuple: widget.dashboard.colorTuple,
                           opacity: widget.dashboard.opacity,
                           onTab: () {
-                            Navigator.pushNamedAndRemoveUntil(
-                              context,
-                              e.routePath,
-                              ModalRoute.withName(KeyUtil.home),
-                              arguments: widget.dashboard.colorTuple,
-                            );
+                            if (!isGamePageOpen) {
+                              isGamePageOpen = true;
+                              Navigator.pushNamed(
+                                context,
+                                e.routePath,
+                                arguments: widget.dashboard.colorTuple,
+                              ).then((value) {
+                                isGamePageOpen = false;
+                              });
+                            }
                           }))
                       .toList(),
                 ),
@@ -168,8 +179,11 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                 widget.dashboard.icon,
                                 height: 200,
                                 width: 200,
-                                color: widget.dashboard.colorTuple.item1
-                                    .withOpacity(0.08),
+                                color: widget.dashboard.fillIconColor
+                                    .withOpacity(Theme.of(context).brightness ==
+                                            Brightness.light
+                                        ? 0.08
+                                        : 0.24),
                               ),
                             ),
                             Positioned(
@@ -179,6 +193,11 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                 widget.dashboard.outlineIcon,
                                 height: 175,
                                 width: 175,
+                                color: widget.dashboard.outlineIconColor
+                                    .withOpacity(Theme.of(context).brightness ==
+                                            Brightness.light
+                                        ? 0.16
+                                        : 0.80),
                                 // color: widget.dashboard.colorTuple.item1,
                               ),
                             ),
