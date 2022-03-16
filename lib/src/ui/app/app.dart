@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         theme: AppTheme.theme,
         darkTheme: AppTheme.darkTheme,
         themeMode: provider.themeMode,
-        initialRoute: KeyUtil.dashboard,
+        initialRoute: KeyUtil.splash,
         routes: appRoutes,
         // home: DashboardView(),
       );
