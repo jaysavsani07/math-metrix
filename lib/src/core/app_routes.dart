@@ -12,12 +12,14 @@ import 'package:mathgame/src/ui/mentalArithmetic/mental_arithmetic_view.dart';
 import 'package:mathgame/src/ui/picturePuzzle/picture_puzzle_view.dart';
 import 'package:mathgame/src/ui/numberPyramid/number_pyramid_view.dart';
 import 'package:mathgame/src/ui/quickCalculation/quick_calculation_view.dart';
+import 'package:mathgame/src/ui/splash/splash_view.dart';
 import 'package:mathgame/src/ui/squareRoot/square_root_view.dart';
 import 'package:mathgame/src/ui/guessTheSign/guess_sign_view.dart';
 import 'package:tuple/tuple.dart';
 
 var appRoutes = {
   KeyUtil.dashboard: (context) => DashboardView(),
+  KeyUtil.splash: (context) => SplashView(),
   KeyUtil.home: (context) => HomeView(
       dashboard: ModalRoute.of(context)?.settings.arguments as Dashboard),
   KeyUtil.calculator: (context) => CalculatorView(
