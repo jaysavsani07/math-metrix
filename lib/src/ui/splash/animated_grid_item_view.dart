@@ -121,4 +121,10 @@ class _AnimatedGridItemViewState extends State<AnimatedGridItemView>
       ],
     );
   }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 }

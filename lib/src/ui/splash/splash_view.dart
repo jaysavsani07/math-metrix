@@ -14,9 +14,9 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
-    // Future.delayed(Duration(seconds: 3)).then((value) {
-    //   Navigator.pushReplacementNamed(context, KeyUtil.dashboard);
-    // });
+    Future.delayed(Duration(seconds: 2)).then((value) {
+      Navigator.pushReplacementNamed(context, KeyUtil.dashboard);
+    });
     super.initState();
   }
 
@@ -100,6 +100,7 @@ class GridItemView extends StatelessWidget {
                             : Text(
                                 e,
                                 style: TextStyle(
+                                  color: Colors.white,
                                   fontWeight: FontWeight.w900,
                                   fontSize: 28,
                                   fontFamily: "Poppins",
@@ -176,7 +177,7 @@ var list2 = [
   ],
   [
     Tuple2("*", 0),
-    Tuple2(".", 400),
+    Tuple2("3", 400),
     Tuple2("~", 0),
     Tuple2("4", 0),
     Tuple2("-", 0),
@@ -186,7 +187,7 @@ var list2 = [
     Tuple2("-", 0),
     Tuple2("6", 0),
     Tuple2("=", 0),
-    Tuple2(".", 1600),
+    Tuple2("7", 1600),
     Tuple2("~", 0),
     Tuple2("9", 0),
   ],
@@ -226,7 +227,7 @@ var list2 = [
     Tuple2("*", 0),
     Tuple2("1", 0),
     Tuple2("~", 0),
-    Tuple2(".", 2600),
+    Tuple2("6", 2600),
     Tuple2("-", 0),
     Tuple2("2", 0),
   ],
@@ -240,7 +241,7 @@ var list2 = [
   ],
   [
     Tuple2("/", 0),
-    Tuple2(".", 3200),
+    Tuple2("1", 3200),
     Tuple2("~", 0),
     Tuple2("4", 0),
     Tuple2("6", 0),
