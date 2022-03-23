@@ -30,7 +30,7 @@ class CommonInfoDialogView extends StatelessWidget {
           ),
           SizedBox(height: 24),
           Container(
-            height: 145,
+            height: 200,
             width: double.infinity,
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.dialogGifBgColor,
