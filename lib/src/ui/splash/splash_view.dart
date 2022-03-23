@@ -61,9 +61,9 @@ class _SplashViewState extends State<SplashView> {
 }
 
 class GridItemView extends StatelessWidget {
+  final double verticalLine;
   final int index;
   final int horizontalLine;
-  final double verticalLine;
 
   const GridItemView({
     Key? key,

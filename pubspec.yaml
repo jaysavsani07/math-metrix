@@ -31,6 +31,9 @@ dependencies:
   tuple: ^2.0.0
   package_info: ^2.0.2
 
+  firebase_analytics: ^9.1.2
+  firebase_crashlytics: ^2.5.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
