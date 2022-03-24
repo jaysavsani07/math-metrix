@@ -4,7 +4,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/jaysavsani07/math-metrix">
-    <img src="android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png">
+    <img src="android/app/src/main/res/mipmap-xxxhdpi/launcher_icon.png">
   </a>
 
   <h3 align="center">Math Matrix : Train Your Brain, Improve Math Skill</h3>

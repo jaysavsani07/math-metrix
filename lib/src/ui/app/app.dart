@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mathgame/src/core/app_constant.dart';
@@ -8,6 +9,12 @@ import 'package:provider/provider.dart';
 
 class MyApp extends StatelessWidget {
   final String fontFamily = "Montserrat";
+  final FirebaseAnalytics firebaseAnalytics;
+
+  const MyApp({
+    required this.firebaseAnalytics,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +34,9 @@ class MyApp extends StatelessWidget {
         initialRoute: KeyUtil.splash,
         routes: appRoutes,
         // home: DashboardView(),
+        navigatorObservers: [
+          FirebaseAnalyticsObserver(analytics: firebaseAnalytics)
+        ],
       );
     });
   }
