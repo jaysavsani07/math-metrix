@@ -34,13 +34,12 @@ class QuickCalculationView extends StatelessWidget {
       ],
       child: WillPopScope(
         onWillPop: () => Future.value(false),
-        child: SafeArea(
-          top: true,
-          bottom: true,
-          child: Scaffold(
-            appBar:
-                CommonAppBar<QuickCalculationProvider>(colorTuple: colorTuple),
-            body: DialogListener<QuickCalculationProvider>(
+        child: Scaffold(
+          appBar:
+              CommonAppBar<QuickCalculationProvider>(colorTuple: colorTuple),
+          body: SafeArea(
+            bottom: true,
+            child: DialogListener<QuickCalculationProvider>(
               gameCategoryType: GameCategoryType.QUICK_CALCULATION,
               child: Container(
                 margin: EdgeInsets.only(top: 24, left: 24, right: 24),

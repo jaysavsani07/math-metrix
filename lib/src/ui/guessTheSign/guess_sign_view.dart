@@ -30,12 +30,11 @@ class GuessSignView extends StatelessWidget {
       ],
       child: WillPopScope(
         onWillPop: () => Future.value(false),
-        child: SafeArea(
-          top: true,
-          bottom: true,
-          child: Scaffold(
-            appBar: CommonAppBar<GuessSignProvider>(colorTuple: colorTuple),
-            body: DialogListener<GuessSignProvider>(
+        child: Scaffold(
+          appBar: CommonAppBar<GuessSignProvider>(colorTuple: colorTuple),
+          body: SafeArea(
+            bottom: true,
+            child: DialogListener<GuessSignProvider>(
               gameCategoryType: GameCategoryType.GUESS_SIGN,
               child: Container(
                 margin: EdgeInsets.only(top: 24, left: 24, right: 24),

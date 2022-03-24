@@ -32,12 +32,11 @@ class CorrectAnswerView extends StatelessWidget {
       ],
       child: WillPopScope(
         onWillPop: () => Future.value(false),
-        child: SafeArea(
-          top: true,
-          bottom: true,
-          child: Scaffold(
-            appBar: CommonAppBar<CorrectAnswerProvider>(colorTuple: colorTuple),
-            body: DialogListener<CorrectAnswerProvider>(
+        child: Scaffold(
+          appBar: CommonAppBar<CorrectAnswerProvider>(colorTuple: colorTuple),
+          body: SafeArea(
+            bottom: true,
+            child: DialogListener<CorrectAnswerProvider>(
               gameCategoryType: GameCategoryType.CORRECT_ANSWER,
               child: Container(
                 margin: EdgeInsets.only(top: 24, left: 24, right: 24),

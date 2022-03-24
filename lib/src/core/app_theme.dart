@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AppTheme {
   static ThemeData get theme {
@@ -12,6 +13,10 @@ class AppTheme {
         caption: base.textTheme.caption!.copyWith(
           color: Color(0xff757575),
         ),
+      ),
+      brightness: Brightness.light,
+      appBarTheme: const AppBarTheme(
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
     );
   }
@@ -27,6 +32,10 @@ class AppTheme {
         caption: base.textTheme.caption!.copyWith(
           color: Color(0xff616161),
         ),
+      ),
+      brightness: Brightness.dark,
+      appBarTheme: const AppBarTheme(
+        systemOverlayStyle: SystemUiOverlayStyle.light,
       ),
     );
   }

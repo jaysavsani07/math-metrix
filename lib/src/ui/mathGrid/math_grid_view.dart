@@ -28,12 +28,11 @@ class MathGridView extends StatelessWidget {
       ],
       child: WillPopScope(
         onWillPop: () => Future.value(false),
-        child: SafeArea(
-          top: true,
-          bottom: true,
-          child: Scaffold(
-            appBar: CommonAppBar<MathGridProvider>(colorTuple: colorTuple),
-            body: DialogListener<MathGridProvider>(
+        child: Scaffold(
+          appBar: CommonAppBar<MathGridProvider>(colorTuple: colorTuple),
+          body: SafeArea(
+            bottom: true,
+            child: DialogListener<MathGridProvider>(
               gameCategoryType: GameCategoryType.MATH_GRID,
               child: Container(
                 margin: EdgeInsets.all(24),
@@ -47,7 +46,8 @@ class MathGridView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Selector<MathGridProvider, int>(
-                              selector: (p0, p1) => p1.currentState.currentAnswer,
+                              selector: (p0, p1) =>
+                                  p1.currentState.currentAnswer,
                               builder: (context, currentAnswer, child) {
                                 return Text(
                                   currentAnswer.toString(),

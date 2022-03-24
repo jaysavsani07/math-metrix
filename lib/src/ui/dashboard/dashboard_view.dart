@@ -49,11 +49,15 @@ class _DashboardViewState extends State<DashboardView>
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: true,
-      bottom: true,
-      child: Scaffold(
-        body: Padding(
+    return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 0,
+        elevation: 0,
+        backgroundColor:  Theme.of(context).scaffoldBackgroundColor,
+      ),
+      body: SafeArea(
+        bottom: true,
+        child: Padding(
           padding: const EdgeInsets.all(12),
           child: Column(
             children: <Widget>[

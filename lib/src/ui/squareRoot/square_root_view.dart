@@ -31,12 +31,11 @@ class SquareRootView extends StatelessWidget {
       ],
       child: WillPopScope(
         onWillPop: () => Future.value(false),
-        child: SafeArea(
-          top: true,
-          bottom: true,
-          child: Scaffold(
-            appBar: CommonAppBar<SquareRootProvider>(colorTuple: colorTuple),
-            body: DialogListener<SquareRootProvider>(
+        child: Scaffold(
+          appBar: CommonAppBar<SquareRootProvider>(colorTuple: colorTuple),
+          body: SafeArea(
+            bottom: true,
+            child: DialogListener<SquareRootProvider>(
               gameCategoryType: GameCategoryType.SQUARE_ROOT,
               child: Container(
                 margin: EdgeInsets.only(top: 24, left: 24, right: 24),
@@ -72,8 +71,9 @@ class SquareRootView extends StatelessWidget {
                       selector: (p0, p1) => p1.currentState,
                       builder: (context, currentState, child) {
                         return GridView(
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2),
                           padding: const EdgeInsets.only(bottom: 24),
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),

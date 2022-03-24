@@ -28,12 +28,11 @@ class MathPairsView extends StatelessWidget {
       ],
       child: WillPopScope(
         onWillPop: () => Future.value(false),
-        child: SafeArea(
-          top: true,
-          bottom: true,
-          child: Scaffold(
-            appBar: CommonAppBar<MathPairsProvider>(colorTuple: colorTuple),
-            body: DialogListener<MathPairsProvider>(
+        child: Scaffold(
+          appBar: CommonAppBar<MathPairsProvider>(colorTuple: colorTuple),
+          body: SafeArea(
+            bottom: true,
+            child: DialogListener<MathPairsProvider>(
               gameCategoryType: GameCategoryType.MATH_PAIRS,
               child: Container(
                 margin: EdgeInsets.only(top: 24, left: 24, right: 24),
@@ -57,8 +56,8 @@ class MathPairsView extends StatelessWidget {
                               physics: NeverScrollableScrollPhysics(),
                               itemBuilder: (BuildContext context, int index) {
                                 return MathPairsButton(
-                                  mathPairs:
-                                      mathPairsProvider.currentState.list[index],
+                                  mathPairs: mathPairsProvider
+                                      .currentState.list[index],
                                   index: index,
                                   colorTuple: colorTuple,
                                 );

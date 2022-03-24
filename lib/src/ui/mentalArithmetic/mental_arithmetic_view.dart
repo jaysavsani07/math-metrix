@@ -34,13 +34,12 @@ class MentalArithmeticView extends StatelessWidget {
       ],
       child: WillPopScope(
         onWillPop: () => Future.value(false),
-        child: SafeArea(
-          bottom: true,
-          top: true,
-          child: Scaffold(
-            appBar:
-                CommonAppBar<MentalArithmeticProvider>(colorTuple: colorTuple),
-            body: DialogListener<MentalArithmeticProvider>(
+        child: Scaffold(
+          appBar:
+              CommonAppBar<MentalArithmeticProvider>(colorTuple: colorTuple),
+          body: SafeArea(
+            bottom: true,
+            child: DialogListener<MentalArithmeticProvider>(
               gameCategoryType: GameCategoryType.MENTAL_ARITHMETIC,
               child: Container(
                 margin: EdgeInsets.only(top: 24, left: 24, right: 24),
@@ -69,7 +68,7 @@ class MentalArithmeticView extends StatelessWidget {
                           child: child!,
                         );
                       },
-                      child:  CommonNeumorphicView(
+                      child: CommonNeumorphicView(
                         isLarge: true,
                         child: Selector<MentalArithmeticProvider, String>(
                           selector: (p0, p1) => p1.result,
@@ -79,7 +78,7 @@ class MentalArithmeticView extends StatelessWidget {
                                     .textTheme
                                     .subtitle2!
                                     .copyWith(
-                                    fontSize: 24, color: colorTuple.item1));
+                                        fontSize: 24, color: colorTuple.item1));
                           },
                         ),
                       ),

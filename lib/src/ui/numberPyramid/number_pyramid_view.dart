@@ -32,13 +32,11 @@ class NumberPyramidView extends StatelessWidget {
       ],
       child: WillPopScope(
         onWillPop: () => Future.value(false),
-        child: SafeArea(
-          top: true,
-          bottom: true,
-          child: Scaffold(
-              appBar:
-                  CommonAppBar<NumberPyramidProvider>(colorTuple: colorTuple),
-              body: DialogListener<NumberPyramidProvider>(
+        child: Scaffold(
+            appBar: CommonAppBar<NumberPyramidProvider>(colorTuple: colorTuple),
+            body: SafeArea(
+              bottom: true,
+              child: DialogListener<NumberPyramidProvider>(
                 gameCategoryType: GameCategoryType.NUMBER_PYRAMID,
                 child: Container(
                   margin: EdgeInsets.only(top: 24, left: 24, right: 24),
@@ -360,8 +358,8 @@ class NumberPyramidView extends StatelessWidget {
                     ],
                   ),
                 ),
-              )),
-        ),
+              ),
+            )),
       ),
     );
   }

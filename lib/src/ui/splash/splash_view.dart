@@ -22,40 +22,36 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      bottom: true,
-      top: true,
-      child: Scaffold(
-        body: LayoutBuilder(builder: (context, constraints) {
-          var verticalLine = constraints.maxWidth / 6;
-          var horizontalLine = constraints.maxHeight ~/ verticalLine;
-          return Container(
-            constraints: BoxConstraints.expand(),
-            decoration: BoxDecoration(
-              gradient: SweepGradient(
-                center: Alignment.center,
-                startAngle: 0.0,
-                endAngle: pi * 2,
-                colors: [
-                  Color(0xff4895EF),
-                  Color(0xff3F37C9),
-                ],
-                transform: GradientRotation(pi / 2),
-              ),
+    return Scaffold(
+      body: LayoutBuilder(builder: (context, constraints) {
+        var verticalLine = constraints.maxWidth / 6;
+        var horizontalLine = constraints.maxHeight ~/ verticalLine;
+        return Container(
+          constraints: BoxConstraints.expand(),
+          decoration: BoxDecoration(
+            gradient: SweepGradient(
+              center: Alignment.center,
+              startAngle: 0.0,
+              endAngle: pi * 2,
+              colors: [
+                Color(0xff4895EF),
+                Color(0xff3F37C9),
+              ],
+              transform: GradientRotation(pi / 2),
             ),
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: horizontalLine,
-              physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) => GridItemView(
-                index: index,
-                horizontalLine: horizontalLine,
-                verticalLine: verticalLine,
-              ),
+          ),
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: horizontalLine,
+            physics: NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) => GridItemView(
+              index: index,
+              horizontalLine: horizontalLine,
+              verticalLine: verticalLine,
             ),
-          );
-        }),
-      ),
+          ),
+        );
+      }),
     );
   }
 }

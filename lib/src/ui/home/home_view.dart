@@ -116,11 +116,10 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: true,
-      bottom: true,
-      child: Scaffold(
-        body: NotificationListener<ScrollNotification>(
+    return Scaffold(
+      body: SafeArea(
+        bottom: true,
+        child: NotificationListener<ScrollNotification>(
           onNotification: _scrollListener,
           child: Container(
             constraints: BoxConstraints.expand(),
