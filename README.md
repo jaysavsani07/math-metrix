@@ -4,7 +4,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/jaysavsani07/math-metrix">
-    <img src="android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png">
+    <img src="android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png">
   </a>
 
   <h3 align="center">Math Matrix : Train Your Brain, Improve Math Skill</h3>
@@ -15,7 +15,7 @@
   </p>
 </p>
 
-<h3 align="center">Math Matrix is a Math Game that tries improvise your math skills in a fun way.</h3>
+<h3 align="center">Math Matrix is a Math Game that tries to improvise your math skills in a fun way.</h3>
 <br />
 
 | <img src="https://github.com/jaysavsani07/math-metrix/blob/development/screenshots/1.png">  | <img src="https://github.com/jaysavsani07/math-metrix/blob/development/screenshots/2.png"> | <img src="https://github.com/jaysavsani07/math-metrix/blob/development/screenshots/3.png"> | <img src="https://github.com/jaysavsani07/math-metrix/blob/development/screenshots/6.png">  | <img src="https://github.com/jaysavsani07/math-metrix/blob/development/screenshots/5.png"> | <img src="https://github.com/jaysavsani07/math-metrix/blob/development/screenshots/7.png"> |
@@ -84,7 +84,8 @@ Distributed under the MIT License. See [LICENSE](https://github.com/jaysavsani07
 [Nividata Consultancy](https://www.nividata.com/contact/)
 
 ## Developer
-[![N|Solid](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mehul-makwana-430326b9/)
+
+[Mehul Makwana](https://www.linkedin.com/in/mehul-makwana-430326b9/)
 
 <!-- ACKNOWLEDGEMENTS -->
 ## This app using following awesome open source libraries
