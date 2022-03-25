@@ -85,21 +85,20 @@ Distributed under the MIT License. See [LICENSE](https://github.com/jaysavsani07
 
 [Nividata Consultancy](https://www.nividata.com/contact/)
 
-## Developers
-
-### Mehul Makwana
-Contact: [LinkedIn](https://www.linkedin.com/in/mehul-makwana-430326b9/)
+## Developer
+[![N|Solid](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mehul-makwana-430326b9/)
 
 <!-- ACKNOWLEDGEMENTS -->
 ## This app using following awesome open source libraries
 
-* [Provider](https://pub.dev/packages/provider)
-* [Percent Indicator](https://pub.dev/packages/percent_indicator)
-* [Provider Architecture](https://pub.dev/packages/provider_architecture)
+* [provider](https://pub.dev/packages/provider)
+* [vsync_provider](https://pub.dev/packages/vsync_provider)
 * [get_it](https://pub.dev/packages/get_it)
-* [Shared Preferences](https://pub.dev/packages/shared_preferences)
-* [RFlutter Alert](https://pub.dev/packages/rflutter_alert)
+* [shared_preferences](https://pub.dev/packages/shared_preferences)
 * [flutter_svg](https://pub.dev/packages/flutter_svg)
+* [tuple](https://pub.dev/packages/tuple)
+* [package_info](https://pub.dev/packages/package_info)
+
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
