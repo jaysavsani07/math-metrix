@@ -6,13 +6,14 @@ import 'package:mathgame/src/data/models/dashboard.dart';
 import 'package:mathgame/src/ui/home/home_button_view.dart';
 import 'package:mathgame/src/ui/dashboard/dashboard_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
 class HomeView extends StatefulWidget {
-  final Dashboard dashboard;
+  final Tuple2<Dashboard, double> tuple2;
 
   HomeView({
     Key? key,
-    required this.dashboard,
+    required this.tuple2,
   }) : super(key: key);
 
   @override
@@ -80,7 +81,9 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
         ),
       ),
     );
-    heightTween = Tween(begin: 183.0, end: 56.0).animate(animationController);
+    heightTween = Tween(
+            begin: 183.0 + widget.tuple2.item2, end: 56.0 + widget.tuple2.item2)
+        .animate(animationController);
     textStyleTween = TextStyleTween(
         begin: TextStyle(
           fontSize: 28.0,
@@ -117,6 +120,10 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        child: SizedBox(),
+        preferredSize: Size.fromHeight(0),
+      ),
       body: SafeArea(
         bottom: true,
         child: NotificationListener<ScrollNotification>(
@@ -127,27 +134,27 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
               children: [
                 ListView(
                   padding: EdgeInsets.only(
-                    top: 200,
-                    bottom:
-                        widget.dashboard.puzzleType == PuzzleType.BRAIN_PUZZLE
-                            ? MediaQuery.of(context).size.height / 3
-                            : MediaQuery.of(context).size.height / 4,
+                    top: 200 + widget.tuple2.item2,
+                    bottom: widget.tuple2.item1.puzzleType ==
+                            PuzzleType.BRAIN_PUZZLE
+                        ? MediaQuery.of(context).size.height / 3
+                        : MediaQuery.of(context).size.height / 4,
                   ),
                   children: Provider.of<DashboardProvider>(context)
-                      .getGameByPuzzleType(widget.dashboard.puzzleType)
+                      .getGameByPuzzleType(widget.tuple2.item1.puzzleType)
                       .map((e) => HomeButtonView(
                           title: e.name,
                           icon: e.icon,
                           score: e.scoreboard.highestScore,
-                          colorTuple: widget.dashboard.colorTuple,
-                          opacity: widget.dashboard.opacity,
+                          colorTuple: widget.tuple2.item1.colorTuple,
+                          opacity: widget.tuple2.item1.opacity,
                           onTab: () {
                             if (!isGamePageOpen) {
                               isGamePageOpen = true;
                               Navigator.pushNamed(
                                 context,
                                 e.routePath,
-                                arguments: widget.dashboard.colorTuple,
+                                arguments: widget.tuple2.item1.colorTuple,
                               ).then((value) {
                                 isGamePageOpen = false;
                               });
@@ -175,10 +182,10 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                               bottom: fillImageBottomPositionTween.value,
                               right: fillImageRightPositionTween.value,
                               child: SvgPicture.asset(
-                                widget.dashboard.icon,
+                                widget.tuple2.item1.icon,
                                 height: 200,
                                 width: 200,
-                                color: widget.dashboard.fillIconColor
+                                color: widget.tuple2.item1.fillIconColor
                                     .withOpacity(Theme.of(context).brightness ==
                                             Brightness.light
                                         ? 0.08
@@ -189,10 +196,10 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                               bottom: outlineImageBottomPositionTween.value,
                               right: outlineImageRightPositionTween.value,
                               child: SvgPicture.asset(
-                                widget.dashboard.outlineIcon,
+                                widget.tuple2.item1.outlineIcon,
                                 height: 175,
                                 width: 175,
-                                color: widget.dashboard.outlineIconColor
+                                color: widget.tuple2.item1.outlineIconColor
                                     .withOpacity(Theme.of(context).brightness ==
                                             Brightness.light
                                         ? 0.16
@@ -201,7 +208,8 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 20, top: 7),
+                              padding: EdgeInsets.only(
+                                  left: 20, top: 7 + widget.tuple2.item2),
                               child: Card(
                                 color: Theme.of(context).colorScheme.crossColor,
                                 shape: RoundedRectangleBorder(
@@ -238,7 +246,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Text(
-                                      widget.dashboard.title,
+                                      widget.tuple2.item1.title,
                                       style: textStyleTween.value,
                                     ),
                                     SizeTransition(
@@ -254,7 +262,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                                     .width -
                                                 62,
                                             child: Text(
-                                              widget.dashboard.subtitle,
+                                              widget.tuple2.item1.subtitle,
                                               maxLines: 2,
                                               style: Theme.of(context)
                                                   .textTheme

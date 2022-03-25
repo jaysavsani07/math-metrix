@@ -21,7 +21,8 @@ var appRoutes = {
   KeyUtil.dashboard: (context) => DashboardView(),
   KeyUtil.splash: (context) => SplashView(),
   KeyUtil.home: (context) => HomeView(
-      dashboard: ModalRoute.of(context)?.settings.arguments as Dashboard),
+      tuple2: ModalRoute.of(context)?.settings.arguments
+          as Tuple2<Dashboard, double>),
   KeyUtil.calculator: (context) => CalculatorView(
       colorTuple:
           ModalRoute.of(context)?.settings.arguments as Tuple2<Color, Color>),
