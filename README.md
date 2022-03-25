@@ -44,7 +44,7 @@ Overall all this puzzle tries to engage you in a different way to improve your m
 ### Games in Memory Puzzle
 **1) Mental Arithmetic** : Numbers and signs will be shown one by one for few seconds, you need to remember those and give correct answer. This focuses on your memory and calculation at same time.<br />
 **2) Square Root** : You need to find Square root of number for given options. With each increasing level you'll be having tough equation to solve.<br />
-**3) Mathematical pairs** : One card have equation while other card have correct answer, but this will be places randomly in Grid. You need to select equation and correct answer to remove it from Grid.
+**3) Mathematical pairs** : One card have equation while other card have correct answer, but this will be places randomly in Grid. You need to select equation and correct answer to remove it from Grid.<br />
 **4) Math Grid** : You'll be given an answer and a 9x9 grid. You need to select numbers from grid one by one to reach the given number. Find the best possible way to solve max answer from 9x9 grid.<br />
 
 ### Games in Train Your Brain
