@@ -18,7 +18,8 @@
 <h3 align="center">Math Matrix is a Math Game that tries improvise your math skills in a fun way.</h3>
 <br />
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+| <img src="https://github.com/jaysavsani07/math-metrix/blob/development/screenshots/1.png">  | <img src="https://github.com/jaysavsani07/math-metrix/blob/development/screenshots/2.png"> | <img src="https://github.com/jaysavsani07/math-metrix/blob/development/screenshots/3.png"> | <img src="https://github.com/jaysavsani07/math-metrix/blob/development/screenshots/6.png">  | <img src="https://github.com/jaysavsani07/math-metrix/blob/development/screenshots/5.png"> | <img src="https://github.com/jaysavsani07/math-metrix/blob/development/screenshots/7.png"> |
+|:---:|:---:|:---:|:---:|:---:|:---:|
 
 Simple math games to learn, improve you math skills. This game is easy to play and target everyone from kids to adults. Every level is design in a way to challenge your mind at every step. 
 
@@ -95,8 +96,3 @@ Distributed under the MIT License. See [LICENSE](https://github.com/jaysavsani07
 * [flutter_svg](https://pub.dev/packages/flutter_svg)
 * [tuple](https://pub.dev/packages/tuple)
 * [package_info](https://pub.dev/packages/package_info)
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[product-screenshot]: https://github.com/jaysavsani07/math-metrix/blob/master/assets/images/banner.png
