@@ -10,22 +10,19 @@
   <h3 align="center">Math Matrix : Train Your Brain, Improve Math Skill</h3>
 
   <p align="center">
-    <br />
-    <a href="https://play.google.com/store/apps/details?id=com.nividata.mathmatrix">Train Your Brain</a>
-    ·
-    <a href="https://github.com/jaysavsani07/math-metrix/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/jaysavsani07/math-metrix/issues">Request Feature</a>
+<!--     <a href="https://apps.apple.com/us/app/expense-manager-money-saver/id1556849821"><img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-example-preferred.png" height="60" alt="Math Matrix" title="Math Matrix"/></a> -->
+    <a href="https://play.google.com/store/apps/details?id=com.nividata.mathmatrix"><img src="https://developer.android.com/images/brand/en_app_rgb_wo_60.png" alt="Math Matrixr" title="Math Matrix"/></a>
   </p>
 </p>
 
-### Math Matrix is a Math Game that tries improvise your math skills in a fun way.
+<h3 align="center">Math Matrix is a Math Game that tries improvise your math skills in a fun way.</h3>
+<br />
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 Simple math games to learn, improve you math skills. This game is easy to play and target everyone from kids to adults. Every level is design in a way to challenge your mind at every step. 
 
-### This game is divided in 3 main categories 
+## This game is divided in 3 main categories 
 
 **Math Puzzle** - This category revolves around basic calculation like addition, subtraction, division and multiplication. Each game in this category includes simple calculation with different approach. So you're playing with numbers and signs while fighting with time.
 
@@ -53,7 +50,7 @@ Overall all this puzzle tries to engage you in a different way to improve your m
 **3) Number Pyramid** : In a number pyramid, the numbers on the lower layers determine the numbers above them. Sum of two consecutive cell would be placed on top cell.<br />
 
 
-### Built With
+## Built With
 This application built [Flutter](https://flutter.dev/). Flutter is cross-platform open source mobile framework built by Google. Flutter use Dart as a primary language which is highly scalable and easy codebase.
 * [Getting started with Flutter](https://flutter.dev/docs).
 * [Dart](https://dart.dev/)
