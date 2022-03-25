@@ -10,22 +10,19 @@
   <h3 align="center">Math Matrix : Train Your Brain, Improve Math Skill</h3>
 
   <p align="center">
-    <br />
-    <a href="https://play.google.com/store/apps/details?id=com.nividata.mathmatrix">Train Your Brain</a>
-    ·
-    <a href="https://github.com/jaysavsani07/math-metrix/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/jaysavsani07/math-metrix/issues">Request Feature</a>
+<!--     <a href="https://apps.apple.com/us/app/expense-manager-money-saver/id1556849821"><img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-example-preferred.png" height="60" alt="Math Matrix" title="Math Matrix"/></a> -->
+    <a href="https://play.google.com/store/apps/details?id=com.nividata.mathmatrix"><img src="https://developer.android.com/images/brand/en_app_rgb_wo_60.png" alt="Math Matrixr" title="Math Matrix"/></a>
   </p>
 </p>
 
-### Math Matrix is a Math Game that tries improvise your math skills in a fun way.
+<h3 align="center">Math Matrix is a Math Game that tries improvise your math skills in a fun way.</h3>
+<br />
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 Simple math games to learn, improve you math skills. This game is easy to play and target everyone from kids to adults. Every level is design in a way to challenge your mind at every step. 
 
-### This game is divided in 3 main categories 
+## This game is divided in 3 main categories 
 
 **Math Puzzle** - This category revolves around basic calculation like addition, subtraction, division and multiplication. Each game in this category includes simple calculation with different approach. So you're playing with numbers and signs while fighting with time.
 
@@ -44,14 +41,16 @@ Overall all this puzzle tries to engage you in a different way to improve your m
 ### Games in Memory Puzzle
 **1) Mental Arithmetic** : Numbers and signs will be shown one by one for few seconds, you need to remember those and give correct answer. This focuses on your memory and calculation at same time.<br />
 **2) Square Root** : You need to find Square root of number for given options. With each increasing level you'll be having tough equation to solve.<br />
-**3) Mathematical pairs** : One card have equation while other card have correct answer, but this will be places randomly in Grid. You need to select equation and correct answer to remove it from Grid.
+**3) Mathematical pairs** : One card have equation while other card have correct answer, but this will be places randomly in Grid. You need to select equation and correct answer to remove it from Grid.<br />
+**4) Math Grid** : You'll be given an answer and a 9x9 grid. You need to select numbers from grid one by one to reach the given number. Find the best possible way to solve max answer from 9x9 grid.<br />
 
 ### Games in Train Your Brain
 **1) Magic Triangle** : This is 3x3 and 4x4 triangle where you need to place 6 number in a way that sum of each side should be equal to given number.<br />
-**2) Math Grid** : You'll be given an answer and a 9x9 grid. You need to select numbers from grid one by one to reach the given number. Find the best possible way to solve max answer from 9x9 grid.<br />
+**2) Picture Puzzle** : Each shape represents a number. You need find number related to each shape and solve the last equation.<br />
+**3) Number Pyramid** : In a number pyramid, the numbers on the lower layers determine the numbers above them. Sum of two consecutive cell would be placed on top cell.<br />
 
 
-### Built With
+## Built With
 This application built [Flutter](https://flutter.dev/). Flutter is cross-platform open source mobile framework built by Google. Flutter use Dart as a primary language which is highly scalable and easy codebase.
 * [Getting started with Flutter](https://flutter.dev/docs).
 * [Dart](https://dart.dev/)
@@ -83,21 +82,20 @@ Distributed under the MIT License. See [LICENSE](https://github.com/jaysavsani07
 
 [Nividata Consultancy](https://www.nividata.com/contact/)
 
-## Developers
-
-### Mehul Makwana
-Contact: [LinkedIn](https://www.linkedin.com/in/mehul-makwana-430326b9/)
+## Developer
+[![N|Solid](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mehul-makwana-430326b9/)
 
 <!-- ACKNOWLEDGEMENTS -->
 ## This app using following awesome open source libraries
 
-* [Provider](https://pub.dev/packages/provider)
-* [Percent Indicator](https://pub.dev/packages/percent_indicator)
-* [Provider Architecture](https://pub.dev/packages/provider_architecture)
+* [provider](https://pub.dev/packages/provider)
+* [vsync_provider](https://pub.dev/packages/vsync_provider)
 * [get_it](https://pub.dev/packages/get_it)
-* [Shared Preferences](https://pub.dev/packages/shared_preferences)
-* [RFlutter Alert](https://pub.dev/packages/rflutter_alert)
+* [shared_preferences](https://pub.dev/packages/shared_preferences)
 * [flutter_svg](https://pub.dev/packages/flutter_svg)
+* [tuple](https://pub.dev/packages/tuple)
+* [package_info](https://pub.dev/packages/package_info)
+
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
