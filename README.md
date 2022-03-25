@@ -4,21 +4,22 @@
 <br />
 <p align="center">
   <a href="https://github.com/jaysavsani07/math-metrix">
-    <img src="android/app/src/main/res/mipmap-xxxhdpi/launcher_icon.png">
+    <img src="android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png">
   </a>
 
   <h3 align="center">Math Matrix : Train Your Brain, Improve Math Skill</h3>
 
   <p align="center">
-    <a href="https://apps.apple.com/us/app/math-matrix-a-math-game/id1511125332?ls=1"><img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-example-preferred.png" height="60" alt="Math Matrix" title="Math Matrix"/></a>
-    <a href="https://play.google.com/store/apps/details?id=com.nividata.mathmatrix"><img src="https://developer.android.com/images/brand/en_app_rgb_wo_60.png" alt="Math Matrixr" title="Math Matrix"/></a>
+    <a href="https://apps.apple.com/us/app/math-matrix-a-math-game/id1511125332?ls=1"><img src="https://github.com/Volorf/Badges/blob/master/App%20Store/App%20Store%20Badge.png" height="60" alt="App Store" title="Math Matrix"/></a>
+    <a href="https://play.google.com/store/apps/details?id=com.nividata.mathmatrix"><img src="https://github.com/Volorf/Badges/blob/master/Google%20Play/Google%20Play%20Badge.png" height="60" alt="Google Play" title="Math Matrix"/></a>
   </p>
 </p>
 
 <h3 align="center">Math Matrix is a Math Game that tries improvise your math skills in a fun way.</h3>
 <br />
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+| <img src="https://github.com/jaysavsani07/math-metrix/blob/development/screenshots/1.png">  | <img src="https://github.com/jaysavsani07/math-metrix/blob/development/screenshots/2.png"> | <img src="https://github.com/jaysavsani07/math-metrix/blob/development/screenshots/3.png"> | <img src="https://github.com/jaysavsani07/math-metrix/blob/development/screenshots/6.png">  | <img src="https://github.com/jaysavsani07/math-metrix/blob/development/screenshots/5.png"> | <img src="https://github.com/jaysavsani07/math-metrix/blob/development/screenshots/7.png"> |
+|:---:|:---:|:---:|:---:|:---:|:---:|
 
 Simple math games to learn, improve you math skills. This game is easy to play and target everyone from kids to adults. Every level is design in a way to challenge your mind at every step. 
 
@@ -95,8 +96,3 @@ Distributed under the MIT License. See [LICENSE](https://github.com/jaysavsani07
 * [flutter_svg](https://pub.dev/packages/flutter_svg)
 * [tuple](https://pub.dev/packages/tuple)
 * [package_info](https://pub.dev/packages/package_info)
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[product-screenshot]: https://github.com/jaysavsani07/math-metrix/blob/master/assets/images/banner.png
