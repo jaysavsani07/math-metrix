@@ -1,45 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/data/models/math_pairs.dart';
-import 'package:mathgame/src/ui/mathPairs/math_pairs_view_model.dart';
+import 'package:mathgame/src/ui/mathPairs/math_pairs_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
 class MathPairsButton extends StatelessWidget {
   final Pair mathPairs;
   final int index;
+  final Tuple2<Color, Color> colorTuple;
 
-  MathPairsButton(this.mathPairs, this.index);
+  MathPairsButton({
+    required this.mathPairs,
+    required this.index,
+    required this.colorTuple,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final mathPairsProvider = Provider.of<MathPairsProvider>(context);
-    return Container(
-      child: InkWell(
-        highlightColor: Colors.transparent,
-        splashColor: Colors.transparent,
-        onTap: () {
-          mathPairsProvider.checkResult(mathPairs, index);
-        },
-        child: Visibility(
-          visible: mathPairs.isVisible,
+    return AnimatedOpacity(
+      opacity: mathPairs.isVisible ? 1 : 0,
+      duration: Duration(milliseconds: 300),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        elevation: 2,
+        child: InkWell(
+          onTap: () {
+            context.read<MathPairsProvider>().checkResult(mathPairs, index);
+          },
+          borderRadius: BorderRadius.all(Radius.circular(24)),
           child: Container(
             decoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.all(Radius.circular(5)),
-              border: Border.all(
-                  width: 2,
-                  color: mathPairs.isActive
-                      ? Theme.of(context).accentColor
-                      : Theme.of(context).dialogBackgroundColor),
+              borderRadius: BorderRadius.all(Radius.circular(24)),
+              border: mathPairs.isActive
+                  ? null
+                  : Border.all(color: colorTuple.item1),
+              gradient: mathPairs.isActive
+                  ? LinearGradient(
+                      colors: [colorTuple.item1, colorTuple.item2],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    )
+                  : null,
             ),
-            margin: EdgeInsets.all(5),
-            constraints: BoxConstraints.expand(),
-            child: Center(
-              child: FittedBox(
-                fit: BoxFit.contain,
-                child: Text(
-                  mathPairs.text,
-                  style: Theme.of(context).textTheme.headline,
-                ),
+            alignment: Alignment.center,
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: Text(
+                mathPairs.text,
+                style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                    fontSize: 24,
+                    color: mathPairs.isActive
+                        ? Theme.of(context).colorScheme.baseColor
+                        : colorTuple.item1),
               ),
             ),
           ),

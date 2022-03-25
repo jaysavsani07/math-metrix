@@ -1,0 +1,12 @@
+<svg id="ic-Mathematical_Pairs" data-name="ic-Mathematical Pairs" xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34">
+  <g id="Group_705" data-name="Group 705">
+    <rect id="Rectangle_1009" data-name="Rectangle 1009" width="34" height="34" fill="none"/>
+    <rect id="Rectangle_1010" data-name="Rectangle 1010" width="34" height="34" fill="none"/>
+  </g>
+  <g id="Group_707" data-name="Group 707" transform="translate(5.667 5.667)">
+    <g id="Group_706" data-name="Group 706">
+      <path id="Path_549" data-name="Path 549" d="M15,5.417h0a1.421,1.421,0,0,0,1.417,1.417H19.25v17H16.417A1.421,1.421,0,0,0,15,25.25h0a1.421,1.421,0,0,0,1.417,1.417H19.25a2.842,2.842,0,0,0,2.833-2.833v-17A2.842,2.842,0,0,0,19.25,4H16.417A1.421,1.421,0,0,0,15,5.417Z" transform="translate(0.583 -4)" fill="#fff"/>
+      <path id="Path_550" data-name="Path 550" d="M6.833,26.667H9.667a1.421,1.421,0,0,0,1.417-1.417h0a1.421,1.421,0,0,0-1.417-1.417H6.833v-17H9.667a1.421,1.421,0,0,0,1.417-1.417h0A1.421,1.421,0,0,0,9.667,4H6.833A2.842,2.842,0,0,0,4,6.833v17A2.842,2.842,0,0,0,6.833,26.667Z" transform="translate(-4 -4)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

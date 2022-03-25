@@ -1,0 +1,19 @@
+<svg id="ic-Number_Pyramid" data-name="ic-Number Pyramid" xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34">
+  <g id="Group_708" data-name="Group 708">
+    <rect id="Rectangle_1011" data-name="Rectangle 1011" width="34" height="34" fill="none"/>
+    <rect id="Rectangle_1012" data-name="Rectangle 1012" width="34" height="34" fill="none"/>
+  </g>
+  <g id="Group_713" data-name="Group 713" transform="translate(3.497 4.25)">
+    <g id="Group_712" data-name="Group 712" transform="translate(0)">
+      <g id="Group_709" data-name="Group 709" transform="translate(0 17.011)">
+        <path id="Path_556" data-name="Path 556" d="M27.46,3,29.1,5.833a2.833,2.833,0,0,1-2.451,4.25H5.3a2.833,2.833,0,0,1-2.451-4.25L4.5,3Z" transform="translate(-2.469 -3)" fill="#fff"/>
+      </g>
+      <g id="Group_710" data-name="Group 710" transform="translate(7.765 0)">
+        <path id="Path_557" data-name="Path 557" d="M7.95,22.094l3.287-5.681a2.832,2.832,0,0,1,4.9,0l3.287,5.681Z" transform="translate(-7.95 -15)" fill="#fff"/>
+      </g>
+      <g id="Group_711" data-name="Group 711" transform="translate(3.657 9.927)">
+        <path id="Path_558" data-name="Path 558" d="M24.742,14.25H5.05L7.515,10H22.277Z" transform="translate(-5.05 -10)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

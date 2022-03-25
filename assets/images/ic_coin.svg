@@ -1,0 +1,10 @@
+<svg id="ic-coin" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <rect id="Rectangle_917" data-name="Rectangle 917" width="24" height="24" fill="none" />
+    <g id="Ellipse_33" data-name="Ellipse 33" transform="translate(5 5)" fill="none"
+        stroke="#ffc600" stroke-width="1">
+        <circle cx="8" cy="8" r="8" stroke="none" />
+        <circle cx="8" cy="8" r="7.5" fill="none" />
+    </g>
+    <circle id="Ellipse_32" data-name="Ellipse 32" cx="8" cy="8" r="8" transform="translate(3 3)"
+        fill="#ffc600" />
+</svg>

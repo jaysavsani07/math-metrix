@@ -8,5 +8,5 @@ class AlertRequest {
   final double coin;
   final bool isPause;
 
-  AlertRequest({this.type,this.gameCategoryType, this.score, this.coin, this.isPause});
+  AlertRequest({required this.type,required this.gameCategoryType,required this.score,required this.coin,required this.isPause});
 }

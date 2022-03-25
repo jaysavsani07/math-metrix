@@ -6,7 +6,11 @@ class TrianglePainter extends CustomPainter {
   final double radius;
   final double padding;
 
-  TrianglePainter(this.color, this.radius, this.padding);
+  TrianglePainter({
+    required this.color,
+    required this.radius,
+    required this.padding,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -14,7 +18,7 @@ class TrianglePainter extends CustomPainter {
 
     paint.style = PaintingStyle.stroke;
     paint.color = color;
-    paint.strokeWidth = 4.0;
+    paint.strokeWidth = 2.0;
 
     var path = Path();
     path.moveTo(size.width / 2, radius + padding);

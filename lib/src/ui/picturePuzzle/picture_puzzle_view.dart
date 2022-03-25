@@ -1,172 +1,135 @@
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/ui/picturePuzzle/picture_puzzle_view_model.dart';
+import 'package:mathgame/src/data/models/picture_puzzle.dart';
+import 'package:mathgame/src/ui/common/common_back_button.dart';
+import 'package:mathgame/src/ui/common/common_clear_button.dart';
+import 'package:mathgame/src/ui/common/common_app_bar.dart';
+import 'package:mathgame/src/ui/common/common_info_text_view.dart';
+import 'package:mathgame/src/ui/common/dialog_listener.dart';
+import 'package:mathgame/src/ui/picturePuzzle/picture_puzzle_provider.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/ui/picturePuzzle/picture_puzzle_button.dart';
-import 'package:mathgame/src/ui/picturePuzzle/picture_puzzle_answer_button.dart';
-import 'package:mathgame/src/ui/common/timer.dart';
+import 'package:mathgame/src/ui/common/common_text_button.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
+import 'package:vsync_provider/vsync_provider.dart';
+import 'package:collection/collection.dart';
 
 class PicturePuzzleView extends StatelessWidget {
+  final Tuple2<Color, Color> colorTuple;
+
+  const PicturePuzzleView({
+    Key? key,
+    required this.colorTuple,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<PicturePuzzleProvider>(
-      create: (_) => PicturePuzzleProvider(),
+    return MultiProvider(
+      providers: [
+        const VsyncProvider(),
+        ChangeNotifierProvider<PicturePuzzleProvider>(
+            create: (context) =>
+                PicturePuzzleProvider(vsync: VsyncProvider.of(context)))
+      ],
       child: WillPopScope(
         onWillPop: () => Future.value(false),
         child: Scaffold(
+          appBar: CommonAppBar<PicturePuzzleProvider>(colorTuple: colorTuple),
           body: SafeArea(
-            top: true,
             bottom: true,
-            child: Container(
-              margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
-              constraints: BoxConstraints.expand(),
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                      flex: 10,
-                      child: SizedBox(
-                        child: Align(
-                          alignment: Alignment.bottomLeft,
-                          child: Timer(GameCategoryType.PICTURE_PUZZLE),
-                        ),
-                      )),
-                  Expanded(
-                    flex: 40,
-                    child: Consumer<PicturePuzzleProvider>(
-                        builder: (context, provider, child) {
-                      return Visibility(
-                        visible: !provider.pause,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: provider.currentState.list.map((list) {
-                            return Padding(
-                              padding: const EdgeInsets.all(6),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: list.shapeList.map((subList) {
-                                  return PicturePuzzleButton(subList);
-                                }).toList(),
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                      );
-                    }),
-                  ),
-                  Expanded(
-                    flex: 40,
-                    child: Container(   
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(30)),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Expanded(
-                              child: Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              border: Border.all(
-                                  color: Theme.of(context).accentColor),
-                            ),
-                            margin: EdgeInsets.fromLTRB(25, 0, 25, 15),
-                            constraints: BoxConstraints.expand(),
-                            child: Center(
-                              child: Consumer<PicturePuzzleProvider>(
-                                builder: (context, provider, child) {
-                                  return Text(
-                                    provider.result,
-                                    style: Theme.of(context).textTheme.display1,
-                                  );
-                                },
-                              ),
-                            ),
-                          )),
-                          Expanded(
-                            child: Row(
-                              children: <Widget>[
-                                PicturePuzzleAnswerButton(
-                                    "5",
-                                    BorderRadius.only(
-                                        topLeft: Radius.circular(40))),
-                                PicturePuzzleAnswerButton(
-                                    "6", BorderRadius.all(Radius.zero)),
-                                PicturePuzzleAnswerButton(
-                                    "7", BorderRadius.all(Radius.zero)),
-                                PicturePuzzleAnswerButton(
-                                    "8", BorderRadius.all(Radius.zero)),
-                                PicturePuzzleAnswerButton(
-                                    "9",
-                                    BorderRadius.only(
-                                        topRight: Radius.circular(40)))
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Row(
-                              children: <Widget>[
-                                PicturePuzzleAnswerButton(
-                                    "0", BorderRadius.all(Radius.zero)),
-                                PicturePuzzleAnswerButton(
-                                    "1", BorderRadius.all(Radius.zero)),
-                                PicturePuzzleAnswerButton(
-                                    "2", BorderRadius.all(Radius.zero)),
-                                PicturePuzzleAnswerButton(
-                                    "3", BorderRadius.all(Radius.zero)),
-                                PicturePuzzleAnswerButton(
-                                    "4", BorderRadius.all(Radius.zero)),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Row(
-                              children: <Widget>[
-                                PicturePuzzleAnswerButton(
-                                    "CLEAR",
-                                    BorderRadius.only(
-                                        bottomLeft: Radius.circular(40),
-                                        bottomRight: Radius.circular(40))),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                      flex: 10,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Consumer<PicturePuzzleProvider>(
-                              builder: (context, provider, child) {
-                            return IconButton(
-                              icon: provider.pause
-                                  ? Icon(Icons.play_arrow)
-                                  : Icon(Icons.pause),
-                              iconSize: 40,
-                              onPressed: () {
-                                provider.pauseGame();
-                              },
+            child: DialogListener<PicturePuzzleProvider>(
+              gameCategoryType: GameCategoryType.PICTURE_PUZZLE,
+              child: Container(
+                margin: EdgeInsets.only(top: 24, left: 24, right: 24),
+                constraints: BoxConstraints.expand(),
+                child: Column(
+                  children: <Widget>[
+                    CommonInfoTextView<PicturePuzzleProvider>(
+                        gameCategoryType: GameCategoryType.PICTURE_PUZZLE),
+                    Expanded(
+                      child: Selector<PicturePuzzleProvider, PicturePuzzle>(
+                          selector: (p0, p1) => p1.currentState,
+                          builder: (context, provider, child) {
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: provider.list.mapIndexed((index, list) {
+                                return Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: index == 3 ? 6 : 12),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: list.shapeList.map((subList) {
+                                      return PicturePuzzleButton(
+                                        picturePuzzleShape: subList,
+                                        shapeColor: colorTuple.item1,
+                                        colorTuple: colorTuple,
+                                      );
+                                    }).toList(),
+                                  ),
+                                );
+                              }).toList(),
                             );
                           }),
-                          Consumer<PicturePuzzleProvider>(
-                              builder: (context, provider, child) {
-                            return IconButton(
-                              icon: Icon(Icons.info_outline),
-                              iconSize: 40,
-                              onPressed: () {
-                                provider.showInfoDialog();
-                              },
-                            );
-                          })
+                    ),
+                    Builder(builder: (context) {
+                      return GridView(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          childAspectRatio: 1.3,
+                        ),
+                        padding: const EdgeInsets.only(bottom: 24),
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        children: [
+                          ...[
+                            "7",
+                            "8",
+                            "9",
+                            "4",
+                            "5",
+                            "6",
+                            "1",
+                            "2",
+                            "3",
+                            "Clear",
+                            "0",
+                            "Back"
+                          ].map(
+                            (e) {
+                              if (e == "Clear") {
+                                return CommonClearButton(
+                                    text: "Clear",
+                                    onTab: () {
+                                      context
+                                          .read<PicturePuzzleProvider>()
+                                          .clearResult();
+                                    });
+                              } else if (e == "Back") {
+                                return CommonBackButton(onTab: () {
+                                  context
+                                      .read<PicturePuzzleProvider>()
+                                      .backPress();
+                                });
+                              } else {
+                                return CommonTextButton(
+                                  text: e,
+                                  colorTuple: colorTuple,
+                                  onTab: () {
+                                    context
+                                        .read<PicturePuzzleProvider>()
+                                        .checkGameResult(e);
+                                  },
+                                );
+                              }
+                            },
+                          )
                         ],
-                      )),
-                ],
+                      );
+                    }),
+                  ],
+                ),
               ),
             ),
           ),

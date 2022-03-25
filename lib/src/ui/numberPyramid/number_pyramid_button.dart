@@ -1,41 +1,70 @@
 import 'package:flutter/material.dart';
+import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/data/models/number_pyramid.dart';
-import 'package:mathgame/src/ui/calculator/calculator_view_model.dart';
-import 'package:mathgame/src/ui/numberPyramid/number_pyramid_view_model.dart';
+import 'package:mathgame/src/ui/numberPyramid/number_pyramid_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
 class PyramidNumberButton extends StatelessWidget {
-  final BorderRadius borderRadius;
-  final String text;
-//  final NumPyramidCellModel numPyramidCellModel;
-  PyramidNumberButton(this.text, this.borderRadius);
+  final NumPyramidCellModel numPyramidCellModel;
+  final bool isLeftRadius;
+  final bool isRightRadius;
+  final double height;
+  final Tuple2<Color, Color> colorTuple;
+
+  PyramidNumberButton({
+    required this.numPyramidCellModel,
+    this.isLeftRadius = false,
+    this.isRightRadius = false,
+    required this.height,
+    required this.colorTuple,
+  });
 
   @override
   Widget build(BuildContext context) {
     final numberProvider = Provider.of<NumberPyramidProvider>(context);
-
-    return Expanded(
-      flex: 1,
-      child: InkWell(
-        borderRadius: borderRadius,
-        onTap: (){
-          numberProvider.pyramidBoxInputValue(text);
-        },
-        child: Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).dialogBackgroundColor,
-            shape: BoxShape.rectangle,
-            borderRadius: borderRadius,
-            border: Border.all(color: Theme.of(context).dividerColor, width: 1),
+    return InkWell(
+      onTap: () {
+        numberProvider.pyramidBoxSelection(numPyramidCellModel);
+      },
+      child: Container(
+        height: (height / 7) * 0.65,
+        width: height / 7,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: numPyramidCellModel.isHint
+              ? null
+              : (numPyramidCellModel.isDone
+                  ? (numPyramidCellModel.isCorrect
+                      ? Colors.transparent
+                      : Colors.redAccent)
+                  : Colors.transparent),
+          gradient: numPyramidCellModel.isHint
+              ? LinearGradient(
+                  colors: [colorTuple.item1, colorTuple.item2],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                )
+              : null,
+          border: Border.all(
+            color: numPyramidCellModel.isActive
+                ? colorTuple.item1
+                : Theme.of(context).colorScheme.triangleLineColor,
+            width: 1,
           ),
-          margin: EdgeInsets.all(1),
-          constraints: BoxConstraints.expand(),
-          child: Center(
-            child: Text(
-              text,
-              style: Theme.of(context).textTheme.headline,
-            ),
+          borderRadius: BorderRadius.only(
+            topRight: isRightRadius ? Radius.circular(8) : Radius.circular(0),
+            topLeft: isLeftRadius ? Radius.circular(8) : Radius.circular(0),
           ),
+        ),
+        child: Text(
+          numPyramidCellModel.isHidden
+              ? numPyramidCellModel.text
+              : numPyramidCellModel.numberOnCell.toString(),
+          style: Theme.of(context).textTheme.subtitle2!.copyWith(
+              color: numPyramidCellModel.isHint
+                  ?  Colors.white
+                  : colorTuple.item1),
         ),
       ),
     );

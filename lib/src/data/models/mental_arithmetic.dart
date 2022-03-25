@@ -1,10 +1,10 @@
 class MentalArithmetic {
-  String currentQuestion;
+  late String currentQuestion;
   List<String> questionList;
   int answer;
-  int answerLength;
+  late int answerLength;
 
-  MentalArithmetic(this.questionList, this.answer) {
+  MentalArithmetic({required this.questionList,required  this.answer}) {
     this.currentQuestion = questionList[0];
     this.answerLength = answer.toString().trim().length;
   }

@@ -4,11 +4,16 @@ class Sign {
   String secondDigit;
   String answer;
 
-  Sign(this.firstDigit, this.sign, this.secondDigit, this.answer);
+  Sign({
+    required this.firstDigit,
+    required this.sign,
+    required this.secondDigit,
+    required this.answer,
+  });
 
   @override
   String toString() {
-    return 'SignQandS{firstDigit: $firstDigit, sign: $sign, secondDigit: $secondDigit, answer: $answer}';
+    return 'SignQandS{firstDigit: $firstDigit, sign: $sign, secondDigit: $secondDigit, answer: $answer} \n';
   }
 
   @override

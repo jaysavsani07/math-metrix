@@ -1,132 +1,125 @@
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/ui/magicTriangle/magic_triangle_view_model.dart';
+import 'package:mathgame/src/core/color_scheme.dart';
+import 'package:mathgame/src/ui/common/common_app_bar.dart';
+import 'package:mathgame/src/ui/common/common_info_text_view.dart';
+import 'package:mathgame/src/ui/common/dialog_listener.dart';
+import 'package:mathgame/src/ui/magicTriangle/magic_triangle_provider.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/ui/magicTriangle/triangle_3x3.dart';
 import 'package:mathgame/src/ui/magicTriangle/triangle_4x4.dart';
-import 'package:mathgame/src/ui/magicTriangle/triangle_button.dart';
 import 'package:mathgame/src/ui/magicTriangle/triangle_input_3x3.dart';
 import 'package:mathgame/src/ui/magicTriangle/triangle_input_4x4.dart';
-import 'package:mathgame/src/ui/magicTriangle/triangle_input_button.dart';
 import 'package:mathgame/src/ui/magicTriangle/triangle_painter.dart';
-import 'package:mathgame/src/ui/common/timer.dart';
-import 'package:mathgame/src/core/size_config.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
+import 'package:vsync_provider/vsync_provider.dart';
 
 class MagicTriangleView extends StatelessWidget {
-  final double padding = 20;
+  final double padding = 0;
   final double radius = 30;
-  double triangleHeight;
+  final Tuple2<Color, Color> colorTuple;
+
+  const MagicTriangleView({
+    Key? key,
+    required this.colorTuple,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    triangleHeight = (MediaQuery.of(context).size.width) * 0.8660254;
-    return ChangeNotifierProvider<MagicTriangleProvider>(
-      create: (_) => MagicTriangleProvider(),
+    return MultiProvider(
+      providers: [
+        const VsyncProvider(),
+        ChangeNotifierProvider<MagicTriangleProvider>(
+            create: (context) =>
+                MagicTriangleProvider(vsync: VsyncProvider.of(context)))
+      ],
       child: WillPopScope(
         onWillPop: () => Future.value(false),
-        child: Scaffold(body: Consumer<MagicTriangleProvider>(
-          builder: (context, magicTriangleProvider, child) {
-            return SafeArea(
-              top: true,
-              bottom: true,
+        child: Scaffold(
+          appBar: CommonAppBar<MagicTriangleProvider>(colorTuple: colorTuple),
+          body: SafeArea(
+            bottom: true,
+            child: DialogListener<MagicTriangleProvider>(
+              gameCategoryType: GameCategoryType.MAGIC_TRIANGLE,
               child: Container(
-                height: SizeConfig.screenHeight,
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                child: Column(children: <Widget>[
-                  Container(
-                      height: (SizeConfig.safeBlockVertical * 0.08),
-                      margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      child: Timer(GameCategoryType.MAGIC_TRIANGLE)),
-                  Container(
-                    height: (SizeConfig.safeBlockVertical * 0.08),
-                    child: Row(
+                margin: EdgeInsets.all(24),
+                constraints: BoxConstraints.expand(),
+                child: Column(
+                  children: <Widget>[
+                    CommonInfoTextView<MagicTriangleProvider>(
+                        gameCategoryType: GameCategoryType.MAGIC_TRIANGLE),
+                    SizedBox(height: 16),
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text(
-                            magicTriangleProvider.currentState.answer
-                                .toString(),
-                            style: Theme.of(context).textTheme.display1)
+                        Selector<MagicTriangleProvider, int>(
+                            selector: (p0, p1) => p1.currentState.answer,
+                            builder: (context, answer, child) {
+                              return Text(
+                                answer.toString(),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle2!
+                                    .copyWith(fontSize: 30),
+                              );
+                            }),
                       ],
                     ),
-                  ),
-                  Container(
-                    height: (SizeConfig.safeBlockVertical * 0.50),
-                    child: Center(
-                      child: Container(
-                        height: triangleHeight,
-                        width: MediaQuery.of(context).size.width,
-                        child: Visibility(
-                          visible: !magicTriangleProvider.pause,
-                          child: Stack(
-                            children: <Widget>[
-                              Container(
-                                child: Row(
-                                  children: <Widget>[
-                                    CustomPaint(
-                                      painter: TrianglePainter(
-                                          Theme.of(context).primaryColor,
-                                          radius,
-                                          padding),
-                                      size: Size(
-                                          (MediaQuery.of(context).size.width),
-                                          triangleHeight),
-                                    )
-                                  ],
-                                ),
+                    SizedBox(height: 16),
+                    Expanded(
+                      child: LayoutBuilder(builder: (context, constraints) {
+                        return Stack(
+                          alignment: Alignment.center,
+                          children: <Widget>[
+                            CustomPaint(
+                              painter: TrianglePainter(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .triangleLineColor,
+                                radius: radius,
+                                padding: padding,
                               ),
-                              magicTriangleProvider.currentState.is3x3
-                                  ? Triangle3x3(radius, padding, triangleHeight)
-                                  : Triangle4x4(radius, padding, triangleHeight)
-                              // last one
-                            ],
-                          ),
-                        ),
-                      ),
+                              size: Size(
+                                constraints.maxWidth,
+                                constraints.maxWidth,
+                              ),
+                            ),
+                            Selector<MagicTriangleProvider, bool>(
+                                selector: (p0, p1) => p1.currentState.is3x3,
+                                builder: (context, is3x3, child) {
+                                  return is3x3
+                                      ? Triangle3x3(
+                                          radius: radius,
+                                          padding: padding,
+                                          triangleHeight: constraints.maxWidth,
+                                          triangleWidth: constraints.maxWidth,
+                                          colorTuple: colorTuple,
+                                        )
+                                      : Triangle4x4(
+                                          radius: radius,
+                                          padding: padding,
+                                          triangleHeight: constraints.maxWidth,
+                                          triangleWidth: constraints.maxWidth,
+                                          colorTuple: colorTuple,
+                                        );
+                                }),
+                          ],
+                        );
+                      }),
                     ),
-                  ),
-                  Container(
-                    height: (SizeConfig.safeBlockVertical * 0.22),
-                    child: magicTriangleProvider.currentState.is3x3
-                        ? TriangleInput3x3()
-                        : TriangleInput4x4(),
-                  ),
-                  Container(
-                    height: (SizeConfig.safeBlockVertical * 0.08),
-                    margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Consumer<MagicTriangleProvider>(
-                            builder: (context, provider, child) {
-                          return IconButton(
-                            icon: provider.pause
-                                ? Icon(Icons.play_arrow)
-                                : Icon(Icons.pause),
-                            iconSize: 30,
-                            onPressed: () {
-                              provider.pauseTimer();
-                            },
-                          );
+                    Selector<MagicTriangleProvider, bool>(
+                        selector: (p0, p1) => p1.currentState.is3x3,
+                        builder: (context, is3x3, child) {
+                          return is3x3
+                              ? TriangleInput3x3(colorTuple: colorTuple)
+                              : TriangleInput4x4(colorTuple: colorTuple);
                         }),
-                        Consumer<MagicTriangleProvider>(
-                            builder: (context, provider, child) {
-                          return IconButton(
-                            icon: Icon(Icons.info_outline),
-                            iconSize: 30,
-                            onPressed: () {
-                              provider.showInfoDialog();
-                            },
-                          );
-                        })
-                      ],
-                    ),
-                  )
-                ]),
+                  ],
+                ),
               ),
-            );
-          },
-        )),
+            ),
+          ),
+        ),
       ),
     );
   }

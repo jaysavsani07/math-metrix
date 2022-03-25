@@ -1,3 +1,15 @@
+enum PicturePuzzleQuestionItemType {
+  shape,
+  sign,
+  hint,
+  answer,
+}
+enum PicturePuzzleShapeType {
+  CIRCLE,
+  SQUARE,
+  TRIANGLE,
+}
+
 class PicturePuzzle {
   List<PicturePuzzleShapeList> list;
   int answer;
@@ -22,17 +34,15 @@ class PicturePuzzleShapeList {
 }
 
 class PicturePuzzleShape {
-  bool isSign;
-  bool isAnswer;
-  PicturePuzzleShapeType picturePuzzleShapeType;
+  PicturePuzzleShapeType? picturePuzzleShapeType;
   String text;
+  final PicturePuzzleQuestionItemType type;
 
-  PicturePuzzleShape({this.isSign, this.picturePuzzleShapeType, this.isAnswer,this.text});
-
-  @override
-  String toString() {
-    return 'PicturePuzzleShape{isSign: $isSign, picturePuzzleShapeType: $picturePuzzleShapeType, sign: $text}';
-  }
+  PicturePuzzleShape({
+    this.picturePuzzleShapeType,
+    required this.text,
+    required this.type,
+  });
 }
 
 class PicturePuzzleData {
@@ -55,8 +65,4 @@ class PicturePuzzleData {
   String toString() {
     return 'PicturePuzzleData{picturePuzzleShapeType1: $picturePuzzleShapeType1, sign1: $sign1, picturePuzzleShapeType2: $picturePuzzleShapeType2, sign2: $sign2, picturePuzzleShapeType3: $picturePuzzleShapeType3, text: $text}';
   }
-
-
 }
-
-enum PicturePuzzleShapeType { CIRCLE, SQUARE, TRIANGLE }

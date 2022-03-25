@@ -2,68 +2,71 @@ import 'package:mathgame/src/data/models/picture_puzzle.dart';
 import 'package:mathgame/src/utility/math_util.dart';
 
 class PicturePuzzleRepository {
-  static List<int> listHasCode = List();
+  static List<int> listHasCode = <int>[];
 
   static getPicturePuzzleDataList(int level) {
     if (level == 1) {
       listHasCode.clear();
     }
 
-    List<PicturePuzzle> list = List();
+    List<PicturePuzzle> list = <PicturePuzzle>[];
     while (list.length < 5) {
-      List<PicturePuzzleShapeList> puzzleList = List();
+      List<PicturePuzzleShapeList> puzzleList = <PicturePuzzleShapeList>[];
       List<PicturePuzzleData> picturePuzzleDataList =
           getNewShapeMatrix(level, list.length);
-      print("\n");
 
       picturePuzzleDataList
           .asMap()
           .forEach((int i, PicturePuzzleData picturePuzzleData) {
         puzzleList.add(PicturePuzzleShapeList([
           PicturePuzzleShape(
-              isSign: false,
-              picturePuzzleShapeType: picturePuzzleData.picturePuzzleShapeType1,
-              text: ""),
+            picturePuzzleShapeType: picturePuzzleData.picturePuzzleShapeType1,
+            text: "",
+            type: PicturePuzzleQuestionItemType.shape,
+          ),
           PicturePuzzleShape(
-              isSign: true, isAnswer: false, text: picturePuzzleData.sign1),
+            text: picturePuzzleData.sign1,
+            type: PicturePuzzleQuestionItemType.sign,
+          ),
           PicturePuzzleShape(
-              isSign: false,
-              picturePuzzleShapeType: picturePuzzleData.picturePuzzleShapeType2,
-              text: ""),
+            picturePuzzleShapeType: picturePuzzleData.picturePuzzleShapeType2,
+            text: "",
+            type: PicturePuzzleQuestionItemType.shape,
+          ),
           PicturePuzzleShape(
-              isSign: true, isAnswer: false, text: picturePuzzleData.sign2),
+            text: picturePuzzleData.sign2,
+            type: PicturePuzzleQuestionItemType.sign,
+          ),
           PicturePuzzleShape(
-              isSign: false,
-              picturePuzzleShapeType: picturePuzzleData.picturePuzzleShapeType3,
-              text: ""),
-          PicturePuzzleShape(isSign: true, isAnswer: false, text: "="),
+            picturePuzzleShapeType: picturePuzzleData.picturePuzzleShapeType3,
+            text: "",
+            type: PicturePuzzleQuestionItemType.shape,
+          ),
           PicturePuzzleShape(
-              isSign: true,
-              isAnswer: true,
-              text: i == picturePuzzleDataList.length - 1
-                  ? "?"
-                  : picturePuzzleData.text)
+            text: "=",
+            type: PicturePuzzleQuestionItemType.sign,
+          ),
+          PicturePuzzleShape(
+            text: i == picturePuzzleDataList.length - 1
+                ? "?"
+                : picturePuzzleData.text,
+            type: i == picturePuzzleDataList.length - 1
+                ? PicturePuzzleQuestionItemType.answer
+                : PicturePuzzleQuestionItemType.hint,
+          )
         ]));
       });
 
       list.add(PicturePuzzle(
           puzzleList, int.parse(picturePuzzleDataList.last.text)));
     }
-
-    list.forEach((list1) {
-      list1.list.forEach((list) {
-        print(
-            "${list.shapeList[0].picturePuzzleShapeType} ${list.shapeList[2].picturePuzzleShapeType} ${list.shapeList[4].picturePuzzleShapeType} ${list1.answer}");
-      });
-    });
-    print("\n");
     return list;
   }
 
   static List<PicturePuzzleData> getNewShapeMatrix(int level, int index) {
-    List<PicturePuzzleData> list = List();
-    List<String> listDigit = List();
-    List<String> listSign = List();
+    List<PicturePuzzleData> list = <PicturePuzzleData>[];
+    List<String> listDigit = <String>[];
+    List<String> listSign = <String>[];
     List<PicturePuzzleShapeType> listShape = [
       PicturePuzzleShapeType.CIRCLE,
       PicturePuzzleShapeType.TRIANGLE,
@@ -139,11 +142,6 @@ class PicturePuzzleRepository {
       list.add(getRowLast(listShape[0], listSign[0], listShape[1], listSign[1],
           listShape[2], listDigit[0], listDigit[1], listDigit[2]));
     }
-//    list.forEach((list) {
-//      print(
-//          "${list.picturePuzzleShapeType1} ${list.sign1} ${list.picturePuzzleShapeType2} ${list.sign2} ${list.picturePuzzleShapeType3}");
-//    });
-//    print("\n");
     return list;
   }
 
@@ -152,8 +150,6 @@ class PicturePuzzleRepository {
       String sign1,
       String sign2,
       String op1) {
-    print(
-        "$op1 $sign1 $op1 $sign2 $op1 ${getResult(op1, sign1, op1, sign2, op1)}");
     return PicturePuzzleData(
         picturePuzzleShapeType1,
         sign1,
@@ -172,11 +168,8 @@ class PicturePuzzleRepository {
       String op2,
       String op3) {
     if ((sign1 == "-" && sign2 == "+") || sign1 == "+" && sign2 == "-") {
-//      print("dakha 6e aama");
       sign1 = "*";
     }
-    print(
-        "$op1 $sign1 $op2 $sign2 $op2 ${getResult(op1, sign1, op2, sign2, op2)}");
     return PicturePuzzleData(
         picturePuzzleShapeType1,
         sign1,
@@ -195,11 +188,9 @@ class PicturePuzzleRepository {
       String op2,
       String op3) {
     if ((sign1 == "-" && sign2 == "+") || sign1 == "+" && sign2 == "-") {
-//      print("dakha 6e aama");
       sign2 = "*";
     }
-    print(
-        "$op2 $sign1 $op3 $sign2 $op3 ${getResult(op2, sign1, op3, sign2, op3)}");
+
     return PicturePuzzleData(
         picturePuzzleShapeType2,
         sign1,
@@ -218,8 +209,6 @@ class PicturePuzzleRepository {
       String op1,
       String op2,
       String op3) {
-    print(
-        "$op1 ${sign1 == "-" ? "+" : sign1} $op2 ${sign2 == "-" ? "+" : sign2} $op3 ${getResult(op1, sign1 == "-" ? "+" : sign1, op2, sign2 == "-" ? "+" : sign2, op3)}");
     return PicturePuzzleData(
         picturePuzzleShapeType1,
         sign1 == "-" ? "+" : sign1,
@@ -243,5 +232,4 @@ void main() {
     PicturePuzzleRepository.getPicturePuzzleDataList(j);
 //    }
   }
-//  print(PicturePuzzleQandSDataProvider.getShapeMatrix());
 }

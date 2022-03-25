@@ -1,31 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/data/models/math_grid.dart';
 import 'package:provider/provider.dart';
-import 'package:mathgame/src/ui/mathGrid/math_grid_view_model.dart';
+import 'package:mathgame/src/ui/mathGrid/math_grid_provider.dart';
+import 'package:tuple/tuple.dart';
 
 class MathGridButton extends StatelessWidget {
-  final int value;
   final MathGridCellModel gridModel;
+  final int index;
+  final Tuple2<Color, Color> colorTuple;
 
-  MathGridButton(this.value, this.gridModel);
+  MathGridButton({
+    required this.gridModel,
+    required this.index,
+    required this.colorTuple,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final mathGridProvider = Provider.of<MathGridProvider>(context);
     return Container(
       decoration: BoxDecoration(
-          border: Border.all(color: Colors.white24),
+          border: Border.all(color: Colors.white24, width: 0.5),
           color: gridModel.isRemoved
-              ? Colors.grey[800]
-              : (gridModel.isActive ? Theme.of(context).accentColor : Colors.grey[900])),
+              ? Theme.of(context).colorScheme.baseColor
+              : (gridModel.isActive
+                  ? Theme.of(context).colorScheme.baseColor
+                  : Colors.transparent)),
       child: Visibility(
         visible: !(gridModel.isRemoved),
         child: InkWell(
           onTap: () {
-            mathGridProvider.checkResult(value, gridModel);
+            context.read<MathGridProvider>().checkResult(index, gridModel);
           },
           child: Center(
-            child: Text(value.toString(), style: Theme.of(context).textTheme.subhead),
+            child: Text(
+              gridModel.value.toString(),
+              style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                  color: gridModel.isActive ? colorTuple.item1 : Colors.white),
+            ),
           ),
         ),
       ),

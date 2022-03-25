@@ -1,12 +1,16 @@
 class MagicTriangle {
-  bool is3x3;
+  late bool is3x3;
 
   List<MagicTriangleGrid> listGrid;
   List<MagicTriangleInput> listTriangle;
-  int availableDigit;
+  late int availableDigit;
   int answer;
 
-  MagicTriangle(this.listGrid, this.listTriangle, this.answer) {
+  MagicTriangle({
+    required this.listGrid,
+    required this.listTriangle,
+    required this.answer,
+  }) {
     this.availableDigit = listGrid.length;
     this.is3x3 = listGrid.length == 6 ? true : false;
   }

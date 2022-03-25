@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get_it/get_it.dart';
-import 'package:mathgame/src/ui/dashboard/dashboard_view_model.dart';
+import 'package:mathgame/src/core/app_assets.dart';
+import 'package:mathgame/src/core/color_scheme.dart';
+import 'package:mathgame/src/ui/app/theme_provider.dart';
+import 'package:mathgame/src/ui/dashboard/dashboard_button_view.dart';
+import 'package:mathgame/src/ui/dashboard/dashboard_provider.dart';
 import 'package:mathgame/src/core/app_constant.dart';
-import 'package:mathgame/src/service/navigation_service.dart';
-import 'package:mathgame/src/core/app_constant.dart';
-
-import 'package:mathgame/src/core/size_config.dart';
-
-import 'package:provider_architecture/provider_architecture.dart';
+import 'package:package_info/package_info.dart';
+import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
 class DashboardView extends StatefulWidget {
   @override
@@ -17,14 +18,15 @@ class DashboardView extends StatefulWidget {
 
 class _DashboardViewState extends State<DashboardView>
     with SingleTickerProviderStateMixin {
-  double _scale;
-  AnimationController _controller;
-  Animation<Offset> _offsetLeftEnter;
-  Animation<Offset> _offsetRightEnter;
+  late AnimationController _controller;
+  late Animation<Offset> _offsetLeftEnter;
+  late Animation<Offset> _offsetRightEnter;
+  late bool isHomePageOpen;
 
   @override
   void initState() {
     super.initState();
+    isHomePageOpen = false;
     _controller = AnimationController(
       duration: Duration(milliseconds: 700),
       vsync: this,
@@ -38,183 +40,190 @@ class _DashboardViewState extends State<DashboardView>
       begin: Offset(-2.0, 0.0),
       end: Offset.zero,
     ).animate(_controller);
-
-    /*_offsetLeftEnter.addListener(() {
-      setState(() {});
-    });*/
     _controller.forward();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _controller.dispose();
   }
 
-  void _onTapDown(TapDownDetails details) {
-    print("hello");
-    _controller.forward();
-  }
-
-  void _onTapUp(TapUpDetails details) {
-    _controller.reverse();
-  }
-
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
-    _scale = 1 - _controller.value;
-
-    return Scaffold(
-      body: SafeArea(
-        top: true,
-        bottom: true,
-        child: ViewModelProvider.withConsumer(
-            reuseExisting: true,
-            viewModel: GetIt.I<DashboardViewModel>(),
-            onModelReady: (model) => model.initialise(),
-            builder: (context, DashboardViewModel model, child) => Container(
-                  constraints: BoxConstraints.expand(),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        systemNavigationBarColor: Theme.of(context).scaffoldBackgroundColor,
+        systemNavigationBarIconBrightness: Theme.of(context).brightness,
+      ),
+      child: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 0,
+          elevation: 0,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        ),
+        body: SafeArea(
+          bottom: true,
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(width: 12),
+                        Container(
+                          decoration: BoxDecoration(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .infoDialogBgColor,
+                              borderRadius: BorderRadius.circular(18)),
+                          padding: const EdgeInsets.all(12.0),
+                          child: Row(
+                            children: [
+                              SvgPicture.asset(
+                                AppAssets.icTrophy,
+                                width: 24,
+                                height: 24,
+                              ),
+                              SizedBox(width: 5),
+                              Consumer<DashboardProvider>(
+                                builder: (context, model, child) => Text(
+                                    model.overallScore.toString(),
+                                    style:
+                                        Theme.of(context).textTheme.subtitle1),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    InkWell(
+                      onTap: () {
+                        context.read<ThemeProvider>().changeTheme();
+                      },
+                      borderRadius: BorderRadius.circular(24),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: SvgPicture.asset(
+                          Theme.of(context).brightness == Brightness.light
+                              ? AppAssets.icDarkMode
+                              : AppAssets.icLightMode,
+                          width: 24,
+                          height: 24,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 24),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(height: 36),
+                        Text(
+                          "Math Matrix",
+                          style: Theme.of(context)
+                              .textTheme
+                              .subtitle2!
+                              .copyWith(
+                                  fontSize: 28, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 12),
+                        Text(
+                          "Train Your Brain, Improve Your Math Skill",
+                          style: Theme.of(context)
+                              .textTheme
+                              .caption!
+                              .copyWith(fontSize: 14),
+                        ),
+                        SizedBox(height: 36),
+                        DashboardButtonView(
+                          dashboard: KeyUtil.dashboardItems[0],
+                          position: _offsetLeftEnter,
+                          onTab: () {
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              KeyUtil.home,
+                              ModalRoute.withName(KeyUtil.dashboard),
+                              arguments: Tuple2(KeyUtil.dashboardItems[0],
+                                  MediaQuery.of(context).padding.top),
+                            );
+                          },
+                        ),
+                        SizedBox(height: 20),
+                        DashboardButtonView(
+                          dashboard: KeyUtil.dashboardItems[1],
+                          position: _offsetRightEnter,
+                          onTab: () {
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              KeyUtil.home,
+                              ModalRoute.withName(KeyUtil.dashboard),
+                              arguments: Tuple2(KeyUtil.dashboardItems[1],
+                                  MediaQuery.of(context).padding.top),
+                            );
+                          },
+                        ),
+                        SizedBox(height: 20),
+                        DashboardButtonView(
+                          dashboard: KeyUtil.dashboardItems[2],
+                          position: _offsetLeftEnter,
+                          onTab: () {
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              KeyUtil.home,
+                              ModalRoute.withName(KeyUtil.dashboard),
+                              arguments: Tuple2(KeyUtil.dashboardItems[2],
+                                  MediaQuery.of(context).padding.top),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 24),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.infoDialogBgColor,
+                      borderRadius: BorderRadius.circular(18)),
+                  padding: const EdgeInsets.all(12.0),
+                  margin: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Expanded(
-                          flex: 1,
-                          child: Container(
-                            constraints: BoxConstraints.expand(),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      SvgPicture.asset(
-                                        "assets/images/goal.svg",
-                                        width: 18,
-                                        height: 18,
-                                      ),
-                                      SizedBox(width: 5),
-                                      Text(model.overallScore.toString(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .subhead),
-                                      SizedBox(width: 30),
-                                      SvgPicture.asset(
-                                        "assets/images/money.svg",
-                                        width: 18,
-                                        height: 18,
-                                      ),
-                                      SizedBox(width: 5),
-                                      Text(model.totalCoin.toString(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .subhead)
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          )),
-                      Expanded(
-                          flex: 2,
-                          child: Container(
-                              constraints: BoxConstraints.expand(),
-                              alignment: Alignment.center,
-                              child: Text("Math Matrix",
-                                  style:
-                                      Theme.of(context).textTheme.display2))),
-                      Expanded(
-                        flex: 7,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            SizedBox(
-                              height: (SizeConfig.screenHeight / 20),
-                            ),
-                            GestureDetector(
-                              onTapDown: (tapDownDetails) {
-                                GetIt.I<NavigationService>().navigateTo(
-                                    KeyUtil.Home,
-                                    arguments: PuzzleType.MATH_PUZZLE);
-                              },
-                              child: SlideTransition(
-                                position: _offsetLeftEnter,
-                                child: Card(
-                                  color: Color(0xFF363636),
-                                  elevation: 10,
-                                  margin: EdgeInsets.all(10),
-                                  child: Container(
-                                      alignment: Alignment.center,
-                                      width: (SizeConfig.screenWidth / 10) * 6,
-                                      margin: EdgeInsets.all(20),
-                                      child: Text("Math Puzzle",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline)),
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTapDown: (tapDownDetails) {
-                                GetIt.I<NavigationService>().navigateTo(
-                                    KeyUtil.Home,
-                                    arguments: PuzzleType.MEMORY_PUZZLE);
-                              },
-                              child: SlideTransition(
-                                position: _offsetRightEnter,
-                                child: Card(
-                                  color: Color(0xFF363636),
-                                  elevation: 10,
-                                  margin: EdgeInsets.all(10),
-                                  child: Container(
-                                      alignment: Alignment.center,
-                                      width: (SizeConfig.screenWidth / 10) * 6,
-                                      margin: EdgeInsets.all(20),
-                                      child: Text("Memory Puzzle",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline)),
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTapDown: (tapDownDetails) {
-                                GetIt.I<NavigationService>().navigateTo(
-                                    KeyUtil.Home,
-                                    arguments: PuzzleType.BRAIN_PUZZLE);
-                              },
-                              child: SlideTransition(
-                                position: _offsetLeftEnter,
-                                child: Card(
-                                  color: Color(0xFF363636),
-                                  elevation: 10,
-                                  margin: EdgeInsets.all(10),
-                                  child: Container(
-                                      alignment: Alignment.center,
-                                      width: (SizeConfig.screenWidth / 10) * 6,
-                                      margin: EdgeInsets.all(20),
-                                      child: Text("Train Your Brain",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline)),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
+                        child: Text("Math Matrix by Nividata",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText2!
+                                .copyWith(fontWeight: FontWeight.normal)),
+                      ),
+                      SizedBox(width: 12),
+                      FutureBuilder<PackageInfo>(
+                        future: PackageInfo.fromPlatform(),
+                        builder: (context, snapshot) => Text(
+                            "v${snapshot.data?.version}",
+                            style: Theme.of(context)
+                                .textTheme
+                                .caption!
+                                .copyWith(fontSize: 14)),
                       ),
                     ],
                   ),
-                )),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

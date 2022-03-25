@@ -1,42 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/ui/picturePuzzle/picture_puzzle_view_model.dart';
+import 'package:mathgame/src/core/color_scheme.dart';
+import 'package:mathgame/src/data/models/picture_puzzle.dart';
+import 'package:mathgame/src/ui/common/common_neumorphic_view.dart';
+import 'package:mathgame/src/ui/common/common_wrong_answer_animation_view.dart';
+import 'package:mathgame/src/ui/picturePuzzle/picture_puzzle_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
 class PicturePuzzleAnswerButton extends StatelessWidget {
-  final BorderRadius borderRadius;
-  final String text;
+  final PicturePuzzleShape picturePuzzleShape;
+  final Tuple2<Color, Color> colorTuple;
 
-  PicturePuzzleAnswerButton(this.text, this.borderRadius);
+  PicturePuzzleAnswerButton({
+    required this.picturePuzzleShape,
+    required this.colorTuple,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<PicturePuzzleProvider>(context, listen: false);
-
-    return Expanded(
-      flex: 1,
-      child: InkWell(
-        onTap: () {
-          if (text == "CLEAR") {
-            provider.clearGameInput();
-          } else {
-            provider.checkGameResult(text);
-          }
-        },
-        borderRadius: borderRadius,
-        child: Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).dialogBackgroundColor,
-            shape: BoxShape.rectangle,
-            borderRadius: borderRadius,
-            border: Border.all(color: Theme.of(context).dividerColor, width: 1),
-          ),
-          margin: EdgeInsets.all(1),
-          constraints: BoxConstraints.expand(),
-          child: Center(
-            child: Text(
-              text,
-              style: Theme.of(context).textTheme.headline,
-            ),
+    return Selector<PicturePuzzleProvider, Tuple2<double, double>>(
+      selector: (p0, p1) => Tuple2(p1.currentScore, p1.oldScore),
+      builder: (context, tuple2, child) {
+        return CommonWrongAnswerAnimationView(
+          currentScore: tuple2.item1.toInt(),
+          oldScore: tuple2.item2.toInt(),
+          child: child!,
+        );
+      },
+      child: CommonNeumorphicView(
+        child: Selector<PicturePuzzleProvider, String>(
+          selector: (p0, p1) => p1.result,
+          builder: (context, value, child) => Text(
+            value == "" ? "?" : value,
+            style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                  fontSize: 24,
+                  color: value == ""
+                      ? Theme.of(context).colorScheme.crossLightColor
+                      : colorTuple.item1,
+                ),
           ),
         ),
       ),

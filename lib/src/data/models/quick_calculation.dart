@@ -1,11 +1,8 @@
 class QuickCalculation {
   String question;
-  String userAnswer;
   int answer;
 
-  QuickCalculation(this.question, this.answer) {
-    this.userAnswer = "";
-  }
+  QuickCalculation({required this.question, required this.answer});
 
   @override
   String toString() {

@@ -14,6 +14,7 @@ class SquareShape extends CustomPainter {
     paint.style = PaintingStyle.stroke;
     paint.color = color;
     paint.strokeWidth = stroke;
+    paint.strokeJoin = StrokeJoin.round;
 
     var path = Path();
     path.lineTo(0, size.height);

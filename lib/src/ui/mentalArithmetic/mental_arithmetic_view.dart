@@ -1,181 +1,145 @@
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/ui/mentalArithmetic/mental_arithmetic_view_model.dart';
+import 'package:mathgame/src/data/models/mental_arithmetic.dart';
+import 'package:mathgame/src/ui/common/common_back_button.dart';
+import 'package:mathgame/src/ui/common/common_clear_button.dart';
+import 'package:mathgame/src/ui/common/common_neumorphic_view.dart';
+import 'package:mathgame/src/ui/common/common_number_button.dart';
+import 'package:mathgame/src/ui/common/common_app_bar.dart';
+import 'package:mathgame/src/ui/common/common_info_text_view.dart';
+import 'package:mathgame/src/ui/common/common_wrong_answer_animation_view.dart';
+import 'package:mathgame/src/ui/common/dialog_listener.dart';
+import 'package:mathgame/src/ui/mentalArithmetic/mental_arithmetic_question_view.dart';
+import 'package:mathgame/src/ui/mentalArithmetic/mental_arithmetic_provider.dart';
 import 'package:mathgame/src/core/app_constant.dart';
-import 'package:mathgame/src/ui/common/timer.dart';
 import 'package:provider/provider.dart';
-
-import 'mental_arithmetic_button.dart';
+import 'package:tuple/tuple.dart';
+import 'package:vsync_provider/vsync_provider.dart';
 
 class MentalArithmeticView extends StatelessWidget {
+  final Tuple2<Color, Color> colorTuple;
+
+  const MentalArithmeticView({
+    Key? key,
+    required this.colorTuple,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<MentalArithmeticProvider>(
-      create: (_) => MentalArithmeticProvider(),
+    return MultiProvider(
+      providers: [
+        const VsyncProvider(),
+        ChangeNotifierProvider<MentalArithmeticProvider>(
+            create: (context) =>
+                MentalArithmeticProvider(vsync: VsyncProvider.of(context)))
+      ],
       child: WillPopScope(
         onWillPop: () => Future.value(false),
         child: Scaffold(
+          appBar:
+              CommonAppBar<MentalArithmeticProvider>(colorTuple: colorTuple),
           body: SafeArea(
             bottom: true,
-            top: true,
-            child: Container(
-              margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
-              constraints: BoxConstraints.expand(),
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                      flex: 10,
-                      child: Timer(GameCategoryType.MENTAL_ARITHMETIC)),
-                  Consumer<MentalArithmeticProvider>(
-                      builder: (context, provider, child) {
-                    return Expanded(
-                        flex: 10,
-                        child: Center(
-                          child: Text(
-                            provider.currentState.currentQuestion,
-                            style: Theme.of(context).textTheme.display1,
-                          ),
-                        ));
-                  }),
-                  Expanded(
-                      flex: 15,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          border:
-                              Border.all(color: Theme.of(context).accentColor),
-                        ),
-                        margin: EdgeInsets.fromLTRB(5, 10, 5, 20),
-                        constraints: BoxConstraints.expand(),
-                        child: Center(
-                          child: Consumer<MentalArithmeticProvider>(
-                            builder: (context, provider, child) {
-                              return provider.timeOut
-                                  ? RaisedButton(
-                                      child: Text("Over"),
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                    )
-                                  : Text(
-                                      provider.result,
-                                      style: TextStyle(
-                                          fontSize: 45,
-                                          fontWeight: FontWeight.w700),
-                                    );
-                            },
-                          ),
-                        ),
-                      )),
-                  Expanded(
-                    flex: 55,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: SizedBox(
-                        height: 600,
-                        width: 400,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(30)),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Expanded(
-                                child: Row(
-                                  children: <Widget>[
-                                    MentalArithmeticButton(
-                                        "7",
-                                        BorderRadius.only(
-                                            topLeft: Radius.circular(40))),
-                                    MentalArithmeticButton(
-                                        "8", BorderRadius.all(Radius.zero)),
-                                    MentalArithmeticButton(
-                                        "9",
-                                        BorderRadius.only(
-                                            topRight: Radius.circular(40)))
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Row(
-                                  children: <Widget>[
-                                    MentalArithmeticButton(
-                                        "4", BorderRadius.all(Radius.zero)),
-                                    MentalArithmeticButton(
-                                        "5", BorderRadius.all(Radius.zero)),
-                                    MentalArithmeticButton(
-                                        "6", BorderRadius.all(Radius.zero))
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Row(
-                                  children: <Widget>[
-                                    MentalArithmeticButton(
-                                        "1", BorderRadius.all(Radius.zero)),
-                                    MentalArithmeticButton(
-                                        "2", BorderRadius.all(Radius.zero)),
-                                    MentalArithmeticButton(
-                                        "3", BorderRadius.all(Radius.zero))
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Row(
-                                  children: <Widget>[
-                                    MentalArithmeticButton(
-                                        "0",
-                                        BorderRadius.only(
-                                            bottomLeft: Radius.circular(40))),
-                                    MentalArithmeticButton(
-                                        "-",
-                                        BorderRadius.only(
-                                            bottomLeft: Radius.zero)),
-                                    MentalArithmeticButton(
-                                        "CLEAR",
-                                        BorderRadius.only(
-                                            bottomRight: Radius.circular(40)))
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+            child: DialogListener<MentalArithmeticProvider>(
+              gameCategoryType: GameCategoryType.MENTAL_ARITHMETIC,
+              child: Container(
+                margin: EdgeInsets.only(top: 24, left: 24, right: 24),
+                constraints: BoxConstraints.expand(),
+                child: Column(
+                  children: <Widget>[
+                    CommonInfoTextView<MentalArithmeticProvider>(
+                        gameCategoryType: GameCategoryType.MENTAL_ARITHMETIC),
+                    Expanded(
+                      child:
+                          Selector<MentalArithmeticProvider, MentalArithmetic>(
+                              selector: (p0, p1) => p1.currentState,
+                              builder: (context, currentState, child) {
+                                return MentalArithmeticQuestionView(
+                                  currentState: currentState,
+                                );
+                              }),
+                    ),
+                    Selector<MentalArithmeticProvider, Tuple2<double, double>>(
+                      selector: (p0, p1) =>
+                          Tuple2(p1.currentScore, p1.oldScore),
+                      builder: (context, tuple2, child) {
+                        return CommonWrongAnswerAnimationView(
+                          currentScore: tuple2.item1.toInt(),
+                          oldScore: tuple2.item2.toInt(),
+                          child: child!,
+                        );
+                      },
+                      child: CommonNeumorphicView(
+                        isLarge: true,
+                        child: Selector<MentalArithmeticProvider, String>(
+                          selector: (p0, p1) => p1.result,
+                          builder: (context, result, child) {
+                            return Text(result,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle2!
+                                    .copyWith(
+                                        fontSize: 24, color: colorTuple.item1));
+                          },
                         ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                      flex: 10,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Consumer<MentalArithmeticProvider>(
-                              builder: (context, provider, child) {
-                            return IconButton(
-                              icon: provider.pause
-                                  ? Icon(Icons.play_arrow)
-                                  : Icon(Icons.pause),
-                              iconSize: 40,
-                              onPressed: () {
-                                provider.pauseTimer();
-                              },
-                            );
-                          }),
-                          Consumer<MentalArithmeticProvider>(
-                              builder: (context, provider, child) {
-                            return IconButton(
-                              icon: Icon(Icons.info_outline),
-                              iconSize: 40,
-                              onPressed: () {
-                                provider.showInfoDialog();
-                              },
-                            );
-                          })
+                    SizedBox(height: 24),
+                    Builder(builder: (context) {
+                      return GridView(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3),
+                        padding: const EdgeInsets.only(bottom: 24),
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        children: [
+                          ...[
+                            "7",
+                            "8",
+                            "9",
+                            "4",
+                            "5",
+                            "6",
+                            "1",
+                            "2",
+                            "3",
+                            "-",
+                            "0",
+                            "Back"
+                          ].map(
+                            (e) {
+                              if (e == "Back") {
+                                return CommonBackButton(onTab: () {
+                                  context
+                                      .read<MentalArithmeticProvider>()
+                                      .backPress();
+                                });
+                              } else if (e == "-") {
+                                return CommonClearButton(
+                                    text: e,
+                                    fontSize: 40,
+                                    onTab: () {
+                                      context
+                                          .read<MentalArithmeticProvider>()
+                                          .checkResult(e);
+                                    });
+                              } else {
+                                return CommonNumberButton(
+                                  text: e,
+                                  onTab: () {
+                                    context
+                                        .read<MentalArithmeticProvider>()
+                                        .checkResult(e);
+                                  },
+                                  colorTuple: colorTuple,
+                                );
+                              }
+                            },
+                          )
                         ],
-                      )),
-                ],
+                      );
+                    }),
+                  ],
+                ),
               ),
             ),
           ),

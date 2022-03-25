@@ -1,11 +1,46 @@
-class MathGrid {
-  int id;
-  List<MathGridCellModel> listForSquare;
-  List<int> listOfAnswer;
-  int currentAnswer;
+import 'dart:math';
 
-  MathGrid(this.id, this.listForSquare, this.listOfAnswer) {
-    currentAnswer = listOfAnswer[0];
+class MathGrid {
+  List<MathGridCellModel> listForSquare;
+  late int currentAnswer;
+
+  MathGrid({
+    required this.listForSquare,
+  }) {
+    currentAnswer = getNewAnswer();
+  }
+
+  int getNewAnswer() {
+    List<MathGridCellModel> list = listForSquare
+        .where((element) => !element.isRemoved)
+        .toList()
+      ..shuffle();
+    int noOfDigit = 3 + Random().nextInt(4);
+    if (noOfDigit > list.length) {
+      return list.map((e) {
+        return e.value;
+      }).fold(0, (previousValue, element) => previousValue + element);
+    } else {
+      return list.take(noOfDigit).map((e) {
+        return e.value;
+      }).fold(0, (previousValue, element) => previousValue + element);
+    }
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MathGrid &&
+          runtimeType == other.runtimeType &&
+          listForSquare == other.listForSquare &&
+          currentAnswer == other.currentAnswer;
+
+  @override
+  int get hashCode => currentAnswer.hashCode;
+
+  @override
+  String toString() {
+    return 'MathGrid{listOfAnswer: currentAnswer: $currentAnswer}';
   }
 }
 

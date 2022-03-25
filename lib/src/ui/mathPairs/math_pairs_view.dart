@@ -1,101 +1,72 @@
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/ui/mathPairs/math_pairs_view_model.dart';
+import 'package:mathgame/src/ui/common/common_app_bar.dart';
+import 'package:mathgame/src/ui/common/common_info_text_view.dart';
+import 'package:mathgame/src/ui/common/dialog_listener.dart';
+import 'package:mathgame/src/ui/mathPairs/math_pairs_provider.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/ui/mathPairs/math_pairs_button.dart';
-import 'package:mathgame/src/ui/common/timer.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
+import 'package:vsync_provider/vsync_provider.dart';
 
 class MathPairsView extends StatelessWidget {
+  final Tuple2<Color, Color> colorTuple;
+
+  const MathPairsView({
+    Key? key,
+    required this.colorTuple,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<MathPairsProvider>(
-      create: (_) => MathPairsProvider(),
+    return MultiProvider(
+      providers: [
+        const VsyncProvider(),
+        ChangeNotifierProvider<MathPairsProvider>(
+            create: (context) =>
+                MathPairsProvider(vsync: VsyncProvider.of(context)))
+      ],
       child: WillPopScope(
         onWillPop: () => Future.value(false),
         child: Scaffold(
+          appBar: CommonAppBar<MathPairsProvider>(colorTuple: colorTuple),
           body: SafeArea(
-            top: true,
             bottom: true,
-            child: Container(
-              margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
-              constraints: BoxConstraints.expand(),
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                      flex: 10,
-                      child: SizedBox(
-                        child: Align(
-                          alignment: Alignment.bottomLeft,
-                          child: Timer(GameCategoryType.MATH_PAIRS),
-                        ),
-                      )),
-                  Expanded(
-                    flex: 5,
-                    child: Container(),
-                  ),
-                  Expanded(
-                    flex: 70,
-                    child: Center(
-                      child: AspectRatio(
-                        aspectRatio: 0.7,
+            child: DialogListener<MathPairsProvider>(
+              gameCategoryType: GameCategoryType.MATH_PAIRS,
+              child: Container(
+                margin: EdgeInsets.only(top: 24, left: 24, right: 24),
+                constraints: BoxConstraints.expand(),
+                child: Column(
+                  children: <Widget>[
+                    CommonInfoTextView<MathPairsProvider>(
+                        gameCategoryType: GameCategoryType.MATH_PAIRS),
+                    Expanded(
+                      child: Center(
                         child: Consumer<MathPairsProvider>(
                             builder: (context, mathPairsProvider, child) {
-                          return Visibility(
-                            visible: !mathPairsProvider.pause,
-                            child: GridView.builder(
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 3,
-                                        childAspectRatio: 1.5),
-                                itemCount:
-                                    mathPairsProvider.currentState.list.length,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemBuilder: (BuildContext context, int index) {
-                                  return MathPairsButton(
-                                      mathPairsProvider
-                                          .currentState.list[index],
-                                      index);
-                                }),
-                          );
+                          return GridView.builder(
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 3, childAspectRatio: 1.2),
+                              padding: const EdgeInsets.only(bottom: 24),
+                              shrinkWrap: true,
+                              itemCount:
+                                  mathPairsProvider.currentState.list.length,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemBuilder: (BuildContext context, int index) {
+                                return MathPairsButton(
+                                  mathPairs: mathPairsProvider
+                                      .currentState.list[index],
+                                  index: index,
+                                  colorTuple: colorTuple,
+                                );
+                              });
                         }),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 5,
-                    child: Container(),
-                  ),
-                  Expanded(
-                      flex: 10,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Consumer<MathPairsProvider>(
-                              builder: (context, provider, child) {
-                            return IconButton(
-                              icon: provider.pause
-                                  ? Icon(Icons.play_arrow)
-                                  : Icon(Icons.pause),
-                              iconSize: 40,
-                              onPressed: () {
-                                provider.pauseTimer();
-                              },
-                            );
-                          }),
-                          Consumer<MathPairsProvider>(
-                              builder: (context, provider, child) {
-                            return IconButton(
-                              icon: Icon(Icons.info_outline),
-                              iconSize: 40,
-                              onPressed: () {
-                                provider.showInfoDialog();
-                              },
-                            );
-                          })
-                        ],
-                      )),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

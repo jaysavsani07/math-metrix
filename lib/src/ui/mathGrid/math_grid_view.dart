@@ -1,107 +1,110 @@
 import 'package:flutter/material.dart';
-import 'package:mathgame/src/ui/mathGrid/math_grid_view_model.dart';
+import 'package:mathgame/src/ui/common/common_app_bar.dart';
+import 'package:mathgame/src/ui/common/common_info_text_view.dart';
+import 'package:mathgame/src/ui/common/dialog_listener.dart';
+import 'package:mathgame/src/ui/mathGrid/math_grid_provider.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/ui/mathGrid/math_grid_button.dart';
-import 'package:mathgame/src/ui/common/timer.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
+import 'package:vsync_provider/vsync_provider.dart';
 
 class MathGridView extends StatelessWidget {
+  final Tuple2<Color, Color> colorTuple;
+
+  const MathGridView({
+    Key? key,
+    required this.colorTuple,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<MathGridProvider>(
-      create: (_) => MathGridProvider(),
+    return MultiProvider(
+      providers: [
+        const VsyncProvider(),
+        ChangeNotifierProvider<MathGridProvider>(
+            create: (context) =>
+                MathGridProvider(vsync: VsyncProvider.of(context)))
+      ],
       child: WillPopScope(
         onWillPop: () => Future.value(false),
-        child: Scaffold(body: Consumer<MathGridProvider>(
-          builder: (context, mathGridProvider, child) {
-            return SafeArea(
-              top: true,
-              bottom: true,
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    flex: 10,
-                    child: Container(
-                      margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
-                      child: Timer(GameCategoryType.MATH_MACHINE),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 10,
-                    child: Container(
+        child: Scaffold(
+          appBar: CommonAppBar<MathGridProvider>(colorTuple: colorTuple),
+          body: SafeArea(
+            bottom: true,
+            child: DialogListener<MathGridProvider>(
+              gameCategoryType: GameCategoryType.MATH_GRID,
+              child: Container(
+                margin: EdgeInsets.all(24),
+                constraints: BoxConstraints.expand(),
+                child: Column(
+                  children: <Widget>[
+                    CommonInfoTextView<MathGridProvider>(
+                        gameCategoryType: GameCategoryType.MATH_GRID),
+                    Expanded(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text(
-                              mathGridProvider.currentState.currentAnswer
-                                  .toString(),
-                              style: Theme.of(context).textTheme.display1)
+                          Selector<MathGridProvider, int>(
+                              selector: (p0, p1) =>
+                                  p1.currentState.currentAnswer,
+                              builder: (context, currentAnswer, child) {
+                                return Text(
+                                  currentAnswer.toString(),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle2!
+                                      .copyWith(fontSize: 40),
+                                );
+                              }),
                         ],
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Container(),
-                  ),
-                  Expanded(
-                    flex: 55,
-                    child: Visibility(
-                      visible: !mathGridProvider.pause,
-                      child: GridView.builder(
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 9),
-                          itemCount: mathGridProvider
-                              .currentState.listForSquare.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return MathGridButton(
-                                mathGridProvider
-                                    .currentState.listForSquare[index].value,
-                                mathGridProvider
-                                    .currentState.listForSquare[index]);
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      elevation: 8,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(24),
+                        child: Container(
+                          alignment: Alignment.center,
+                          // height: height,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [colorTuple.item1, colorTuple.item2],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                            ),
+                          ),
+                          child: Consumer<MathGridProvider>(
+                              builder: (context, listForSquare, child) {
+                            return GridView.builder(
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 9),
+                                itemCount: listForSquare
+                                    .currentState.listForSquare.length,
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemBuilder: (BuildContext context, int index) {
+                                  return MathGridButton(
+                                    gridModel: listForSquare
+                                        .currentState.listForSquare[index],
+                                    index: index,
+                                    colorTuple: colorTuple,
+                                  );
+                                });
                           }),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 10,
-                    child: Container(
-                      margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Consumer<MathGridProvider>(
-                              builder: (context, provider, child) {
-                            return IconButton(
-                              icon: provider.pause
-                                  ? Icon(Icons.play_arrow)
-                                  : Icon(Icons.pause),
-                              iconSize: 40,
-                              onPressed: () {
-                                provider.pauseTimer();
-                              },
-                            );
-                          }),
-                          Consumer<MathGridProvider>(
-                              builder: (context, provider, child) {
-                            return IconButton(
-                              icon: Icon(Icons.info_outline),
-                              iconSize: 40,
-                              onPressed: () {
-                                provider.showInfoDialog();
-                              },
-                            );
-                          })
-                        ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            );
-          },
-        )),
+            ),
+          ),
+        ),
       ),
     );
   }
