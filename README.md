@@ -45,10 +45,12 @@ Overall all this puzzle tries to engage you in a different way to improve your m
 **1) Mental Arithmetic** : Numbers and signs will be shown one by one for few seconds, you need to remember those and give correct answer. This focuses on your memory and calculation at same time.<br />
 **2) Square Root** : You need to find Square root of number for given options. With each increasing level you'll be having tough equation to solve.<br />
 **3) Mathematical pairs** : One card have equation while other card have correct answer, but this will be places randomly in Grid. You need to select equation and correct answer to remove it from Grid.
+**4) Math Grid** : You'll be given an answer and a 9x9 grid. You need to select numbers from grid one by one to reach the given number. Find the best possible way to solve max answer from 9x9 grid.<br />
 
 ### Games in Train Your Brain
 **1) Magic Triangle** : This is 3x3 and 4x4 triangle where you need to place 6 number in a way that sum of each side should be equal to given number.<br />
-**2) Math Grid** : You'll be given an answer and a 9x9 grid. You need to select numbers from grid one by one to reach the given number. Find the best possible way to solve max answer from 9x9 grid.<br />
+**2) Picture Puzzle** : Each shape represents a number. You need find number related to each shape and solve the last equation.<br />
+**3) Number Pyramid** : In a number pyramid, the numbers on the lower layers determine the numbers above them. Sum of two consecutive cell would be placed on top cell.<br />
 
 
 ### Built With
