@@ -15,8 +15,6 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: [SystemUiOverlay.top]);
     Future.delayed(Duration(seconds: 2)).then((value) {
       Navigator.pushReplacementNamed(context, KeyUtil.dashboard);
     });
@@ -61,13 +59,6 @@ class _SplashViewState extends State<SplashView> {
         }),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
-    super.dispose();
   }
 }
 
