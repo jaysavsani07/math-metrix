@@ -6,9 +6,16 @@ import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/ui/app/game_provider.dart';
 
 class GuessSignProvider extends GameProvider<Sign> {
+  final DifficultyType difficultyType;
 
-  GuessSignProvider({required TickerProvider vsync})
-      : super(vsync: vsync, gameCategoryType: GameCategoryType.GUESS_SIGN) {
+  GuessSignProvider({
+    required TickerProvider vsync,
+    required this.difficultyType,
+  }) : super(
+          vsync: vsync,
+          gameCategoryType: GameCategoryType.GUESS_SIGN,
+          difficultyType: difficultyType,
+        ) {
     startGame();
   }
 

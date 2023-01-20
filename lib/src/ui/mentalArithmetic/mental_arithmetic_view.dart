@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/data/models/mental_arithmetic.dart';
+import 'package:mathgame/src/ui/app/theme_provider.dart';
 import 'package:mathgame/src/ui/common/common_back_button.dart';
 import 'package:mathgame/src/ui/common/common_clear_button.dart';
 import 'package:mathgame/src/ui/common/common_neumorphic_view.dart';
@@ -29,8 +30,10 @@ class MentalArithmeticView extends StatelessWidget {
       providers: [
         const VsyncProvider(),
         ChangeNotifierProvider<MentalArithmeticProvider>(
-            create: (context) =>
-                MentalArithmeticProvider(vsync: VsyncProvider.of(context)))
+            create: (context) => MentalArithmeticProvider(
+                  vsync: VsyncProvider.of(context),
+                  difficultyType: context.read<ThemeProvider>().difficultyType,
+                ))
       ],
       child: WillPopScope(
         onWillPop: () => Future.value(false),

@@ -4,6 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mathgame/src/core/app_assets.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/ui/app/theme_provider.dart';
+import 'package:mathgame/src/ui/common/common_alert_dialog.dart';
+import 'package:mathgame/src/ui/common/common_difficulty_view.dart';
 import 'package:mathgame/src/ui/dashboard/dashboard_button_view.dart';
 import 'package:mathgame/src/ui/dashboard/dashboard_provider.dart';
 import 'package:mathgame/src/core/app_constant.dart';
@@ -100,6 +102,36 @@ class _DashboardViewState extends State<DashboardView>
                           ),
                         ),
                       ],
+                    ),
+                    Spacer(),
+                    InkWell(
+                      onTap: () {
+                        showDialog<bool>(
+                          context: context,
+                          builder: (newContext) {
+                            final model = Provider.of<ThemeProvider>(context,
+                                listen: true);
+
+                            return CommonAlertDialog(
+                              child: ChangeNotifierProvider.value(
+                                value: model,
+                                child: CommonDifficultyView(
+                                  selectedDifficulty: model.difficultyType,
+                                ),
+                              ),
+                            );
+                          },
+                          barrierDismissible: false,
+                        ).then((value) {});
+                      },
+                      borderRadius: BorderRadius.circular(24),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Icon(
+                          Icons.bar_chart_outlined,
+                          size: 24,
+                        ),
+                      ),
                     ),
                     InkWell(
                       onTap: () {

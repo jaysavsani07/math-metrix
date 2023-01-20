@@ -18,6 +18,7 @@ import 'package:mathgame/src/data/repository/sign_repository.dart';
 
 class GameProvider<T> extends TimeProvider {
   final GameCategoryType gameCategoryType;
+  final DifficultyType difficultyType;
   final _homeViewModel = GetIt.I<DashboardProvider>();
 
   late List<T> list;
@@ -27,8 +28,17 @@ class GameProvider<T> extends TimeProvider {
   late T currentState;
   late String result;
 
-  GameProvider({required TickerProvider vsync, required this.gameCategoryType})
-      : super(vsync: vsync, totalTime: KeyUtil.getTimeUtil(gameCategoryType));
+  GameProvider({
+    required TickerProvider vsync,
+    required this.gameCategoryType,
+    required this.difficultyType,
+  }) : super(
+          vsync: vsync,
+          totalTime: KeyUtil.getTimeUtil(
+            gameCategoryType,
+            difficultyType,
+          ),
+        );
 
   void startGame() async {
     result = "";

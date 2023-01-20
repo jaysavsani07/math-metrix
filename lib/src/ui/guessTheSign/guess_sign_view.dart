@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/data/models/sign.dart';
+import 'package:mathgame/src/ui/app/theme_provider.dart';
 import 'package:mathgame/src/ui/common/common_neumorphic_view.dart';
 import 'package:mathgame/src/ui/common/common_number_button.dart';
 import 'package:mathgame/src/ui/common/common_app_bar.dart';
@@ -26,7 +27,10 @@ class GuessSignView extends StatelessWidget {
       providers: [
         const VsyncProvider(),
         ChangeNotifierProvider<GuessSignProvider>(
-            create: (context) => GuessSignProvider(vsync: VsyncProvider.of(context)))
+            create: (context) => GuessSignProvider(
+                  vsync: VsyncProvider.of(context),
+                  difficultyType: context.read<ThemeProvider>().difficultyType,
+                ))
       ],
       child: WillPopScope(
         onWillPop: () => Future.value(false),
@@ -69,7 +73,7 @@ class GuessSignView extends StatelessWidget {
                                 child: child!,
                               );
                             },
-                            child:  CommonNeumorphicView(
+                            child: CommonNeumorphicView(
                               child: Selector<GuessSignProvider, String>(
                                 selector: (p0, p1) => p1.result,
                                 builder: (context, result, child) {
@@ -79,8 +83,8 @@ class GuessSignView extends StatelessWidget {
                                         .textTheme
                                         .subtitle2!
                                         .copyWith(
-                                        fontSize: 30,
-                                        color: colorTuple.item1),
+                                            fontSize: 30,
+                                            color: colorTuple.item1),
                                   );
                                 },
                               ),
@@ -139,7 +143,9 @@ class GuessSignView extends StatelessWidget {
                               return CommonNumberButton(
                                 text: e,
                                 onTab: () {
-                                  context.read<GuessSignProvider>().checkResult(e);
+                                  context
+                                      .read<GuessSignProvider>()
+                                      .checkResult(e);
                                 },
                                 colorTuple: colorTuple,
                                 fontSize: 48,

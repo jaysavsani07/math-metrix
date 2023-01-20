@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/data/models/correct_answer.dart';
+import 'package:mathgame/src/ui/app/theme_provider.dart';
 import 'package:mathgame/src/ui/common/common_number_button.dart';
 import 'package:mathgame/src/ui/common/common_app_bar.dart';
 import 'package:mathgame/src/ui/common/common_info_text_view.dart';
@@ -27,8 +28,10 @@ class CorrectAnswerView extends StatelessWidget {
       providers: [
         const VsyncProvider(),
         ChangeNotifierProvider<CorrectAnswerProvider>(
-            create: (context) =>
-                CorrectAnswerProvider(vsync: VsyncProvider.of(context)))
+            create: (context) => CorrectAnswerProvider(
+                  vsync: VsyncProvider.of(context),
+                  difficultyType: context.read<ThemeProvider>().difficultyType,
+                ))
       ],
       child: WillPopScope(
         onWillPop: () => Future.value(false),

@@ -4,6 +4,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:mathgame/firebase_options.dart';
 import 'package:mathgame/src/ui/app/app.dart';
 import 'package:mathgame/src/ui/app/theme_provider.dart';
 import 'package:mathgame/src/ui/dashboard/dashboard_provider.dart';
@@ -12,15 +13,25 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.instance;
 
   if (kDebugMode) {
     await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(false);
+    await firebaseAnalytics.setAnalyticsCollectionEnabled(false);
   }
-  final sharedPreferences = await SharedPreferences.getInstance();
-  FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.instance;
 
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
+
+  final sharedPreferences = await SharedPreferences.getInstance();
 
   setupServiceLocator(sharedPreferences);
   runApp(

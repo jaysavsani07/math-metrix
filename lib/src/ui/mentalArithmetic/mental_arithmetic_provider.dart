@@ -7,11 +7,16 @@ import 'package:mathgame/src/ui/app/game_provider.dart';
 
 class MentalArithmeticProvider extends GameProvider<MentalArithmetic> {
   late String result;
+  final DifficultyType difficultyType;
 
-  MentalArithmeticProvider({required TickerProvider vsync})
-      : super(
-            vsync: vsync,
-            gameCategoryType: GameCategoryType.MENTAL_ARITHMETIC) {
+  MentalArithmeticProvider({
+    required TickerProvider vsync,
+    required this.difficultyType,
+  }) : super(
+          vsync: vsync,
+          gameCategoryType: GameCategoryType.MENTAL_ARITHMETIC,
+          difficultyType: difficultyType,
+        ) {
     startGame();
   }
 

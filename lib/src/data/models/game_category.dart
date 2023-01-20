@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/data/models/score_board.dart';
 

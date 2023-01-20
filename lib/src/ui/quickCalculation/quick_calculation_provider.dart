@@ -5,14 +5,18 @@ import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/ui/app/game_provider.dart';
 
 class QuickCalculationProvider extends GameProvider<QuickCalculation> {
-
   late QuickCalculation nextCurrentState;
   QuickCalculation? previousCurrentState;
+  final DifficultyType difficultyType;
 
-  QuickCalculationProvider({required TickerProvider vsync})
-      : super(
-            vsync: vsync,
-            gameCategoryType: GameCategoryType.QUICK_CALCULATION) {
+  QuickCalculationProvider({
+    required TickerProvider vsync,
+    required this.difficultyType,
+  }) : super(
+          vsync: vsync,
+          gameCategoryType: GameCategoryType.QUICK_CALCULATION,
+          difficultyType: difficultyType,
+        ) {
     startGame();
     nextCurrentState = list[index + 1];
   }

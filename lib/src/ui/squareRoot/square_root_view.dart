@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mathgame/src/core/app_assets.dart';
 import 'package:mathgame/src/data/models/square_root.dart';
+import 'package:mathgame/src/ui/app/theme_provider.dart';
 import 'package:mathgame/src/ui/common/common_number_button.dart';
 import 'package:mathgame/src/ui/common/common_app_bar.dart';
 import 'package:mathgame/src/ui/common/common_info_text_view.dart';
@@ -26,8 +27,10 @@ class SquareRootView extends StatelessWidget {
       providers: [
         const VsyncProvider(),
         ChangeNotifierProvider<SquareRootProvider>(
-            create: (context) =>
-                SquareRootProvider(vsync: VsyncProvider.of(context)))
+            create: (context) => SquareRootProvider(
+                  vsync: VsyncProvider.of(context),
+                  difficultyType: context.read<ThemeProvider>().difficultyType,
+                ))
       ],
       child: WillPopScope(
         onWillPop: () => Future.value(false),

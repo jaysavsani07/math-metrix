@@ -6,9 +6,16 @@ import 'package:mathgame/src/ui/app/game_provider.dart';
 
 class MathGridProvider extends GameProvider<MathGrid> {
   int answerIndex = 0;
+  final DifficultyType difficultyType;
 
-  MathGridProvider({required TickerProvider vsync})
-      : super(vsync: vsync, gameCategoryType: GameCategoryType.MATH_GRID) {
+  MathGridProvider({
+    required TickerProvider vsync,
+    required this.difficultyType,
+  }) : super(
+          vsync: vsync,
+          gameCategoryType: GameCategoryType.MATH_GRID,
+          difficultyType: difficultyType,
+        ) {
     startGame();
   }
 

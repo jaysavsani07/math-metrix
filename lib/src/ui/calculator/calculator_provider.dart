@@ -6,9 +6,16 @@ import 'package:mathgame/src/ui/app/game_provider.dart';
 
 class CalculatorProvider extends GameProvider<Calculator> {
   late String result;
+  final DifficultyType difficultyType;
 
-  CalculatorProvider({required TickerProvider vsync})
-      : super(vsync: vsync,gameCategoryType: GameCategoryType.CALCULATOR) {
+  CalculatorProvider({
+    required TickerProvider vsync,
+    required this.difficultyType,
+  }) : super(
+          vsync: vsync,
+          gameCategoryType: GameCategoryType.CALCULATOR,
+          difficultyType: difficultyType,
+        ) {
     startGame();
   }
 

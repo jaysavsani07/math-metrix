@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/core/app_constant.dart';
+import 'package:mathgame/src/ui/app/theme_provider.dart';
 import 'package:mathgame/src/ui/calculator/calculator_provider.dart';
 import 'package:mathgame/src/ui/common/common_back_button.dart';
 import 'package:mathgame/src/ui/common/common_clear_button.dart';
@@ -27,8 +28,10 @@ class CalculatorView extends StatelessWidget {
       providers: [
         const VsyncProvider(),
         ChangeNotifierProvider<CalculatorProvider>(
-            create: (context) =>
-                CalculatorProvider(vsync: VsyncProvider.of(context)))
+            create: (context) => CalculatorProvider(
+                  vsync: VsyncProvider.of(context),
+                  difficultyType: context.read<ThemeProvider>().difficultyType,
+                ))
       ],
       child: WillPopScope(
         onWillPop: () => Future.value(false),

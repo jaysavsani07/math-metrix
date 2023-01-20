@@ -25,6 +25,8 @@ enum TimerStatus {
   pause,
 }
 
+enum DifficultyType { HIGH, MEDIUM, LOW }
+
 enum DialogType {
   non,
   info,
@@ -89,30 +91,34 @@ class KeyUtil {
     ),
   ];
 
-  static int getTimeUtil(GameCategoryType gameCategoryType) {
+  static int getTimeUtil(
+    GameCategoryType gameCategoryType,
+    DifficultyType difficultyType,
+  ) {
+    print("ok123 ${difficultyType.name}");
     switch (gameCategoryType) {
       case GameCategoryType.CALCULATOR:
-        return calculatorTimeOut;
+        return calculatorTimeOut[difficultyType.index];
       case GameCategoryType.GUESS_SIGN:
-        return guessSignTimeOut;
+        return guessSignTimeOut[difficultyType.index];
       case GameCategoryType.SQUARE_ROOT:
-        return squareRootTimeOut;
+        return squareRootTimeOut[difficultyType.index];
       case GameCategoryType.MATH_PAIRS:
-        return mathematicalPairsTimeOut;
+        return mathematicalPairsTimeOut[difficultyType.index];
       case GameCategoryType.CORRECT_ANSWER:
-        return correctAnswerTimeOut;
+        return correctAnswerTimeOut[difficultyType.index];
       case GameCategoryType.MAGIC_TRIANGLE:
-        return magicTriangleTimeOut;
+        return magicTriangleTimeOut[difficultyType.index];
       case GameCategoryType.MENTAL_ARITHMETIC:
-        return mentalArithmeticTimeOut;
+        return mentalArithmeticTimeOut[difficultyType.index];
       case GameCategoryType.QUICK_CALCULATION:
-        return quickCalculationTimeOut;
+        return quickCalculationTimeOut[difficultyType.index];
       case GameCategoryType.MATH_GRID:
-        return mathGridTimeOut;
+        return mathGridTimeOut[difficultyType.index];
       case GameCategoryType.PICTURE_PUZZLE:
-        return picturePuzzleTimeOut;
+        return picturePuzzleTimeOut[difficultyType.index];
       case GameCategoryType.NUMBER_PYRAMID:
-        return numPyramidTimeOut;
+        return numPyramidTimeOut[difficultyType.index];
     }
   }
 
@@ -198,21 +204,21 @@ class KeyUtil {
   }
 
   //Game TimeOut Constant
-  static int calculatorTimeOut = 5;
-  static int guessSignTimeOut = 5;
-  static int correctAnswerTimeOut = 5;
-  static int quickCalculationTimeOut = 20;
-  static int quickCalculationPlusTime = 1;
+  static List<int> calculatorTimeOut = [5, 10, 15];
+  static List<int> guessSignTimeOut = [5, 10, 15];
+  static List<int> correctAnswerTimeOut = [5, 10, 15];
+  static List<int> quickCalculationTimeOut = [20, 30, 40];
+  static List<int> quickCalculationPlusTime = [1, 3, 6];
 
-  static int mentalArithmeticTimeOut = 60;
-  static int mentalArithmeticLocalTimeOut = 4;
-  static int squareRootTimeOut = 5;
-  static int mathGridTimeOut = 120;
-  static int mathematicalPairsTimeOut = 60;
+  static List<int> mentalArithmeticTimeOut = [60, 90, 120];
+  static List<int> mentalArithmeticLocalTimeOut = [4, 7, 11];
+  static List<int> squareRootTimeOut = [5, 10, 15];
+  static List<int> mathGridTimeOut = [120, 150, 180];
+  static List<int> mathematicalPairsTimeOut = [60, 90, 120];
 
-  static int magicTriangleTimeOut = 60;
-  static int picturePuzzleTimeOut = 90;
-  static int numPyramidTimeOut = 120;
+  static List<int> magicTriangleTimeOut = [60, 90, 120];
+  static List<int> picturePuzzleTimeOut = [90, 120, 150];
+  static List<int> numPyramidTimeOut = [120, 150, 180];
 
   //Game Score Constant
   static double calculatorScore = 1;

@@ -7,9 +7,16 @@ import 'package:mathgame/src/ui/app/game_provider.dart';
 class MathPairsProvider extends GameProvider<MathPairs> {
   int first = -1;
   int second = -1;
+  final DifficultyType difficultyType;
 
-  MathPairsProvider({required TickerProvider vsync})
-      : super(vsync: vsync, gameCategoryType: GameCategoryType.MATH_PAIRS) {
+  MathPairsProvider({
+    required TickerProvider vsync,
+    required this.difficultyType,
+  }) : super(
+          vsync: vsync,
+          gameCategoryType: GameCategoryType.MATH_PAIRS,
+          difficultyType: difficultyType,
+        ) {
     startGame();
   }
 

@@ -6,9 +6,16 @@ import 'package:mathgame/src/ui/app/game_provider.dart';
 
 class CorrectAnswerProvider extends GameProvider<CorrectAnswer> {
   late String result;
+  final DifficultyType difficultyType;
 
-  CorrectAnswerProvider({required TickerProvider vsync})
-      : super(vsync: vsync, gameCategoryType: GameCategoryType.CORRECT_ANSWER) {
+  CorrectAnswerProvider({
+    required TickerProvider vsync,
+    required this.difficultyType,
+  }) : super(
+          vsync: vsync,
+          gameCategoryType: GameCategoryType.CORRECT_ANSWER,
+          difficultyType: difficultyType,
+        ) {
     startGame();
   }
 

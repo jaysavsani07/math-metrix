@@ -6,8 +6,14 @@ import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/ui/app/game_provider.dart';
 
 class SquareRootProvider extends GameProvider<SquareRoot> {
-  SquareRootProvider({required TickerProvider vsync})
-      : super(vsync: vsync, gameCategoryType: GameCategoryType.SQUARE_ROOT) {
+  final DifficultyType difficultyType;
+
+  SquareRootProvider({
+    required TickerProvider vsync,
+    required this.difficultyType,
+  }) : super(vsync: vsync, gameCategoryType: GameCategoryType.SQUARE_ROOT,
+          difficultyType: difficultyType,
+        ) {
     startGame();
   }
 

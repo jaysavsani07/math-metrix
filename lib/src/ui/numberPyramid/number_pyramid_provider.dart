@@ -6,8 +6,16 @@ import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/ui/app/game_provider.dart';
 
 class NumberPyramidProvider extends GameProvider<NumberPyramid> {
-  NumberPyramidProvider({required TickerProvider vsync})
-      : super(vsync: vsync,gameCategoryType: GameCategoryType.NUMBER_PYRAMID) {
+  final DifficultyType difficultyType;
+
+  NumberPyramidProvider({
+    required TickerProvider vsync,
+    required this.difficultyType,
+  }) : super(
+          vsync: vsync,
+          gameCategoryType: GameCategoryType.NUMBER_PYRAMID,
+          difficultyType: difficultyType,
+        ) {
     startGame();
   }
 

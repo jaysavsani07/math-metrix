@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/data/models/picture_puzzle.dart';
+import 'package:mathgame/src/ui/app/theme_provider.dart';
 import 'package:mathgame/src/ui/common/common_back_button.dart';
 import 'package:mathgame/src/ui/common/common_clear_button.dart';
 import 'package:mathgame/src/ui/common/common_app_bar.dart';
@@ -28,8 +29,10 @@ class PicturePuzzleView extends StatelessWidget {
       providers: [
         const VsyncProvider(),
         ChangeNotifierProvider<PicturePuzzleProvider>(
-            create: (context) =>
-                PicturePuzzleProvider(vsync: VsyncProvider.of(context)))
+            create: (context) => PicturePuzzleProvider(
+                  vsync: VsyncProvider.of(context),
+                  difficultyType: context.read<ThemeProvider>().difficultyType,
+                ))
       ],
       child: WillPopScope(
         onWillPop: () => Future.value(false),

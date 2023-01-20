@@ -7,9 +7,16 @@ import 'package:mathgame/src/ui/app/game_provider.dart';
 
 class MagicTriangleProvider extends GameProvider<MagicTriangle> {
   int selectedTriangleIndex = 0;
+  final DifficultyType difficultyType;
 
-  MagicTriangleProvider({required TickerProvider vsync})
-      : super(vsync: vsync,gameCategoryType: GameCategoryType.MAGIC_TRIANGLE) {
+  MagicTriangleProvider({
+    required TickerProvider vsync,
+    required this.difficultyType,
+  }) : super(
+          vsync: vsync,
+          gameCategoryType: GameCategoryType.MAGIC_TRIANGLE,
+          difficultyType: difficultyType,
+        ) {
     startGame();
   }
 

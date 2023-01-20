@@ -6,9 +6,16 @@ import 'package:mathgame/src/core/app_constant.dart';
 
 class PicturePuzzleProvider extends GameProvider<PicturePuzzle> {
   late String result;
+  final DifficultyType difficultyType;
 
-  PicturePuzzleProvider({required TickerProvider vsync})
-      : super(vsync: vsync,gameCategoryType: GameCategoryType.PICTURE_PUZZLE) {
+  PicturePuzzleProvider({
+    required TickerProvider vsync,
+    required this.difficultyType,
+  }) : super(
+          vsync: vsync,
+          gameCategoryType: GameCategoryType.PICTURE_PUZZLE,
+          difficultyType: difficultyType,
+        ) {
     startGame();
   }
 

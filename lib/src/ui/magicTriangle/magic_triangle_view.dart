@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
+import 'package:mathgame/src/ui/app/theme_provider.dart';
 import 'package:mathgame/src/ui/common/common_app_bar.dart';
 import 'package:mathgame/src/ui/common/common_info_text_view.dart';
 import 'package:mathgame/src/ui/common/dialog_listener.dart';
@@ -30,8 +31,10 @@ class MagicTriangleView extends StatelessWidget {
       providers: [
         const VsyncProvider(),
         ChangeNotifierProvider<MagicTriangleProvider>(
-            create: (context) =>
-                MagicTriangleProvider(vsync: VsyncProvider.of(context)))
+            create: (context) => MagicTriangleProvider(
+                  vsync: VsyncProvider.of(context),
+                  difficultyType: context.read<ThemeProvider>().difficultyType,
+                ))
       ],
       child: WillPopScope(
         onWillPop: () => Future.value(false),

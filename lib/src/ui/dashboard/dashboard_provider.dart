@@ -16,7 +16,6 @@ class DashboardProvider extends ChangeNotifier {
 
   int get overallScore => _overallScore;
 
-
   List<GameCategory> get list => _list;
 
   DashboardProvider({required this.preferences}) {
@@ -143,8 +142,7 @@ class DashboardProvider extends ChangeNotifier {
     preferences.setString(gameCategoryType, json.encode(scoreboard.toJson()));
   }
 
-  void updateScoreboard(
-      GameCategoryType gameCategoryType, double newScore) {
+  void updateScoreboard(GameCategoryType gameCategoryType, double newScore) {
     list.forEach((gameCategory) {
       if (gameCategory.gameCategoryType == gameCategoryType) {
         if (gameCategory.scoreboard.highestScore < newScore.toInt()) {
