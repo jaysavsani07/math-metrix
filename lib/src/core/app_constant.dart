@@ -95,7 +95,6 @@ class KeyUtil {
     GameCategoryType gameCategoryType,
     DifficultyType difficultyType,
   ) {
-    print("ok123 ${difficultyType.name}");
     switch (gameCategoryType) {
       case GameCategoryType.CALCULATOR:
         return calculatorTimeOut[difficultyType.index];

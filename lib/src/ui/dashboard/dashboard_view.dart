@@ -111,7 +111,6 @@ class _DashboardViewState extends State<DashboardView>
                           builder: (newContext) {
                             final model = Provider.of<ThemeProvider>(context,
                                 listen: true);
-
                             return CommonAlertDialog(
                               child: ChangeNotifierProvider.value(
                                 value: model,
