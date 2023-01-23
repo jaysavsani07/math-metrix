@@ -38,6 +38,9 @@ class NumberPyramidProvider extends GameProvider<NumberPyramid> {
   void pyramidBoxInputValue(String value) {
     var currentActiveCellIndex =
         currentState.list.indexWhere((cell) => cell.isActive == true);
+    if (currentActiveCellIndex == -1) {
+      return;
+    }
     if (value == "Back") {
       // if clear is pressed then empty existing text value and return
       currentState.list[currentActiveCellIndex].text = "";

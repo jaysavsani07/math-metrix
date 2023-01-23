@@ -50,6 +50,7 @@ class PicturePuzzleView extends StatelessWidget {
                     CommonInfoTextView<PicturePuzzleProvider>(
                         gameCategoryType: GameCategoryType.PICTURE_PUZZLE),
                     Expanded(
+                      flex: 5,
                       child: Selector<PicturePuzzleProvider, PicturePuzzle>(
                           selector: (p0, p1) => p1.currentState,
                           builder: (context, provider, child) {
@@ -76,61 +77,66 @@ class PicturePuzzleView extends StatelessWidget {
                             );
                           }),
                     ),
-                    Builder(builder: (context) {
-                      return GridView(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          childAspectRatio: 1.3,
-                        ),
-                        padding: const EdgeInsets.only(bottom: 24),
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        children: [
-                          ...[
-                            "7",
-                            "8",
-                            "9",
-                            "4",
-                            "5",
-                            "6",
-                            "1",
-                            "2",
-                            "3",
-                            "Clear",
-                            "0",
-                            "Back"
-                          ].map(
-                            (e) {
-                              if (e == "Clear") {
-                                return CommonClearButton(
-                                    text: "Clear",
+                    Expanded(
+                      flex: 5,
+                      child: LayoutBuilder(builder: (context, constraints) {
+                        return GridView(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            childAspectRatio: (constraints.maxWidth / 3) /
+                                ((constraints.maxHeight - 24) / 4),
+                          ),
+                          padding: const EdgeInsets.only(bottom: 24),
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          children: [
+                            ...[
+                              "7",
+                              "8",
+                              "9",
+                              "4",
+                              "5",
+                              "6",
+                              "1",
+                              "2",
+                              "3",
+                              "Clear",
+                              "0",
+                              "Back"
+                            ].map(
+                              (e) {
+                                if (e == "Clear") {
+                                  return CommonClearButton(
+                                      text: "Clear",
+                                      onTab: () {
+                                        context
+                                            .read<PicturePuzzleProvider>()
+                                            .clearResult();
+                                      });
+                                } else if (e == "Back") {
+                                  return CommonBackButton(onTab: () {
+                                    context
+                                        .read<PicturePuzzleProvider>()
+                                        .backPress();
+                                  });
+                                } else {
+                                  return CommonTextButton(
+                                    text: e,
+                                    colorTuple: colorTuple,
                                     onTab: () {
                                       context
                                           .read<PicturePuzzleProvider>()
-                                          .clearResult();
-                                    });
-                              } else if (e == "Back") {
-                                return CommonBackButton(onTab: () {
-                                  context
-                                      .read<PicturePuzzleProvider>()
-                                      .backPress();
-                                });
-                              } else {
-                                return CommonTextButton(
-                                  text: e,
-                                  colorTuple: colorTuple,
-                                  onTab: () {
-                                    context
-                                        .read<PicturePuzzleProvider>()
-                                        .checkGameResult(e);
-                                  },
-                                );
-                              }
-                            },
-                          )
-                        ],
-                      );
-                    }),
+                                          .checkGameResult(e);
+                                    },
+                                  );
+                                }
+                              },
+                            )
+                          ],
+                        );
+                      }),
+                    ),
                   ],
                 ),
               ),

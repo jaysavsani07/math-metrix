@@ -30,7 +30,7 @@ class AppTheme {
       cardColor: Colors.black,
       textTheme: base.textTheme.copyWith(
         caption: base.textTheme.caption!.copyWith(
-          color: Color(0xff616161),
+          color: Color(0xffcdcdcd),
         ),
       ),
       brightness: Brightness.dark,

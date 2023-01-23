@@ -98,6 +98,7 @@ class CommonDifficultyButtonView extends StatelessWidget {
       child: InkWell(
         onTap: () {
           context.read<ThemeProvider>().changeDifficulty(difficultyType);
+          Navigator.pop(context);
         },
         borderRadius: BorderRadius.all(Radius.circular(12)),
         child: ClipRRect(

@@ -49,6 +49,7 @@ class NumberPyramidView extends StatelessWidget {
                       CommonInfoTextView<NumberPyramidProvider>(
                           gameCategoryType: GameCategoryType.NUMBER_PYRAMID),
                       Expanded(
+                        flex: 5,
                         child: LayoutBuilder(builder: (context, constraints) {
                           return Center(
                             child: Consumer<NumberPyramidProvider>(builder:
@@ -302,62 +303,66 @@ class NumberPyramidView extends StatelessWidget {
                           );
                         }),
                       ),
-                      Builder(builder: (context) {
-                        return GridView(
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            childAspectRatio: 1.3,
-                          ),
-                          padding: const EdgeInsets.only(bottom: 24),
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          children: [
-                            ...[
-                              "7",
-                              "8",
-                              "9",
-                              "4",
-                              "5",
-                              "6",
-                              "1",
-                              "2",
-                              "3",
-                              "Done",
-                              "0",
-                              "Back"
-                            ].map(
-                              (e) {
-                                if (e == "Back") {
-                                  return CommonBackButton(onTab: () {
-                                    context
-                                        .read<NumberPyramidProvider>()
-                                        .pyramidBoxInputValue(e);
-                                  });
-                                } else if (e == "Done") {
-                                  return CommonClearButton(
-                                      text: "Done",
+                      Expanded(
+                        flex: 5,
+                        child: LayoutBuilder(builder: (context, constraints) {
+                          return GridView(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              childAspectRatio: (constraints.maxWidth / 3) /
+                                  ((constraints.maxHeight - 24) / 4),
+                            ),
+                            padding: const EdgeInsets.only(bottom: 24),
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            children: [
+                              ...[
+                                "7",
+                                "8",
+                                "9",
+                                "4",
+                                "5",
+                                "6",
+                                "1",
+                                "2",
+                                "3",
+                                "Done",
+                                "0",
+                                "Back"
+                              ].map(
+                                (e) {
+                                  if (e == "Back") {
+                                    return CommonBackButton(onTab: () {
+                                      context
+                                          .read<NumberPyramidProvider>()
+                                          .pyramidBoxInputValue(e);
+                                    });
+                                  } else if (e == "Done") {
+                                    return CommonClearButton(
+                                        text: "Done",
+                                        onTab: () {
+                                          context
+                                              .read<NumberPyramidProvider>()
+                                              .pyramidBoxInputValue(e);
+                                        });
+                                  } else {
+                                    return CommonTextButton(
+                                      text: e,
+                                      colorTuple: colorTuple,
                                       onTab: () {
                                         context
                                             .read<NumberPyramidProvider>()
                                             .pyramidBoxInputValue(e);
-                                      });
-                                } else {
-                                  return CommonTextButton(
-                                    text: e,
-                                    colorTuple: colorTuple,
-                                    onTab: () {
-                                      context
-                                          .read<NumberPyramidProvider>()
-                                          .pyramidBoxInputValue(e);
-                                    },
-                                  );
-                                }
-                              },
-                            )
-                          ],
-                        );
-                      }),
+                                      },
+                                    );
+                                  }
+                                },
+                              )
+                            ],
+                          );
+                        }),
+                      ),
                     ],
                   ),
                 ),

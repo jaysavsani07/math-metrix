@@ -52,6 +52,7 @@ class MentalArithmeticView extends StatelessWidget {
                     CommonInfoTextView<MentalArithmeticProvider>(
                         gameCategoryType: GameCategoryType.MENTAL_ARITHMETIC),
                     Expanded(
+                      flex: 2,
                       child:
                           Selector<MentalArithmeticProvider, MentalArithmetic>(
                               selector: (p0, p1) => p1.currentState,
@@ -87,60 +88,67 @@ class MentalArithmeticView extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 24),
-                    Builder(builder: (context) {
-                      return GridView(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3),
-                        padding: const EdgeInsets.only(bottom: 24),
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        children: [
-                          ...[
-                            "7",
-                            "8",
-                            "9",
-                            "4",
-                            "5",
-                            "6",
-                            "1",
-                            "2",
-                            "3",
-                            "-",
-                            "0",
-                            "Back"
-                          ].map(
-                            (e) {
-                              if (e == "Back") {
-                                return CommonBackButton(onTab: () {
-                                  context
-                                      .read<MentalArithmeticProvider>()
-                                      .backPress();
-                                });
-                              } else if (e == "-") {
-                                return CommonClearButton(
+                    Expanded(
+                      flex: 8,
+                      child: LayoutBuilder(builder: (context, constraints) {
+                        return GridView(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            childAspectRatio: (constraints.maxWidth / 3) /
+                                ((constraints.maxHeight - 24) / 4),
+                          ),
+                          padding: const EdgeInsets.only(bottom: 24),
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          children: [
+                            ...[
+                              "7",
+                              "8",
+                              "9",
+                              "4",
+                              "5",
+                              "6",
+                              "1",
+                              "2",
+                              "3",
+                              "-",
+                              "0",
+                              "Back"
+                            ].map(
+                              (e) {
+                                if (e == "Back") {
+                                  return CommonBackButton(onTab: () {
+                                    context
+                                        .read<MentalArithmeticProvider>()
+                                        .backPress();
+                                  });
+                                } else if (e == "-") {
+                                  return CommonClearButton(
+                                      text: e,
+                                      fontSize: 40,
+                                      onTab: () {
+                                        context
+                                            .read<MentalArithmeticProvider>()
+                                            .checkResult(e);
+                                      });
+                                } else {
+                                  return CommonNumberButton(
                                     text: e,
-                                    fontSize: 40,
                                     onTab: () {
                                       context
                                           .read<MentalArithmeticProvider>()
                                           .checkResult(e);
-                                    });
-                              } else {
-                                return CommonNumberButton(
-                                  text: e,
-                                  onTab: () {
-                                    context
-                                        .read<MentalArithmeticProvider>()
-                                        .checkResult(e);
-                                  },
-                                  colorTuple: colorTuple,
-                                );
-                              }
-                            },
-                          )
-                        ],
-                      );
-                    }),
+                                    },
+                                    colorTuple: colorTuple,
+                                  );
+                                }
+                              },
+                            )
+                          ],
+                        );
+                      }),
+                    ),
                   ],
                 ),
               ),

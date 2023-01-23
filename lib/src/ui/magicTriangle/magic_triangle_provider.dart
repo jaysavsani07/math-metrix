@@ -45,6 +45,9 @@ class MagicTriangleProvider extends GameProvider<MagicTriangle> {
     if (timerStatus != TimerStatus.pause) {
       int activeTriangleIndex =
           currentState.listTriangle.indexWhere((val) => val.isActive == true);
+      if (activeTriangleIndex == -1) {
+        return;
+      }
       if (currentState.listTriangle[activeTriangleIndex].value.isNotEmpty) {
         return;
       }

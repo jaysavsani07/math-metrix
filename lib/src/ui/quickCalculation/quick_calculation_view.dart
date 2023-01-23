@@ -52,6 +52,7 @@ class QuickCalculationView extends StatelessWidget {
                     CommonInfoTextView<QuickCalculationProvider>(
                         gameCategoryType: GameCategoryType.QUICK_CALCULATION),
                     Expanded(
+                      flex: 3,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -66,24 +67,21 @@ class QuickCalculationView extends StatelessWidget {
                           Row(
                             children: [
                               Expanded(
-                                child: SizedBox(
-                                  height: 72,
-                                  child: Selector<
-                                      QuickCalculationProvider,
-                                      Tuple3<QuickCalculation, QuickCalculation,
-                                          QuickCalculation?>>(
-                                    selector: (p0, p1) => Tuple3(
-                                        p1.currentState,
-                                        p1.nextCurrentState,
-                                        p1.previousCurrentState),
-                                    builder: (context, tuple3, child) {
-                                      return QuickCalculationQuestionView(
-                                        currentState: tuple3.item1,
-                                        nextCurrentState: tuple3.item2,
-                                        previousCurrentState: tuple3.item3,
-                                      );
-                                    },
-                                  ),
+                                child: Selector<
+                                    QuickCalculationProvider,
+                                    Tuple3<QuickCalculation, QuickCalculation,
+                                        QuickCalculation?>>(
+                                  selector: (p0, p1) => Tuple3(
+                                      p1.currentState,
+                                      p1.nextCurrentState,
+                                      p1.previousCurrentState),
+                                  builder: (context, tuple3, child) {
+                                    return QuickCalculationQuestionView(
+                                      currentState: tuple3.item1,
+                                      nextCurrentState: tuple3.item2,
+                                      previousCurrentState: tuple3.item3,
+                                    );
+                                  },
                                 ),
                               ),
                               SizedBox(width: 6),
@@ -121,65 +119,73 @@ class QuickCalculationView extends StatelessWidget {
                                       }),
                                 ),
                               ),
-                              SizedBox(width: 60),
                             ],
                           ),
                         ],
                       ),
                     ),
-                    Builder(builder: (context) {
-                      return GridView(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3),
-                        padding: const EdgeInsets.only(bottom: 24),
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        children: [
-                          ...[
-                            "7",
-                            "8",
-                            "9",
-                            "4",
-                            "5",
-                            "6",
-                            "1",
-                            "2",
-                            "3",
-                            "Clear",
-                            "0",
-                            "Back"
-                          ].map(
-                            (e) {
-                              if (e == "Clear") {
-                                return CommonClearButton(
-                                    text: "Clear",
+                    SizedBox(height: 24),
+                    Expanded(
+                      flex: 7,
+                      child: LayoutBuilder(builder: (context, constraints) {
+                        var aspectRatio = (constraints.maxWidth / 3) /
+                            ((constraints.maxHeight - 24) / 4);
+                        return GridView(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            childAspectRatio: aspectRatio < 1 ? 1 : aspectRatio,
+                          ),
+                          padding: const EdgeInsets.only(bottom: 24),
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          children: [
+                            ...[
+                              "7",
+                              "8",
+                              "9",
+                              "4",
+                              "5",
+                              "6",
+                              "1",
+                              "2",
+                              "3",
+                              "Clear",
+                              "0",
+                              "Back"
+                            ].map(
+                              (e) {
+                                if (e == "Clear") {
+                                  return CommonClearButton(
+                                      text: "Clear",
+                                      onTab: () {
+                                        context
+                                            .read<QuickCalculationProvider>()
+                                            .clearResult();
+                                      });
+                                } else if (e == "Back") {
+                                  return CommonBackButton(onTab: () {
+                                    context
+                                        .read<QuickCalculationProvider>()
+                                        .backPress();
+                                  });
+                                } else {
+                                  return CommonNumberButton(
+                                    text: e,
                                     onTab: () {
                                       context
                                           .read<QuickCalculationProvider>()
-                                          .clearResult();
-                                    });
-                              } else if (e == "Back") {
-                                return CommonBackButton(onTab: () {
-                                  context
-                                      .read<QuickCalculationProvider>()
-                                      .backPress();
-                                });
-                              } else {
-                                return CommonNumberButton(
-                                  text: e,
-                                  onTab: () {
-                                    context
-                                        .read<QuickCalculationProvider>()
-                                        .checkResult(e);
-                                  },
-                                  colorTuple: colorTuple,
-                                );
-                              }
-                            },
-                          )
-                        ],
-                      );
-                    }),
+                                          .checkResult(e);
+                                    },
+                                    colorTuple: colorTuple,
+                                  );
+                                }
+                              },
+                            )
+                          ],
+                        );
+                      }),
+                    ),
                   ],
                 ),
               ),
