@@ -12,7 +12,7 @@ class ThemeProvider extends ChangeNotifier {
     themeMode =
         ThemeMode.values[sharedPreferences.getInt(KeyUtil.IS_DARK_MODE) ?? 2];
     difficultyType =
-        DifficultyType.values[sharedPreferences.getInt("difficulty") ?? 1];
+        DifficultyType.values[sharedPreferences.getInt("difficulty") ?? 2];
   }
 
   void changeTheme() async {

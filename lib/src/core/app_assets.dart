@@ -5,6 +5,8 @@ class AppAssets {
 
   static const String icCoin = "assets/images/ic_coin.svg";
   static const String icTrophy = "assets/images/ic_trophy.svg";
+  static const String ic3dStairsDark = "assets/images/ic_3d_stairs_dark.svg";
+  static const String ic3dStairsLight = "assets/images/ic_3d_stairs_light.svg";
 
   static const String icDarkMode = "assets/images/ic_dark_mode.svg";
   static const String icLightMode = "assets/images/ic_light_mode.svg";

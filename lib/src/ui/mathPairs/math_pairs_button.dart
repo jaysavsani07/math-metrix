@@ -27,9 +27,13 @@ class MathPairsButton extends StatelessWidget {
         ),
         elevation: 2,
         child: InkWell(
-          onTap: () {
-            context.read<MathPairsProvider>().checkResult(mathPairs, index);
-          },
+          onTap: mathPairs.isVisible
+              ? () {
+                  context
+                      .read<MathPairsProvider>()
+                      .checkResult(mathPairs, index);
+                }
+              : null,
           borderRadius: BorderRadius.all(Radius.circular(24)),
           child: Container(
             decoration: BoxDecoration(

@@ -126,9 +126,12 @@ class _DashboardViewState extends State<DashboardView>
                       borderRadius: BorderRadius.circular(24),
                       child: Padding(
                         padding: const EdgeInsets.all(12),
-                        child: Icon(
-                          Icons.bar_chart_outlined,
-                          size: 24,
+                        child: SvgPicture.asset(
+                          Theme.of(context).brightness == Brightness.light
+                              ? AppAssets.ic3dStairsDark
+                              : AppAssets.ic3dStairsLight ,
+                          width: 24,
+                          height: 24,
                         ),
                       ),
                     ),
