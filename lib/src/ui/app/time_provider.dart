@@ -10,6 +10,7 @@ class TimeProvider with ChangeNotifier {
       vsync: vsync,
       value: 1.0,
       duration: Duration(seconds: totalTime),
+      animationBehavior: AnimationBehavior.preserve,
     )..addStatusListener((status) {
         if (status == AnimationStatus.dismissed &&
             dialogType == DialogType.non) {
