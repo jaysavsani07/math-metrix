@@ -1,6 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:math';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/ui/splash/animated_grid_item_view.dart';
 import 'package:tuple/tuple.dart';
@@ -76,8 +77,8 @@ class GridItemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if ((horizontalLine / 2 - 1) <= index && (horizontalLine / 2 + 1) > index) {
-      int tempIndex = (horizontalLine / 2 - 1) == index ? 0 : 1;
+    if ((horizontalLine ~/ 2 - 1) == index || (horizontalLine ~/ 2) == index) {
+      int tempIndex = (horizontalLine ~/ 2 - 1) == index ? 0 : 1;
       return SizedBox(
         height: verticalLine,
         child: Row(

@@ -9,7 +9,6 @@
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:label="Math Matrix">
         <activity
             android:name="com.nividata.mathmatrix.MainActivity"
