@@ -28,7 +28,7 @@ class CommonDifficultyView extends StatelessWidget {
                 "Change Difficulty",
                 style: Theme.of(context)
                     .textTheme
-                    .bodyText1!
+                    .bodyLarge!
                     .copyWith(fontSize: 18),
               ),
             ),
@@ -119,7 +119,7 @@ class CommonDifficultyButtonView extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Text(
                     name,
-                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           fontSize: 18,
                           color: Colors.white,
                         ),

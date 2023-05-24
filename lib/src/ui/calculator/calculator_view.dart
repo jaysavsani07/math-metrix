@@ -59,7 +59,7 @@ class CalculatorView extends StatelessWidget {
                               calculatorProvider.currentState.question,
                               style: Theme.of(context)
                                   .textTheme
-                                  .subtitle2!
+                                  .titleSmall!
                                   .copyWith(fontSize: 30),
                             );
                           }),
@@ -85,7 +85,7 @@ class CalculatorView extends StatelessWidget {
                               result,
                               style: Theme.of(context)
                                   .textTheme
-                                  .subtitle2!
+                                  .titleSmall!
                                   .copyWith(
                                   fontSize: 30,
                                   color: colorTuple.item1),

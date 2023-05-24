@@ -19,13 +19,13 @@ class CommonGameOverDialogView extends StatelessWidget {
         SizedBox(height: 6),
         Text(
           "Game Over!!!",
-          style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 18),
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 18),
         ),
         SizedBox(height: 24),
         Text(
           "Your highest score is $score",
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 16),
+          style: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 16),
         ),
         SizedBox(height: 24),
         Row(
@@ -56,7 +56,7 @@ class CommonGameOverDialogView extends StatelessWidget {
                         child: Text("RESTART",
                             style: Theme.of(context)
                                 .textTheme
-                                .subtitle1!
+                                .titleMedium!
                                 .copyWith(fontSize: 18, color: Colors.white))),
                   ),
                 ),

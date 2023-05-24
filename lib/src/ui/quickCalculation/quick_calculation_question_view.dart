@@ -114,7 +114,7 @@ class _QuickCalculationQuestionViewState
             child: Text(
               widget.previousCurrentState?.question ?? "",
               style:
-                  Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 30),
+                  Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 30),
             ),
           ),
         ),
@@ -125,7 +125,7 @@ class _QuickCalculationQuestionViewState
             child: Text(
               widget.nextCurrentState.question,
               style:
-                  Theme.of(context).textTheme.caption!.copyWith(fontSize: 16),
+                  Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 16),
             ),
           ),
         ),

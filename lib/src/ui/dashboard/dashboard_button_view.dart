@@ -71,7 +71,7 @@ class DashboardButtonView extends StatelessWidget {
                           Text(dashboard.title,
                               style: Theme.of(context)
                                   .textTheme
-                                  .subtitle2!
+                                  .titleSmall!
                                   .copyWith(
                                       fontSize: 24,
                                       color: Colors.white,

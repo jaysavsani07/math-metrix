@@ -32,7 +32,7 @@ class PicturePuzzleAnswerButton extends StatelessWidget {
           selector: (p0, p1) => p1.result,
           builder: (context, value, child) => Text(
             value == "" ? "?" : value,
-            style: Theme.of(context).textTheme.subtitle2!.copyWith(
+            style: Theme.of(context).textTheme.titleSmall!.copyWith(
                   fontSize: 24,
                   color: value == ""
                       ? Theme.of(context).colorScheme.crossLightColor

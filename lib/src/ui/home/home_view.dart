@@ -266,7 +266,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                               maxLines: 2,
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .caption!
+                                                  .bodySmall!
                                                   .copyWith(fontSize: 14),
                                             ),
                                           ),

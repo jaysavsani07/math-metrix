@@ -62,7 +62,7 @@ class MagicTriangleView extends StatelessWidget {
                                 answer.toString(),
                                 style: Theme.of(context)
                                     .textTheme
-                                    .subtitle2!
+                                    .titleSmall!
                                     .copyWith(fontSize: 30),
                               );
                             }),

@@ -25,7 +25,7 @@ class CommonInfoDialogView extends StatelessWidget {
             gameInfoDialog.title,
             style: Theme.of(context)
                 .textTheme
-                .bodyText1!
+                .bodyLarge!
                 .copyWith(fontSize: 18),
           ),
           SizedBox(height: 24),
@@ -51,7 +51,7 @@ class CommonInfoDialogView extends StatelessWidget {
               gameInfoDialog.dec,
               textAlign: TextAlign.center,
               style:
-                  Theme.of(context).textTheme.caption!.copyWith(fontSize: 16),
+                  Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 16),
             ),
           ),
           SizedBox(height: 18),
@@ -66,7 +66,7 @@ class CommonInfoDialogView extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .subtitle2!
+                        .titleSmall!
                         .copyWith(fontSize: 14),
                   ),
                   SizedBox(height: 8),
@@ -75,7 +75,7 @@ class CommonInfoDialogView extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .subtitle2!
+                        .titleSmall!
                         .copyWith(fontSize: 14),
                   ),
                 ],
@@ -89,7 +89,7 @@ class CommonInfoDialogView extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .subtitle1!
+                        .titleMedium!
                         .copyWith(fontSize: 14),
                   ),
                   SizedBox(height: 8),
@@ -98,7 +98,7 @@ class CommonInfoDialogView extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .subtitle1!
+                        .titleMedium!
                         .copyWith(fontSize: 14),
                   ),
                 ],
@@ -132,7 +132,7 @@ class CommonInfoDialogView extends StatelessWidget {
                     child: Text("GOT IT!",
                         style: Theme.of(context)
                             .textTheme
-                            .subtitle1!
+                            .titleMedium!
                             .copyWith(fontSize: 18, color: Colors.white))),
               ),
             ),

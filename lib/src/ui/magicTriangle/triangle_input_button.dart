@@ -43,7 +43,7 @@ class TriangleInputButton extends StatelessWidget {
             input.value.toString(),
             style: Theme.of(context)
                 .textTheme
-                .subtitle2!
+                .titleSmall!
                 .copyWith(fontSize: 30, color: Colors.white),
           ),
         ),

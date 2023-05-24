@@ -61,7 +61,7 @@ class QuickCalculationView extends StatelessWidget {
                             "NEXT",
                             style: Theme.of(context)
                                 .textTheme
-                                .caption!
+                                .bodySmall!
                                 .copyWith(fontSize: 10),
                           ),
                           Row(
@@ -89,7 +89,7 @@ class QuickCalculationView extends StatelessWidget {
                                 " = ",
                                 style: Theme.of(context)
                                     .textTheme
-                                    .subtitle2!
+                                    .titleSmall!
                                     .copyWith(fontSize: 30),
                               ),
                               SizedBox(width: 6),
@@ -112,7 +112,7 @@ class QuickCalculationView extends StatelessWidget {
                                         return Text(result,
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .subtitle2!
+                                                .titleSmall!
                                                 .copyWith(
                                                     fontSize: 24,
                                                     color: colorTuple.item1));

@@ -52,7 +52,7 @@ class CommonNumberButton extends StatelessWidget {
                           child: Text(
                             text,
                             style:
-                                Theme.of(context).textTheme.subtitle1!.copyWith(
+                                Theme.of(context).textTheme.titleMedium!.copyWith(
                                       fontSize: 18,
                                       color: Colors.white.withOpacity(0.05),
                                       fontWeight: FontWeight.bold,
@@ -69,7 +69,7 @@ class CommonNumberButton extends StatelessWidget {
                       child: Text(text,
                           style: Theme.of(context)
                               .textTheme
-                              .subtitle1!
+                              .titleMedium!
                               .copyWith(
                                   fontSize: fontSize, color: Colors.white)),
                     ),

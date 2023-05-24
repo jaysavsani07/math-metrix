@@ -96,7 +96,7 @@ class _DashboardViewState extends State<DashboardView>
                                 builder: (context, model, child) => Text(
                                     model.overallScore.toString(),
                                     style:
-                                        Theme.of(context).textTheme.subtitle1),
+                                        Theme.of(context).textTheme.titleMedium),
                               ),
                             ],
                           ),
@@ -165,7 +165,7 @@ class _DashboardViewState extends State<DashboardView>
                           "Math Matrix",
                           style: Theme.of(context)
                               .textTheme
-                              .subtitle2!
+                              .titleSmall!
                               .copyWith(
                                   fontSize: 28, fontWeight: FontWeight.bold),
                         ),
@@ -174,7 +174,7 @@ class _DashboardViewState extends State<DashboardView>
                           "Train Your Brain, Improve Your Math Skill",
                           style: Theme.of(context)
                               .textTheme
-                              .caption!
+                              .bodySmall!
                               .copyWith(fontSize: 14),
                         ),
                         SizedBox(height: 36),
@@ -238,7 +238,7 @@ class _DashboardViewState extends State<DashboardView>
                         child: Text("Math Matrix by Nividata",
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyText2!
+                                .bodyMedium!
                                 .copyWith(fontWeight: FontWeight.normal)),
                       ),
                       SizedBox(width: 12),
@@ -248,7 +248,7 @@ class _DashboardViewState extends State<DashboardView>
                             "v${snapshot.data?.version}",
                             style: Theme.of(context)
                                 .textTheme
-                                .caption!
+                                .bodySmall!
                                 .copyWith(fontSize: 14)),
                       ),
                     ],

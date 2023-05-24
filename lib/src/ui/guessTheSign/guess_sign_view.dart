@@ -58,7 +58,7 @@ class GuessSignView extends StatelessWidget {
                                   calculatorProvider.firstDigit,
                                   style: Theme.of(context)
                                       .textTheme
-                                      .subtitle2!
+                                      .titleSmall!
                                       .copyWith(fontSize: 30),
                                 );
                               }),
@@ -81,7 +81,7 @@ class GuessSignView extends StatelessWidget {
                                     result,
                                     style: Theme.of(context)
                                         .textTheme
-                                        .subtitle2!
+                                        .titleSmall!
                                         .copyWith(
                                             fontSize: 30,
                                             color: colorTuple.item1),
@@ -98,7 +98,7 @@ class GuessSignView extends StatelessWidget {
                                   calculatorProvider.secondDigit,
                                   style: Theme.of(context)
                                       .textTheme
-                                      .subtitle2!
+                                      .titleSmall!
                                       .copyWith(fontSize: 30),
                                 );
                               }),
@@ -107,7 +107,7 @@ class GuessSignView extends StatelessWidget {
                             "=",
                             style: Theme.of(context)
                                 .textTheme
-                                .subtitle2!
+                                .titleSmall!
                                 .copyWith(fontSize: 30),
                           ),
                           SizedBox(width: 6),
@@ -118,7 +118,7 @@ class GuessSignView extends StatelessWidget {
                                   calculatorProvider.answer,
                                   style: Theme.of(context)
                                       .textTheme
-                                      .subtitle2!
+                                      .titleSmall!
                                       .copyWith(fontSize: 30),
                                 );
                               }),

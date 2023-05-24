@@ -35,7 +35,7 @@ class MathGridButton extends StatelessWidget {
           child: Center(
             child: Text(
               gridModel.value.toString(),
-              style: Theme.of(context).textTheme.subtitle2!.copyWith(
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
                   color: gridModel.isActive ? colorTuple.item1 : Colors.white),
             ),
           ),

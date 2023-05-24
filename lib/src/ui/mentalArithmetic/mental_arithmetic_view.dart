@@ -80,7 +80,7 @@ class MentalArithmeticView extends StatelessWidget {
                             return Text(result,
                                 style: Theme.of(context)
                                     .textTheme
-                                    .subtitle2!
+                                    .titleSmall!
                                     .copyWith(
                                         fontSize: 24, color: colorTuple.item1));
                           },

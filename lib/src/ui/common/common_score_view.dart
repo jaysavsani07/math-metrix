@@ -102,7 +102,7 @@ class _CommonScoreViewState extends State<CommonScoreView>
                   : widget.oldScore.toString(),
               // key: ValueKey<int>(widget.score),
               style:
-                  Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 24),
+                  Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 24),
             ),
           ),
           position: inAnimation,
@@ -116,7 +116,7 @@ class _CommonScoreViewState extends State<CommonScoreView>
                   : widget.oldScore.toString(),
               // key: ValueKey<int>(widget.score),
               style:
-                  Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 24),
+                  Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 24),
             ),
           ),
           position: outAnimation,
@@ -236,7 +236,7 @@ class _CommonScoreViewState extends State<CommonScoreView>
 //               widget.currentScore.toString(),
 //               // key: ValueKey<int>(widget.score),
 //               style:
-//               Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 24),
+//               Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 24),
 //             ),
 //           ),
 //           position: inAnimation,
@@ -248,7 +248,7 @@ class _CommonScoreViewState extends State<CommonScoreView>
 //               widget.oldScore.toString(),
 //               // key: ValueKey<int>(widget.score),
 //               style:
-//               Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 24),
+//               Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 24),
 //             ),
 //           ),
 //           position: outAnimation,

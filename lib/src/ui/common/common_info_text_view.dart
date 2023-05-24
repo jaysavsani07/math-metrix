@@ -31,13 +31,13 @@ class CommonInfoTextView<T extends GameProvider> extends StatelessWidget {
                     .toUpperCase(),
                 style: Theme.of(context)
                     .textTheme
-                    .caption!
+                    .bodySmall!
                     .copyWith(fontWeight: FontWeight.bold)),
             SizedBox(width: 4),
             Icon(
               Icons.info,
               size: 13,
-              color: Theme.of(context).textTheme.caption!.color,
+              color: Theme.of(context).textTheme.bodySmall!.color,
             ),
           ],
         ),

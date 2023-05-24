@@ -77,7 +77,7 @@ class HomeButtonView extends StatelessWidget {
                               Text(title,
                                   style: Theme.of(context)
                                       .textTheme
-                                      .subtitle1!
+                                      .titleMedium!
                                       .copyWith(
                                           fontSize: 18, color: Colors.white)),
                             ],
@@ -96,7 +96,7 @@ class HomeButtonView extends StatelessWidget {
                                     Text("Score:",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .subtitle1!
+                                            .titleMedium!
                                             .copyWith(
                                                 fontSize: 14,
                                                 color: Colors.white)),
@@ -110,7 +110,7 @@ class HomeButtonView extends StatelessWidget {
                                     Text(score.toString(),
                                         style: Theme.of(context)
                                             .textTheme
-                                            .subtitle2!
+                                            .titleSmall!
                                             .copyWith(
                                             fontSize: 14,
                                             color: Colors.white)),

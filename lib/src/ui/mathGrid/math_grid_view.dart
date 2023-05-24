@@ -56,7 +56,7 @@ class MathGridView extends StatelessWidget {
                                   currentAnswer.toString(),
                                   style: Theme.of(context)
                                       .textTheme
-                                      .subtitle2!
+                                      .titleSmall!
                                       .copyWith(fontSize: 40),
                                 );
                               }),

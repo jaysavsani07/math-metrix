@@ -45,7 +45,7 @@ class TriangleButton extends StatelessWidget {
               digit.value,
               style: Theme.of(context)
                   .textTheme
-                  .subtitle1!
+                  .titleMedium!
                   .copyWith(fontSize: 24, color: colorTuple.item1),
             ),
           ),

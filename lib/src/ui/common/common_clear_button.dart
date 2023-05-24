@@ -34,7 +34,7 @@ class CommonClearButton extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Text(
               text,
-              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     fontSize: fontSize,
                     color: Theme.of(context).colorScheme.crossColor,
                   ),

@@ -38,7 +38,7 @@ class PicturePuzzleButton extends StatelessWidget {
           child: Text(
             picturePuzzleShape.text,
             style:
-                Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 30),
+                Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 30),
           ),
         );
       case PicturePuzzleQuestionItemType.hint:
@@ -48,7 +48,7 @@ class PicturePuzzleButton extends StatelessWidget {
           child: Text(
             picturePuzzleShape.text,
             style:
-                Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 24),
+                Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 24),
           ),
         );
       case PicturePuzzleQuestionItemType.answer:

@@ -77,7 +77,7 @@ class CorrectAnswerView extends StatelessWidget {
                                               result == "" ? "?" : result,
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .subtitle2!
+                                                  .titleSmall!
                                                   .copyWith(
                                                       fontSize: 30,
                                                       color: colorTuple.item1),

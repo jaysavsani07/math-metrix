@@ -61,7 +61,7 @@ class PyramidNumberButton extends StatelessWidget {
           numPyramidCellModel.isHidden
               ? numPyramidCellModel.text
               : numPyramidCellModel.numberOnCell.toString(),
-          style: Theme.of(context).textTheme.subtitle2!.copyWith(
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(
               color: numPyramidCellModel.isHint
                   ?  Colors.white
                   : colorTuple.item1),

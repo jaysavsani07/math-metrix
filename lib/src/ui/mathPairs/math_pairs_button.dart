@@ -54,7 +54,7 @@ class MathPairsButton extends StatelessWidget {
               fit: BoxFit.contain,
               child: Text(
                 mathPairs.text,
-                style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     fontSize: 24,
                     color: mathPairs.isActive
                         ? Theme.of(context).colorScheme.baseColor

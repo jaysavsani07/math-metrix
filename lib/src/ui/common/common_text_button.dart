@@ -36,7 +36,7 @@ class CommonTextButton extends StatelessWidget {
             text,
             style: Theme.of(context)
                 .textTheme
-                .subtitle1!
+                .titleMedium!
                 .copyWith(fontSize: 24, color: Colors.white),
           ),
         ),

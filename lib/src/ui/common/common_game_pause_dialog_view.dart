@@ -30,7 +30,7 @@ class CommonGamePauseDialogView extends StatelessWidget {
                 gameInfoDialog.title,
                 style: Theme.of(context)
                     .textTheme
-                    .bodyText1!
+                    .bodyLarge!
                     .copyWith(fontSize: 18),
               ),
             ),
@@ -60,7 +60,7 @@ class CommonGamePauseDialogView extends StatelessWidget {
         SizedBox(height: 24),
         Text(
           "Your current score is $score",
-          style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 16),
+          style: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 16),
         ),
         SizedBox(height: 24),
         Row(
@@ -91,7 +91,7 @@ class CommonGamePauseDialogView extends StatelessWidget {
                         child: Text("RESUME",
                             style: Theme.of(context)
                                 .textTheme
-                                .subtitle1!
+                                .titleMedium!
                                 .copyWith(fontSize: 18, color: Colors.white))),
                   ),
                 ),

@@ -10,7 +10,7 @@ class AppTheme {
       scaffoldBackgroundColor: Colors.white,
       cardColor: Colors.white,
       textTheme: base.textTheme.copyWith(
-        caption: base.textTheme.caption!.copyWith(
+        bodySmall: base.textTheme.bodySmall!.copyWith(
           color: Color(0xff757575),
         ),
       ),
@@ -29,7 +29,7 @@ class AppTheme {
       scaffoldBackgroundColor: Colors.black,
       cardColor: Colors.black,
       textTheme: base.textTheme.copyWith(
-        caption: base.textTheme.caption!.copyWith(
+        bodySmall: base.textTheme.bodySmall!.copyWith(
           color: Color(0xffcdcdcd),
         ),
       ),

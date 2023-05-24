@@ -63,7 +63,7 @@ class SquareRootView extends StatelessWidget {
                                   currentState.question,
                                   style: Theme.of(context)
                                       .textTheme
-                                      .subtitle2!
+                                      .titleSmall!
                                       .copyWith(fontSize: 40),
                                 );
                               }),

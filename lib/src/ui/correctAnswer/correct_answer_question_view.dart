@@ -21,20 +21,20 @@ class CorrectAnswerQuestionView extends StatelessWidget {
                 question.firstOperand.value,
                 style: Theme.of(context)
                     .textTheme
-                    .subtitle2!
+                    .titleSmall!
                     .copyWith(fontSize: 30),
               ),
         SizedBox(width: 14),
         Text(
           question.firstOperator,
-          style: Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 30),
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 30),
         ),
         SizedBox(width: 14),
         question.secondOperand.isQuestionMark
             ? questionView
             : Text(
           question.secondOperand.value,
-          style: Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 30),
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 30),
         ),
         if (question.secondOperator != null)
           Row(
@@ -44,7 +44,7 @@ class CorrectAnswerQuestionView extends StatelessWidget {
                 question.secondOperator!,
                 style: Theme.of(context)
                     .textTheme
-                    .subtitle2!
+                    .titleSmall!
                     .copyWith(fontSize: 30),
               ),
               SizedBox(width: 14),
@@ -55,7 +55,7 @@ class CorrectAnswerQuestionView extends StatelessWidget {
                 question.thirdOperand!.value,
                 style: Theme.of(context)
                     .textTheme
-                    .subtitle2!
+                    .titleSmall!
                     .copyWith(fontSize: 30),
               ),
             ],
@@ -63,12 +63,12 @@ class CorrectAnswerQuestionView extends StatelessWidget {
         SizedBox(width: 6),
         Text(
           "=",
-          style: Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 30),
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 30),
         ),
         SizedBox(width: 6),
         Text(
           question.answer.toString(),
-          style: Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 30),
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 30),
         ),
       ],
     );

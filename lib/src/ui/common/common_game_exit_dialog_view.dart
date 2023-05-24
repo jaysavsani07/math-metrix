@@ -17,12 +17,12 @@ class CommonGameExitDialogView extends StatelessWidget {
         Text(
           "Are you sure you want to quit the game?",
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 18),
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 18),
         ),
         SizedBox(height: 24),
         Text(
           "Your current score is $score",
-          style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 16),
+          style: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 16),
         ),
         SizedBox(height: 24),
         Row(
@@ -53,7 +53,7 @@ class CommonGameExitDialogView extends StatelessWidget {
                         child: Text("YES",
                             style: Theme.of(context)
                                 .textTheme
-                                .subtitle1!
+                                .titleMedium!
                                 .copyWith(fontSize: 18, color: Colors.white))),
                   ),
                 ),
