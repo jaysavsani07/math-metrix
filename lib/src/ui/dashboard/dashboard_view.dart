@@ -83,10 +83,10 @@ class _DashboardViewState extends State<DashboardView>
                         SizedBox(width: 12),
                         Container(
                           decoration: BoxDecoration(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .infoDialogBgColor,
-                              borderRadius: BorderRadius.circular(18)),
+                            color:
+                                Theme.of(context).colorScheme.infoDialogBgColor,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
                           padding: const EdgeInsets.all(12.0),
                           child: Row(
                             children: [
@@ -110,7 +110,7 @@ class _DashboardViewState extends State<DashboardView>
                         //TODO Remove this when ios version of Math Riddle is live on App Store.
                         if (Platform.isAndroid)
                           InkWell(
-                            borderRadius: BorderRadius.circular(18),
+                            borderRadius: BorderRadius.circular(12),
                             onTap: () {
                               showDialog<bool>(
                                 context: context,
@@ -126,7 +126,7 @@ class _DashboardViewState extends State<DashboardView>
                                 color: Theme.of(context)
                                     .colorScheme
                                     .infoDialogBgColor,
-                                borderRadius: BorderRadius.circular(18),
+                                borderRadius: BorderRadius.circular(12),
                               ),
                               padding: const EdgeInsets.all(12.0),
                               child: RepaintBoundary(
@@ -165,9 +165,21 @@ class _DashboardViewState extends State<DashboardView>
                           barrierDismissible: false,
                         ).then((value) {});
                       },
-                      borderRadius: BorderRadius.circular(24),
-                      child: Padding(
-                        padding: const EdgeInsets.all(12),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(12),
+                        bottomLeft: Radius.circular(12),
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color:
+                              Theme.of(context).colorScheme.infoDialogBgColor,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(12),
+                            bottomLeft: Radius.circular(12),
+                          ),
+                        ),
+                        padding: const EdgeInsets.only(
+                            left: 12, top: 12, bottom: 12, right: 8),
                         child: SvgPicture.asset(
                           Theme.of(context).brightness == Brightness.light
                               ? AppAssets.ic3dStairsDark
@@ -181,9 +193,21 @@ class _DashboardViewState extends State<DashboardView>
                       onTap: () {
                         context.read<ThemeProvider>().changeTheme();
                       },
-                      borderRadius: BorderRadius.circular(24),
-                      child: Padding(
-                        padding: const EdgeInsets.all(12),
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(12),
+                        bottomRight: Radius.circular(12),
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color:
+                              Theme.of(context).colorScheme.infoDialogBgColor,
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(12),
+                            bottomRight: Radius.circular(12),
+                          ),
+                        ),
+                        padding: const EdgeInsets.only(
+                            right: 12, top: 12, bottom: 12, left: 8),
                         child: SvgPicture.asset(
                           Theme.of(context).brightness == Brightness.light
                               ? AppAssets.icDarkMode
@@ -193,6 +217,7 @@ class _DashboardViewState extends State<DashboardView>
                         ),
                       ),
                     ),
+                    SizedBox(width: 12),
                   ],
                 ),
                 SizedBox(height: 24),
