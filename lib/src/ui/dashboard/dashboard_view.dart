@@ -1,14 +1,18 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mathgame/src/core/app_assets.dart';
+import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/ui/app/theme_provider.dart';
 import 'package:mathgame/src/ui/common/common_alert_dialog.dart';
 import 'package:mathgame/src/ui/common/common_difficulty_view.dart';
+import 'package:mathgame/src/ui/common/math_riddle_view.dart';
 import 'package:mathgame/src/ui/dashboard/dashboard_button_view.dart';
 import 'package:mathgame/src/ui/dashboard/dashboard_provider.dart';
-import 'package:mathgame/src/core/app_constant.dart';
 import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
@@ -95,12 +99,50 @@ class _DashboardViewState extends State<DashboardView>
                               Consumer<DashboardProvider>(
                                 builder: (context, model, child) => Text(
                                     model.overallScore.toString(),
-                                    style:
-                                        Theme.of(context).textTheme.titleMedium),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium),
                               ),
                             ],
                           ),
                         ),
+                        SizedBox(width: 12),
+                        //TODO Remove this when ios version of Math Riddle is live on App Store.
+                        if (Platform.isAndroid)
+                          InkWell(
+                            borderRadius: BorderRadius.circular(18),
+                            onTap: () {
+                              showDialog<bool>(
+                                context: context,
+                                builder: (newContext) {
+                                  return CommonAlertDialog(
+                                    child: MathRiddleView(),
+                                  );
+                                },
+                              );
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .infoDialogBgColor,
+                                borderRadius: BorderRadius.circular(18),
+                              ),
+                              padding: const EdgeInsets.all(12.0),
+                              child: RepaintBoundary(
+                                child: Image.asset(
+                                  AppAssets.icAppMathRiddle,
+                                  width: 24,
+                                  height: 24,
+                                )
+                                    .animate(
+                                      onPlay: (controller) =>
+                                          controller.repeat(reverse: true),
+                                    )
+                                    .scaleXY(begin: 1.5, end: 0.8),
+                              ),
+                            ),
+                          ),
                       ],
                     ),
                     Spacer(),
@@ -129,7 +171,7 @@ class _DashboardViewState extends State<DashboardView>
                         child: SvgPicture.asset(
                           Theme.of(context).brightness == Brightness.light
                               ? AppAssets.ic3dStairsDark
-                              : AppAssets.ic3dStairsLight ,
+                              : AppAssets.ic3dStairsLight,
                           width: 24,
                           height: 24,
                         ),

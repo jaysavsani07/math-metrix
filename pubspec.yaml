@@ -30,6 +30,8 @@ dependencies:
 
   tuple: ^2.0.1
   package_info: ^2.0.2
+  flutter_animate: ^4.1.1+1
+  store_redirect: ^2.0.1
 
   firebase_core: ^2.13.0
   firebase_analytics: ^10.4.1

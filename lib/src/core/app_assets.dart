@@ -2,6 +2,7 @@ class AppAssets {
   AppAssets._();
 
   static const String imgBanner = "assets/images/banner.svg";
+  static const String icAppMathRiddle = "assets/images/ic_app_math_riddle.png";
 
   static const String icCoin = "assets/images/ic_coin.svg";
   static const String icTrophy = "assets/images/ic_trophy.svg";
