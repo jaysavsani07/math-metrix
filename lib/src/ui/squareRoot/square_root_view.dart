@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mathgame/src/core/app_assets.dart';
+import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/data/models/square_root.dart';
 import 'package:mathgame/src/ui/app/theme_provider.dart';
-import 'package:mathgame/src/ui/common/common_number_button.dart';
 import 'package:mathgame/src/ui/common/common_app_bar.dart';
 import 'package:mathgame/src/ui/common/common_info_text_view.dart';
+import 'package:mathgame/src/ui/common/common_number_button.dart';
 import 'package:mathgame/src/ui/common/dialog_listener.dart';
 import 'package:mathgame/src/ui/squareRoot/square_root_provider.dart';
-import 'package:mathgame/src/core/app_constant.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 import 'package:vsync_provider/vsync_provider.dart';
@@ -54,7 +54,10 @@ class SquareRootView extends StatelessWidget {
                           SvgPicture.asset(
                             AppAssets.icRoot,
                             height: 40,
-                            color: colorTuple.item1,
+                            colorFilter: ColorFilter.mode(
+                              colorTuple.item1,
+                              BlendMode.srcIn,
+                            ),
                           ),
                           Selector<SquareRootProvider, SquareRoot>(
                               selector: (p0, p1) => p1.currentState,

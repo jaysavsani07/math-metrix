@@ -21,19 +21,19 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.5
-  flutter_svg: ^1.1.6
+  flutter_svg: ^2.0.6
 
-  get_it: ^7.2.0
+  get_it: ^7.6.0
   vsync_provider: ^0.5.0
   provider: ^6.0.5
-  shared_preferences: ^2.0.16
+  shared_preferences: ^2.1.1
 
   tuple: ^2.0.1
   package_info: ^2.0.2
 
-  firebase_core: ^2.4.1
-  firebase_analytics: ^10.1.0
-  firebase_crashlytics: ^3.0.11
+  firebase_core: ^2.13.0
+  firebase_analytics: ^10.4.1
+  firebase_crashlytics: ^3.3.1
 
 dev_dependencies:
   flutter_test:
@@ -57,22 +57,10 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
     - assets/gif/
 
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware.
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
-  #         style: italic
-  #   - family: Trajan Pro
   fonts:
     - family: Montserrat
       fonts:
@@ -89,5 +77,3 @@ flutter:
           weight: 700
         - asset: assets/fonts/Poppins-Regular.ttf
           weight: 400
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages

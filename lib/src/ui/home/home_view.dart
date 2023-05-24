@@ -3,8 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mathgame/src/core/app_constant.dart';
 import 'package:mathgame/src/core/color_scheme.dart';
 import 'package:mathgame/src/data/models/dashboard.dart';
-import 'package:mathgame/src/ui/home/home_button_view.dart';
 import 'package:mathgame/src/ui/dashboard/dashboard_provider.dart';
+import 'package:mathgame/src/ui/home/home_button_view.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
@@ -185,11 +185,14 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                 widget.tuple2.item1.icon,
                                 height: 200,
                                 width: 200,
-                                color: widget.tuple2.item1.fillIconColor
-                                    .withOpacity(Theme.of(context).brightness ==
-                                            Brightness.light
-                                        ? 0.08
-                                        : 0.24),
+                                colorFilter: ColorFilter.mode(
+                                  widget.tuple2.item1.fillIconColor.withOpacity(
+                                      Theme.of(context).brightness ==
+                                              Brightness.light
+                                          ? 0.08
+                                          : 0.24),
+                                  BlendMode.srcIn,
+                                ),
                               ),
                             ),
                             Positioned(
@@ -199,11 +202,15 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                 widget.tuple2.item1.outlineIcon,
                                 height: 175,
                                 width: 175,
-                                color: widget.tuple2.item1.outlineIconColor
-                                    .withOpacity(Theme.of(context).brightness ==
-                                            Brightness.light
-                                        ? 0.16
-                                        : 0.80),
+                                colorFilter: ColorFilter.mode(
+                                  widget.tuple2.item1.outlineIconColor
+                                      .withOpacity(
+                                          Theme.of(context).brightness ==
+                                                  Brightness.light
+                                              ? 0.16
+                                              : 0.80),
+                                  BlendMode.srcIn,
+                                ),
                                 // color: widget.dashboard.colorTuple.item1,
                               ),
                             ),
