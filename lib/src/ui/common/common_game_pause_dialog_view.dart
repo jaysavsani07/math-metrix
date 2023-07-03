@@ -42,7 +42,7 @@ class CommonGamePauseDialogView extends StatelessWidget {
               child: InkWell(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.pop(context, true);
                 },
                 child: SizedBox(
                   height: 38,
