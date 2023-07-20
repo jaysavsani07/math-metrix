@@ -50,6 +50,40 @@ Overall all this puzzle tries to engage you in a different way to improve your m
 **2) Picture Puzzle** : Each shape represents a number. You need find number related to each shape and solve the last equation.<br />
 **3) Number Pyramid** : In a number pyramid, the numbers on the lower layers determine the numbers above them. Sum of two consecutive cell would be placed on top cell.<br />
 
+## Crashlytics and Analytics
+To enable Firebase Crashlytics and Analytics, do the following:
+
+1. Create a new project in
+   [console.firebase.google.com](https://console.firebase.google.com/).
+   Call the Firebase project whatever you like; just **remember the name**.
+   You don't need to enable Analytics in the project if you don't want to.
+2. [Install `firebase-tools`](https://firebase.google.com/docs/cli?authuser=0#setup_update_cli)
+   on your machine.
+3. [Install `flutterfire` CLI](https://firebase.flutter.dev/docs/cli#installation)
+   on your machine.
+4. In the root of this project (the directory containing `pubspec.yaml`),
+   run the following:
+    - `flutterfire configure`
+        - This command asks you for the name of the Firebase project
+          that you created earlier, and the list of target platforms you support.
+          As of April 2022, only `android` and `ios` are fully
+          supported by Crashlytics.
+        - The command rewrites `lib/firebase_options.dart` with
+          the correct code.
+5. Go to `lib/main.dart` and uncomment the lines that relate to Crashlytics and Analytics.
+
+You should now be able to see crashes, errors, and
+severe log messages in
+[console.firebase.google.com](https://console.firebase.google.com/).
+To test, add a button to your project, and throw whatever
+exception you like when the player presses it.
+
+```dart
+TextButton(
+  onPressed: () => throw StateError('whoa!'),
+  child: Text('Test Crashlytics'),
+)
+```
 
 ## Built With
 This application built [Flutter](https://flutter.dev/). Flutter is cross-platform open source mobile framework built by Google. Flutter use Dart as a primary language which is highly scalable and easy codebase.

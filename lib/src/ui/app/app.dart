@@ -2,14 +2,14 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mathgame/src/core/app_constant.dart';
-import 'package:mathgame/src/core/app_theme.dart';
 import 'package:mathgame/src/core/app_routes.dart';
+import 'package:mathgame/src/core/app_theme.dart';
 import 'package:mathgame/src/ui/app/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class MyApp extends StatelessWidget {
   final String fontFamily = "Montserrat";
-  final FirebaseAnalytics firebaseAnalytics;
+  final FirebaseAnalytics? firebaseAnalytics;
 
   const MyApp({
     required this.firebaseAnalytics,
@@ -35,7 +35,8 @@ class MyApp extends StatelessWidget {
         routes: appRoutes,
         // home: DashboardView(),
         navigatorObservers: [
-          FirebaseAnalyticsObserver(analytics: firebaseAnalytics)
+          if (firebaseAnalytics != null)
+            FirebaseAnalyticsObserver(analytics: firebaseAnalytics!)
         ],
       );
     });
