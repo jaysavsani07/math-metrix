@@ -5,6 +5,7 @@ import 'package:mathgame/src/ui/calculator/calculator_view.dart';
 import 'package:mathgame/src/ui/correctAnswer/correct_answer_view.dart';
 import 'package:mathgame/src/ui/dashboard/dashboard_view.dart';
 import 'package:mathgame/src/ui/home/home_view.dart';
+import 'package:mathgame/src/ui/home/home_view1.dart';
 import 'package:mathgame/src/ui/magicTriangle/magic_triangle_view.dart';
 import 'package:mathgame/src/ui/mathGrid/math_grid_view.dart';
 import 'package:mathgame/src/ui/mathPairs/math_pairs_view.dart';
