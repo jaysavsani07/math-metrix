@@ -4,7 +4,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/jaysavsani07/math-metrix">
-    <img src="https://github.com/jaysavsani07/math-metrix/tree/master/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png">
+    <img src="android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png">
   </a>
 
   <h3 align="center">Math Matrix : Train Your Brain, Improve Math Skill</h3>
@@ -18,7 +18,7 @@
 <h3 align="center">Math Matrix is a Math Game that tries to improvise your math skills in a fun way.</h3>
 <br />
 
-| <img src="https://github.com/jaysavsani07/math-metrix/tree/master/screenshots/1.webp"> | <img src="https://github.com/jaysavsani07/math-metrix/tree/master/screenshots/2.webp"> | <img src="https://github.com/jaysavsani07/math-metrix/tree/master/screenshots/3.webp"> | <img src="https://github.com/jaysavsani07/math-metrix/tree/master/screenshots/6.png">  | <img src="https://github.com/jaysavsani07/math-metrix/tree/master/screenshots/5.png"> | <img src="https://github.com/jaysavsani07/math-metrix/tree/master/screenshots/7.png"> |
+| <img src="screenshots/1.webp"> | <img src="screenshots/2.webp"> | <img src="screenshots/3.webp"> | <img src="screenshots/6.webp">  | <img src="screenshots/5.webp"> | <img src="screenshots/7.webp"> |
 |:-------------------------------------------------------------------------------------------:|:---:|:---:|:---:|:---:|:---:|
 
 Simple math games to learn, improve you math skills. This game is easy to play and target everyone from kids to adults. Every level is design in a way to challenge your mind at every step. 
