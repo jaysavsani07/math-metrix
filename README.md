@@ -18,7 +18,7 @@
 <h3 align="center">Math Matrix is a Math Game that tries to improvise your math skills in a fun way.</h3>
 <br />
 
-| <img src="https://github.com/jaysavsani07/math-metrix/blob/development/screenshots/1.webp"> | <img src="https://github.com/jaysavsani07/math-metrix/blob/development/screenshots/2.webp"> | <img src="https://github.com/jaysavsani07/math-metrix/blob/development/screenshots/3.png"> | <img src="https://github.com/jaysavsani07/math-metrix/blob/development/screenshots/6.png">  | <img src="https://github.com/jaysavsani07/math-metrix/blob/development/screenshots/5.png"> | <img src="https://github.com/jaysavsani07/math-metrix/blob/development/screenshots/7.png"> |
+| <img src="https://github.com/jaysavsani07/math-metrix/tree/master/screenshots/1.webp"> | <img src="https://github.com/jaysavsani07/math-metrix/tree/master/screenshots/2.webp"> | <img src="https://github.com/jaysavsani07/math-metrix/tree/master/screenshots/3.webp"> | <img src="https://github.com/jaysavsani07/math-metrix/tree/master/screenshots/6.png">  | <img src="https://github.com/jaysavsani07/math-metrix/tree/master/screenshots/5.png"> | <img src="https://github.com/jaysavsani07/math-metrix/tree/master/screenshots/7.png"> |
 |:-------------------------------------------------------------------------------------------:|:---:|:---:|:---:|:---:|:---:|
 
 Simple math games to learn, improve you math skills. This game is easy to play and target everyone from kids to adults. Every level is design in a way to challenge your mind at every step. 
