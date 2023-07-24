@@ -50,6 +50,26 @@ Overall all this puzzle tries to engage you in a different way to improve your m
 **2) Picture Puzzle** : Each shape represents a number. You need find number related to each shape and solve the last equation.<br />
 **3) Number Pyramid** : In a number pyramid, the numbers on the lower layers determine the numbers above them. Sum of two consecutive cell would be placed on top cell.<br />
 
+## ⚠️ Warning: This Repository is for Learning Purposes Only ⚠️
+Dear users,
+
+We would like to emphasize that this repository is intended for educational and learning purposes only. It is not meant to be directly used to create or update applications for commercial use, including publishing on app stores like the Android Play Store and/or App Store.
+
+Please note the following:
+
+1. **Educational Use Only**: The code and resources provided here are designed to help learners understand concepts and improve their skills.
+
+2. **Avoid Plagiarism**: Copying and submitting code from this repository as your own for academic or professional purposes is considered plagiarism. Make sure to use the knowledge gained here to build your own unique projects.
+
+3. **Commercial Usage Prohibited**: You are strictly prohibited from using this code to create apps for commercial purposes, including but not limited to monetization through app stores, advertisements, or any other revenue-generating means.
+
+4. **Contribution Guidelines**: If you wish to contribute to this project, please review the guidelines provided in the repository. Contributions should align with the educational and learning focus of this project.
+
+If you have any questions or concerns about the usage of this repository, please feel free to reach out to us via [Nividata Consultancy](https://www.nividata.com/contact/).
+
+Thank you for your understanding and cooperation in maintaining the educational integrity of this project.
+
+
 ## Crashlytics and Analytics
 To enable Firebase Crashlytics and Analytics, do the following:
 
