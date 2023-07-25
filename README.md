@@ -15,7 +15,7 @@
   </p>
 </p>
 
-  <h3 align="center">Try our new Math Riddle Puzzle Game</h3>
+  <h3 align="center">Try our new Math Riddle Game</h3>
   <p align="center">
     <a href="https://github.com/nividata-consultancy/math-riddle-free"><img src="screenshots/Math-Riddle_Banner.png" height="120" alt="Github" title="Math Riddle"/></a>
   </p>
